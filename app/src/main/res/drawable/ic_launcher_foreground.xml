@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Shield / Law emblem in background -->
+    <path
+        android:fillColor="#38BDF8"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF"
+        android:pathData="M54,20 L76,28 L76,50 C76,66 65,77 54,82 C43,77 32,66 32,50 L32,28 Z" />
+        
+    <!-- Star accent -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M54,30 L56.5,35.5 L62.5,36.5 L58,40.5 L59.5,46.5 L54,43.5 L48.5,46.5 L50,40.5 L45.5,36.5 L51.5,35.5 Z" />
+
+    <!-- Checked / Completed Vote Ballot Icon -->
+    <path
+        android:strokeWidth="4"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M46,55 L51,60 L62,49" />
+</vector>
