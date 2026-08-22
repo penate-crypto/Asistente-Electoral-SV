@@ -1,8 +1,11 @@
 package com.example.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.data.AppFontSize
+import com.example.data.AppSettingsManager
 import com.example.data.database.QueryHistory
 import com.example.data.repository.AnswerResult
 import com.example.data.repository.ApiKeyStatus
@@ -42,6 +45,13 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     private val _queryInput = MutableStateFlow("")
     val queryInput: StateFlow<String> = _queryInput.asStateFlow()
 
+    // Specific Book Focus Mode
+    private val _preferredBookId = MutableStateFlow<String?>(null)
+    val preferredBookId: StateFlow<String?> = _preferredBookId.asStateFlow()
+
+    private val _preferredBookTitle = MutableStateFlow<String?>(null)
+    val preferredBookTitle: StateFlow<String?> = _preferredBookTitle.asStateFlow()
+
     // Voice conversation state machine
     private val _voiceState = MutableStateFlow(VoiceConversationState.IDLE)
     val voiceState: StateFlow<VoiceConversationState> = _voiceState.asStateFlow()
@@ -58,6 +68,9 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     private val _apiKeyStatus = MutableStateFlow(ApiKeyStatus.AVAILABLE)
     val apiKeyStatus: StateFlow<ApiKeyStatus> = _apiKeyStatus.asStateFlow()
 
+    private val _appFontSize = MutableStateFlow(AppFontSize.MEDIANO)
+    val appFontSize: StateFlow<AppFontSize> = _appFontSize.asStateFlow()
+
     val historyList: StateFlow<List<QueryHistory>> = repository.allHistory
         .stateIn(
             scope = viewModelScope,
@@ -67,6 +80,15 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
 
     init {
         checkApiKeyStatus()
+    }
+
+    fun initFontSize(context: Context) {
+        _appFontSize.value = AppSettingsManager.getAppFontSize(context)
+    }
+
+    fun updateAppFontSize(context: Context, fontSize: AppFontSize) {
+        _appFontSize.value = fontSize
+        AppSettingsManager.setAppFontSize(context, fontSize)
     }
 
     fun setScreen(screen: ElectoralScreen) {
@@ -79,6 +101,22 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
 
     fun onQueryInputChange(newInput: String) {
         _queryInput.value = newInput
+    }
+
+    fun setPreferredBook(docId: String?, docTitle: String?) {
+        _preferredBookId.value = docId
+        _preferredBookTitle.value = docTitle
+    }
+
+    fun startDocumentSpecificQuery(docId: String, docTitle: String) {
+        _preferredBookId.value = docId
+        _preferredBookTitle.value = docTitle
+        _currentScreen.value = ElectoralScreen.CHAT
+    }
+
+    fun clearPreferredBook() {
+        _preferredBookId.value = null
+        _preferredBookTitle.value = null
     }
 
     fun getSuggestionsForInput(input: String): List<String> {
@@ -153,8 +191,15 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
         _currentScreen.value = ElectoralScreen.CHAT
         _uiState.value = ElectoralUiState.Loading(queryToSend)
 
+        val conversationHistory = historyList.value.takeLast(4).map { it.question to it.answer }
+        val preferredDoc = _preferredBookId.value
+
         viewModelScope.launch {
-            when (val result = repository.askAssistant(queryToSend)) {
+            when (val result = repository.askAssistant(
+                question = queryToSend,
+                preferredDocumentId = preferredDoc,
+                conversationHistory = conversationHistory
+            )) {
                 is AnswerResult.Success -> {
                     _uiState.value = ElectoralUiState.Success(
                         question = queryToSend,

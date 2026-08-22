@@ -33,7 +33,8 @@ object ElectoralLibraryData {
         "Organismos Electorales (JRV, JEM, JED, TSE)",
         "Fiscalización y Vigilancia",
         "Votación y Escrutinio",
-        "Sanciones, Delitos y Recursos"
+        "Sanciones, Delitos y Recursos",
+        "Organización Territorial y Municipal"
     )
 
     val documents: List<PdfDocument> = listOf(
@@ -140,12 +141,12 @@ object ElectoralLibraryData {
             )
         ),
 
-        // 2. Constitución de la República de El Salvador
+        // 2. Constitución de la República de El Salvador (1983)
         PdfDocument(
             id = "constitucion_republica_1983",
             title = "Constitución de la República de El Salvador (1983)",
             category = "Disposiciones Fundamentales",
-            summary = "Carta Magna y Ley Suprema de la República de El Salvador. Contiene los principios fundamentales del sistema político democrático, la soberanía ciudadana, los derechos fundamentales y las atribuciones del Tribunal Supremo Electoral.",
+            summary = "Carta Magna y Ley Suprema de la República de El Salvador. Contiene los principios fundamentales del sistema político democrático, la soberanía ciudadana, los derechos políticos fundamentales (Arts. 71-89) y las atribuciones del Tribunal Supremo Electoral (Arts. 208-209).",
             authority = "Asamblea Constituyente de 1983 • República de El Salvador",
             releaseDate = "D.O. No. 234, Tomo No. 281 (1983)",
             assetPath = "libros/constitucion.pdf",
@@ -193,12 +194,305 @@ object ElectoralLibraryData {
             )
         ),
 
-        // 3. Instructivo para Miembros de JRV (TSE)
+        // 3. Ley de Partidos Políticos (Decreto 307)
+        PdfDocument(
+            id = "ley_de_partidos_politicos",
+            title = "Ley de Partidos Políticos (Decreto No. 307)",
+            category = "Fiscalización y Vigilancia",
+            summary = "Regula la constitución, organización, funcionamiento, financiamiento público y privado, democracia interna, cuotas de género y fiscalización de los partidos políticos en El Salvador.",
+            authority = "Asamblea Legislativa • Tribunal Supremo Electoral",
+            releaseDate = "Decreto Legislativo No. 307",
+            assetPath = "libros/ley-de-partidos-politicos.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "LEY DE PARTIDOS POLÍTICOS DE EL SALVADOR",
+                    subtitle = "DISPOSICIONES GENERALES, DEMOCRACIA INTERNA Y FINANCIAMIENTO",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Objeto de la Ley",
+                            content = "Art. 1.- La presente Ley tiene por objeto regular la constitución, organización, funcionamiento y financiamiento de los partidos políticos, así asentar las normas para garantizar la democracia interna y la transparencia financiera.",
+                            articleRef = "Art. 1",
+                            isOfficialSeal = true
+                        ),
+                        PdfSection(
+                            title = "Elecciones Internas Obligatorias",
+                            content = "Arts. 37 y 38.- Los candidatos a cargos de elección popular deben ser electos mediante voto libre, directo, igualitario y secreto de los afiliados del partido político, bajo supervisión de sus comisiones electorales internas.",
+                            articleRef = "Arts. 37-38"
+                        ),
+                        PdfSection(
+                            title = "Transparencia y Origen de Fondos",
+                            content = "Arts. 67 y 68.- Los partidos están obligados a registrar contablemente todos los donativos privados y aportes de militantes, manteniendo prohibidas las donaciones anónimas.",
+                            articleRef = "Arts. 67-68",
+                            isWarning = true
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 4. Ley de Acceso a la Información Pública (LAIP)
+        PdfDocument(
+            id = "ley_acceso_informacion_publica",
+            title = "Ley de Acceso a la Información Pública (LAIP)",
+            category = "Disposiciones Fundamentales",
+            summary = "Garantiza el derecho de toda persona a acceder a la información en poder de los órganos del Estado, instituciones electorales y partidos políticos receptores de fondos públicos.",
+            authority = "Instituto de Acceso a la Información Pública (IAIP) • Asamblea Legislativa",
+            releaseDate = "Decreto Legislativo No. 534",
+            assetPath = "libros/Ley-de-Acceso-a-la-Informacion-Publica.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "LEY DE ACCESO A LA INFORMACIÓN PÚBLICA (LAIP)",
+                    subtitle = "PRINCIPIOS DE MÁXIMA PUBLICIDAD Y TRANSPARENCIA ELECTORAL",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Principio de Máxima Publicidad",
+                            content = "Art. 1 y 4.- Toda información en poder de los entes obligados es pública, salvo las excepciones expresamente establecidas por la ley (información reservada o confidencial).",
+                            articleRef = "Arts. 1, 4",
+                            isOfficialSeal = true
+                        ),
+                        PdfSection(
+                            title = "Partidos Políticos y TSE como Entes Obligados",
+                            content = "Art. 7.- El Tribunal Supremo Electoral y los partidos políticos son entes obligados a rendir cuentas y publicar de oficio la información relativa a presupuestos, contratación y orígenes de financiamiento.",
+                            articleRef = "Art. 7"
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 5. Ley Especial para el Ejercicio del Sufragio en el Extranjero (Decreto 542)
+        PdfDocument(
+            id = "ley_sufragio_extranjero_542",
+            title = "Ley Especial para el Ejercicio del Sufragio en el Extranjero (Decreto No. 542)",
+            category = "Votación y Escrutinio",
+            summary = "Decreto Legislativo No. 542 que regula las modalidades de votación electrónica por internet (remota) y votación electrónica presencial en sedes diplomáticas y consulares para salvadoreños en el exterior, padrón electoral del exterior y JELVEX.",
+            authority = "Asamblea Legislativa de El Salvador • Tribunal Supremo Electoral",
+            releaseDate = "Decreto Legislativo No. 542 (Vigente)",
+            assetPath = "libros/LEY ESPECIAL PARA EL EJERCICIO DEL SUFRAGIO EN EL EXTRANJERO.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "LEY ESPECIAL PARA EL EJERCICIO DEL SUFRAGIO EN EL EXTRANJERO",
+                    subtitle = "DECRETO No. 542 • MODALIDADES DE VOTO ELECTRÓNICO REMOTO Y PRESENCIAL",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Objeto de la Ley",
+                            content = "Art. 1.- Garantizar el ejercicio del derecho a votar y a postularse a cargos de elección popular para los salvadoreños en el extranjero para elecciones presidenciales y legislativas.",
+                            articleRef = "Art. 1",
+                            isOfficialSeal = true
+                        ),
+                        PdfSection(
+                            title = "Modalidades de Voto Electrónico",
+                            content = "Art. 2.- Dos modalidades: 1) Voto electrónico remoto por internet (DUI con dirección en el exterior); 2) Voto electrónico presencial en consulados y centros habilitados (DUI con dirección en El Salvador o pasaporte vigente/vencido).",
+                            articleRef = "Art. 2"
+                        ),
+                        PdfSection(
+                            title = "Junta Electoral de Voto en el Extranjero (JELVEX)",
+                            content = "Art. 5.- Organismo electoral temporal responsable de organizar, coordinar y fiscalizar el sufragio de los salvadoreños en el exterior y su escrutinio preliminar.",
+                            articleRef = "Art. 5"
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 6. Ley Especial para la Reestructuración Municipal (Decreto 763)
+        PdfDocument(
+            id = "ley_reestructuracion_municipal_763",
+            title = "Ley Especial para la Reestructuración Municipal (Decreto No. 763)",
+            category = "Organización Territorial y Municipal",
+            summary = "Decreto Legislativo No. 763 que reorganiza la división político-administrativa de El Salvador en 44 Municipios y 262 Distritos Municipales, regulando los Concejos Municipales, cabeceras y circunscripciones electorales.",
+            authority = "Asamblea Legislativa de El Salvador",
+            releaseDate = "Decreto Legislativo No. 763 (D.O. No. 110, Tomo 439)",
+            assetPath = "libros/LEY ESPECIAL PARA LA REESTRUCTURACIÓN MUNICIPAL.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "LEY ESPECIAL PARA LA REESTRUCTURACIÓN MUNICIPAL",
+                    subtitle = "44 MUNICIPIOS Y 262 DISTRITOS MUNICIPALES",
+                    sections = listOf(
+                        PdfSection(
+                            title = "División en 44 Municipios",
+                            content = "Arts. 1-2.- El territorio de la República de El Salvador se divide en 44 Municipios integrados por 262 Distritos Municipales en los 14 departamentos del país.",
+                            articleRef = "Arts. 1-2",
+                            isOfficialSeal = true
+                        ),
+                        PdfSection(
+                            title = "Concejos Municipales y Elecciones",
+                            content = "Arts. 3-5.- Cada municipio es gobernado por un Concejo Municipal integrado por Alcalde/sa, Síndico/a y Regidores. El TSE adecúa las circunscripciones y padrones electorales a la nueva estructura municipal.",
+                            articleRef = "Arts. 3-5"
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 7. Código Penal de El Salvador (Delitos Electorales)
+        PdfDocument(
+            id = "codigo_penal_delitos_electorales",
+            title = "Código Penal de El Salvador (Delitos Electorales)",
+            category = "Sanciones, Delitos y Recursos",
+            summary = "Tipificación de delitos contra los derechos cívicos y electorales (Arts. 295 a 302): Fraude electoral, coacción del sufragio, falsedad documental, obstaculización, usurpación de funciones y penas de prisión de hasta 15 años.",
+            authority = "Asamblea Legislativa • Órgano Judicial de El Salvador",
+            releaseDate = "Código Penal Consolidado",
+            assetPath = "libros/Código Penal.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "CÓDIGO PENAL • LIBRO SEGUNDO • TÍTULO XIII",
+                    subtitle = "DELITOS CONTRA LOS DERECHOS CÍVICOS Y ELECTORALES",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Fraude Electoral (Art. 295)",
+                            content = "Art. 295.- Votar más de una vez, suplantar a otro elector, votar sin derecho o alterar padrones o actas. Pena: 4 a 6 años de prisión (aumenta si es miembro de organismo electoral).",
+                            articleRef = "Art. 295",
+                            isWarning = true
+                        ),
+                        PdfSection(
+                            title = "Coacción del Sufragio (Art. 296)",
+                            content = "Art. 296.- Impedir, amenazar o coartar el voto de un elector o forzarlo a votar en determinado sentido o abstenerse. Pena: 3 a 6 años de prisión.",
+                            articleRef = "Art. 296",
+                            isWarning = true
+                        ),
+                        PdfSection(
+                            title = "Falsedad y Obstaculización (Arts. 297-298)",
+                            content = "Arts. 297 y 298.- Alterar o destruir credenciales, actas, papeletas o perturbar la instalación o escrutinio de JRV. Pena: 4 a 8 años de prisión.",
+                            articleRef = "Arts. 297-298",
+                            isWarning = true
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 8. Acuerdo Legislativo - Reforma - Supresión Segunda Elección
+        PdfDocument(
+            id = "acuerdo_legislativo_reforma_electoral",
+            title = "Acuerdo Legislativo - Reforma y Normativa Electoral",
+            category = "Fiscalización y Vigilancia",
+            summary = "Acuerdo legislativo y reformas procesales relativas a los cómputos de escrutinio, mayorías absolutas, adjudicación de escaños y plazos para elecciones en la República de El Salvador.",
+            authority = "Asamblea Legislativa de El Salvador",
+            releaseDate = "Acuerdos Legislativos Oficiales",
+            assetPath = "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "ACUERDO LEGISLATIVO • REFORMAS ELECTORALES",
+                    subtitle = "SISTEMA DE ESCRUTINIO, MAYORÍAS Y PLAZOS",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Reglas de Mayoría Absoluta",
+                            content = "Establece las pautas para la declaratoria de elección conforme a la Constitución y la aplicación de fórmulas en escrutinio definitivo.",
+                            articleRef = "Disposiciones Electorales",
+                            isOfficialSeal = true
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 9. Ciclo Electoral Salvadoreño
+        PdfDocument(
+            id = "ciclo_electoral_salvadoreno",
+            title = "Ciclo Electoral Salvadoreño • Guía Doctrinal y Operativa",
+            category = "Organismos Electorales (JRV, JEM, JED, TSE)",
+            summary = "Guía integral del Tribunal Supremo Electoral sobre las tres macro-etapas del ciclo eleccionario salvadoreño: Pre-electoral (PLAGEL, padrón, candidaturas), Electoral (jornada y escrutinio preliminar) y Post-electoral (escrutinio final y credenciales).",
+            authority = "Tribunal Supremo Electoral • Dirección de Capacitación",
+            releaseDate = "Guía Metodológica TSE",
+            assetPath = "libros/CICLO ELECTORAL SALVADOREÑO.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "CICLO ELECTORAL SALVADOREÑO • FASES Y ETAPAS",
+                    subtitle = "PRE-ELECTORAL, ELECTORAL Y POST-ELECTORAL",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Etapa Pre-electoral",
+                            content = "Plan General de Elecciones (PLAGEL), conformación del Padrón Electoral con el RNPN, inscripción de candidatos, logística y conformación de JED, JEM y JRV.",
+                            articleRef = "Fase I"
+                        ),
+                        PdfSection(
+                            title = "Etapa Electoral y Post-electoral",
+                            content = "Jornada de votación (07:00 a 17:00 hrs), escrutinio preliminar de mesa, escrutinio final ante el TSE, resolución de recursos y proclamación oficial.",
+                            articleRef = "Fases II y III",
+                            isOfficialSeal = true
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 10. Disposiciones Especiales para Candidaturas No Partidarias
+        PdfDocument(
+            id = "disposiciones_candidaturas_no_partidarias",
+            title = "Disposiciones Especiales para Candidaturas No Partidarias",
+            category = "Disposiciones Fundamentales",
+            summary = "Normas que regulan los requisitos de inscripción, recolección de firmas ciudadanas, financiamiento y fiscalización para aspirantes independientes no afiliados a partidos políticos.",
+            authority = "Asamblea Legislativa • Sentencias Sala de lo Constitucional",
+            releaseDate = "Decreto Legislativo de Candidaturas Independientes",
+            assetPath = "libros/Disposciones-Especiales-Candidaturas-no-partidarias.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "CANDIDATURAS NO PARTIDARIAS (INDEPENDIENTES)",
+                    subtitle = "INSCRIPCIÓN, REQUISITOS DE RESPALDO Y PAPELETAS",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Derecho a Postulación Independiente",
+                            content = "En cumplimiento de la jurisprudencia constitucional, se reconoce el derecho de los ciudadanos salvadoreños a postularse a cargos de Diputaciones a la Asamblea Legislativa de forma no partidaria.",
+                            articleRef = "Bases Constitucionales",
+                            isOfficialSeal = true
+                        ),
+                        PdfSection(
+                            title = "Respaldo Ciudadano y Reglas de Votación",
+                            content = "Los aspirantes deben presentar las firmas de respaldo ciudadano en el porcentaje correspondiente a su circunscripción departamental y aparecen en las papeletas en el sector de candidaturas no partidarias.",
+                            articleRef = "Procedimiento de Inscripción"
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 11. Reglamento General para la Observación Electoral
+        PdfDocument(
+            id = "reglamento_observacion_electoral",
+            title = "Reglamento General para la Observación Electoral Nacional e Internacional",
+            category = "Fiscalización y Vigilancia",
+            summary = "Normas y procedimientos dictados por el TSE para la acreditación, derechos, deberes y código de conducta de las misiones de observación electoral nacionales e internacionales.",
+            authority = "Tribunal Supremo Electoral (TSE)",
+            releaseDate = "Reglamento Oficial TSE",
+            assetPath = "libros/REGLAMENTO-GENERAL-PARA-LA-OBSERVACION-ELECTORAL-NACIONAL-E-INTERNACIONAL-EN-EL-SALVADOR.pdf",
+            pages = listOf(
+                PdfPage(
+                    pageNumber = 1,
+                    headerTitle = "REGLAMENTO DE OBSERVACIÓN ELECTORAL",
+                    subtitle = "ACREDITACIÓN, FACULTADES Y CÓDIGO DE CONDUCTA",
+                    sections = listOf(
+                        PdfSection(
+                            title = "Finalidad de la Observación Electoral",
+                            content = "Presenciar de forma imparcial e independiente el desarrollo de todas las etapas del proceso eleccionario salvadoreño para formular recomendaciones que fortalezcan la confianza ciudadana.",
+                            articleRef = "Art. 1",
+                            isOfficialSeal = true
+                        ),
+                        PdfSection(
+                            title = "Deber de Imparcialidad y No Injerencia",
+                            content = "Los observadores acreditados no pueden intervenir en las decisiones de los organismos electorales (JRV, JEM, JED), no pueden sustituir a las autoridades ni manifestar preferencias político-partidarias.",
+                            articleRef = "Código de Conducta",
+                            isWarning = true
+                        )
+                    )
+                )
+            )
+        ),
+
+        // 12. Instructivo Oficial para Miembros de JRV (TSE)
         PdfDocument(
             id = "instructivo_jrv_tse",
-            title = "Instructivo para Miembros de JRV (TSE)",
+            title = "Instructivo Oficial para Juntas Receptoras de Votos (JRV)",
             category = "Organismos Electorales (JRV, JEM, JED, TSE)",
-            summary = "Guía operativa oficial emitida por el Tribunal Supremo Electoral para los integrantes de las Juntas Receptoras de Votos (JRV). Describe paso a paso la instalación, apertura, recepción de sufragios, escrutinio preliminar y llenado de actas.",
+            summary = "Guía operativa oficial emitida por el Tribunal Supremo Electoral para los integrantes de las Juntas Receptoras de Votos (JRV). Describe paso a paso la instalación a las 06:00 AM, apertura a las 07:00 AM, recepción de sufragios, escrutinio preliminar a las 05:00 PM y llenado de actas.",
             authority = "Tribunal Supremo Electoral (TSE)",
             releaseDate = "Instructivo Oficial de Capacitación",
             assetPath = "libros/instructivo-JRV.pdf",
@@ -235,200 +529,6 @@ object ElectoralLibraryData {
                             title = "Escrutinio Preliminar (05:00 PM)",
                             content = "A las 17:00 horas se cierra la votación. Se cuentan e inutilizan papeletas no usadas. Se abre la urna, se confronta el total de papeletas con el padrón de firmas y se califican voto por voto de viva voz frente a los vigilantes.",
                             articleRef = "Conteo y Cierre"
-                        )
-                    )
-                )
-            )
-        ),
-
-        // 4. Ley de Partidos Políticos
-        PdfDocument(
-            id = "ley_de_partidos_politicos",
-            title = "Ley de Partidos Políticos",
-            category = "Fiscalización y Vigilancia",
-            summary = "Regula la constitución, organización, funcionamiento, financiamiento público y privado, democracia interna y fiscalización de los partidos políticos en El Salvador.",
-            authority = "Asamblea Legislativa • Tribunal Supremo Electoral",
-            releaseDate = "Decreto Legislativo No. 307",
-            assetPath = "libros/ley-de-partidos-politicos.pdf",
-            pages = listOf(
-                PdfPage(
-                    pageNumber = 1,
-                    headerTitle = "LEY DE PARTIDOS POLÍTICOS DE EL SALVADOR",
-                    subtitle = "DISPOSICIONES GENERALES, DEMOCRACIA INTERNA Y FINANCIAMIENTO",
-                    sections = listOf(
-                        PdfSection(
-                            title = "Objeto de la Ley",
-                            content = "Art. 1.- La presente Ley tiene por objeto regular la constitución, organización, funcionamiento y financiamiento de los partidos políticos, así asentar las normas para garantizar la democracia interna y la transparencia financiera.",
-                            articleRef = "Art. 1",
-                            isOfficialSeal = true
-                        ),
-                        PdfSection(
-                            title = "Elecciones Internas Obligatorias",
-                            content = "Arts. 37 y 38.- Los candidatos a cargos de elección popular deben ser electos mediante voto libre, directo, igualitario y secreto de los afiliados del partido político, bajo supervisión de sus comisiones electorales internas.",
-                            articleRef = "Arts. 37-38"
-                        ),
-                        PdfSection(
-                            title = "Transparencia y Origen de Fondos",
-                            content = "Arts. 67 y 68.- Los partidos están obligados a registrar contablemente todos los donativos privados y aportes de militantes, manteniendo reserva de donaciones anónimas que están prohibidas por la ley.",
-                            articleRef = "Arts. 67-68",
-                            isWarning = true
-                        )
-                    )
-                )
-            )
-        ),
-
-        // 5. Ley de Acceso a la Información Pública (LAIP)
-        PdfDocument(
-            id = "ley_acceso_informacion_publica",
-            title = "Ley de Acceso a la Información Pública (LAIP)",
-            category = "Disposiciones Fundamentales",
-            summary = "Garantiza el derecho de toda persona a acceder a la información en poder de los órganos del Estado, instituciones electorales y partidos políticos receptores de fondos públicos.",
-            authority = "Instituto de Acceso a la Información Pública (IAIP) • Asamblea Legislativa",
-            releaseDate = "Decreto Legislativo No. 534",
-            assetPath = "libros/Ley-de-Acceso-a-la-Informacion-Publica.pdf",
-            pages = listOf(
-                PdfPage(
-                    pageNumber = 1,
-                    headerTitle = "LEY DE ACCESO A LA INFORMACIÓN PÚBLICA (LAIP)",
-                    subtitle = "PRINCIPIOS DE MÁXIMA PUBLICIDAD Y TRANSPARENCIA ELECTORAL",
-                    sections = listOf(
-                        PdfSection(
-                            title = "Principio de Máxima Publicidad",
-                            content = "Art. 1 y 4.- Toda información en poder de los entes obligados es pública, salvo las excepciones expresamente establecidas por la ley (información reservada o confidencial).",
-                            articleRef = "Arts. 1, 4",
-                            isOfficialSeal = true
-                        ),
-                        PdfSection(
-                            title = "Partidos Políticos y TSE como Entes Obligados",
-                            content = "Art. 7.- El Tribunal Supremo Electoral y los partidos políticos son entes obligados a rendir cuentas y publicar de oficio la información relativa a presupuestos, contratación y orígenes de financiamiento.",
-                            articleRef = "Art. 7"
-                        )
-                    )
-                )
-            )
-        ),
-
-        // 6. Ley Especial para el Ejercicio del Sufragio en el Extranjero
-        PdfDocument(
-            id = "ley_sufragio_extranjero",
-            title = "Ley Especial para el Ejercicio del Sufragio en el Extranjero",
-            category = "Votación y Escrutinio",
-            summary = "Normativa que regula los mecanismos para que los ciudadanos salvadoreños domiciliados en el exterior puedan emitir su voto mediante sufragio electrónico presencial o por internet en elecciones presidenciales y legislativas.",
-            authority = "Asamblea Legislativa de El Salvador • TSE",
-            releaseDate = "Decreto Legislativo Actualizado",
-            assetPath = "libros/Ley-especial-para-el-sufragio-en-el-extranjero.pdf",
-            pages = listOf(
-                PdfPage(
-                    pageNumber = 1,
-                    headerTitle = "SUFRAGIO EN EL EXTRANJERO",
-                    subtitle = "MODALIDADES DE VOTO ELECTRÓNICO POR INTERNET Y PRESENCIAL",
-                    sections = listOf(
-                        PdfSection(
-                            title = "Derecho al Voto en el Exterior",
-                            content = "Art. 1.- Garantiza el derecho de los salvadoreños residentes en el exterior a emitir su voto para elecciones de Presidente, Vicepresidente y Diputaciones a la Asamblea Legislativa.",
-                            articleRef = "Art. 1",
-                            isOfficialSeal = true
-                        ),
-                        PdfSection(
-                            title = "Modalidades: Remoto por Internet y Presencial",
-                            content = "Votación remota por internet: Para salvadoreños cuyo DUI tenga dirección en el extranjero. Votación electrónica presencial: Para salvadoreños con DUI emitido en El Salvador o pasaporte que se presenten a consulados y sedes habilitadas.",
-                            articleRef = "Modalidades Electorales"
-                        )
-                    )
-                )
-            )
-        ),
-
-        // 7. Ley Especial Integral para una Vida Libre de Violencia / Ley de Género
-        PdfDocument(
-            id = "ley_genero_electoral",
-            title = "Ley Especial Integral para una Vida Libre de Violencia / Ley de Género",
-            category = "Sanciones, Delitos y Recursos",
-            summary = "Protección legal especial para mujeres en el ejercicio de sus derechos políticos, sancionando la violencia política de género, coacciones y discriminación en organismos electorales y candidaturas.",
-            authority = "Asamblea Legislativa • ISDEMU • TSE",
-            releaseDate = "Decreto No. 520 (LEIV / LIE)",
-            assetPath = "libros/ley_genero.pdf",
-            pages = listOf(
-                PdfPage(
-                    pageNumber = 1,
-                    headerTitle = "PROTECCIÓN DE LA MUJER Y VIOLENCIA POLÍTICA",
-                    subtitle = "DERECHOS POLÍTICOS, NO DISCRIMINACIÓN Y CUOTAS DE PARTICIPACIÓN",
-                    sections = listOf(
-                        PdfSection(
-                            title = "Violencia Política contra la Mujer",
-                            content = "Art. 10 y 55.- Se sanciona toda acción o conducta dirigida a menoscabar, restringir o impedir el ejercicio de los derechos políticos de las mujeres miembros de mesas electorales, candidatas o funcionarias públicas.",
-                            articleRef = "LEIV Arts. 10, 55",
-                            isOfficialSeal = true
-                        ),
-                        PdfSection(
-                            title = "Cuota de Participación en Planillas",
-                            content = "Los partidos políticos deben integrar sus planillas con al menos un 30% de mujeres en cargos de elección popular de conformidad con el Art. 38 de la Ley de Partidos Políticos.",
-                            articleRef = "Cuota de Género",
-                            isWarning = true
-                        )
-                    )
-                )
-            )
-        ),
-
-        // 8. Reglamento General para la Observación Electoral
-        PdfDocument(
-            id = "reglamento_observacion_electoral",
-            title = "Reglamento General para la Observación Electoral Nacional e Internacional",
-            category = "Fiscalización y Vigilancia",
-            summary = "Normas y procedimientos dictados por el TSE para la acreditación, derechos, deberes y código de conducta de las misiones de observación electoral nacionales e internacionales.",
-            authority = "Tribunal Supremo Electoral (TSE)",
-            releaseDate = "Reglamento Oficial TSE",
-            assetPath = "libros/REGLAMENTO-GENERAL-PARA-LA-OBSERVACION-ELECTORAL-NACIONAL-E-INTERNACIONAL-EN-EL-SALVADOR.pdf",
-            pages = listOf(
-                PdfPage(
-                    pageNumber = 1,
-                    headerTitle = "REGLAMENTO DE OBSERVACIÓN ELECTORAL",
-                    subtitle = "ACREDITACIÓN, FACULTADES Y CÓDIGO DE CONDUCTA",
-                    sections = listOf(
-                        PdfSection(
-                            title = "Finalidad de la Observación Electoral",
-                            content = "Presenciar de forma imparcial e independiente el desarrollo de todas las etapas del proceso eleccionario salvadoreño para formular recomendaciones que fortalezcan la confianza ciudadana.",
-                            articleRef = "Art. 1",
-                            isOfficialSeal = true
-                        ),
-                        PdfSection(
-                            title = "Deber de Imparcialidad y No Injerencia",
-                            content = "Los observadores acreditados no pueden intervenir en las decisiones de los organismos electorales (JRV, JEM, JED), no pueden sustituir a las autoridades ni manifestar preferencias político-partidarias.",
-                            articleRef = "Código de Conducta",
-                            isWarning = true
-                        )
-                    )
-                )
-            )
-        ),
-
-        // 9. Disposiciones Especiales para Candidaturas No Partidarias
-        PdfDocument(
-            id = "disposiciones_candidaturas_no_partidarias",
-            title = "Disposiciones Especiales para Candidaturas No Partidarias",
-            category = "Disposiciones Fundamentales",
-            summary = "Normas que regulan los requisitos de inscripción, recolección de firmas ciudadanas, financiamiento y fiscalización para aspirantes independientes no afiliados a partidos políticos.",
-            authority = "Asamblea Legislativa • Sentencias Sala de lo Constitucional",
-            releaseDate = "Decreto Legislativo de Candidaturas Independientes",
-            assetPath = "libros/Disposciones-Especiales-Candidaturas-no-partidarias.pdf",
-            pages = listOf(
-                PdfPage(
-                    pageNumber = 1,
-                    headerTitle = "CANDIDATURAS NO PARTIDARIAS (INDEPENDIENTES)",
-                    subtitle = "INSCRIPCIÓN, REQUISITOS DE RESPALDO Y PAPELETAS",
-                    sections = listOf(
-                        PdfSection(
-                            title = "Derecho a Postulación Independiente",
-                            content = "En cumplimiento de la jurisprudencia constitucional, se reconoce el derecho de los ciudadanos salvadoreños a postularse a cargos de Diputaciones a la Asamblea Legislativa de forma no partidaria.",
-                            articleRef = "Bases Constitucionales",
-                            isOfficialSeal = true
-                        ),
-                        PdfSection(
-                            title = "Respaldo Ciudadano y Reglas de Votación",
-                            content = "Los aspirantes deben presentar las firmas de respaldo ciudadano en el porcentaje correspondiente a su circunscripción departamental y aparecen en las papeletas en el sector de candidaturas no partidarias.",
-                            articleRef = "Procedimiento de Inscripción"
                         )
                     )
                 )

@@ -29,13 +29,15 @@ fun BibliotecaScreen(
 ) {
     val context = LocalContext.current
     var viewingDocument by remember { mutableStateOf<PdfDocument?>(null) }
+    var searchingDocument by remember { mutableStateOf<PdfDocument?>(null) }
+    var readerInitialPage by remember { mutableStateOf(0) }
 
     // Discover any additional PDFs in assets
     val discoveredPdfs = remember(context) {
         PdfRendererManager.discoverAssetPdfs(context)
     }
 
-    // Dynamic document list: all 9 official library documents matched with discovered PDF asset paths
+    // Dynamic document list: all 12 official library documents matched with discovered PDF asset paths
     val allDocuments = remember(discoveredPdfs) {
         val baseDocs = ElectoralLibraryData.documents.map { defaultDoc ->
             val matchPath = discoveredPdfs.firstOrNull { discovered ->
@@ -46,10 +48,13 @@ fun BibliotecaScreen(
                     "instructivo_jrv_tse" -> lowerDisc.contains("instructivo") && lowerDisc.contains("jrv")
                     "ley_de_partidos_politicos" -> lowerDisc.contains("partidos")
                     "ley_acceso_informacion_publica" -> lowerDisc.contains("acceso") || lowerDisc.contains("informacion")
-                    "ley_sufragio_extranjero" -> lowerDisc.contains("extranjero") || lowerDisc.contains("sufragio")
-                    "ley_genero_electoral" -> lowerDisc.contains("genero") || lowerDisc.contains("mujer")
-                    "reglamento_observacion_electoral" -> lowerDisc.contains("observacion")
+                    "ley_sufragio_extranjero_542" -> lowerDisc.contains("extranjero") || lowerDisc.contains("sufragio")
+                    "ley_reestructuracion_municipal_763" -> lowerDisc.contains("reestructuracion") || lowerDisc.contains("municipal")
+                    "codigo_penal_delitos_electorales" -> lowerDisc.contains("penal")
+                    "acuerdo_legislativo_reforma_electoral" -> lowerDisc.contains("acuerdo") || lowerDisc.contains("reforma") || lowerDisc.contains("segunda")
+                    "ciclo_electoral_salvadoreno" -> lowerDisc.contains("ciclo")
                     "disposiciones_candidaturas_no_partidarias" -> lowerDisc.contains("no-partidaria") || lowerDisc.contains("candidaturas")
+                    "reglamento_observacion_electoral" -> lowerDisc.contains("observacion")
                     else -> false
                 }
             } ?: defaultDoc.assetPath
@@ -82,11 +87,36 @@ fun BibliotecaScreen(
         baseDocs.distinctBy { it.id }
     }
 
-    // If viewing document, open absolute full-screen PDF reader
+    // 1. If searching within a specific document, open internal search view
+    if (searchingDocument != null) {
+        BookInternalSearchScreen(
+            document = searchingDocument!!,
+            onClose = { searchingDocument = null },
+            onOpenPage = { page ->
+                viewingDocument = searchingDocument
+                readerInitialPage = (page - 1).coerceAtLeast(0)
+                searchingDocument = null
+            },
+            onConsultAi = { queryText ->
+                viewModel.startDocumentSpecificQuery(searchingDocument!!.id, searchingDocument!!.title)
+                viewModel.onQueryInputChange(queryText)
+                viewModel.submitQuery(queryText)
+                searchingDocument = null
+            },
+            modifier = modifier
+        )
+        return
+    }
+
+    // 2. If viewing document, open absolute full-screen PDF reader
     if (viewingDocument != null) {
         PdfReaderScreen(
             document = viewingDocument!!,
-            onClose = { viewingDocument = null },
+            initialPageIndex = readerInitialPage,
+            onClose = {
+                viewingDocument = null
+                readerInitialPage = 0
+            },
             viewModel = viewModel,
             modifier = modifier
         )
@@ -111,7 +141,7 @@ fun BibliotecaScreen(
             ) {
                 Text(
                     text = "BIBLIOTECA",
-                    fontSize = 11.sp,
+                    fontSize = 11.5.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary,
                     letterSpacing = 1.sp
@@ -122,10 +152,16 @@ fun BibliotecaScreen(
                     fontWeight = FontWeight.Black,
                     color = MaterialTheme.colorScheme.onSurface
                 )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "Cada libro cuenta con buscador interno exclusivo, visor PDF y consulta con IA",
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
         }
 
-        // Direct list of available books with simplified cards
+        // Direct list of available books with 3 clear action buttons
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -144,7 +180,7 @@ fun BibliotecaScreen(
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
                     Column(
-                        modifier = Modifier.padding(18.dp)
+                        modifier = Modifier.padding(16.dp)
                     ) {
                         // Title of the book
                         Row(
@@ -152,10 +188,10 @@ fun BibliotecaScreen(
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .size(40.dp)
+                                    .size(42.dp)
                                     .background(
                                         color = MaterialTheme.colorScheme.primaryContainer,
-                                        shape = RoundedCornerShape(10.dp)
+                                        shape = RoundedCornerShape(12.dp)
                                     ),
                                 contentAlignment = Alignment.Center
                             ) {
@@ -163,74 +199,110 @@ fun BibliotecaScreen(
                                     imageVector = Icons.Default.PictureAsPdf,
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(22.dp)
+                                    modifier = Modifier.size(24.dp)
                                 )
                             }
                             Spacer(modifier = Modifier.width(12.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = doc.title,
+                                    fontSize = 15.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                                Text(
+                                    text = doc.authority,
+                                    fontSize = 11.5.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    maxLines = 1
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(14.dp))
+
+                        // Primary Action Button: BUSCAR EN LIBRO
+                        Button(
+                            onClick = { searchingDocument = doc },
+                            shape = RoundedCornerShape(10.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(40.dp)
+                                .testTag("btn_search_in_book_${doc.id}")
+                        ) {
+                            Icon(
+                                Icons.Default.Search,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = doc.title,
-                                fontSize = 15.sp,
+                                text = "BUSCADOR DEL LIBRO (Artículos y Temas)",
+                                fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                modifier = Modifier.weight(1f)
+                                color = MaterialTheme.colorScheme.primary
                             )
                         }
 
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
 
-                        // Two distinct action buttons
+                        // Secondary Action Buttons: [ ABRIR PDF ] and [ CONSULTAR CON IA ]
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             // [ ABRIR PDF ]
-                            Button(
-                                onClick = { viewingDocument = doc },
+                            OutlinedButton(
+                                onClick = {
+                                    viewingDocument = doc
+                                    readerInitialPage = 0
+                                },
                                 shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
                                     .weight(1f)
-                                    .height(44.dp)
-                                    .testTag("btn_open_pdf_${doc.id}"),
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.primary
-                                )
+                                    .height(40.dp)
+                                    .testTag("btn_open_pdf_${doc.id}")
                             ) {
                                 Icon(
                                     Icons.Default.MenuBook,
                                     contentDescription = null,
-                                    modifier = Modifier.size(16.dp)
+                                    modifier = Modifier.size(15.dp)
                                 )
-                                Spacer(modifier = Modifier.width(6.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
                                 Text(
                                     text = "ABRIR PDF",
-                                    fontSize = 12.sp,
+                                    fontSize = 11.5.sp,
                                     fontWeight = FontWeight.Bold
                                 )
                             }
 
                             // [ CONSULTAR CON IA ]
-                            OutlinedButton(
+                            Button(
                                 onClick = {
-                                    val priorityPrompt = "Consulta basada prioritariamente en el documento '${doc.title}': ¿Qué normativas, atribuciones y procedimientos establece respecto a los procesos electorales de El Salvador?"
+                                    val priorityPrompt = "¿Qué disposiciones y procedimientos principales establece el documento '${doc.title}'?"
+                                    viewModel.startDocumentSpecificQuery(doc.id, doc.title)
                                     viewModel.onQueryInputChange(priorityPrompt)
-                                    viewModel.setScreen(ElectoralScreen.CHAT)
                                     viewModel.submitQuery(priorityPrompt)
                                 },
                                 shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
                                     .weight(1f)
-                                    .height(44.dp)
+                                    .height(40.dp)
                                     .testTag("btn_consult_ai_${doc.id}")
                             ) {
                                 Icon(
                                     Icons.Default.AutoAwesome,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(16.dp)
+                                    modifier = Modifier.size(15.dp)
                                 )
-                                Spacer(modifier = Modifier.width(6.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "CONSULTAR CON IA",
+                                    text = "CONSULTAR IA",
                                     fontSize = 11.5.sp,
                                     fontWeight = FontWeight.Bold
                                 )

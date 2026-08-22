@@ -42,6 +42,7 @@ fun SimulacionScreen(
 
     // State for viewing a specific case in detail
     var viewingCase by remember { mutableStateOf<CaseSolution?>(null) }
+    var viewingPdfDoc by remember { mutableStateOf<Pair<PdfDocument, Int>?>(null) }
 
     // State for the 25-Question Exam
     var currentExamQuestions by remember { mutableStateOf(ElectoralSimulationRepository.getRandom25ExamQuestions()) }
@@ -50,6 +51,37 @@ fun SimulacionScreen(
     var hasAnsweredCurrentQuestion by remember { mutableStateOf(false) }
     var userAnswers by remember { mutableStateOf<MutableMap<Int, Int>>(mutableMapOf()) } // questionIndex -> selectedOptionIndex
     var isExamFinished by remember { mutableStateOf(false) }
+
+    val onOpenSource: (ExamQuestion) -> Unit = { question ->
+        val docId = question.sourceDocumentId ?: when {
+            question.sourceDocument.contains("Código Electoral", ignoreCase = true) -> "codigo_electoral_decreto_413"
+            question.sourceDocument.contains("Instructivo", ignoreCase = true) -> "instructivo_jrv_tse"
+            question.sourceDocument.contains("Constitución", ignoreCase = true) -> "constitucion_republica_1983"
+            question.sourceDocument.contains("Partidos", ignoreCase = true) -> "ley_de_partidos_politicos"
+            question.sourceDocument.contains("Acceso", ignoreCase = true) -> "ley_acceso_informacion_publica"
+            question.sourceDocument.contains("Extranjero", ignoreCase = true) || question.sourceDocument.contains("Exterior", ignoreCase = true) -> "ley_sufragio_extranjero"
+            question.sourceDocument.contains("LEIV", ignoreCase = true) || question.sourceDocument.contains("Género", ignoreCase = true) || question.sourceDocument.contains("Mujer", ignoreCase = true) -> "ley_genero_electoral"
+            question.sourceDocument.contains("Observación", ignoreCase = true) -> "reglamento_observacion_electoral"
+            question.sourceDocument.contains("No Partidaria", ignoreCase = true) || question.sourceDocument.contains("No-partidaria", ignoreCase = true) -> "disposiciones_candidaturas_no_partidarias"
+            else -> "codigo_electoral_decreto_413"
+        }
+
+        val targetDoc = ElectoralLibraryData.documents.firstOrNull { it.id == docId }
+            ?: ElectoralLibraryData.documents.first()
+        val pageIndex = ((question.sourcePage ?: 1) - 1).coerceAtLeast(0)
+        viewingPdfDoc = Pair(targetDoc, pageIndex)
+    }
+
+    if (viewingPdfDoc != null) {
+        PdfReaderScreen(
+            document = viewingPdfDoc!!.first,
+            initialPageIndex = viewingPdfDoc!!.second,
+            onClose = { viewingPdfDoc = null },
+            viewModel = viewModel,
+            modifier = modifier
+        )
+        return
+    }
 
     Column(
         modifier = modifier
@@ -69,14 +101,14 @@ fun SimulacionScreen(
             ) {
                 Column {
                     Text(
-                        text = "MÓDULO DE SIMULACIÓN",
+                        text = "MÓDULO DE TEST",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.primary,
                         letterSpacing = 1.sp
                     )
                     Text(
-                        text = "Simulaciones y Examen Electoral",
+                        text = "Test y Examen Electoral",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Black,
                         color = MaterialTheme.colorScheme.onSurface
@@ -173,6 +205,7 @@ fun SimulacionScreen(
                                 userAnswers = mutableMapOf()
                                 isExamFinished = false
                             },
+                            onOpenSource = onOpenSource,
                             viewModel = viewModel
                         )
                     } else {
@@ -205,6 +238,15 @@ fun SimulacionScreen(
                                     hasAnsweredCurrentQuestion = userAnswers.containsKey(currentQuestionIndex)
                                 }
                             },
+                            onResetExam = {
+                                currentExamQuestions = ElectoralSimulationRepository.getRandom25ExamQuestions()
+                                currentQuestionIndex = 0
+                                selectedOptionIndex = null
+                                hasAnsweredCurrentQuestion = false
+                                userAnswers = mutableMapOf()
+                                isExamFinished = false
+                            },
+                            onOpenSource = onOpenSource,
                             viewModel = viewModel
                         )
                     }
@@ -718,10 +760,45 @@ private fun ActiveExamQuestionView(
     onOptionSelected: (Int) -> Unit,
     onNextQuestion: () -> Unit,
     onPreviousQuestion: () -> Unit,
+    onResetExam: () -> Unit,
+    onOpenSource: (ExamQuestion) -> Unit,
     viewModel: ElectoralViewModel
 ) {
     val currentQuestion = questions[currentIndex]
     val totalCount = questions.size
+
+    var showConfirmResetDialog by remember { mutableStateOf(false) }
+
+    if (showConfirmResetDialog) {
+        AlertDialog(
+            onDismissRequest = { showConfirmResetDialog = false },
+            icon = { Icon(Icons.Default.Refresh, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
+            title = { Text("¿Reiniciar Examen?", fontWeight = FontWeight.Bold) },
+            text = {
+                Text(
+                    "Se generará un nuevo conjunto de 25 preguntas aleatorias del catálogo oficial de 125 y volverás a la pregunta 1 con las respuestas en blanco.",
+                    fontSize = 13.5.sp,
+                    lineHeight = 18.sp
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        showConfirmResetDialog = false
+                        onResetExam()
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                ) {
+                    Text("Reiniciar con 25 Nuevas", fontWeight = FontWeight.Bold)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showConfirmResetDialog = false }) {
+                    Text("Cancelar")
+                }
+            }
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -732,7 +809,7 @@ private fun ActiveExamQuestionView(
             .testTag("active_exam_question_view"),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Progress header: Pregunta X de 25
+        // Progress header: Pregunta X de 25 & Restart Button
         Surface(
             color = MaterialTheme.colorScheme.surface,
             shape = RoundedCornerShape(12.dp),
@@ -745,24 +822,44 @@ private fun ActiveExamQuestionView(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "Pregunta ${currentIndex + 1} de $totalCount",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Black,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-
-                    Surface(
-                        color = MaterialTheme.colorScheme.secondaryContainer,
-                        shape = RoundedCornerShape(6.dp)
-                    ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = currentQuestion.category,
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSecondaryContainer,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                            text = "Pregunta ${currentIndex + 1} de $totalCount",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Black,
+                            color = MaterialTheme.colorScheme.primary
                         )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Surface(
+                            color = MaterialTheme.colorScheme.secondaryContainer,
+                            shape = RoundedCornerShape(6.dp)
+                        ) {
+                            Text(
+                                text = currentQuestion.category,
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                            )
+                        }
+                    }
+
+                    // Botón de Reinicio de Test en Examen Electoral
+                    OutlinedButton(
+                        onClick = { showConfirmResetDialog = true },
+                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.outlinedButtonColors(
+                            contentColor = MaterialTheme.colorScheme.error
+                        ),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.5f)),
+                        modifier = Modifier
+                            .height(30.dp)
+                            .testTag("btn_reiniciar_examen_electoral")
+                    ) {
+                        Icon(Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(14.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("Reiniciar", fontSize = 11.sp, fontWeight = FontWeight.Bold)
                     }
                 }
 
@@ -983,27 +1080,50 @@ private fun ActiveExamQuestionView(
 
                     Surface(
                         color = Color.White.copy(alpha = 0.7f),
-                        shape = RoundedCornerShape(6.dp),
+                        shape = RoundedCornerShape(8.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Column(modifier = Modifier.padding(8.dp)) {
-                            Text(
-                                text = "Referencia Normativa:",
-                                fontSize = 10.5.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color(0xFF0D47A1)
-                            )
-                            Text(
-                                text = currentQuestion.normativeReference,
-                                fontSize = 11.5.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                color = Color(0xFF1E293B)
-                            )
-                            Text(
-                                text = "Biblioteca Electoral: ${currentQuestion.sourceDocument}",
-                                fontSize = 10.5.sp,
-                                color = Color(0xFF546E7A)
-                            )
+                        Column(modifier = Modifier.padding(10.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = "Fundamento Legal / Electoral:",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color(0xFF0D47A1)
+                                    )
+                                    Text(
+                                        text = currentQuestion.sourceArticle ?: currentQuestion.normativeReference,
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color(0xFF1E293B)
+                                    )
+                                    Text(
+                                        text = "Fuente: ${currentQuestion.sourceDocument}${if (currentQuestion.sourcePage != null) " • Pág. ${currentQuestion.sourcePage}" else ""}",
+                                        fontSize = 11.sp,
+                                        color = Color(0xFF546E7A)
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(8.dp))
+
+                                Button(
+                                    onClick = { onOpenSource(currentQuestion) },
+                                    shape = RoundedCornerShape(8.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.primary
+                                    ),
+                                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 6.dp)
+                                ) {
+                                    Icon(Icons.Default.MenuBook, contentDescription = null, modifier = Modifier.size(15.dp))
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text("VER FUENTE", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                }
+                            }
                         }
                     }
                 }
@@ -1060,6 +1180,7 @@ private fun ExamResultsSummaryView(
     scorePercentage: Float,
     isApproved: Boolean,
     onRetakeWithNewQuestions: () -> Unit,
+    onOpenSource: (ExamQuestion) -> Unit,
     viewModel: ElectoralViewModel
 ) {
     var filterOnlyIncorrect by remember { mutableStateOf(false) }
@@ -1248,11 +1369,45 @@ private fun ExamResultsSummaryView(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
 
-                        Text(
-                            text = "Base legal: ${question.normativeReference} (${question.sourceDocument})",
-                            fontSize = 10.5.sp,
-                            color = Color(0xFF0D47A1)
-                        )
+                        Surface(
+                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(8.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = "Fundamento: ${question.sourceArticle ?: question.normativeReference}",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color(0xFF0D47A1)
+                                    )
+                                    Text(
+                                        text = "Documento: ${question.sourceDocument}${if (question.sourcePage != null) " (Pág. ${question.sourcePage})" else ""}",
+                                        fontSize = 10.5.sp,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(6.dp))
+
+                                OutlinedButton(
+                                    onClick = { onOpenSource(question) },
+                                    shape = RoundedCornerShape(8.dp),
+                                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+                                ) {
+                                    Icon(Icons.Default.MenuBook, contentDescription = null, modifier = Modifier.size(14.dp))
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text("VER FUENTE", fontSize = 10.5.sp, fontWeight = FontWeight.Bold)
+                                }
+                            }
+                        }
                     }
                 }
             }

@@ -29,6 +29,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.data.BookInternalSearchEngine
+import com.example.data.BookSearchResult
 import com.example.data.PdfDocument
 import com.example.data.PdfRenderSession
 import com.example.data.PdfRendererManager
@@ -37,6 +39,7 @@ import com.example.viewmodel.ElectoralViewModel
 @Composable
 fun PdfReaderScreen(
     document: PdfDocument,
+    initialPageIndex: Int = 0,
     onClose: () -> Unit,
     viewModel: ElectoralViewModel,
     modifier: Modifier = Modifier
@@ -45,9 +48,10 @@ fun PdfReaderScreen(
 
     var renderSession by remember { mutableStateOf<PdfRenderSession?>(null) }
     var isLoadingPdf by remember { mutableStateOf(true) }
-    var currentPageIndex by remember { mutableStateOf(0) }
+    var currentPageIndex by remember(document, initialPageIndex) { mutableStateOf(initialPageIndex.coerceAtLeast(0)) }
     var currentBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var isRenderingPage by remember { mutableStateOf(false) }
+    var showInReaderSearch by remember { mutableStateOf(false) }
 
     // Touch gesture zoom and pan
     var scale by remember { mutableStateOf(1f) }
@@ -260,15 +264,45 @@ fun PdfReaderScreen(
             }
         }
 
-        // Single Top-Corner Discreet "✕ CERRAR" Button (Mandatory requirement)
+        // Top Controls: Search in Book + Close Button
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .statusBarsPadding()
                 .padding(horizontal = 14.dp, vertical = 10.dp),
-            horizontalArrangement = Arrangement.End,
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // Document title badge + Search button
+            Button(
+                onClick = { showInReaderSearch = true },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black.copy(alpha = 0.75f),
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(20.dp),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
+                modifier = Modifier
+                    .height(38.dp)
+                    .testTag("btn_reader_search")
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Buscar en este documento",
+                    tint = Color(0xFF64B5F6),
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = "BUSCAR EN LIBRO",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 11.5.sp,
+                    color = Color.White
+                )
+            }
+
+            // Close button
             Button(
                 onClick = onClose,
                 colors = ButtonDefaults.buttonColors(
@@ -296,6 +330,18 @@ fun PdfReaderScreen(
                     color = Color.White
                 )
             }
+        }
+
+        // In-Reader Search Dialog / Modal
+        if (showInReaderSearch) {
+            InReaderSearchModal(
+                document = document,
+                onClose = { showInReaderSearch = false },
+                onSelectPage = { page ->
+                    currentPageIndex = (page - 1).coerceIn(0, totalPages - 1)
+                    showInReaderSearch = false
+                }
+            )
         }
 
         // Minimalist Bottom Page Indicator & Navigation (Discreet overlay)
@@ -348,6 +394,182 @@ fun PdfReaderScreen(
                             tint = if (currentPageIndex < totalPages - 1) Color.White else Color.Gray.copy(alpha = 0.4f),
                             modifier = Modifier.size(18.dp)
                         )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun InReaderSearchModal(
+    document: PdfDocument,
+    onClose: () -> Unit,
+    onSelectPage: (Int) -> Unit
+) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var query by remember { mutableStateOf("") }
+    val results = remember(query, document) {
+        if (query.trim().isNotEmpty()) {
+            BookInternalSearchEngine.searchDocument(
+                documentId = document.id,
+                documentTitle = document.title,
+                query = query,
+                assetPath = document.assetPath,
+                context = context
+            )
+        } else {
+            emptyList()
+        }
+    }
+
+    ModalBottomSheet(
+        onDismissRequest = onClose,
+        containerColor = MaterialTheme.colorScheme.surface,
+        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
+        dragHandle = { BottomSheetDefaults.DragHandle() }
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.85f)
+                .padding(horizontal = 16.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column {
+                    Text(
+                        text = "Buscar en este documento",
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = document.title,
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.primary,
+                        maxLines = 1
+                    )
+                }
+
+                IconButton(onClick = onClose) {
+                    Icon(Icons.Default.Close, contentDescription = "Cerrar búsqueda")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            OutlinedTextField(
+                value = query,
+                onValueChange = { query = it },
+                placeholder = { Text("Buscar artículos o palabras en este libro...") },
+                leadingIcon = {
+                    Icon(Icons.Default.Search, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                },
+                trailingIcon = {
+                    if (query.isNotEmpty()) {
+                        IconButton(onClick = { query = "" }) {
+                            Icon(Icons.Default.Close, contentDescription = "Limpiar")
+                        }
+                    }
+                },
+                singleLine = true,
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            if (query.trim().isEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Escribe un número de artículo o palabra para saltar directamente a la página correspondiente.",
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                        modifier = Modifier.padding(24.dp)
+                    )
+                }
+            } else if (results.isEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "No se encontraron coincidencias en ${document.title}.",
+                        fontSize = 13.5.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                    )
+                }
+            } else {
+                Text(
+                    text = "${results.size} resultados encontrados — Toca uno para saltar a la página:",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(bottom = 6.dp)
+                )
+
+                androidx.compose.foundation.lazy.LazyColumn(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                    contentPadding = PaddingValues(bottom = 24.dp)
+                ) {
+                    items(results.size) { index ->
+                        val res = results[index]
+                        Card(
+                            onClick = { onSelectPage(res.pageNumber) },
+                            shape = RoundedCornerShape(10.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Column(modifier = Modifier.padding(12.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = "${res.articleRef?.let { "$it · " } ?: ""}${res.sectionTitle}",
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurface,
+                                        modifier = Modifier.weight(1f)
+                                    )
+                                    Surface(
+                                        color = MaterialTheme.colorScheme.primaryContainer,
+                                        shape = RoundedCornerShape(6.dp)
+                                    ) {
+                                        Text(
+                                            text = "Pág. ${res.pageNumber}",
+                                            fontSize = 11.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = res.snippet,
+                                    fontSize = 12.sp,
+                                    lineHeight = 16.sp,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
                     }
                 }
             }

@@ -60,7 +60,10 @@ data class ExamQuestion(
     val correctOptionIndex: Int,
     val explanation: String,
     val normativeReference: String,
-    val sourceDocument: String
+    val sourceDocument: String,
+    val sourceArticle: String = "",
+    val sourcePage: Int? = null,
+    val sourceDocumentId: String = "codigo_electoral_decreto_413"
 )
 
 data class ExamResult(

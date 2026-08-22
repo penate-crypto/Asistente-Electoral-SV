@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.example.data.BookInternalSearchEngine
 import com.example.data.LegalConsentManager
 import com.example.data.database.AppDatabase
 import com.example.data.repository.ElectoralRepository
@@ -62,6 +63,8 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             val repository = ElectoralRepository(database.queryHistoryDao())
             val factory = ElectoralViewModelFactory(repository)
             viewModel = ViewModelProvider(this, factory)[ElectoralViewModel::class.java]
+            viewModel.initFontSize(this)
+            BookInternalSearchEngine.init(this)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -75,7 +78,9 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         initSpeechRecognizerSafely()
 
         setContent {
-            MyApplicationTheme {
+            val currentFontSize by viewModel.appFontSize.collectAsState()
+
+            MyApplicationTheme(appFontSize = currentFontSize) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
