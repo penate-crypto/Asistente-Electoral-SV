@@ -159,35 +159,53 @@ class ElectoralRepository(
 
             try {
                 val response = apiService.generateContent(apiKey, request)
-                val textRes = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
-                if (!textRes.isNullOrBlank()) {
+                val rawTextRes = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
+                if (!rawTextRes.isNullOrBlank()) {
+                    val validatedAnswer = ElectoralResponseValidator.validateAndFormat(
+                        userQuery = trimmedQuestion,
+                        analyzedQuery = analyzedQuery,
+                        rawAnswer = rawTextRes,
+                        retrievedChunks = retrievedChunks
+                    )
                     val historyItem = QueryHistory(
                         question = trimmedQuestion,
-                        answer = textRes
+                        answer = validatedAnswer
                     )
                     queryHistoryDao.insertHistory(historyItem)
-                    return@withContext AnswerResult.Success(textRes, suggestions)
+                    return@withContext AnswerResult.Success(validatedAnswer, suggestions)
                 }
             } catch (e: Exception) {
                 // Fallback to grounded local knowledge engine if network fails or timeout occurs
-                val fallbackAnswer = ElectoralRAGEngine.buildLocalGroundedAnswer(analyzedQuery, retrievedChunks)
+                val rawFallback = ElectoralRAGEngine.buildLocalGroundedAnswer(analyzedQuery, retrievedChunks)
+                val validatedFallback = ElectoralResponseValidator.validateAndFormat(
+                    userQuery = trimmedQuestion,
+                    analyzedQuery = analyzedQuery,
+                    rawAnswer = rawFallback,
+                    retrievedChunks = retrievedChunks
+                )
                 val historyItem = QueryHistory(
                     question = trimmedQuestion,
-                    answer = fallbackAnswer
+                    answer = validatedFallback
                 )
                 queryHistoryDao.insertHistory(historyItem)
-                return@withContext AnswerResult.Success(fallbackAnswer, suggestions)
+                return@withContext AnswerResult.Success(validatedFallback, suggestions)
             }
         }
 
         // 3. Grounded Local RAG Generation (when offline or without API key)
-        val localGroundedAnswer = ElectoralRAGEngine.buildLocalGroundedAnswer(analyzedQuery, retrievedChunks)
+        val rawLocalAnswer = ElectoralRAGEngine.buildLocalGroundedAnswer(analyzedQuery, retrievedChunks)
+        val validatedLocalAnswer = ElectoralResponseValidator.validateAndFormat(
+            userQuery = trimmedQuestion,
+            analyzedQuery = analyzedQuery,
+            rawAnswer = rawLocalAnswer,
+            retrievedChunks = retrievedChunks
+        )
         val historyItem = QueryHistory(
             question = trimmedQuestion,
-            answer = localGroundedAnswer
+            answer = validatedLocalAnswer
         )
         queryHistoryDao.insertHistory(historyItem)
-        return@withContext AnswerResult.Success(localGroundedAnswer, suggestions)
+        return@withContext AnswerResult.Success(validatedLocalAnswer, suggestions)
     }
 }
 

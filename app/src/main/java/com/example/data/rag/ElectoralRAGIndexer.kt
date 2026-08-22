@@ -262,16 +262,16 @@ object ElectoralRAGIndexer {
         )
 
         // =========================================================================
-        // DOCUMENTO 3: INSTRUCTIVO Y PROTOCOLO OPERATIVO DE JRV (TSE)
+        // DOCUMENTO: INSTRUCTIVO Y PROTOCOLO OPERATIVO DE JRV (TSE)
         // =========================================================================
-        val doc3Id = "instructivo_jrv_tse"
-        val doc3Title = "Instructivo Oficial para Miembros de JRV (Tribunal Supremo Electoral)"
+        val instructivoDocId = "instructivo_jrv_tse"
+        val instructivoDocTitle = "Instructivo Oficial para Miembros de JRV (Tribunal Supremo Electoral)"
 
         list.add(
             ElectoralKnowledgeChunk(
                 id = "ins_sustitucion_escalonada",
-                documentId = doc3Id,
-                documentTitle = doc3Title,
+                documentId = instructivoDocId,
+                documentTitle = instructivoDocTitle,
                 chapter = "FASE 1: INSTALACIÓN DE MESA (06:00 AM - 07:00 AM)",
                 sectionTitle = "Protocolo de Sustitución Escalonada por Ausencia de Miembros de JRV",
                 articleRef = "Protocolo de Quórum e Instalación TSE",
@@ -290,8 +290,8 @@ object ElectoralRAGIndexer {
         list.add(
             ElectoralKnowledgeChunk(
                 id = "ins_falta_material_papeletas",
-                documentId = doc3Id,
-                documentTitle = doc3Title,
+                documentId = instructivoDocId,
+                documentTitle = instructivoDocTitle,
                 chapter = "FASE 1: RECEPCIÓN Y REVISIÓN DEL PAQUETE ELECTORAL",
                 sectionTitle = "Procedimiento ante Faltante de Papeletas, Sellos o Material Electoral",
                 articleRef = "Instructivo JRV - Sección Inventario",
@@ -310,8 +310,8 @@ object ElectoralRAGIndexer {
         list.add(
             ElectoralKnowledgeChunk(
                 id = "ins_credenciales_vigilantes_acceso",
-                documentId = doc3Id,
-                documentTitle = doc3Title,
+                documentId = instructivoDocId,
+                documentTitle = instructivoDocTitle,
                 chapter = "SEGURIDAD Y CONTROL DE ACCESO A LA MESA",
                 sectionTitle = "Requisitos de Acceso a JRV: Credenciales Obligatorias y Prohibición de Acceso Irregular",
                 articleRef = "Instructivo JRV - Fiscalización y Acreditaciones",
@@ -329,8 +329,8 @@ object ElectoralRAGIndexer {
         list.add(
             ElectoralKnowledgeChunk(
                 id = "ins_voto_asistido_inclusion",
-                documentId = doc3Id,
-                documentTitle = doc3Title,
+                documentId = instructivoDocId,
+                documentTitle = instructivoDocTitle,
                 chapter = "FASE 2: ATENCIÓN A CIUDADANOS Y MODALIDADES DE VOTO",
                 sectionTitle = "Voto Asistido para Adultos Mayores y Personas con Discapacidad",
                 articleRef = "Instructivo JRV - Voto Inclusivo TSE",
@@ -346,16 +346,16 @@ object ElectoralRAGIndexer {
         )
 
         // =========================================================================
-        // DOCUMENTO 4: MANUAL DE ESCRUTINIO Y ACTAS (TSE)
+        // DOCUMENTO: MANUAL DE ESCRUTINIO Y ACTAS (TSE)
         // =========================================================================
-        val doc4Id = "manual_escrutinio_tse"
-        val doc4Title = "Manual Oficial de Escrutinio Preliminar y Actas (TSE)"
+        val manualEscrutinioDocId = "manual_escrutinio_tse"
+        val manualEscrutinioDocTitle = "Manual Oficial de Escrutinio Preliminar y Actas (TSE)"
 
         list.add(
             ElectoralKnowledgeChunk(
                 id = "man_escrutinio_paso_a_paso",
-                documentId = doc4Id,
-                documentTitle = doc4Title,
+                documentId = manualEscrutinioDocId,
+                documentTitle = manualEscrutinioDocTitle,
                 chapter = "ESCRUTINIO PRELIMINAR PASO A PASO (05:00 PM)",
                 sectionTitle = "Procedimiento Cronológico del Conteo de Votos y Llenado de Acta",
                 articleRef = "Manual de Escrutinio TSE - Paso 1 a 6",
@@ -376,8 +376,8 @@ object ElectoralRAGIndexer {
         list.add(
             ElectoralKnowledgeChunk(
                 id = "man_voto_cruzado_preferencial",
-                documentId = doc4Id,
-                documentTitle = doc4Title,
+                documentId = manualEscrutinioDocId,
+                documentTitle = manualEscrutinioDocTitle,
                 chapter = "CALIFICACIÓN EN ELECCIÓN DE DIPUTADOS",
                 sectionTitle = "Reglas de Voto Preferencial, Voto Cruzado y Voto por Bandera",
                 articleRef = "Manual de Escrutinio TSE - Elección Legislativa",
@@ -394,16 +394,16 @@ object ElectoralRAGIndexer {
         )
 
         // =========================================================================
-        // DOCUMENTO 5: LEY ESPECIAL INTEGRAL PARA UNA VIDA LIBRE DE VIOLENCIA (LEIV) - MATERIA ELECTORAL
+        // DOCUMENTO: LEY ESPECIAL INTEGRAL PARA UNA VIDA LIBRE DE VIOLENCIA (LEIV) - MATERIA ELECTORAL
         // =========================================================================
-        val doc5Id = "leiv_proteccion_mujer_electoral"
-        val doc5Title = "Ley Especial Integral para una Vida Libre de Violencia para las Mujeres (LEIV) • Ámbito Electoral"
+        val leivDocId = "leiv_proteccion_mujer_electoral"
+        val leivDocTitle = "Ley Especial Integral para una Vida Libre de Violencia para las Mujeres (LEIV) • Ámbito Electoral"
 
         list.add(
             ElectoralKnowledgeChunk(
                 id = "leiv_art_55_violencia_politica",
-                documentId = doc5Id,
-                documentTitle = doc5Title,
+                documentId = leivDocId,
+                documentTitle = leivDocTitle,
                 chapter = "PROTECCIÓN DE DERECHOS POLÍTICOS DE LA MUJER",
                 sectionTitle = "Sanción y Prevención de Violencia Política contra la Mujer (LEIV Art. 55)",
                 articleRef = "LEIV Arts. 9, 10 y 55",
@@ -416,26 +416,130 @@ object ElectoralRAGIndexer {
         )
 
         // =========================================================================
-        // DOCUMENTO 6: LEY DE PARTIDOS POLÍTICOS
+        // DOCUMENTO 3: LEY DE PARTIDOS POLÍTICOS (DECRETO No. 307)
         // =========================================================================
-        val doc6Id = "ley_partidos_politicos_sv"
-        val doc6Title = "Ley de Partidos Políticos de El Salvador"
+        val lppDocId = "ley_de_partidos_politicos"
+        val lppDocTitle = "Ley de Partidos Políticos (Decreto No. 307)"
+
+        list.add(
+            ElectoralKnowledgeChunk(
+                id = "lpp_art_1_37_democracia_interna",
+                documentId = lppDocId,
+                documentTitle = lppDocTitle,
+                chapter = "DEMOCRACIA INTERNA Y ORGANIZACIÓN",
+                sectionTitle = "Elecciones Internas y Selección de Candidaturas",
+                articleRef = "Arts. 37 y 38 Ley de Partidos Políticos",
+                pageNumber = 1,
+                content = "Arts. 37 y 38.- Las candidaturas a cargos de elección popular deben ser electas mediante voto libre, directo, igualitario y secreto de los afiliados del partido político, bajo la supervisión de sus comisiones electorales internas y la fiscalización del TSE.",
+                sourceType = "Ley Oficial",
+                keywords = listOf("partidos politicos", "elecciones internas", "democracia interna", "afiliados", "candidaturas", "decreto 307"),
+                concepts = listOf("democracia interna partidaria", "selección de candidatos", "estatutos de partidos")
+            )
+        )
+
+        list.add(
+            ElectoralKnowledgeChunk(
+                id = "lpp_art_67_transparencia_financiamiento",
+                documentId = lppDocId,
+                documentTitle = lppDocTitle,
+                chapter = "RÉGIMEN FINANCIERO Y TRANSPARENCIA",
+                sectionTitle = "Transparencia y Prohibición de Donaciones Anónimas",
+                articleRef = "Arts. 67 y 68 Ley de Partidos Políticos",
+                pageNumber = 2,
+                content = "Arts. 67 y 68.- Los partidos están obligados a registrar contablemente todos los donativos privados y aportes de militantes, manteniendo prohibidas las donaciones anónimas y de origen ilícito, debiendo rendir cuentas públicas al TSE.",
+                sourceType = "Ley Oficial",
+                keywords = listOf("financiamiento", "donaciones", "origen de fondos", "transparencia", "rendicion de cuentas", "prohibicion de donantes anonimos"),
+                concepts = listOf("fiscalización de fondos", "transparencia financiera", "auditoría del TSE")
+            )
+        )
 
         list.add(
             ElectoralKnowledgeChunk(
                 id = "lpp_derechos_prohibiciones_vigilantes",
-                documentId = doc6Id,
-                documentTitle = doc6Title,
+                documentId = lppDocId,
+                documentTitle = lppDocTitle,
                 chapter = "FISCALIZACIÓN ELECTORAL Y VIGILANCIA",
                 sectionTitle = "Derechos y Prohibiciones Estrictas de Vigilantes de Partidos Políticos",
                 articleRef = "Ley de Partidos Políticos y Código Electoral",
-                pageNumber = 1,
+                pageNumber = 3,
                 content = "Derechos y Prohibiciones de Vigilantes Partidarios en JRV:\n" +
                         "• DERECHOS: Presenciar la instalación, apertura, votación y conteo; formular objeciones e impugnaciones; firmar las actas y recibir copia certificada legible del Acta de Escrutinio.\n" +
                         "• PROHIBICIONES ESTRICTAS: Se prohíbe tajantemente a los vigilantes tocar o manipular papeletas electorales o urnas, intervenir en el atril con los electores, hacer propaganda o proselitismo político dentro del centro de votación, o dar órdenes a los miembros de JRV. Si un vigilante transgrede estas normas, el Presidente de JRV puede ordenar su expulsión del centro.",
                 sourceType = "Ley Oficial",
                 keywords = listOf("vigilantes", "partidos politicos", "derechos vigilantes", "prohibiciones", "no tocar papeletas", "propaganda", "expulsion"),
                 concepts = listOf("fiscalización partidaria", "rol de vigilantes", "prohibiciones a partidos", "autonomía de JRV")
+            )
+        )
+
+        // =========================================================================
+        // DOCUMENTO 4: LEY DE ACCESO A LA INFORMACIÓN PÚBLICA (LAIP)
+        // =========================================================================
+        val laipDocId = "ley_acceso_informacion_publica"
+        val laipDocTitle = "Ley de Acceso a la Información Pública (LAIP)"
+
+        list.add(
+            ElectoralKnowledgeChunk(
+                id = "laip_art_1_7_entes_obligados",
+                documentId = laipDocId,
+                documentTitle = laipDocTitle,
+                chapter = "PRINCIPIOS DE MÁXIMA PUBLICIDAD Y TRANSPARENCIA ELECTORAL",
+                sectionTitle = "TSE y Partidos Políticos como Entes Obligados",
+                articleRef = "Arts. 1, 4 y 7 LAIP",
+                pageNumber = 1,
+                content = "Arts. 1, 4 y 7.- El Tribunal Supremo Electoral y los partidos políticos son entes obligados a garantizar el principio de máxima publicidad, facilitando a la ciudadanía el acceso a la información oficiosa sobre presupuestos, contrataciones, resoluciones y orígenes del financiamiento.",
+                sourceType = "Ley Oficial",
+                keywords = listOf("laip", "acceso a la informacion", "maxima publicidad", "partidos entes obligados", "tse transparencia", "decreto 534"),
+                concepts = listOf("transparencia electoral", "rendición de cuentas", "acceso a la información pública")
+            )
+        )
+
+        // =========================================================================
+        // DOCUMENTO 5: DISPOSICIONES ESPECIALES PARA CANDIDATURAS NO PARTIDARIAS
+        // =========================================================================
+        val cnpDocId = "disposiciones_candidaturas_no_partidarias"
+        val cnpDocTitle = "Disposiciones Especiales para Candidaturas No Partidarias"
+
+        list.add(
+            ElectoralKnowledgeChunk(
+                id = "cnp_requisitos_firmas_inscripcion",
+                documentId = cnpDocId,
+                documentTitle = cnpDocTitle,
+                chapter = "CANDIDATURAS INDEPENDIENTES NO PARTIDARIAS",
+                sectionTitle = "Inscripción, Respaldo Ciudadano y Reglas de Votación",
+                articleRef = "Disposiciones Especiales Candidaturas No Partidarias",
+                pageNumber = 1,
+                content = "Requisitos y reglas para Candidaturas No Partidarias (independientes) a Diputaciones a la Asamblea Legislativa:\n" +
+                        "1. Deben recolectar y presentar las firmas de respaldo ciudadano en el porcentaje exigido por circunscripción departamental.\n" +
+                        "2. No pertenecer ni haber pertenecido a partidos políticos en los plazos fijados por la jurisprudencia constitucional.\n" +
+                        "3. Aparecen en la papeleta en la sección de candidaturas no partidarias y reciben marcas de preferencia individuales.",
+                sourceType = "Disposiciones Especiales",
+                keywords = listOf("candidaturas no partidarias", "candidatos independientes", "firmas de respaldo", "diputaciones independientes", "sin partido"),
+                concepts = listOf("candidaturas ciudadanas", "derecho a ser votado", "postulación no partidaria")
+            )
+        )
+
+        // =========================================================================
+        // DOCUMENTO 6: REGLAMENTO GENERAL PARA LA OBSERVACIÓN ELECTORAL
+        // =========================================================================
+        val doc6Id = "reglamento_observacion_electoral"
+        val doc6Title = "Reglamento General para la Observación Electoral Nacional e Internacional"
+
+        list.add(
+            ElectoralKnowledgeChunk(
+                id = "roe_acreditacion_codigo_conducta",
+                documentId = doc6Id,
+                documentTitle = doc6Title,
+                chapter = "OBSERVACIÓN ELECTORAL NACIONAL E INTERNACIONAL",
+                sectionTitle = "Acreditación, Deber de Imparcialidad y Facultades de Observadores",
+                articleRef = "Reglamento de Observación Electoral TSE",
+                pageNumber = 1,
+                content = "Reglas para la Misión de Observación Electoral:\n" +
+                        "1. Acreditación oficial ante el TSE y portación obligatoria de gafete visible.\n" +
+                        "2. Deber estricto de neutralidad, objetividad e imparcialidad, sin manifestar preferencias políticas ni emitir declaraciones que interfieran en el proceso.\n" +
+                        "3. Facultades: Presenciar la jornada de votación y el escrutinio preliminar en JRV sin sustituir ni intervenir en las facultades de las autoridades de mesa ni tocar material electoral.",
+                sourceType = "Reglamento TSE",
+                keywords = listOf("observacion electoral", "observadores internacionales", "observadores nacionales", "imparcialidad", "codigo de conducta", "gafete tse"),
+                concepts = listOf("observación electoral", "fiscalización ciudadana", "transparencia internacional")
             )
         )
 

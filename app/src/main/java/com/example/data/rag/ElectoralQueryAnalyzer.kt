@@ -135,6 +135,10 @@ object ElectoralQueryAnalyzer {
     }
 
     private fun determineIntent(text: String, articles: List<String>): QueryIntentType {
+        if (isOutOfScopeQuery(text)) {
+            return QueryIntentType.OUT_OF_SCOPE
+        }
+
         if (articles.isNotEmpty()) return QueryIntentType.ARTICLE_LOOKUP
 
         if (text.contains("arma") || text.contains("cuchillo") || text.contains("objeto cortante") ||
@@ -172,6 +176,19 @@ object ElectoralQueryAnalyzer {
         }
 
         return QueryIntentType.GENERAL_ELECTORAL
+    }
+
+    private fun isOutOfScopeQuery(text: String): Boolean {
+        val nonElectoralKeywords = listOf(
+            "receta", "cocinar", "ingredientes", "pupusas", "pizza", "futbol", "fútbol", "campeonato",
+            "messi", "ronaldo", "pelicula", "cancion", "musica", "videojuego", "clima", "temperatura",
+            "programar", "javascript", "python", "kotlin", "java", "chatgpt", "medicina", "sintomas",
+            "enfermedad", "horoscopo", "astrologia", "astronomia", "chiste", "poema", "cuento"
+        )
+        for (kw in nonElectoralKeywords) {
+            if (text.contains(kw)) return true
+        }
+        return false
     }
 
     private fun decomposeComplexQuery(normalizedText: String, intent: QueryIntentType): List<String> {

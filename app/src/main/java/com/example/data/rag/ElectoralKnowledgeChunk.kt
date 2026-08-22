@@ -28,7 +28,8 @@ enum class QueryIntentType {
     INCIDENT_SECURITY,    // Incidentes, personas armadas, orden público, auxilio PNC
     ARTICLE_LOOKUP,       // Búsqueda de artículo legal específico
     VOTING_ASSISTANCE,    // Voto asistido, inclusión, LEIV mujer
-    GENERAL_ELECTORAL     // Consulta general
+    GENERAL_ELECTORAL,    // Consulta general
+    OUT_OF_SCOPE          // Consulta fuera del ámbito electoral salvadoreño
 }
 
 data class AnalyzedQuery(
