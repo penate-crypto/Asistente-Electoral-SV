@@ -1335,11 +1335,11 @@ fun ElectoralMainScreen(
                                 // Send Button for written queries
                                 IconButton(
                                     onClick = { viewModel.submitQuery() },
-                                    enabled = queryInput.isNotEmpty() && apiKeyStatus != ApiKeyStatus.MISSING && uiState !is ElectoralUiState.Loading,
+                                    enabled = queryInput.isNotEmpty() && uiState !is ElectoralUiState.Loading,
                                     modifier = Modifier
                                         .size(38.dp)
                                         .background(
-                                            color = if (queryInput.isNotEmpty() && apiKeyStatus != ApiKeyStatus.MISSING && uiState !is ElectoralUiState.Loading) {
+                                            color = if (queryInput.isNotEmpty() && uiState !is ElectoralUiState.Loading) {
                                                 MaterialTheme.colorScheme.primary
                                             } else {
                                                 MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
@@ -1351,7 +1351,7 @@ fun ElectoralMainScreen(
                                     Icon(
                                         Icons.Default.Send,
                                         contentDescription = "Enviar consulta",
-                                        tint = if (queryInput.isNotEmpty() && apiKeyStatus != ApiKeyStatus.MISSING && uiState !is ElectoralUiState.Loading) {
+                                        tint = if (queryInput.isNotEmpty() && uiState !is ElectoralUiState.Loading) {
                                             MaterialTheme.colorScheme.onPrimary
                                         } else {
                                             MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)

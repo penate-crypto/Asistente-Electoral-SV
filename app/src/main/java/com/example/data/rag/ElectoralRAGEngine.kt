@@ -3,6 +3,7 @@ package com.example.data.rag
 import com.example.data.api.Content
 import com.example.data.api.GenerateContentRequest
 import com.example.data.api.GenerationConfig
+import com.example.data.api.GoogleSearchTool
 import com.example.data.api.Part
 
 object ElectoralRAGEngine {
@@ -118,21 +119,20 @@ object ElectoralRAGEngine {
             }
         }
 
-        // Conversation History Context
-        val historyBuilder = StringBuilder()
+        // Multi-turn conversation contents (ChatGPT style)
+        val contentsList = mutableListOf<Content>()
+
+        // Previous turns
         if (conversationHistory.isNotEmpty()) {
-            historyBuilder.append("\n=== HISTORIAL RECIENTE (CONTEXTO DE CONVERSACIÓN) ===\n")
-            conversationHistory.takeLast(2).forEach { (q, a) ->
-                historyBuilder.append("Usuario: $q\n")
-                val shortAnswer = a.lines().take(2).joinToString(" ")
-                historyBuilder.append("Capacitador: $shortAnswer\n")
+            conversationHistory.takeLast(4).forEach { (q, a) ->
+                contentsList.add(Content(role = "user", parts = listOf(Part(text = q))))
+                contentsList.add(Content(role = "model", parts = listOf(Part(text = a))))
             }
-            historyBuilder.append("====================================================\n\n")
         }
 
-        val promptContent = """
+        // Current turn with grounded context and query
+        val currentPrompt = """
             $contextBuilder
-            $historyBuilder
             CONSULTA DEL USUARIO / INTEGRANTE DE MESA ELECTORAL:
             "$userQuery"
 
@@ -142,34 +142,36 @@ object ElectoralRAGEngine {
             • Organismos / Ámbito: ${analyzedQuery.targetEntities.joinToString(", ").ifEmpty { "Electoral El Salvador" }}
 
             INSTRUCCIONES CLAVE PARA EL CAPACITADOR ELECTORAL VIRTUAL:
-            1. FUNDAMENTACIÓN ESTRICTA EN LA BIBLIOTECA: Basa tu respuesta de forma prioritaria en los fragmentos documentales de la biblioteca electoral salvadoreña proporcionados arriba.
+            1. FUNDAMENTACIÓN RIGUROSA: Basa tu respuesta de forma prioritaria en los fragmentos documentales de la biblioteca electoral salvadoreña proporcionados arriba y en información oficial verificada.
             2. CERO ALUCINACIONES: Si un dato o procedimiento no existe en la normativa oficial salvadoreña, decláralo con honestidad técnica («No se encontró suficiente información en los documentos disponibles para confirmar esta respuesta.»). No inventes plazos, sanciones ni artículos.
             3. NO MEZCLAR INFORMACIÓN NI COMPETENCIAS:
                - Distingue con exactitud las funciones de la JRV (mesa receptora), JEM (municipal), JED (departamental) y TSE (máxima autoridad).
                - No confundas las fases del evento (instalación 6:00 am, votación 7:00 am - 5:00 pm, cierre y escrutinio preliminar de mesa).
                - No confundas la elección nacional presencial con el voto en el extranjero ni las distintas elecciones (Presidencial, Diputados, Concejos Municipales, PARLACEN).
             4. FORMATO OBLIGATORIO:
-               📌 **Respuesta:** (Directa y concisa)
-               📝 **Explicación:** (Procedimiento pedagógico y secuencial)
+               📌 **Respuesta:** (Directa, fluida y precisa)
+               📝 **Explicación:** (Procedimiento pedagógico y secuencial paso a paso)
                ⚖️ **Fundamento:** (Artículos y leyes salvadoreñas aplicables)
                📚 **Fuentes consultadas:** (Documentos oficiales citados)
             5. ADVERTENCIA ORIENTATIVA: Concluye siempre con "Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
         """.trimIndent()
 
+        contentsList.add(Content(role = "user", parts = listOf(Part(text = currentPrompt))))
+
         val request = GenerateContentRequest(
-            contents = listOf(
-                Content(parts = listOf(Part(text = promptContent)))
-            ),
+            contents = contentsList,
             generationConfig = GenerationConfig(
-                temperature = 0.2f,
-                topP = 0.95f
+                temperature = 0.35f,
+                topP = 0.95f,
+                maxOutputTokens = 4096
             ),
             systemInstruction = Content(
                 parts = listOf(Part(text = systemInstruction))
-            )
+            ),
+            tools = listOf(GoogleSearchTool())
         )
 
-        return Pair(promptContent, request)
+        return Pair(currentPrompt, request)
     }
 
     fun buildLocalGroundedAnswer(
@@ -178,7 +180,22 @@ object ElectoralRAGEngine {
     ): String {
         if (analyzedQuery.intent == QueryIntentType.OUT_OF_SCOPE) {
             return """
-                Como Asistente y Capacitador Electoral Virtual de El Salvador, mi función se limita exclusivamente a resolver consultas sobre el sistema electoral, organismos electorales (TSE, JED, JEM, JRV), normativa jurídica y procedimientos de votación en El Salvador. No dispongo de información sobre temas no electorales.
+                📌 **Respuesta:**
+                Como Asistente y Capacitador Electoral Virtual de El Salvador, mi función se concentra exclusivamente en resolver consultas sobre el sistema electoral salvadoreño, organismos electorales (TSE, JED, JEM, JRV), normativa jurídica (Código Electoral, Constitución, instructivos) y procedimientos de votación y escrutinio en El Salvador.
+
+                📝 **Explicación:**
+                Para realizar una consulta efectiva, pregunte sobre:
+                • Procedimientos de votación, apertura (6:00 AM) o cierre de mesas (5:00 PM).
+                • Requisitos de identificación del elector con DUI.
+                • Funciones de los miembros de la JRV, vigilantes de partidos y jefes de centro.
+                • Escrutinio preliminar, clasificación de votos (válidos, nulos, impugnados, abstenciones).
+                • Delitos electorales y régimen de sanciones según el Código Penal y Código Electoral.
+
+                ⚖️ **Fundamento:**
+                Constitución de la República de El Salvador y Código Electoral (Decreto Legislativo No. 413).
+
+                📚 **Fuentes consultadas:**
+                Biblioteca Electoral Oficial de El Salvador.
 
                 Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
             """.trimIndent()
@@ -186,16 +203,17 @@ object ElectoralRAGEngine {
 
         if (retrievedChunks.isEmpty()) {
             return """
-                No encontré suficiente información en los documentos disponibles para confirmar esta respuesta.
-
                 📌 **Respuesta:**
-                No se localizó una disposición específica en la biblioteca electoral procesada para responder con certeza documental a este requerimiento.
+                No se encontró suficiente información en los documentos disponibles para confirmar una respuesta taxativa sobre este punto específico.
 
                 📝 **Explicación:**
-                Para resolver cualquier contingencia operativa no prevista durante la jornada electoral, consulte la versión física de los instructivos oficiales del TSE o acuda de inmediato al Jefe de Centro de Votación o al Delegado de la Junta Electoral Municipal (JEM).
+                En caso de presentarse una duda procedimental u operativa no prevista expresamente en el recinto de votación:
+                1. El Presidente de la JRV somete el caso a resolución colegiada con los miembros de mesa.
+                2. Si persiste la duda, se consulta inmediatamente al Delegado Municipal (JEM) o al Jefe de Centro del TSE asignado al recinto.
+                3. Todo acuerdo y resolución debe asentarse fielmente en el Acta de Incidentes por el Secretario de la mesa.
 
                 ⚖️ **Fundamento:**
-                Código Electoral de El Salvador y directrices del Tribunal Supremo Electoral (TSE).
+                Código Electoral de El Salvador e Instructivo Oficial para Juntas Receptoras de Votos (TSE).
 
                 📚 **Fuentes consultadas:**
                 Biblioteca Electoral Oficial de El Salvador.
@@ -205,76 +223,52 @@ object ElectoralRAGEngine {
         }
 
         val primary = retrievedChunks.first().chunk
-        val secondary = retrievedChunks.getOrNull(1)?.chunk
-
         val docName = primary.documentTitle
         val artRef = primary.articleRef ?: primary.sectionTitle
 
-        return when (analyzedQuery.intent) {
-            QueryIntentType.ARTICLE_LOOKUP -> {
-                """
-                📌 **Respuesta:**
-                El ${primary.articleRef ?: primary.sectionTitle} de $docName establece la regulación normativa aplicable a ${primary.sectionTitle}.
+        // Build a cohesive explanation synthesizing all retrieved chunks
+        val explanationBuilder = StringBuilder()
+        explanationBuilder.append(primary.content)
 
-                📝 **Explicación:**
-                ${primary.content}
-                ${if (secondary != null && secondary.documentId == primary.documentId) "\n" + secondary.content else ""}
-
-                ⚖️ **Fundamento:**
-                • ${primary.articleRef ?: primary.sectionTitle} ($docName, Pág. ${primary.pageNumber}).
-
-                📚 **Fuentes consultadas:**
-                • $docName
-                ${if (secondary != null && secondary.documentTitle != docName) "• " + secondary.documentTitle else ""}
-
-                Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
-                """.trimIndent()
-            }
-            QueryIntentType.INCIDENT_SECURITY, QueryIntentType.PROHIBITION, QueryIntentType.EXCEPTION_CONTINGENCY -> {
-                """
-                📌 **Respuesta:**
-                Ante esta situación en la Junta Receptora de Votos (JRV), se debe actuar bajo la dirección del Presidente de la mesa aplicando el protocolo oficial del TSE, garantizando el orden y la continuidad del sufragio.
-
-                📝 **Explicación:**
-                **Procedimiento de Actuación Oficial:**
-                1. **Evaluación de la Situación:** El Presidente de la JRV, como máxima autoridad del recinto de mesa, toma conocimiento directo del hecho.
-                2. **Decisión Colegiada:** La JRV delibera y resuelve por mayoría simple conforme a las directrices de la ley e instructivo oficial.
-                3. **Auxilio Institucional:** En caso de alteración del orden público, presuntos delitos o presencia de armas, el Presidente solicitará inmediatamente el auxilio de la Policía Nacional Civil (PNC) destacada en el centro o del Jefe de Centro del TSE.
-                4. **Registro en Acta:** El Secretario de la JRV asienta el hecho de forma circunstanciada en el Acta de Incidentes.
-                5. **Garantía del Sufragio:** Se reanuda la votación garantizando que todo ciudadano habilitado con DUI vigente ejerza su derecho libremente.
-
-                ⚖️ **Fundamento:**
-                • $artRef — $docName.
-                • Disposición aplicable: ${primary.content}
-
-                📚 **Fuentes consultadas:**
-                • $docName
-                • Instructivo Oficial para Juntas Receptoras de Votos (TSE)
-                ${if (secondary != null && secondary.documentTitle != docName) "• " + secondary.documentTitle else ""}
-
-                Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
-                """.trimIndent()
-            }
-            else -> {
-                """
-                📌 **Respuesta:**
-                De acuerdo con la normativa electoral salvadoreña, ${primary.sectionTitle.lowercase()} se rige por lo dispuesto en $docName.
-
-                📝 **Explicación:**
-                ${primary.content}
-                ${if (secondary != null) "\n\n**Disposición complementaria:**\n" + secondary.content else ""}
-
-                ⚖️ **Fundamento:**
-                • ${primary.articleRef ?: primary.sectionTitle} ($docName, Pág. ${primary.pageNumber}).
-
-                📚 **Fuentes consultadas:**
-                • $docName
-                ${if (secondary != null && secondary.documentTitle != docName) "• " + secondary.documentTitle else ""}
-
-                Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
-                """.trimIndent()
+        val additionalChunks = retrievedChunks.drop(1)
+        if (additionalChunks.isNotEmpty()) {
+            explanationBuilder.append("\n\n**Disposiciones y lineamientos complementarios:**\n")
+            additionalChunks.forEach { scored ->
+                val chunk = scored.chunk
+                val ref = chunk.articleRef ?: chunk.sectionTitle
+                explanationBuilder.append("• **$ref (${chunk.documentTitle}):** ${chunk.content}\n\n")
             }
         }
+
+        val allSources = retrievedChunks.map { it.chunk.documentTitle }.distinct()
+        val allArticles = retrievedChunks.mapNotNull { it.chunk.articleRef ?: it.chunk.sectionTitle }.distinct()
+
+        val answerSummary = when (analyzedQuery.intent) {
+            QueryIntentType.ARTICLE_LOOKUP -> "De acuerdo con el ${artRef} de $docName, la normativa salvadoreña regula de forma expresa los aspectos relativos a ${primary.sectionTitle.lowercase()}."
+            QueryIntentType.INCIDENT_SECURITY -> "Ante situaciones de seguridad o alteración del orden público en el centro de votación, la autoridad exclusiva del recinto recae en el Presidente de la JRV, quien ordenará el auxilio de la Policía Nacional Civil (PNC)."
+            QueryIntentType.PROHIBITION -> "La legislación electoral salvadoreña tipifica y prohíbe de manera terminante cualquier conducta que vulnere la pureza, libertad y secreto del sufragio."
+            QueryIntentType.EXCEPTION_CONTINGENCY -> "Ante cualquier contingencia en mesa electoral, la JRV actúa como cuerpo colegiado por mayoría de votos, asentando todo hecho en el Acta de Incidentes."
+            QueryIntentType.PROCEDURAL -> "El procedimiento electoral y de recepción del sufragio se ejecuta de manera secuencial y obligatoria por los miembros de la JRV conforme a la normativa oficial del TSE."
+            QueryIntentType.VOTING_ASSISTANCE -> "La legislación electoral salvadoreña garantiza el voto asistido y medidas de accesibilidad e inclusión para personas adultas mayores y con discapacidad."
+            QueryIntentType.DEFINITION -> "Conforme a la doctrina y normativa electoral salvadoreña, los conceptos y términos aplicables se definen según lo establecido en $docName."
+            else -> "De acuerdo con la legislación salvadoreña aplicable, ${primary.sectionTitle.lowercase()} se rige taxativamente por las directrices establecidas en $docName."
+        }
+
+        return """
+            📌 **Respuesta:**
+            $answerSummary
+
+            📝 **Explicación:**
+            $explanationBuilder
+
+            ⚖️ **Fundamento:**
+            ${allArticles.take(4).joinToString("\n") { "• $it" }}
+
+            📚 **Fuentes consultadas:**
+            ${allSources.joinToString("\n") { "• $it" }}
+
+            Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
+        """.trimIndent()
     }
 }
 

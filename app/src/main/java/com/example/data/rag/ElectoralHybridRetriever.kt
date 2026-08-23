@@ -21,12 +21,28 @@ object ElectoralHybridRetriever {
             scoredList = scoreChunks(allChunks, expandedQuery, preferredDocumentId)
         }
 
-        // Re-ranking and deduping
+        // Re-ranking and deduping with thematic domain coherence
         val distinctChunks = mutableListOf<ScoredChunk>()
         val seenIds = mutableSetOf<String>()
 
+        val topChunk = scoredList.firstOrNull()
+        val dominantDocId = topChunk?.chunk?.documentId
+        val topScoreVal = topChunk?.score ?: 0.0
+
         for (scored in scoredList) {
             if (scored.chunk.id !in seenIds && scored.score > 5.0) {
+                // If top match is strongly identified, filter out conflicting outlier domains
+                if (topScoreVal >= 40.0 && dominantDocId != null) {
+                    val isCompatible = isDomainCompatible(
+                        dominantDocId = dominantDocId,
+                        candidateDocId = scored.chunk.documentId,
+                        queryText = analyzedQuery.normalizedQuery
+                    )
+                    if (!isCompatible && distinctChunks.size >= 2) {
+                        continue
+                    }
+                }
+
                 seenIds.add(scored.chunk.id)
                 distinctChunks.add(scored)
                 if (distinctChunks.size >= topK) break
@@ -34,6 +50,22 @@ object ElectoralHybridRetriever {
         }
 
         return distinctChunks
+    }
+
+    private fun isDomainCompatible(dominantDocId: String, candidateDocId: String, queryText: String): Boolean {
+        if (dominantDocId == candidateDocId) return true
+
+        // Core mesa/JRV documents are mutually compatible
+        val coreJRVDocs = setOf("codigo_electoral", "instructivo_jrv", "constitucion", "manual_fiscales")
+        if (dominantDocId in coreJRVDocs && candidateDocId in coreJRVDocs) return true
+
+        // If query explicitly asks for both domains, allow them
+        if (queryText.contains("extranjero") && candidateDocId == "voto_extranjero") return true
+        if (queryText.contains("municipio") && candidateDocId == "reestructuracion_municipal") return true
+        if (queryText.contains("mujer") && candidateDocId == "ley_leiv") return true
+        if (queryText.contains("delito") && candidateDocId == "delitos_electorales") return true
+
+        return false
     }
 
     private fun scoreChunks(

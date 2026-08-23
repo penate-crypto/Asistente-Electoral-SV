@@ -156,7 +156,7 @@ fun LoginScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     TransparentAssetImage(
-                        assetPath = "imagenes/icono_1_new.png",
+                        assetPath = "imagenes/icono_3_new.png",
                         contentDescription = "Logo Capacitador Electoral SV",
                         modifier = Modifier
                             .size(88.dp)

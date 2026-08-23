@@ -26,19 +26,14 @@ object AppImageHelper {
         return withContext(Dispatchers.IO) {
             try {
                 // Try candidate paths to guarantee finding the user's asset
+                val cleanPath = assetPath.trim()
                 val candidatePaths = listOf(
-                    assetPath,
-                    assetPath.replace("imágenes/", "imagenes/"),
-                    assetPath.replace("imagenes/", "imágenes/"),
-                    if (!assetPath.contains("/")) "imagenes/$assetPath" else assetPath,
-                    assetPath.replace(" ", "_"),
-                    assetPath.replace("_", " "),
-                    "imagenes/icono_1_new.png",
-                    "imagenes/icono_2_new.png",
-                    "imagenes/icono_3_new.png",
-                    "imagenes/icono 1 new.png",
-                    "imagenes/icono 2 new.png",
-                    "imagenes/icono 3 new.png"
+                    cleanPath,
+                    cleanPath.replace("imágenes/", "imagenes/"),
+                    cleanPath.replace("imagenes/", "imágenes/"),
+                    if (!cleanPath.contains("/")) "imagenes/$cleanPath" else cleanPath,
+                    cleanPath.replace(" ", "_"),
+                    cleanPath.replace("_", " ")
                 ).distinct()
 
                 var originalBitmap: Bitmap? = null

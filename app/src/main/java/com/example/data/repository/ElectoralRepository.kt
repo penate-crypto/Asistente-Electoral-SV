@@ -143,7 +143,7 @@ class ElectoralRepository(
         val retrievedChunks = ElectoralHybridRetriever.retrieve(
             analyzedQuery = analyzedQuery,
             preferredDocumentId = preferredDocumentId,
-            topK = 5
+            topK = 4
         )
 
         val apiKey = BuildConfig.GEMINI_API_KEY
@@ -157,25 +157,63 @@ class ElectoralRepository(
                 conversationHistory = conversationHistory
             )
 
-            try {
-                val response = apiService.generateContent(apiKey, request)
-                val rawTextRes = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
-                if (!rawTextRes.isNullOrBlank()) {
-                    val validatedAnswer = ElectoralResponseValidator.validateAndFormat(
-                        userQuery = trimmedQuestion,
-                        analyzedQuery = analyzedQuery,
-                        rawAnswer = rawTextRes,
-                        retrievedChunks = retrievedChunks
+            val isApiKeyFormat = apiKey.startsWith("AIzaSy") || !apiKey.contains(".")
+            val keyParam = if (isApiKeyFormat) apiKey else null
+            val authHeader = if (!isApiKeyFormat) "Bearer $apiKey" else null
+
+            val candidateModels = listOf("gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro")
+            var responseText: String? = null
+
+            for (modelName in candidateModels) {
+                try {
+                    val response = apiService.generateContent(
+                        model = modelName,
+                        apiKey = keyParam,
+                        authHeader = authHeader,
+                        request = request
                     )
-                    val historyItem = QueryHistory(
-                        question = trimmedQuestion,
-                        answer = validatedAnswer
-                    )
-                    queryHistoryDao.insertHistory(historyItem)
-                    return@withContext AnswerResult.Success(validatedAnswer, suggestions)
+                    val candidateText = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
+                    if (!candidateText.isNullOrBlank()) {
+                        responseText = candidateText
+                        break
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.w("ElectoralRepository", "Model $modelName with search tools failed (${e.javaClass.simpleName}: ${e.message}), trying without tools...")
+                    try {
+                        val fallbackReq = request.copy(tools = null)
+                        val response = apiService.generateContent(
+                            model = modelName,
+                            apiKey = keyParam,
+                            authHeader = authHeader,
+                            request = fallbackReq
+                        )
+                        val candidateText = response.candidates?.firstOrNull()?.content?.parts?.firstOrNull()?.text
+                        if (!candidateText.isNullOrBlank()) {
+                            responseText = candidateText
+                            break
+                        }
+                    } catch (e2: Exception) {
+                        android.util.Log.w("ElectoralRepository", "Model $modelName without tools also failed: ${e2.message}")
+                        continue
+                    }
                 }
-            } catch (e: Exception) {
-                // Fallback to grounded local knowledge engine if network fails or timeout occurs
+            }
+
+            if (!responseText.isNullOrBlank()) {
+                val validatedAnswer = ElectoralResponseValidator.validateAndFormat(
+                    userQuery = trimmedQuestion,
+                    analyzedQuery = analyzedQuery,
+                    rawAnswer = responseText,
+                    retrievedChunks = retrievedChunks
+                )
+                val historyItem = QueryHistory(
+                    question = trimmedQuestion,
+                    answer = validatedAnswer
+                )
+                queryHistoryDao.insertHistory(historyItem)
+                return@withContext AnswerResult.Success(validatedAnswer, suggestions)
+            } else {
+                // Fallback to grounded local knowledge engine if all network attempts fail
                 val rawFallback = ElectoralRAGEngine.buildLocalGroundedAnswer(analyzedQuery, retrievedChunks)
                 val validatedFallback = ElectoralResponseValidator.validateAndFormat(
                     userQuery = trimmedQuestion,
