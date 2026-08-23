@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
+import com.example.data.TtsPlaybackState
 import com.example.data.database.QueryHistory
 import com.example.data.repository.ApiKeyStatus
 import com.example.viewmodel.ElectoralUiState
@@ -50,7 +51,12 @@ fun ElectoralMainScreen(
     viewModel: ElectoralViewModel,
     onVoiceButtonTapped: () -> Unit,
     onSpeakText: (String) -> Unit,
+    onPauseSpeaking: () -> Unit = {},
+    onResumeSpeaking: () -> Unit = {},
     onStopSpeaking: () -> Unit,
+    onRestartSpeaking: () -> Unit = {},
+    onToggleDarkTheme: () -> Unit = {},
+    onLogout: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -62,7 +68,9 @@ fun ElectoralMainScreen(
     val uiState by viewModel.uiState.collectAsState()
     val voiceState by viewModel.voiceState.collectAsState()
     val voiceStatusMessage by viewModel.voiceStatusMessage.collectAsState()
+    val ttsPlaybackState by viewModel.ttsPlaybackState.collectAsState()
     val historyList by viewModel.historyList.collectAsState()
+    val isDarkTheme by viewModel.isDarkTheme.collectAsState()
     val apiKeyStatus by viewModel.apiKeyStatus.collectAsState()
     val currentScreen by viewModel.currentScreen.collectAsState()
     val preferredBookTitle by viewModel.preferredBookTitle.collectAsState()
@@ -116,7 +124,7 @@ fun ElectoralMainScreen(
                         .padding(18.dp)
                 ) {
                     TransparentAssetImage(
-                        assetPath = "imágenes/icono 1.jpeg",
+                        assetPath = "imagenes/icono_1_new.png",
                         contentDescription = "Logo Principal",
                         modifier = Modifier
                             .size(54.dp)
@@ -302,13 +310,27 @@ fun ElectoralMainScreen(
                         Text("Inicio", fontSize = 13.sp)
                     }
 
+                    TextButton(
+                        onClick = {
+                            scope.launch { drawerState.close() }
+                            viewModel.logout(context)
+                            onLogout()
+                        },
+                        colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
+                        modifier = Modifier.testTag("drawer_logout_button")
+                    ) {
+                        Icon(Icons.Default.Logout, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text("Salir", fontSize = 13.sp)
+                    }
+
                     if (historyList.isNotEmpty()) {
                         TextButton(
                             onClick = { viewModel.clearHistory() },
-                            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error),
+                            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onSurfaceVariant),
                             modifier = Modifier.testTag("clear_history_button")
                         ) {
-                            Icon(Icons.Default.Delete, contentDescription = "Limpiar Todo", modifier = Modifier.size(16.dp))
+                            Icon(Icons.Default.Delete, contentDescription = "Limpiar", modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
                             Text("Limpiar", fontSize = 13.sp)
                         }
@@ -349,6 +371,17 @@ fun ElectoralMainScreen(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.padding(end = 8.dp)
                         ) {
+                            // BOTÓN DE TEMA CLARO / OSCURO (SWITCH MANUAL)
+                            IconButton(
+                                onClick = onToggleDarkTheme,
+                                modifier = Modifier.testTag("topbar_theme_toggle_btn")
+                            ) {
+                                Icon(
+                                    imageVector = if (isDarkTheme) Icons.Default.LightMode else Icons.Default.DarkMode,
+                                    contentDescription = if (isDarkTheme) "Cambiar a Modo Claro" else "Cambiar a Modo Oscuro",
+                                    tint = MaterialTheme.colorScheme.primary
+                                )
+                            }
                             IconButton(onClick = { viewModel.resetState() }) {
                                 Icon(
                                     Icons.Default.Refresh,
@@ -358,7 +391,7 @@ fun ElectoralMainScreen(
                             }
                             Spacer(modifier = Modifier.width(4.dp))
                             TransparentAssetImage(
-                                assetPath = "imágenes/icono 3.jpeg",
+                                assetPath = "imagenes/icono_3_new.png",
                                 contentDescription = "SV Identidad",
                                 modifier = Modifier
                                     .size(34.dp)
@@ -531,8 +564,8 @@ fun ElectoralMainScreen(
                                             title = "¿Cómo se integra e instala una JRV?",
                                             subtitle = "Arts. 99-109, 190 Código Electoral",
                                             icon = Icons.Default.Groups,
-                                            containerColor = if (isSystemInDarkTheme()) Color(0xFF1E293B) else Color(0xFFEFF6FF),
-                                            iconColor = Color(0xFF0056B3),
+                                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                            iconColor = MaterialTheme.colorScheme.primary,
                                             onClick = {
                                                 val q = "¿Cómo se integra y a qué hora se instala una JRV según el Código Electoral de El Salvador?"
                                                 viewModel.onQueryInputChange(q)
@@ -546,8 +579,8 @@ fun ElectoralMainScreen(
                                             title = "Permisos laborales con goce de sueldo",
                                             subtitle = "Art. 113 Código Electoral",
                                             icon = Icons.Default.WorkHistory,
-                                            containerColor = if (isSystemInDarkTheme()) Color(0xFF14301E) else Color(0xFFF0FDF4),
-                                            iconColor = Color(0xFF059669),
+                                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                            iconColor = MaterialTheme.colorScheme.secondary,
                                             onClick = {
                                                 val q = "¿Qué permisos de trabajo con goce de sueldo tienen los miembros de JRV según el Art. 113 del Código Electoral?"
                                                 viewModel.onQueryInputChange(q)
@@ -561,8 +594,8 @@ fun ElectoralMainScreen(
                                             title = "Prohibición de armas y seguridad",
                                             subtitle = "Art. 290 Código Electoral • Rol PNC",
                                             icon = Icons.Default.LocalPolice,
-                                            containerColor = if (isSystemInDarkTheme()) Color(0xFF332211) else Color(0xFFFFF7ED),
-                                            iconColor = Color(0xFFD97706),
+                                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                                            iconColor = MaterialTheme.colorScheme.tertiary,
                                             onClick = {
                                                 val q = "¿Cuáles son las normas de seguridad, prohibición de armas y rol de la PNC en los centros de votación en El Salvador?"
                                                 viewModel.onQueryInputChange(q)
@@ -576,8 +609,8 @@ fun ElectoralMainScreen(
                                             title = "Protección de la mujer y LEIV",
                                             subtitle = "Prevención de violencia política",
                                             icon = Icons.Default.Shield,
-                                            containerColor = if (isSystemInDarkTheme()) Color(0xFF3B1E38) else Color(0xFFFDF2F8),
-                                            iconColor = Color(0xFFC2185B),
+                                            containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f),
+                                            iconColor = MaterialTheme.colorScheme.error,
                                             onClick = {
                                                 val q = "¿Qué medidas de protección para la mujer y prevención de violencia política aplican en las elecciones según la LEIV y el TSE?"
                                                 viewModel.onQueryInputChange(q)
@@ -774,21 +807,66 @@ fun ElectoralMainScreen(
                                                         )
                                                     }
 
-                                                    Row {
-                                                        // Voice playback
-                                                        val isSpeakingAnswer = voiceState == VoiceConversationState.SPEAKING
-                                                        IconButton(
-                                                            onClick = {
-                                                                if (isSpeakingAnswer) onStopSpeaking() else onSpeakText(state.answer)
-                                                            },
-                                                            modifier = Modifier.testTag("audio_playback_button")
-                                                        ) {
-                                                            Icon(
-                                                                imageVector = if (isSpeakingAnswer) Icons.Default.VolumeOff else Icons.Default.VolumeUp,
-                                                                contentDescription = if (isSpeakingAnswer) "Detener audio" else "Escuchar respuesta",
-                                                                tint = if (isSpeakingAnswer) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary,
-                                                                modifier = Modifier.size(20.dp)
-                                                            )
+                                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                                        // Voice playback controls
+                                                        val isSpeaking = ttsPlaybackState == TtsPlaybackState.PLAYING
+                                                        val isPaused = ttsPlaybackState == TtsPlaybackState.PAUSED
+                                                        val isVoiceActive = isSpeaking || isPaused
+
+                                                        if (isVoiceActive) {
+                                                            // Pause / Resume
+                                                            IconButton(
+                                                                onClick = {
+                                                                    if (isSpeaking) onPauseSpeaking() else onResumeSpeaking()
+                                                                },
+                                                                modifier = Modifier.testTag("audio_pause_resume_button")
+                                                            ) {
+                                                                Icon(
+                                                                    imageVector = if (isSpeaking) Icons.Default.PauseCircle else Icons.Default.PlayCircle,
+                                                                    contentDescription = if (isSpeaking) "Pausar audio" else "Continuar audio",
+                                                                    tint = MaterialTheme.colorScheme.primary,
+                                                                    modifier = Modifier.size(22.dp)
+                                                                )
+                                                            }
+
+                                                            // Stop
+                                                            IconButton(
+                                                                onClick = onStopSpeaking,
+                                                                modifier = Modifier.testTag("audio_stop_button")
+                                                            ) {
+                                                                Icon(
+                                                                    imageVector = Icons.Default.StopCircle,
+                                                                    contentDescription = "Detener audio",
+                                                                    tint = MaterialTheme.colorScheme.error,
+                                                                    modifier = Modifier.size(22.dp)
+                                                                )
+                                                            }
+
+                                                            // Restart from beginning
+                                                            IconButton(
+                                                                onClick = onRestartSpeaking,
+                                                                modifier = Modifier.testTag("audio_restart_button")
+                                                            ) {
+                                                                Icon(
+                                                                    imageVector = Icons.Default.Replay,
+                                                                    contentDescription = "Reiniciar audio",
+                                                                    tint = MaterialTheme.colorScheme.secondary,
+                                                                    modifier = Modifier.size(20.dp)
+                                                                )
+                                                            }
+                                                        } else {
+                                                            // Play complete answer
+                                                            IconButton(
+                                                                onClick = { onSpeakText(state.answer) },
+                                                                modifier = Modifier.testTag("audio_playback_button")
+                                                            ) {
+                                                                Icon(
+                                                                    imageVector = Icons.Default.VolumeUp,
+                                                                    contentDescription = "Escuchar respuesta completa",
+                                                                    tint = MaterialTheme.colorScheme.primary,
+                                                                    modifier = Modifier.size(22.dp)
+                                                                )
+                                                            }
                                                         }
 
                                                         // Copy
@@ -815,23 +893,62 @@ fun ElectoralMainScreen(
                                                     FormattedElectoralText(text = state.answer)
                                                 }
 
-                                                if (voiceState == VoiceConversationState.SPEAKING) {
+                                                if (ttsPlaybackState == TtsPlaybackState.PLAYING || ttsPlaybackState == TtsPlaybackState.PAUSED) {
                                                     Spacer(modifier = Modifier.height(12.dp))
-                                                    Row(
-                                                        modifier = Modifier
-                                                            .fillMaxWidth()
-                                                            .background(
-                                                                MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
-                                                                RoundedCornerShape(10.dp)
-                                                            )
-                                                            .padding(10.dp),
-                                                        verticalAlignment = Alignment.CenterVertically
+                                                    Surface(
+                                                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f),
+                                                        shape = RoundedCornerShape(12.dp),
+                                                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+                                                        modifier = Modifier.fillMaxWidth()
                                                     ) {
-                                                        Icon(Icons.Default.VolumeUp, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                                                        Spacer(modifier = Modifier.width(8.dp))
-                                                        Text("Respondiendo mediante voz...", fontSize = 12.sp, color = MaterialTheme.colorScheme.primary, modifier = Modifier.weight(1f))
-                                                        IconButton(onClick = onStopSpeaking, modifier = Modifier.size(24.dp)) {
-                                                            Icon(Icons.Default.StopCircle, contentDescription = "Detener", tint = MaterialTheme.colorScheme.error)
+                                                        Row(
+                                                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                                                            verticalAlignment = Alignment.CenterVertically,
+                                                            horizontalArrangement = Arrangement.SpaceBetween
+                                                        ) {
+                                                            Row(
+                                                                verticalAlignment = Alignment.CenterVertically,
+                                                                modifier = Modifier.weight(1f)
+                                                            ) {
+                                                                Icon(
+                                                                    imageVector = if (ttsPlaybackState == TtsPlaybackState.PLAYING) Icons.Default.VolumeUp else Icons.Default.Pause,
+                                                                    contentDescription = null,
+                                                                    tint = MaterialTheme.colorScheme.primary,
+                                                                    modifier = Modifier.size(18.dp)
+                                                                )
+                                                                Spacer(modifier = Modifier.width(8.dp))
+                                                                Text(
+                                                                    text = if (ttsPlaybackState == TtsPlaybackState.PLAYING) "Reproduciendo respuesta completa..." else "Voz en pausa",
+                                                                    fontSize = 12.sp,
+                                                                    fontWeight = FontWeight.Medium,
+                                                                    color = MaterialTheme.colorScheme.primary
+                                                                )
+                                                            }
+
+                                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                                IconButton(
+                                                                    onClick = {
+                                                                        if (ttsPlaybackState == TtsPlaybackState.PLAYING) onPauseSpeaking() else onResumeSpeaking()
+                                                                    },
+                                                                    modifier = Modifier.size(32.dp)
+                                                                ) {
+                                                                    Icon(
+                                                                        imageVector = if (ttsPlaybackState == TtsPlaybackState.PLAYING) Icons.Default.Pause else Icons.Default.PlayArrow,
+                                                                        contentDescription = "Pausar/Reanudar",
+                                                                        tint = MaterialTheme.colorScheme.primary
+                                                                    )
+                                                                }
+                                                                IconButton(
+                                                                    onClick = onStopSpeaking,
+                                                                    modifier = Modifier.size(32.dp)
+                                                                ) {
+                                                                    Icon(
+                                                                        Icons.Default.Stop,
+                                                                        contentDescription = "Detener",
+                                                                        tint = MaterialTheme.colorScheme.error
+                                                                    )
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -990,7 +1107,10 @@ fun ElectoralMainScreen(
                             CapacitacionScreen(viewModel = viewModel)
                         }
                         ElectoralScreen.CONFIGURACION -> {
-                            ConfiguracionScreen(viewModel = viewModel)
+                            ConfiguracionScreen(
+                                viewModel = viewModel,
+                                onLogout = onLogout
+                            )
                         }
                     }
                 }
@@ -1315,446 +1435,212 @@ fun ElectoralTopicCard(
 }
 
 /**
- * Structured response renderer that formats Markdown titles, steps, bullet points,
- * and highlights Procedimiento de Actuación (Light Green) and Qué No Hacer (Light Red) blocks.
+ * Modern, responsive Markdown & Electoral Text renderer.
+ * Formats headings, bold sections, numbered steps, bullet items, legal foundations,
+ * and official disclaimers gracefully without misclassifying content into negative containers.
  */
 @Composable
 fun FormattedElectoralText(text: String) {
-    val blocks = remember(text) { parseElectoralResponseBlocks(text) }
+    val lines = remember(text) { text.split("\n") }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 2.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(6.dp)
     ) {
-        blocks.forEach { block ->
-            when (block) {
-                is ElectoralBlock.QueDebesHacer -> {
+        lines.forEach { line ->
+            val trimmed = line.trim()
+            if (trimmed.isBlank()) {
+                Spacer(modifier = Modifier.height(3.dp))
+                return@forEach
+            }
+
+            when {
+                // Section Badges (📌 Respuesta, 📝 Explicación, ⚖️ Fundamento, 📚 Fuentes consultadas)
+                trimmed.startsWith("📌") || trimmed.startsWith("📝") || trimmed.startsWith("⚖️") || trimmed.startsWith("📚") -> {
                     Surface(
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f),
-                        shape = RoundedCornerShape(12.dp),
-                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(12.dp),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    Icons.Default.CheckCircle,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = block.title.ifBlank { "🎯 ¿QUÉ DEBES HACER?" },
-                                    fontSize = 12.5.sp,
-                                    fontWeight = FontWeight.Black,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    letterSpacing = 0.5.sp
-                                )
-                            }
-                            block.items.forEachIndexed { idx, item ->
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.Top
-                                ) {
-                                    Text(
-                                        text = "${idx + 1}.",
-                                        fontSize = 12.5.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.padding(end = 6.dp)
-                                    )
-                                    Text(
-                                        text = item.removePrefix("${idx + 1}.").removePrefix("-").removePrefix("*").trim(),
-                                        fontSize = 13.sp,
-                                        lineHeight = 18.5.sp,
-                                        fontWeight = FontWeight.Medium,
-                                        color = MaterialTheme.colorScheme.onSurface,
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-                is ElectoralBlock.Procedimiento -> {
-                    Surface(
-                        color = Color(0xFFE8F5E9),
-                        shape = RoundedCornerShape(12.dp),
-                        border = BorderStroke(1.dp, Color(0xFFA5D6A7)),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(12.dp),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    Icons.Default.CheckCircle,
-                                    contentDescription = null,
-                                    tint = Color(0xFF2E7D32),
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = block.title.ifBlank { "PROCEDIMIENTO DE ACTUACIÓN" },
-                                    fontSize = 12.5.sp,
-                                    fontWeight = FontWeight.Black,
-                                    color = Color(0xFF1B5E20),
-                                    letterSpacing = 0.5.sp
-                                )
-                            }
-                            block.items.forEach { step ->
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.Top
-                                ) {
-                                    Text(
-                                        text = "•",
-                                        fontSize = 13.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color(0xFF2E7D32),
-                                        modifier = Modifier.padding(horizontal = 4.dp)
-                                    )
-                                    Text(
-                                        text = step.removePrefix("-").removePrefix("*").trim(),
-                                        fontSize = 12.5.sp,
-                                        lineHeight = 18.sp,
-                                        color = Color(0xFF1B5E20),
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-                is ElectoralBlock.QueNoHacer -> {
-                    Surface(
-                        color = Color(0xFFFFEBEE),
-                        shape = RoundedCornerShape(12.dp),
-                        border = BorderStroke(1.dp, Color(0xFFFFCDD2)),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(12.dp),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    Icons.Default.Cancel,
-                                    contentDescription = null,
-                                    tint = Color(0xFFC62828),
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = block.title.ifBlank { "QUÉ NO HACER" },
-                                    fontSize = 12.5.sp,
-                                    fontWeight = FontWeight.Black,
-                                    color = Color(0xFFB71C1C),
-                                    letterSpacing = 0.5.sp
-                                )
-                            }
-                            block.items.forEach { item ->
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.Top
-                                ) {
-                                    Text(
-                                        text = "❌",
-                                        fontSize = 11.sp,
-                                        modifier = Modifier.padding(end = 4.dp, top = 2.dp)
-                                    )
-                                    Text(
-                                        text = item.removePrefix("❌").removePrefix("-").removePrefix("*").trim(),
-                                        fontSize = 12.5.sp,
-                                        lineHeight = 18.sp,
-                                        color = Color(0xFFB71C1C),
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-                is ElectoralBlock.FundamentoLegal -> {
-                    Surface(
-                        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
+                        shape = RoundedCornerShape(8.dp),
                         border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.25f)),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 6.dp, bottom = 2.dp)
                     ) {
-                        Column(
-                            modifier = Modifier.padding(12.dp),
-                            verticalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    Icons.Default.MenuBook,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = "FUNDAMENTO LEGAL",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    letterSpacing = 0.5.sp
-                                )
-                            }
-                            block.lines.forEach { line ->
-                                Text(
-                                    text = line,
-                                    fontSize = 12.5.sp,
-                                    lineHeight = 17.sp,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                            }
-                        }
+                        Text(
+                            text = trimmed.replace("**", ""),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                        )
                     }
                 }
-                is ElectoralBlock.DudaOpciones -> {
+
+                // Level 1 Header (# Title)
+                trimmed.startsWith("# ") -> {
+                    Text(
+                        text = trimmed.removePrefix("# ").trim(),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 3.dp)
+                    )
+                }
+
+                // Level 2 Header (## Title)
+                trimmed.startsWith("## ") -> {
+                    Text(
+                        text = trimmed.removePrefix("## ").trim(),
+                        fontSize = 14.5.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(top = 6.dp, bottom = 2.dp)
+                    )
+                }
+
+                // Level 3 Header (### Title)
+                trimmed.startsWith("### ") -> {
+                    Text(
+                        text = trimmed.removePrefix("### ").trim(),
+                        fontSize = 13.5.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(top = 4.dp, bottom = 2.dp)
+                    )
+                }
+
+                // Prohibition Item (❌ ...)
+                trimmed.startsWith("❌") -> {
                     Surface(
-                        color = Color(0xFFFFF8E1),
-                        shape = RoundedCornerShape(12.dp),
-                        border = BorderStroke(1.dp, Color(0xFFFFE082)),
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.45f),
+                        shape = RoundedCornerShape(8.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Column(
-                            modifier = Modifier.padding(12.dp),
-                            verticalArrangement = Arrangement.spacedBy(6.dp)
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.Top
                         ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Text(
-                                    text = "⚠️",
-                                    fontSize = 14.sp
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = block.title.ifBlank { "SI EXISTE DUDA O CONDICIONES PARTICULARES" },
-                                    fontSize = 12.5.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color(0xFFB45309),
-                                    letterSpacing = 0.5.sp
-                                )
-                            }
-                            block.items.forEach { item ->
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.Top
-                                ) {
-                                    Text(
-                                        text = "•",
-                                        fontSize = 13.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color(0xFFD97706),
-                                        modifier = Modifier.padding(horizontal = 4.dp)
-                                    )
-                                    Text(
-                                        text = item.removePrefix("-").removePrefix("*").trim(),
-                                        fontSize = 12.5.sp,
-                                        lineHeight = 18.sp,
-                                        color = Color(0xFF92400E),
-                                        modifier = Modifier.weight(1f)
-                                    )
-                                }
-                            }
+                            Text(
+                                text = "❌",
+                                fontSize = 12.sp,
+                                modifier = Modifier.padding(end = 6.dp, top = 2.dp)
+                            )
+                            Text(
+                                text = trimmed.removePrefix("❌").trim(),
+                                fontSize = 12.5.sp,
+                                lineHeight = 18.sp,
+                                color = MaterialTheme.colorScheme.onErrorContainer,
+                                modifier = Modifier.weight(1f)
+                            )
                         }
                     }
                 }
-                is ElectoralBlock.Standard -> {
-                    Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
-                        block.lines.forEach { line ->
-                            val trimmed = line.trim()
-                            when {
-                                trimmed.startsWith("###") -> {
-                                    Text(
-                                        text = trimmed.removePrefix("###").trim(),
-                                        fontSize = 14.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.padding(top = 6.dp, bottom = 2.dp)
-                                    )
-                                }
-                                trimmed.startsWith("##") -> {
-                                    Text(
-                                        text = trimmed.removePrefix("##").trim(),
-                                        fontSize = 15.sp,
-                                        fontWeight = FontWeight.ExtraBold,
-                                        color = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.padding(top = 8.dp, bottom = 2.dp)
-                                    )
-                                }
-                                trimmed.startsWith("**") && trimmed.endsWith("**") -> {
-                                    Text(
-                                        text = trimmed.replace("**", ""),
-                                        fontSize = 13.5.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.secondary,
-                                        modifier = Modifier.padding(top = 4.dp)
-                                    )
-                                }
-                                trimmed.startsWith("*") || trimmed.startsWith("-") -> {
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        verticalAlignment = Alignment.Top
-                                    ) {
-                                        Text(
-                                            text = "•",
-                                            fontSize = 13.5.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            color = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.padding(horizontal = 4.dp)
-                                        )
-                                        Text(
-                                            text = trimmed.removePrefix("*").removePrefix("-").trim().replace("**", ""),
-                                            fontSize = 13.sp,
-                                            lineHeight = 18.5.sp,
-                                            color = MaterialTheme.colorScheme.onSurface,
-                                            modifier = Modifier.weight(1f)
-                                        )
-                                    }
-                                }
-                                trimmed.isNotEmpty() -> {
-                                    val isWarning = trimmed.contains("Advertencia", ignoreCase = true) || trimmed.contains("Importante", ignoreCase = true)
-                                    Text(
-                                        text = trimmed.replace("**", ""),
-                                        fontSize = 13.sp,
-                                        lineHeight = 18.5.sp,
-                                        fontWeight = if (isWarning) FontWeight.SemiBold else FontWeight.Normal,
-                                        color = if (isWarning) Color(0xFFD97706) else MaterialTheme.colorScheme.onSurface
-                                    )
-                                }
+
+                // Numbered Steps (e.g. "1. Paso uno...")
+                trimmed.matches(Regex("^\\d+\\..*")) -> {
+                    val dotIndex = trimmed.indexOf('.')
+                    val number = trimmed.substring(0, dotIndex + 1)
+                    val content = trimmed.substring(dotIndex + 1).trim()
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 2.dp),
+                        verticalAlignment = Alignment.Top
+                    ) {
+                        Surface(
+                            shape = CircleShape,
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                            modifier = Modifier.size(20.dp)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Text(
+                                    text = number.removeSuffix("."),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
                             }
                         }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = content.replace("**", ""),
+                            fontSize = 13.sp,
+                            lineHeight = 18.5.sp,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f)
+                        )
                     }
+                }
+
+                // Bullet Lists (•, -, *)
+                trimmed.startsWith("•") || trimmed.startsWith("- ") || trimmed.startsWith("* ") -> {
+                    val bulletContent = trimmed.removePrefix("•").removePrefix("- ").removePrefix("* ").trim()
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 1.dp),
+                        verticalAlignment = Alignment.Top
+                    ) {
+                        Text(
+                            text = "•",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(horizontal = 6.dp)
+                        )
+                        Text(
+                            text = bulletContent.replace("**", ""),
+                            fontSize = 13.sp,
+                            lineHeight = 18.5.sp,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+
+                // Orientative Disclaimer Footer
+                trimmed.startsWith("Esta respuesta es únicamente orientativa", ignoreCase = true) -> {
+                    Surface(
+                        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
+                        shape = RoundedCornerShape(10.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(10.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Default.Info,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = trimmed,
+                                fontSize = 11.5.sp,
+                                lineHeight = 16.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+
+                // Regular Text Line
+                else -> {
+                    Text(
+                        text = trimmed.replace("**", ""),
+                        fontSize = 13.sp,
+                        lineHeight = 18.5.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
                 }
             }
         }
     }
-}
-
-sealed class ElectoralBlock {
-    data class QueDebesHacer(val title: String, val items: List<String>) : ElectoralBlock()
-    data class Procedimiento(val title: String, val items: List<String>) : ElectoralBlock()
-    data class QueNoHacer(val title: String, val items: List<String>) : ElectoralBlock()
-    data class FundamentoLegal(val lines: List<String>) : ElectoralBlock()
-    data class DudaOpciones(val title: String, val items: List<String>) : ElectoralBlock()
-    data class Standard(val lines: List<String>) : ElectoralBlock()
-}
-
-fun parseElectoralResponseBlocks(rawText: String): List<ElectoralBlock> {
-    val lines = rawText.split("\n")
-    val blocks = mutableListOf<ElectoralBlock>()
-
-    var currentBlockType: String? = null // "QUE_HACER", "PROC", "NO_HACER", "FUNDAMENTO", "DUDA", "STD"
-    var currentTitle = ""
-    val currentLines = mutableListOf<String>()
-
-    fun flush() {
-        if (currentLines.isEmpty()) return
-        when (currentBlockType) {
-            "QUE_HACER" -> blocks.add(ElectoralBlock.QueDebesHacer(currentTitle, currentLines.toList()))
-            "PROC" -> blocks.add(ElectoralBlock.Procedimiento(currentTitle, currentLines.toList()))
-            "NO_HACER" -> blocks.add(ElectoralBlock.QueNoHacer(currentTitle, currentLines.toList()))
-            "FUNDAMENTO" -> blocks.add(ElectoralBlock.FundamentoLegal(currentLines.toList()))
-            "DUDA" -> blocks.add(ElectoralBlock.DudaOpciones(currentTitle, currentLines.toList()))
-            else -> blocks.add(ElectoralBlock.Standard(currentLines.toList()))
-        }
-        currentLines.clear()
-        currentBlockType = null
-        currentTitle = ""
-    }
-
-    for (line in lines) {
-        val trimmed = line.trim()
-
-        val isQueHacerHeader = (trimmed.contains("QUÉ DEBES HACER", ignoreCase = true) ||
-                trimmed.contains("QUE DEBES HACER", ignoreCase = true) ||
-                trimmed.contains("RESPUESTA DIRECTA", ignoreCase = true) ||
-                trimmed.contains("¿QUÉ HACER?", ignoreCase = true) ||
-                trimmed.contains("QUE HACER", ignoreCase = true)) &&
-                (trimmed.startsWith("🎯") || trimmed.startsWith("#") || trimmed.startsWith("**") || trimmed.startsWith("¿"))
-
-        val isProcedimientoHeader = trimmed.contains("PROCEDIMIENTO DE ACTUACIÓN", ignoreCase = true) ||
-                (trimmed.contains("PROCEDIMIENTO", ignoreCase = true) && (trimmed.startsWith("🟩") || trimmed.startsWith("#") || trimmed.startsWith("**")))
-
-        val isQueNoHacerHeader = trimmed.contains("QUÉ NO HACER", ignoreCase = true) ||
-                trimmed.contains("QUE NO HACER", ignoreCase = true) ||
-                trimmed.contains("PROHIBICIONES", ignoreCase = true) && (trimmed.startsWith("🟥") || trimmed.startsWith("#") || trimmed.startsWith("**"))
-
-        val isFundamentoHeader = trimmed.contains("FUNDAMENTO LEGAL", ignoreCase = true) &&
-                (trimmed.startsWith("📚") || trimmed.startsWith("#") || trimmed.startsWith("**"))
-
-        val isDudaHeader = (trimmed.contains("SI EXISTE DUDA", ignoreCase = true) ||
-                trimmed.contains("SI LA SITUACIÓN CAMBIA", ignoreCase = true) ||
-                trimmed.contains("SI LA SITUACION CAMBIA", ignoreCase = true) ||
-                trimmed.contains("CONDICIONES PARTICULARES", ignoreCase = true) ||
-                trimmed.contains("OPCIONES DE ACTUACIÓN", ignoreCase = true) ||
-                trimmed.contains("SITUACIÓN GRAVE", ignoreCase = true) ||
-                trimmed.contains("EMERGENCIA", ignoreCase = true)) &&
-                (trimmed.startsWith("⚠️") || trimmed.startsWith("#") || trimmed.startsWith("**"))
-
-        if (isQueHacerHeader) {
-            flush()
-            currentBlockType = "QUE_HACER"
-            currentTitle = trimmed.replace("🎯", "").replace("#", "").replace("**", "").trim()
-            continue
-        }
-
-        if (isProcedimientoHeader) {
-            flush()
-            currentBlockType = "PROC"
-            currentTitle = trimmed.replace("🟩", "").replace("#", "").replace("**", "").trim()
-            continue
-        }
-
-        if (isQueNoHacerHeader) {
-            flush()
-            currentBlockType = "NO_HACER"
-            currentTitle = trimmed.replace("🟥", "").replace("#", "").replace("**", "").trim()
-            continue
-        }
-
-        if (isFundamentoHeader) {
-            flush()
-            currentBlockType = "FUNDAMENTO"
-            continue
-        }
-
-        if (isDudaHeader) {
-            flush()
-            currentBlockType = "DUDA"
-            currentTitle = trimmed.replace("⚠️", "").replace("#", "").replace("**", "").trim()
-            continue
-        }
-
-        // If line signals end of special block
-        if ((currentBlockType != null && currentBlockType != "STD") &&
-            (trimmed.startsWith("##") || trimmed.startsWith("###") || trimmed.startsWith("Esta respuesta es únicamente orientativa"))
-        ) {
-            flush()
-            currentBlockType = "STD"
-            currentLines.add(line)
-            continue
-        }
-
-        if (trimmed.isNotBlank()) {
-            if (currentBlockType == null) currentBlockType = "STD"
-            currentLines.add(line)
-        } else if (currentBlockType == "STD") {
-            currentLines.add("")
-        }
-    }
-    flush()
-
-    return if (blocks.isEmpty()) listOf(ElectoralBlock.Standard(lines)) else blocks
 }
 

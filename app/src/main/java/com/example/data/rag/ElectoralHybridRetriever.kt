@@ -93,9 +93,33 @@ object ElectoralHybridRetriever {
 
             // 5. Concept & Entity matches
             for (entity in query.targetEntities) {
-                if (chunkSearchableText.contains(entity.lowercase(Locale.ROOT).take(6))) {
-                    score += 10.0
+                val entityLower = entity.lowercase(Locale.ROOT)
+                if (chunkSearchableText.contains(entityLower.take(8))) {
+                    score += 15.0
                     matchReasons.add("Entidad electoral coincidente: $entity")
+                }
+            }
+
+            // 6. Domain-specific context boosts (e.g., Extranjero, Municipios, Delitos, LEIV)
+            val normQuery = query.normalizedQuery
+            if (normQuery.contains("extranjero") || normQuery.contains("exterior") || normQuery.contains("remoto")) {
+                if (chunk.documentId == "voto_extranjero" || chunk.content.contains("extranjero", ignoreCase = true)) {
+                    score += 30.0
+                }
+            }
+            if (normQuery.contains("municipio") || normQuery.contains("distrito") || normQuery.contains("concejo") || normQuery.contains("alcalde")) {
+                if (chunk.documentId == "reestructuracion_municipal" || chunk.content.contains("municipio", ignoreCase = true)) {
+                    score += 25.0
+                }
+            }
+            if (normQuery.contains("delito") || normQuery.contains("penal") || normQuery.contains("carcel") || normQuery.contains("prision") || normQuery.contains("fraude")) {
+                if (chunk.documentId == "delitos_electorales" || chunk.chapter.contains("DELITOS", ignoreCase = true)) {
+                    score += 30.0
+                }
+            }
+            if (normQuery.contains("mujer") || normQuery.contains("violencia politica") || normQuery.contains("acoso")) {
+                if (chunk.documentId == "ley_leiv" || chunk.content.contains("violencia", ignoreCase = true)) {
+                    score += 30.0
                 }
             }
 

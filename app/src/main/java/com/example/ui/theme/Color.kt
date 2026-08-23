@@ -2,20 +2,31 @@ package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Salvadoran National / Electoral Palette
-val SvBluePrimary = Color(0xFF0056B3)     // Clean Minimalist Blue (#0056B3)
-val SvBlueDark = Color(0xFF004494)        // Deep Clean Blue
-val SvWhiteAccent = Color(0xFFE0F2FE)     // Very soft blue/slate background accent
-val SvSecondary = Color(0xFF64748B)       // Slate Gray for professional text
-val SvBackgroundLight = Color(0xFFF7F9FC) // Crisp Clean Minimalism soft slate background (#F7F9FC)
-val SvSurfaceLight = Color(0xFFFFFFFF)    // Pure white card surfaces
+// =========================================================================
+// NUEVA PALETA DE COLORES - ASISTENTE ELECTORAL SV
+// =========================================================================
 
-// Dark theme colors
-val SvBlueDarkThemePrimary = Color(0xFF38BDF8) // High visibility soft cerulean blue
-val SvBlueDarkThemeSecondary = Color(0xFF94A3B8) // Slate gray secondary
-val SvBackgroundDark = Color(0xFF0F172A)  // Cosmic Minimalist Midnight Blue (#0F172A)
-val SvSurfaceDark = Color(0xFF1E293B)     // Dark slate card surface (#1E293B)
-val SvAccentCyan = Color(0xFF06B6D4)      // Cyan highlights
+// --- TEMA CLARO ---
+val SvLightPrimary = Color(0xFF00C6D7)         // Color principal: #00C6D7
+val SvLightSecondary = Color(0xFF7AE7F2)       // Color secundario: #7AE7F2
+val SvLightTextContrast = Color(0xFF0B2D39)    // Color de contraste / texto: #0B2D39
+val SvLightBackground = Color(0xFFE9F7F8)      // Fondos claros: #E9F7F8
+val SvLightSurface = Color(0xFFFFFFFF)         // Tarjetas / superficies blancas limpias
+val SvLightSurfaceVariant = Color(0xFFD8F3F6)  // Variante de superficie suave
+val SvLightOutline = Color(0xFF7BDCE6)         // Bordes y separadores claros
+val SvLightPrimaryDark = Color(0xFF009AA8)     // Tono más oscuro para contraste en botones con texto blanco
 
-val GoldWarning = Color(0xFFD97706)       // Safety Amber/Orange (#D97706)
-val RedError = Color(0xFFEF4444)          // Alert Crimson red
+// --- TEMA OSCURO ---
+val SvDarkPrimary = Color(0xFF00D4E6)          // Color principal: #00D4E6
+val SvDarkSecondary = Color(0xFF0A3D62)        // Color secundario: #0A3D62
+val SvDarkBackground = Color(0xFF0B1320)       // Fondo oscuro: #0B1320
+val SvDarkTextSecondary = Color(0xFF9FB3C8)    // Color secundario para textos y elementos: #9FB3C8
+val SvDarkSurface = Color(0xFF111D30)          // Superficies y tarjetas oscuras
+val SvDarkSurfaceVariant = Color(0xFF182942)   // Variante oscura de tarjetas
+val SvDarkTextPrimary = Color(0xFFFFFFFF)      // Texto principal blanco nítido
+val SvDarkOutline = Color(0xFF1E3A5F)          // Bordes oscuros
+
+// --- COLORES FUNCIONALES Y DE ESTADO ---
+val GoldWarning = Color(0xFFD97706)            // Advertencias
+val RedError = Color(0xFFEF4444)               // Errores y alertas
+val GreenSuccess = Color(0xFF10B981)           // Éxito / Respuestas correctas

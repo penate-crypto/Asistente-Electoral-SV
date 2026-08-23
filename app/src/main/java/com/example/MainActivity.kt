@@ -14,8 +14,6 @@ import android.os.Looper
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -32,23 +30,24 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.BookInternalSearchEngine
+import com.example.data.ElectoralTtsManager
 import com.example.data.LegalConsentManager
+import com.example.data.TtsPlaybackState
 import com.example.data.database.AppDatabase
 import com.example.data.repository.ElectoralRepository
 import com.example.ui.ElectoralMainScreen
 import com.example.ui.LegalNoticeScreen
+import com.example.ui.LoginScreen
 import com.example.ui.WelcomeIntroScreen
 import com.example.ui.theme.MyApplicationTheme
 import com.example.viewmodel.ElectoralUiState
 import com.example.viewmodel.ElectoralViewModel
 import com.example.viewmodel.ElectoralViewModelFactory
 import com.example.viewmodel.VoiceConversationState
-import java.util.Locale
 
-class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
+class MainActivity : ComponentActivity() {
 
-    private var textToSpeech: TextToSpeech? = null
-    private var isTtsInitialized by mutableStateOf(false)
+    private lateinit var ttsManager: ElectoralTtsManager
     private var speechRecognizer: SpeechRecognizer? = null
 
     private lateinit var viewModel: ElectoralViewModel
@@ -63,24 +62,31 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             val repository = ElectoralRepository(database.queryHistoryDao())
             val factory = ElectoralViewModelFactory(repository)
             viewModel = ViewModelProvider(this, factory)[ElectoralViewModel::class.java]
-            viewModel.initFontSize(this)
+            viewModel.initSettings(this)
             BookInternalSearchEngine.init(this)
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
-        try {
-            textToSpeech = TextToSpeech(this, this)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        // Initialize advanced chunked Text-To-Speech engine
+        ttsManager = ElectoralTtsManager(
+            context = this,
+            onStateChanged = { state ->
+                viewModel.updateTtsPlaybackState(state)
+            }
+        )
 
         initSpeechRecognizerSafely()
 
         setContent {
             val currentFontSize by viewModel.appFontSize.collectAsState()
+            val isDarkTheme by viewModel.isDarkTheme.collectAsState()
+            val isLoggedIn by viewModel.isLoggedIn.collectAsState()
 
-            MyApplicationTheme(appFontSize = currentFontSize) {
+            MyApplicationTheme(
+                darkTheme = isDarkTheme,
+                appFontSize = currentFontSize
+            ) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -120,48 +126,76 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
                     }
 
                     val uiState by viewModel.uiState.collectAsState()
-                    val voiceState by viewModel.voiceState.collectAsState()
                     val isVoiceTurn by viewModel.isVoiceTurn.collectAsState()
                     val showIntroSplash by viewModel.showIntroSplash.collectAsState()
 
-                    // Reactive Voice Speaker: When AI responds to a voice question, automatically speak the answer!
+                    // Reactive Voice Speaker: When AI responds to a voice question, automatically speak the full answer!
                     LaunchedEffect(uiState) {
                         val state = uiState
                         if (state is ElectoralUiState.Success && isVoiceTurn) {
-                            val spokenText = formatSpokenAnswer(state.answer)
-                            speakAnswer(spokenText)
+                            ttsManager.speakFullAnswer(state.answer)
                         } else if (state is ElectoralUiState.Error && isVoiceTurn) {
                             viewModel.onVoiceError("No fue posible obtener una respuesta. Intenta nuevamente.")
                         }
                     }
 
-                    if (showIntroSplash) {
-                        WelcomeIntroScreen(
-                            onDismiss = { viewModel.dismissIntroSplash() }
-                        )
-                    } else if (!hasAcceptedLegalConsent) {
-                        LegalNoticeScreen(
-                            onAcceptAndContinue = {
-                                hasAcceptedLegalConsent = true
-                            },
-                            onReject = {
-                                finish()
-                            }
-                        )
-                    } else {
-                        ElectoralMainScreen(
-                            viewModel = viewModel,
-                            onVoiceButtonTapped = {
-                                handleVoiceButtonInteraction(micPermissionLauncher, speechIntentLauncher)
-                            },
-                            onSpeakText = { text ->
-                                speakAnswer(formatSpokenAnswer(text))
-                            },
-                            onStopSpeaking = {
-                                stopSpeaking()
-                                viewModel.onVoiceSpeakingFinished()
-                            }
-                        )
+                    when {
+                        showIntroSplash -> {
+                            WelcomeIntroScreen(
+                                onDismiss = { viewModel.dismissIntroSplash() }
+                            )
+                        }
+                        !isLoggedIn -> {
+                            LoginScreen(
+                                onLoginSuccess = {
+                                    viewModel.onLoginSuccess()
+                                },
+                                isDarkTheme = isDarkTheme,
+                                onToggleDarkTheme = {
+                                    viewModel.toggleDarkTheme(this)
+                                }
+                            )
+                        }
+                        !hasAcceptedLegalConsent -> {
+                            LegalNoticeScreen(
+                                onAcceptAndContinue = {
+                                    hasAcceptedLegalConsent = true
+                                },
+                                onReject = {
+                                    finish()
+                                }
+                            )
+                        }
+                        else -> {
+                            ElectoralMainScreen(
+                                viewModel = viewModel,
+                                onVoiceButtonTapped = {
+                                    handleVoiceButtonInteraction(micPermissionLauncher, speechIntentLauncher)
+                                },
+                                onSpeakText = { text ->
+                                    ttsManager.speakFullAnswer(text)
+                                },
+                                onPauseSpeaking = {
+                                    ttsManager.pause()
+                                },
+                                onResumeSpeaking = {
+                                    ttsManager.resume()
+                                },
+                                onStopSpeaking = {
+                                    ttsManager.stop()
+                                },
+                                onRestartSpeaking = {
+                                    ttsManager.restart()
+                                },
+                                onToggleDarkTheme = {
+                                    viewModel.toggleDarkTheme(this)
+                                },
+                                onLogout = {
+                                    ttsManager.stop()
+                                    viewModel.logout(this)
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -236,24 +270,21 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         speechIntentLauncher: ActivityResultLauncher<Intent>
     ) {
         val currentVoiceState = viewModel.voiceState.value
+        val ttsState = viewModel.ttsPlaybackState.value
 
-        when (currentVoiceState) {
-            VoiceConversationState.LISTENING -> {
-                // User pressed again while listening -> Cancel listening
+        when {
+            currentVoiceState == VoiceConversationState.LISTENING -> {
                 stopSpeechRecognition()
                 viewModel.cancelVoiceListening("Escucha cancelada.")
             }
-            VoiceConversationState.SPEAKING -> {
-                // User pressed while AI is speaking -> Stop audio and return to ready
-                stopSpeaking()
-                viewModel.onVoiceSpeakingFinished()
+            ttsState == TtsPlaybackState.PLAYING -> {
+                ttsManager.stop()
             }
-            VoiceConversationState.PROCESSING -> {
+            currentVoiceState == VoiceConversationState.PROCESSING -> {
                 Toast.makeText(this, "Procesando respuesta con IA...", Toast.LENGTH_SHORT).show()
             }
-            VoiceConversationState.IDLE,
-            VoiceConversationState.ERROR -> {
-                stopSpeaking()
+            else -> {
+                ttsManager.stop()
                 val hasPermission = ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.RECORD_AUDIO
@@ -327,97 +358,6 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    override fun onInit(status: Int) {
-        try {
-            if (status == TextToSpeech.SUCCESS) {
-                val result = textToSpeech?.setLanguage(Locale("es", "SV"))
-                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    textToSpeech?.setLanguage(Locale("es"))
-                }
-                textToSpeech?.setSpeechRate(1.02f)
-                textToSpeech?.setPitch(1.0f)
-                isTtsInitialized = true
-            }
-        } catch (e: Exception) {
-            isTtsInitialized = false
-        }
-    }
-
-    private fun speakAnswer(spokenText: String) {
-        if (isTtsInitialized && textToSpeech != null) {
-            try {
-                stopSpeaking()
-                viewModel.onVoiceSpeakingStarted()
-
-                textToSpeech?.speak(spokenText, TextToSpeech.QUEUE_FLUSH, null, "ElectoralVoiceSessionId")
-
-                textToSpeech?.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
-                    override fun onStart(utteranceId: String?) {
-                        mainHandler.post {
-                            viewModel.onVoiceSpeakingStarted()
-                        }
-                    }
-
-                    override fun onDone(utteranceId: String?) {
-                        mainHandler.post {
-                            viewModel.onVoiceSpeakingFinished()
-                        }
-                    }
-
-                    @Deprecated("Deprecated in Java")
-                    override fun onError(utteranceId: String?) {
-                        mainHandler.post {
-                            viewModel.onVoiceSpeakingFinished()
-                        }
-                    }
-                })
-            } catch (e: Exception) {
-                viewModel.onVoiceSpeakingFinished()
-            }
-        } else {
-            viewModel.onVoiceSpeakingFinished()
-        }
-    }
-
-    private fun stopSpeaking() {
-        try {
-            textToSpeech?.stop()
-        } catch (_: Exception) {}
-    }
-
-    private fun formatSpokenAnswer(fullAnswer: String): String {
-        var clean = fullAnswer
-
-        if (clean.contains("ADVERTENCIA ORIENTATIVA", ignoreCase = true)) {
-            clean = clean.substringBefore("ADVERTENCIA ORIENTATIVA")
-        }
-        if (clean.contains("Esta respuesta es únicamente orientativa", ignoreCase = true)) {
-            clean = clean.substringBefore("Esta respuesta es únicamente orientativa")
-        }
-
-        clean = clean
-            .replace(Regex("[#*_`\\[\\]()>\"]"), " ")
-            .replace(Regex("\\s+"), " ")
-            .trim()
-
-        val sentences = clean.split(Regex("(?<=[.!?])\\s+"))
-            .filter { it.isNotBlank() && it.length > 5 }
-
-        val spokenCore = when {
-            sentences.isEmpty() -> clean
-            sentences.size <= 3 -> sentences.joinToString(" ")
-            else -> sentences.take(3).joinToString(" ")
-        }
-
-        val finalSpoken = if (!spokenCore.contains("paso a paso", ignoreCase = true) && spokenCore.length < 240) {
-            "$spokenCore Si deseas, puedo explicarte los detalles paso a paso."
-        } else {
-            spokenCore
-        }
-
-        return finalSpoken.trim()
-    }
-
     override fun onDestroy() {
         try {
             stopSpeechRecognition()
@@ -425,9 +365,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
             speechRecognizer = null
         } catch (_: Exception) {}
         try {
-            textToSpeech?.stop()
-            textToSpeech?.shutdown()
-            textToSpeech = null
+            ttsManager.shutdown()
         } catch (_: Exception) {}
         super.onDestroy()
     }

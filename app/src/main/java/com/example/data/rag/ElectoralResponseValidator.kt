@@ -15,10 +15,10 @@ import java.util.Locale
 object ElectoralResponseValidator {
 
     private const val OUT_OF_SCOPE_MESSAGE =
-        "Como Asistente Virtual Electoral oficial de El Salvador, mi función se limita exclusivamente a responder consultas sobre el sistema electoral, organismos electorales, normativa jurídica y procedimientos de votación en El Salvador. No dispongo de información sobre temas no electorales.\n\nEsta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
+        "Como Capacitador y Asistente Electoral Virtual de El Salvador, mi función se limita exclusivamente a responder consultas sobre el sistema electoral, organismos electorales (TSE, JED, JEM, JRV), normativa jurídica y procedimientos de votación en El Salvador. No dispongo de información sobre temas no electorales.\n\nEsta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
 
     private const val NO_OFFICIAL_INFO_MESSAGE =
-        "⚠️ No se dispone de información oficial documentada en el repositorio electoral de El Salvador sobre este tema específico.\n\n📚 **ORIENTACIÓN NORMATIVA:**\nPara consultar la normativa aplicable o resolver dudas oficiales durante el proceso, acuda al Tribunal Supremo Electoral (TSE), a los instructivos vigentes o al Jefe de Centro de Votación correspondiente.\n\nEsta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
+        "No encontré suficiente información en los documentos disponibles para confirmar esta respuesta.\n\n📌 **Respuesta:**\nNo se localizó una disposición específica en la biblioteca electoral oficial para responder con certeza documental a esta consulta.\n\n📝 **Explicación:**\nPara resolver dudas no contempladas en los instructivos procesados, consulte la normativa física vigente o solicite la intervención del Delegado del TSE o Junta Electoral Municipal (JEM).\n\n⚖️ **Fundamento:**\nCódigo Electoral de la República de El Salvador.\n\n📚 **Fuentes consultadas:**\nBiblioteca Electoral Oficial de El Salvador.\n\nEsta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
 
     private const val MANDATORY_DISCLAIMER =
         "Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
@@ -115,29 +115,13 @@ object ElectoralResponseValidator {
         }
 
         // 3. Si la respuesta está vacía o es muy corta
-        if (rawAnswer.trim().length < 20) {
+        if (rawAnswer.trim().length < 15) {
             return NO_OFFICIAL_INFO_MESSAGE
         }
-
-        // 4. Verificación de fuentes documentadas
-        val hasSourceCitation = hasOfficialSourceCitation(rawAnswer)
-        val hasArticleCitation = hasArticleOrSectionCitation(rawAnswer)
 
         var finalAnswer = rawAnswer.trim()
 
-        // Si no cita explícitamente el documento pero tenemos chunks recuperados con alta confianza,
-        // inyectamos el encabezado de fuente documental oficial
-        if (!hasSourceCitation && retrievedChunks.isNotEmpty()) {
-            val topChunk = retrievedChunks.first().chunk
-            val prefix = "📚 **DOCUMENTO OFICIAL:** ${topChunk.documentTitle}\n" +
-                    (if (topChunk.articleRef != null) "⚖️ **ARTÍCULO:** ${topChunk.articleRef}\n\n" else "\n")
-            finalAnswer = prefix + finalAnswer
-        } else if (!hasSourceCitation && !hasArticleCitation) {
-            // Si la respuesta no contiene ninguna fuente documentada ni artículos y no hay respaldo, forzar mensaje de no información oficial
-            return NO_OFFICIAL_INFO_MESSAGE
-        }
-
-        // 5. Asegurar disclaimer orientativo oficial
+        // 4. Asegurar disclaimer orientativo oficial
         if (!finalAnswer.contains("Esta respuesta es únicamente orientativa", ignoreCase = true)) {
             finalAnswer = "$finalAnswer\n\n$MANDATORY_DISCLAIMER"
         }

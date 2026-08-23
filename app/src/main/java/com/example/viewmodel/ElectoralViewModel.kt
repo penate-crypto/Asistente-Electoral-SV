@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.data.AppFontSize
 import com.example.data.AppSettingsManager
+import com.example.data.AuthSessionManager
+import com.example.data.TtsPlaybackState
 import com.example.data.database.QueryHistory
 import com.example.data.repository.AnswerResult
 import com.example.data.repository.ApiKeyStatus
@@ -39,6 +41,12 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     private val _showIntroSplash = MutableStateFlow(true)
     val showIntroSplash: StateFlow<Boolean> = _showIntroSplash.asStateFlow()
 
+    private val _isLoggedIn = MutableStateFlow(false)
+    val isLoggedIn: StateFlow<Boolean> = _isLoggedIn.asStateFlow()
+
+    private val _isDarkTheme = MutableStateFlow(false)
+    val isDarkTheme: StateFlow<Boolean> = _isDarkTheme.asStateFlow()
+
     private val _currentScreen = MutableStateFlow(ElectoralScreen.CHAT)
     val currentScreen: StateFlow<ElectoralScreen> = _currentScreen.asStateFlow()
 
@@ -62,6 +70,13 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     private val _isVoiceTurn = MutableStateFlow(false)
     val isVoiceTurn: StateFlow<Boolean> = _isVoiceTurn.asStateFlow()
 
+    // Enhanced TTS Playback state
+    private val _ttsPlaybackState = MutableStateFlow(TtsPlaybackState.IDLE)
+    val ttsPlaybackState: StateFlow<TtsPlaybackState> = _ttsPlaybackState.asStateFlow()
+
+    private val _currentlySpeakingAnswer = MutableStateFlow<String?>(null)
+    val currentlySpeakingAnswer: StateFlow<String?> = _currentlySpeakingAnswer.asStateFlow()
+
     private val _uiState = MutableStateFlow<ElectoralUiState>(ElectoralUiState.Idle)
     val uiState: StateFlow<ElectoralUiState> = _uiState.asStateFlow()
 
@@ -80,6 +95,31 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
 
     init {
         checkApiKeyStatus()
+    }
+
+    fun initSettings(context: Context) {
+        _appFontSize.value = AppSettingsManager.getAppFontSize(context)
+        _isDarkTheme.value = AppSettingsManager.isDarkTheme(context)
+        _isLoggedIn.value = AuthSessionManager.isUserLoggedIn(context)
+    }
+
+    fun toggleDarkTheme(context: Context) {
+        val newTheme = AppSettingsManager.toggleDarkTheme(context)
+        _isDarkTheme.value = newTheme
+    }
+
+    fun setDarkTheme(context: Context, isDark: Boolean) {
+        AppSettingsManager.setDarkTheme(context, isDark)
+        _isDarkTheme.value = isDark
+    }
+
+    fun onLoginSuccess() {
+        _isLoggedIn.value = true
+    }
+
+    fun logout(context: Context) {
+        AuthSessionManager.logout(context)
+        _isLoggedIn.value = false
     }
 
     fun initFontSize(context: Context) {
@@ -155,21 +195,58 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
         submitQuery(customQuery = recognizedText, isFromVoice = true)
     }
 
-    fun onVoiceSpeakingStarted() {
+    fun onVoiceSpeakingStarted(text: String? = null) {
         _voiceState.value = VoiceConversationState.SPEAKING
-        _voiceStatusMessage.value = "Respondiendo…"
+        _voiceStatusMessage.value = "Respondiendo con voz completa…"
+        _ttsPlaybackState.value = TtsPlaybackState.PLAYING
+        if (text != null) {
+            _currentlySpeakingAnswer.value = text
+        }
+    }
+
+    fun onVoiceSpeakingPaused() {
+        _ttsPlaybackState.value = TtsPlaybackState.PAUSED
+        _voiceStatusMessage.value = "Audio en pausa"
+    }
+
+    fun onVoiceSpeakingResumed() {
+        _ttsPlaybackState.value = TtsPlaybackState.PLAYING
+        _voiceState.value = VoiceConversationState.SPEAKING
+        _voiceStatusMessage.value = "Reproduciendo respuesta…"
     }
 
     fun onVoiceSpeakingFinished() {
         _voiceState.value = VoiceConversationState.IDLE
         _voiceStatusMessage.value = "Pulsa el micrófono para hablar"
+        _ttsPlaybackState.value = TtsPlaybackState.IDLE
         _isVoiceTurn.value = false
+        _currentlySpeakingAnswer.value = null
     }
 
     fun onVoiceError(errorMessage: String) {
         _voiceState.value = VoiceConversationState.ERROR
         _voiceStatusMessage.value = errorMessage
+        _ttsPlaybackState.value = TtsPlaybackState.IDLE
         _isVoiceTurn.value = false
+        _currentlySpeakingAnswer.value = null
+    }
+
+    fun updateTtsPlaybackState(state: TtsPlaybackState) {
+        _ttsPlaybackState.value = state
+        when (state) {
+            TtsPlaybackState.PLAYING -> {
+                _voiceState.value = VoiceConversationState.SPEAKING
+                _voiceStatusMessage.value = "Reproduciendo respuesta…"
+            }
+            TtsPlaybackState.PAUSED -> {
+                _voiceStatusMessage.value = "Audio en pausa"
+            }
+            TtsPlaybackState.STOPPED, TtsPlaybackState.IDLE -> {
+                _voiceState.value = VoiceConversationState.IDLE
+                _voiceStatusMessage.value = "Pulsa el micrófono para hablar"
+                _currentlySpeakingAnswer.value = null
+            }
+        }
     }
 
     fun submitQuery(customQuery: String? = null, isFromVoice: Boolean = false) {

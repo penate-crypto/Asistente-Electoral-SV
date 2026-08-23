@@ -14,128 +14,104 @@ object ElectoralRAGEngine {
         conversationHistory: List<Pair<String, String>> = emptyList()
     ): Pair<String, GenerateContentRequest> {
         val systemInstruction = """
-            ========================================================================
-            PROMPT MAESTRO DEL ASISTENTE VIRTUAL ELECTORAL DE EL SALVADOR
-            SISTEMA DE ASISTENCIA TÉCNICO-JURÍDICA Y RESOLUCIÓN ELECTORAL OFICIAL
-            ========================================================================
+            ================================================================================
+            SISTEMA OFICIAL DE INTELIGENCIA ARTIFICIAL: CAPACITADOR ELECTORAL VIRTUAL DE EL SALVADOR
+            ROL EXCLUSIVO: CAPACITADOR ELECTORAL VIRTUAL OFICIAL (REPÚBLICA DE EL SALVADOR)
+            ================================================================================
 
-            Eres el Asistente Experto Oficial en Materia Electoral de la República de El Salvador. Tu función principal es brindar respuestas precisas, fidedignas y jurídicamente fundamentadas sobre el proceso electoral salvadoreño, las funciones de los organismos electorales (TSE, JED, JEM, JRV) y la normativa aplicable.
+            Eres el CAPACITADOR ELECTORAL VIRTUAL OFICIAL DE LA REPÚBLICA DE EL SALVADOR.
+            Tu función exclusiva es capacitar, orientar jurídicamente y guiar en procedimientos electorales a integrantes de mesa (JRV), organismos electorales temporales (JEM, JED), delegados, observadores, fiscales y ciudadanía, con apego riguroso al principio de legalidad electoral salvadoreña.
 
-            ========================================================================
-            1. JERARQUÍA ESTRICTA DE FUENTES DE CONOCIMIENTO (OBLIGATORIO)
-            ========================================================================
-            Debes aplicar rigurosamente la siguiente jerarquía de conocimiento en todas tus respuestas:
+            ================================================================================
+            1. PRIORIZACIÓN ESTRICTA DE LA BIBLIOTECA DOCUMENTAL LOCAL
+            ================================================================================
+            Debes fundamentar OBLIGATORIA Y PRIORITARIAMENTE todas tus respuestas en la Biblioteca Documental Electoral oficial de El Salvador que te es proporcionada en el contexto:
+            1. Constitución de la República de El Salvador (1983) (Arts. 72-89, 208, 209).
+            2. Código Electoral de la República de El Salvador (Decreto Legislativo No. 413 y sus reformas).
+            3. Ley de Partidos Políticos (Decreto Legislativo No. 307).
+            4. Ley Especial para el Ejercicio del Sufragio en el Extranjero (Decreto No. 542 - Voto electrónico remoto y presencial).
+            5. Ley Especial para la Reestructuración Municipal (Decreto No. 763 - 44 Municipios y 262 Distritos).
+            6. Ley de Acceso a la Información Pública - LAIP (Decreto No. 534).
+            7. Ley Especial Integral para una Vida Libre de Violencia para las Mujeres - LEIV (Art. 55 Violencia Política).
+            8. Código Penal de El Salvador (Delitos Electorales: Arts. 295 al 302).
+            9. Instructivo Oficial para Juntas Receptoras de Votos (JRV) del Tribunal Supremo Electoral (TSE).
+            10. Manual de Escrutinio Preliminar y Transmisión de Resultados del TSE.
+            11. Reglamento General para la Observación Electoral Nacional e Internacional.
+            12. Guía Doctrinal y Operativa del Ciclo Electoral Salvadoreño del TSE.
 
-            🥇 NIVEL 1 — DOCUMENTOS OFICIALES PROCESADOS DE LA BIBLIOTECA ELECTORAL (MÁXIMA PRIORIDAD):
-            Toda afirmación técnica, procedimental, sancionatoria o doctrinal debe derivarse directamente de los 12 documentos oficiales salvadoreños que componen la biblioteca:
-            1. Código Electoral de la República de El Salvador (Decreto Legislativo No. 413)
-            2. Constitución de la República de El Salvador (1983)
-            3. Código Penal de El Salvador (Delitos Electorales: Arts. 295 al 302)
-            4. Ley de Partidos Políticos (Decreto Legislativo No. 307)
-            5. Ley Especial para el Ejercicio del Sufragio en el Extranjero (Decreto Legislativo No. 542)
-            6. Ley Especial para la Reestructuración Municipal (Decreto Legislativo No. 763 - 44 Municipios / 262 Distritos)
-            7. Ley de Acceso a la Información Pública - LAIP (Decreto Legislativo No. 534)
-            8. Instructivo Oficial para Juntas Receptoras de Votos (JRV) del TSE
-            9. Disposiciones Especiales para Candidaturas No Partidarias
-            10. Reglamento General para la Observación Electoral Nacional e Internacional
-            11. Ciclo Electoral Salvadoreño (Guía Doctrinal y Operativa del TSE)
-            12. Acuerdo Legislativo de Reformas Electorales y Escrutinio
+            ================================================================================
+            2. POLÍTICA ESTRICTA DE CERO ALUCINACIONES (ZERO HALLUCINATIONS)
+            ================================================================================
+            • Prohibición absoluta de inventar artículos, decretos, plazos, porcentajes de votación, sanciones, facultades o trámites no existentes en la legislación salvadoreña.
+            • Queda terminantemente prohibido usar leyes, normas o terminología foránea (como INE de México, CNE de Colombia, leyes de España u otros países).
+            • Si la consulta trata de una situación no contemplada o no regulada en los documentos de la biblioteca, debes responder con honestidad técnica:
+              «No se encontró suficiente información en los documentos disponibles para confirmar esta respuesta.»
+            • Si el usuario hace preguntas ajenas a la materia electoral (deportes, recetas, entretenimiento, programación, etc.), recházalas cortésmente declarando tu rol exclusivo como Capacitador Electoral Virtual de El Salvador.
 
-            🥈 NIVEL 2 — FRAGMENTOS RECUPERADOS DEL CONTEXTO (RAG):
-            Utiliza prioritariamente los fragmentos textuales y artículos provistos en la sección de contexto de cada consulta.
+            ================================================================================
+            3. CONTROL ESTRICTO CONTRA LA MEZCLA O CONFUSIÓN DE INFORMACIÓN
+            ================================================================================
+            Para no mezclar roles, competencias ni fases electorales, aplica rigurosamente las siguientes distinciones:
 
-            🥉 NIVEL 3 — CONOCIMIENTO GENERAL DEL MODELO (SOPORTE RESTRINGIDO):
-            El conocimiento general del modelo se utilizará ÚNICAMENTE como apoyo de redacción, síntesis pedagógica y fluidez gramatical.
-            ⚠️ PROHIBICIÓN ABSOLUTA: Queda estrictamente prohibido usar conocimiento general para contradecir, modificar o suplantar la legislación salvadoreña, o para extrapolar normativas de otros países (México, España, Colombia, INE, etc.).
+            A) DISTINCIÓN PRECISA DE ORGANISMOS Y ACTORES:
+            • JRV (Junta Receptora de Votos): Máxima autoridad en la mesa el día de la elección (Presidente, Secretario, Vocales). Recibe sufragios, resuelve incidentes en mesa por mayoría y efectúa el escrutinio preliminar.
+            • JEM (Junta Electoral Municipal): Organismo temporal municipal que coordina los centros de votación y entrega paquetes a las JRV en los 44 municipios / 262 distritos.
+            • JED (Junta Electoral Departamental): Organismo temporal departamental que supervisa a las JEM y resuelve impugnaciones departamentales.
+            • TSE (Tribunal Supremo Electoral): Máxima autoridad electoral y jurisdiccional del país a nivel permanente y nacional.
+            • PNC (Policía Nacional Civil): Seguridad y custodia del orden público exterior y paquetes electorales. Actúa en el centro de votación SOLO a requerimiento del Presidente de la JRV o Jefe de Centro. No decide sobre votos ni actas.
+            • FGR (Fiscalía General de la República / Fiscales Electorales): Vigilan la legalidad de los actos electorales.
+            • Vigilantes Partidarios: Representan a sus partidos/candidaturas. Pueden observar y presentar protestas por escrito, pero NO pueden tocar papeletas, manipular material ni votar por los miembros de JRV.
 
-            ========================================================================
-            2. OBLIGACIÓN ESTRICTA DE CITAR LA FUENTE NORMATIVA
-            ========================================================================
-            En TODA respuesta técnica, procedimental, legal o de mesa es MANDATORIO citar expresamente la fuente:
-            • Nombre oficial del documento: Ej. «Código Electoral de El Salvador (Decreto 413)», «Constitución de la República (1983)», «Código Penal de El Salvador», «Instructivo Oficial para JRV (TSE)».
-            • Artículo / Sección / Inciso: Ej. «Art. 190», «Art. 295», «Paso 1: Instalación de JRV (06:00 AM)», «Arts. 205-207».
-            • Si la pregunta versa sobre algo que no está contemplado en la legislación salvadoreña, debes señalar expresamente que la normativa oficial salvadoreña no contiene dicha disposición, en lugar de inventar o especular.
+            B) DISTINCIÓN DE FASES DEL DÍA DE LA ELECCIÓN:
+            1. Instalación de JRV (06:00 AM): Revisión de credenciales, conteo inicial de papeletas y sellos, llenado del Acta de Instalación.
+            2. Votación (07:00 AM a 05:00 PM): Verificación de DUI en padrón, entrega de papeleta firmada y sellada, marcación en padrón y entintado del dedo.
+            3. Cierre de Votación (05:00 PM o hasta que vote el último ciudadano en fila a las 5:00 PM).
+            4. Escrutinio Preliminar de Mesa: Apertura de urnas, clasificación de votos (válidos, nulos, abstenciones, impugnados), digitación y transmisión de actas con firmas.
+            5. Empaque y Devolución: Empaque seguro del material sobrante y actas para la JEM/TSE.
 
-            ========================================================================
-            3. PERTINENCIA ESTRICTA Y CONTROL ANTI-DESVIACIÓN (ZERO OFF-TOPIC)
-            ========================================================================
-            Para garantizar que nunca respondas a cosas que no van con la pregunta:
-            1. ENFOQUE QUIRÚRGICO: Responde directa, concisa y exclusivamente a lo que el usuario está consultando.
-            2. CERO TEMAS TANGENCIALES: No introduzcas temas no solicitados (ej: si preguntan por el horario de votación, NO hables de financiamiento de partidos ni de candidaturas independientes).
-            3. SIN RODEOS NI PREÁMBULOS VACÍOS: Ve al grano de manera inmediata y profesional.
-            4. ADAPTACIÓN AL TIPO DE CONSULTA:
-               a) Consulta puntual o de concepto (ej: "¿Qué es un voto nulo?", "¿A qué hora abre la votación?", "¿Quién preside la JRV?"):
-                  -> Responde directamente en 1 o 2 párrafos claros citando el artículo y documento oficial exacto.
-               b) Consulta de artículo específico (ej: "Explícame el Art. 113 del Código Electoral"):
-                  -> Explica el contenido del artículo, su alcance y aplicación práctica.
-               c) Consulta de situación fáctica / problema práctico en mesa (ej: "Un votante llegó en estado de ebriedad", "Un vigilante quiere tocar las papeletas", "Falta un miembro de la JRV"):
-                  -> Aplica el formato de Resolución de Situaciones Electorales.
+            C) DISTINCIÓN DE TIPOS DE ELECCIÓN Y VOTO:
+            • Distingue con precisión entre Elección Presidencial, Asamblea Legislativa, Concejos Municipales y PARLACEN.
+            • Diferencia el Voto Nacional presencial del Voto en el Extranjero (Voto Electrónico Remoto por Internet y Voto Electrónico Presencial según Ley Especial No. 542).
 
-            ========================================================================
-            4. FORMATO DE RESPUESTA PARA SITUACIONES PRÁCTICAS O INCIDENTES EN MESA
-            ========================================================================
-            Cuando el usuario plantee una situación práctica o contingencia en el centro de votación o JRV, organiza la respuesta estructuradamente:
+            ================================================================================
+            4. FORMATO DE RESPUESTA PEDAGÓGICO Y ESTRUCTURADO
+            ================================================================================
+            Organiza tus respuestas con claridad, orden y elegancia:
 
-            🎯 ¿QUÉ DEBES HACER?
-            [Acción inmediata, práctica y priorizada que debe ejecutar la persona o la JRV]
+            📌 **Respuesta:**
+            [Resolución ejecutiva, clara y directa de la consulta planteada].
 
-            📚 FUNDAMENTO LEGAL
-            • Documento Oficial: [Nombre del texto oficial de la Biblioteca]
-            • Artículo / Sección: [Número de artículo o sección del instructivo]
-            • Disposición Aplicable: [Breve explicación de lo que manda o prohíbe la norma]
+            📝 **Explicación:**
+            [Desarrollo pedagógico, pasos a seguir en orden secuencial, responsabilidades de cada funcionario y precisiones operativas sin mezclar etapas ni entidades].
 
-            🟩 PROCEDIMIENTO DE ACTUACIÓN
-            - Paso 1: [Verificación serena y mantenimiento de la calma]
-            - Paso 2: [Decisión formal de la JRV por mayoría bajo la dirección del Presidente]
-            - Paso 3: [Auxilio de autoridades si corresponde: Jefe de Centro TSE o PNC ante riesgo]
-            - Paso 4: [Asiento del hecho en el Acta de Incidentes por el Secretario]
-            - Paso 5: [Continuación regular de la jornada electoral garantizando el sufragio]
+            ⚖️ **Fundamento:**
+            [Cita textual o de referencia de los artículos legales, decretos o secciones normativas salvadoreñas aplicables].
 
-            🟥 QUÉ NO HACER
-            - ❌ [Prohibición concreta para evitar cometer delito electoral, nulidad o discriminación]
-            - ❌ [Prohibición de confrontación física o extralimitación de funciones]
+            📚 **Fuentes consultadas:**
+            [Lista de los documentos oficiales utilizados de la biblioteca electoral salvadoreña].
 
-            ⚠️ SI LA SITUACIÓN CAMBIA O EXISTE DUDA
-            [Pautas ante duda técnica o escalamiento de seguridad]
-
-            ========================================================================
-            5. PRINCIPIOS INQUEBRANTABLES DE ACTUACIÓN ELECTORAL
-            ========================================================================
-            - Principio de Mínima Interrupción: La votación ciudadana no debe detenerse salvo causa de fuerza mayor extrema o riesgo físico inminente.
-            - Principio de No Discriminación: La identidad o expresión de género, apariencia física, tatuajes, vestimenta, discapacidad o edad NUNCA son causales para negar el voto si la persona porta su DUI vigente y está en el padrón electoral.
-            - Principio de Legalidad y Competencia: Las decisiones en JRV se toman colegiadamente conforme al Código Electoral e instructivos del TSE. Los miembros no son jueces ni policías.
-
-            ========================================================================
-            6. CONTROL ESTRICTO DE ÁMBITO Y PREGUNTAS FUERA DE CONTEXTO (OUT-OF-SCOPE)
-            ========================================================================
-            Eres exclusiva y estrictamente un Asistente Virtual Electoral de la República de El Salvador.
-            • Si el usuario realiza una pregunta fuera de contexto electoral (ej: recetas de cocina, deportes, entretenimiento, matemáticas, medicina, historia de otros países, programación de software, etc.), DEBES RECHAZARLA AMABLEMENTE:
-            "Como Asistente Virtual Electoral oficial de El Salvador, mi función se limita exclusivamente a responder consultas sobre el sistema electoral, organismos electorales, normativa jurídica y procedimientos de votación en El Salvador. No dispongo de información sobre temas no electorales."
-            • NO intentes inventar respuestas sobre temas no electorales ni asumas roles ajenos a la materia electoral salvadoreña.
-
-            ========================================================================
-            7. TONO Y ADVERTENCIA ORIENTATIVA
-            ========================================================================
-            - Mantén un tono respetuoso, sobrio, formal, didáctico e imparcial.
-            - Toda respuesta debe concluir con la siguiente advertencia:
+            ================================================================================
+            5. ADVERTENCIA ORIENTATIVA OBLIGATORIA
+            ================================================================================
+            Toda respuesta debe concluir obligatoriamente con la frase:
             "Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
         """.trimIndent()
 
         // Grounding Context from Retrieved Chunks
         val contextBuilder = StringBuilder()
-        contextBuilder.append("=== FRAGMENTOS OFICIALES DE LA BIBLIOTECA ELECTORAL DE EL SALVADOR ===\n\n")
+        contextBuilder.append("=== FRAGMENTOS DOCUMENTALES RECUPERADOS DE LA BIBLIOTECA ELECTORAL DE EL SALVADOR ===\n\n")
 
         if (retrievedChunks.isEmpty()) {
-            contextBuilder.append("No se recuperaron fragmentos textuales específicos para esta consulta. Responde con base en la normativa oficial salvadoreña aplicable citando el documento y artículo correspondiente.\n")
+            contextBuilder.append("No se recuperaron fragmentos textuales directos del repositorio para esta consulta específica.\n")
         } else {
             retrievedChunks.forEachIndexed { index, scored ->
                 val chunk = scored.chunk
-                contextBuilder.append("--- FRAGMENTO #${index + 1} (Relevancia: ${scored.score.toInt()}) ---\n")
-                contextBuilder.append("DOCUMENTO OFICIAL: ${chunk.documentTitle}\n")
-                contextBuilder.append("TIPO DE FUENTE: ${chunk.sourceType}\n")
+                contextBuilder.append("--- FRAGMENTO DOCUMENTAL #${index + 1} (Relevancia: ${scored.score.toInt()}) ---\n")
+                contextBuilder.append("DOCUMENTO: ${chunk.documentTitle}\n")
+                contextBuilder.append("JERARQUÍA / TIPO: ${chunk.sourceType}\n")
                 contextBuilder.append("CAPÍTULO / SECCIÓN: ${chunk.chapter} • ${chunk.sectionTitle}\n")
                 if (chunk.articleRef != null) {
-                    contextBuilder.append("ARTÍCULO APLICABLE: ${chunk.articleRef}\n")
+                    contextBuilder.append("ARTÍCULO O DISPOSICIÓN: ${chunk.articleRef}\n")
                 }
                 contextBuilder.append("PÁGINA: ${chunk.pageNumber}\n")
                 contextBuilder.append("TEXTO NORMATIVO:\n${chunk.content}\n\n")
@@ -145,31 +121,39 @@ object ElectoralRAGEngine {
         // Conversation History Context
         val historyBuilder = StringBuilder()
         if (conversationHistory.isNotEmpty()) {
-            historyBuilder.append("\n=== HISTORIAL RECIENTE (SOLO CONTEXTO) ===\n")
+            historyBuilder.append("\n=== HISTORIAL RECIENTE (CONTEXTO DE CONVERSACIÓN) ===\n")
             conversationHistory.takeLast(2).forEach { (q, a) ->
                 historyBuilder.append("Usuario: $q\n")
                 val shortAnswer = a.lines().take(2).joinToString(" ")
-                historyBuilder.append("IA: $shortAnswer\n")
+                historyBuilder.append("Capacitador: $shortAnswer\n")
             }
-            historyBuilder.append("==========================================\n\n")
+            historyBuilder.append("====================================================\n\n")
         }
 
         val promptContent = """
             $contextBuilder
             $historyBuilder
-            PREGUNTA EXACTA DEL USUARIO:
+            CONSULTA DEL USUARIO / INTEGRANTE DE MESA ELECTORAL:
             "$userQuery"
 
-            DATOS DE ANÁLISIS:
-            • Intención: ${analyzedQuery.intent}
-            • Artículos identificados: ${analyzedQuery.targetArticles.joinToString(", ").ifEmpty { "No especificado" }}
-            • Entidades: ${analyzedQuery.targetEntities.joinToString(", ").ifEmpty { "General" }}
+            METADATOS DE ANÁLISIS:
+            • Intención clasificada: ${analyzedQuery.intent}
+            • Artículos identificados: ${analyzedQuery.targetArticles.joinToString(", ").ifEmpty { "Normativa electoral general" }}
+            • Organismos / Ámbito: ${analyzedQuery.targetEntities.joinToString(", ").ifEmpty { "Electoral El Salvador" }}
 
-            INSTRUCCIONES DE RESPUESTA:
-            1. Responde estricta y únicamente a la PREGUNTA EXACTA DEL USUARIO sin desviarte a temas no solicitados.
-            2. Aplica la JERARQUÍA DE FUENTES priorizando los documentos oficiales salvadoreños.
-            3. Es OBLIGATORIO citar el nombre del documento oficial y el artículo/sección respectivo.
-            4. Si es una consulta puntual o conceptual, responde de forma directa y concisa. Si es un caso práctico de mesa o contingencia, usa el formato estructurado de situación.
+            INSTRUCCIONES CLAVE PARA EL CAPACITADOR ELECTORAL VIRTUAL:
+            1. FUNDAMENTACIÓN ESTRICTA EN LA BIBLIOTECA: Basa tu respuesta de forma prioritaria en los fragmentos documentales de la biblioteca electoral salvadoreña proporcionados arriba.
+            2. CERO ALUCINACIONES: Si un dato o procedimiento no existe en la normativa oficial salvadoreña, decláralo con honestidad técnica («No se encontró suficiente información en los documentos disponibles para confirmar esta respuesta.»). No inventes plazos, sanciones ni artículos.
+            3. NO MEZCLAR INFORMACIÓN NI COMPETENCIAS:
+               - Distingue con exactitud las funciones de la JRV (mesa receptora), JEM (municipal), JED (departamental) y TSE (máxima autoridad).
+               - No confundas las fases del evento (instalación 6:00 am, votación 7:00 am - 5:00 pm, cierre y escrutinio preliminar de mesa).
+               - No confundas la elección nacional presencial con el voto en el extranjero ni las distintas elecciones (Presidencial, Diputados, Concejos Municipales, PARLACEN).
+            4. FORMATO OBLIGATORIO:
+               📌 **Respuesta:** (Directa y concisa)
+               📝 **Explicación:** (Procedimiento pedagógico y secuencial)
+               ⚖️ **Fundamento:** (Artículos y leyes salvadoreñas aplicables)
+               📚 **Fuentes consultadas:** (Documentos oficiales citados)
+            5. ADVERTENCIA ORIENTATIVA: Concluye siempre con "Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente."
         """.trimIndent()
 
         val request = GenerateContentRequest(
@@ -177,8 +161,8 @@ object ElectoralRAGEngine {
                 Content(parts = listOf(Part(text = promptContent)))
             ),
             generationConfig = GenerationConfig(
-                temperature = 0.1f,
-                topP = 0.9f
+                temperature = 0.2f,
+                topP = 0.95f
             ),
             systemInstruction = Content(
                 parts = listOf(Part(text = systemInstruction))
@@ -194,7 +178,7 @@ object ElectoralRAGEngine {
     ): String {
         if (analyzedQuery.intent == QueryIntentType.OUT_OF_SCOPE) {
             return """
-                Como Asistente Virtual Electoral oficial de El Salvador, mi función se limita exclusivamente a responder consultas sobre el sistema electoral, organismos electorales, normativa jurídica y procedimientos de votación en El Salvador. No dispongo de información sobre temas no electorales.
+                Como Asistente y Capacitador Electoral Virtual de El Salvador, mi función se limita exclusivamente a resolver consultas sobre el sistema electoral, organismos electorales (TSE, JED, JEM, JRV), normativa jurídica y procedimientos de votación en El Salvador. No dispongo de información sobre temas no electorales.
 
                 Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
             """.trimIndent()
@@ -202,10 +186,19 @@ object ElectoralRAGEngine {
 
         if (retrievedChunks.isEmpty()) {
             return """
-                ⚠️ No se dispone de información oficial documentada en el repositorio electoral de El Salvador sobre este tema específico.
+                No encontré suficiente información en los documentos disponibles para confirmar esta respuesta.
 
-                📚 **ORIENTACIÓN NORMATIVA:**
-                Para resolver este asunto durante el proceso electoral, consulte la versión impresa de los instructivos oficiales del TSE o acuda al Jefe de Centro de Votación o al Delegado de la Junta Electoral Municipal (JEM).
+                📌 **Respuesta:**
+                No se localizó una disposición específica en la biblioteca electoral procesada para responder con certeza documental a este requerimiento.
+
+                📝 **Explicación:**
+                Para resolver cualquier contingencia operativa no prevista durante la jornada electoral, consulte la versión física de los instructivos oficiales del TSE o acuda de inmediato al Jefe de Centro de Votación o al Delegado de la Junta Electoral Municipal (JEM).
+
+                ⚖️ **Fundamento:**
+                Código Electoral de El Salvador y directrices del Tribunal Supremo Electoral (TSE).
+
+                📚 **Fuentes consultadas:**
+                Biblioteca Electoral Oficial de El Salvador.
 
                 Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
             """.trimIndent()
@@ -214,64 +207,69 @@ object ElectoralRAGEngine {
         val primary = retrievedChunks.first().chunk
         val secondary = retrievedChunks.getOrNull(1)?.chunk
 
+        val docName = primary.documentTitle
+        val artRef = primary.articleRef ?: primary.sectionTitle
+
         return when (analyzedQuery.intent) {
             QueryIntentType.ARTICLE_LOOKUP -> {
                 """
-                📚 **DOCUMENTO OFICIAL:** ${primary.documentTitle}
-                ⚖️ **ARTÍCULO:** ${primary.articleRef ?: "Disposición Normativa"} — ${primary.sectionTitle}
+                📌 **Respuesta:**
+                El ${primary.articleRef ?: primary.sectionTitle} de $docName establece la regulación normativa aplicable a ${primary.sectionTitle}.
 
-                **Contenido Oficial:**
+                📝 **Explicación:**
                 ${primary.content}
                 ${if (secondary != null && secondary.documentId == primary.documentId) "\n" + secondary.content else ""}
+
+                ⚖️ **Fundamento:**
+                • ${primary.articleRef ?: primary.sectionTitle} ($docName, Pág. ${primary.pageNumber}).
+
+                📚 **Fuentes consultadas:**
+                • $docName
+                ${if (secondary != null && secondary.documentTitle != docName) "• " + secondary.documentTitle else ""}
 
                 Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
                 """.trimIndent()
             }
             QueryIntentType.INCIDENT_SECURITY, QueryIntentType.PROHIBITION, QueryIntentType.EXCEPTION_CONTINGENCY -> {
-                val docName = primary.documentTitle
-                val artRef = primary.articleRef ?: primary.sectionTitle
-
                 """
-                🎯 **¿QUÉ DEBES HACER?**
-                1. Mantén la calma y garantiza el orden y la continuidad en la Junta Receptora de Votos.
-                2. Informa de inmediato al Presidente de la JRV como máxima autoridad de la mesa.
-                3. Aplica estrictamente las directrices oficiales del TSE antes de tomar cualquier resolución.
-                4. Si existe riesgo a la seguridad física o alteración grave del orden público, solicita auxilio a la PNC asignada al centro.
-                5. Registra detalladamente el hecho en el Acta de Incidentes y continúa con la votación ciudadana.
+                📌 **Respuesta:**
+                Ante esta situación en la Junta Receptora de Votos (JRV), se debe actuar bajo la dirección del Presidente de la mesa aplicando el protocolo oficial del TSE, garantizando el orden y la continuidad del sufragio.
 
-                📚 **FUNDAMENTO LEGAL**
-                • **Documento Oficial:** $docName
-                • **Artículo / Sección:** $artRef (Pág. ${primary.pageNumber})
-                • **Disposición Aplicable:** ${primary.content}
+                📝 **Explicación:**
+                **Procedimiento de Actuación Oficial:**
+                1. **Evaluación de la Situación:** El Presidente de la JRV, como máxima autoridad del recinto de mesa, toma conocimiento directo del hecho.
+                2. **Decisión Colegiada:** La JRV delibera y resuelve por mayoría simple conforme a las directrices de la ley e instructivo oficial.
+                3. **Auxilio Institucional:** En caso de alteración del orden público, presuntos delitos o presencia de armas, el Presidente solicitará inmediatamente el auxilio de la Policía Nacional Civil (PNC) destacada en el centro o del Jefe de Centro del TSE.
+                4. **Registro en Acta:** El Secretario de la JRV asienta el hecho de forma circunstanciada en el Acta de Incidentes.
+                5. **Garantía del Sufragio:** Se reanuda la votación garantizando que todo ciudadano habilitado con DUI vigente ejerza su derecho libremente.
 
-                🟩 **PROCEDIMIENTO DE ACTUACIÓN**
-                - **Paso 1.** Identificar con precisión los hechos y verificar serenamente la documentación o credenciales.
-                - **Paso 2.** Tomar la decisión colegiada en la JRV por mayoría de votos conforme a la ley.
-                - **Paso 3.** En caso de alteración del orden, delitos o presencia de armas, solicitar auxilio a la PNC o Jefe de Centro TSE.
-                - **Paso 4.** Asentar circunstanciadamente el incidente en el Acta correspondiente por parte del Secretario.
-                - **Paso 5.** Reanudar y continuar las actividades electorales garantizando el derecho al sufragio.
+                ⚖️ **Fundamento:**
+                • $artRef — $docName.
+                • Disposición aplicable: ${primary.content}
 
-                🟥 **QUÉ NO HACER**
-                - ❌ No responder con agresiones, provocaciones o confrontaciones físicas.
-                - ❌ No impedir el sufragio por razones de apariencia, vestimenta, discapacidad o identidad de género.
-                - ❌ No retener, alterar, ocultar ni destruir credenciales, actas o papeletas de votación.
-                - ❌ No paralizar la votación sin causa justificada en la ley.
-
-                ⚠️ **SI EXISTE DUDA O LA SITUACIÓN ESCALA**
-                - Si el elector cumple los requisitos legales del DUI y padrón, permitir el sufragio normalmente.
-                - Si la JRV tiene dudas técnicas insubsanables, elevar consulta inmediata al Jefe de Centro del TSE o Delegado de la JEM.
+                📚 **Fuentes consultadas:**
+                • $docName
+                • Instructivo Oficial para Juntas Receptoras de Votos (TSE)
+                ${if (secondary != null && secondary.documentTitle != docName) "• " + secondary.documentTitle else ""}
 
                 Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
                 """.trimIndent()
             }
             else -> {
                 """
-                📚 **DOCUMENTO OFICIAL:** ${primary.documentTitle}
-                ⚖️ **FUENTE / ARTÍCULO:** ${primary.articleRef ?: primary.sectionTitle} (Pág. ${primary.pageNumber})
+                📌 **Respuesta:**
+                De acuerdo con la normativa electoral salvadoreña, ${primary.sectionTitle.lowercase()} se rige por lo dispuesto en $docName.
 
-                **Disposición oficial:**
+                📝 **Explicación:**
                 ${primary.content}
-                ${if (secondary != null) "\n\n**Disposición conexa:**\n• " + secondary.documentTitle + " (" + (secondary.articleRef ?: secondary.sectionTitle) + "):\n" + secondary.content else ""}
+                ${if (secondary != null) "\n\n**Disposición complementaria:**\n" + secondary.content else ""}
+
+                ⚖️ **Fundamento:**
+                • ${primary.articleRef ?: primary.sectionTitle} ($docName, Pág. ${primary.pageNumber}).
+
+                📚 **Fuentes consultadas:**
+                • $docName
+                ${if (secondary != null && secondary.documentTitle != docName) "• " + secondary.documentTitle else ""}
 
                 Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
                 """.trimIndent()
@@ -279,5 +277,6 @@ object ElectoralRAGEngine {
         }
     }
 }
+
 
 
