@@ -30,7 +30,7 @@ object ElectoralHybridRetriever {
         val topScoreVal = topChunk?.score ?: 0.0
 
         for (scored in scoredList) {
-            if (scored.chunk.id !in seenIds && scored.score > 5.0) {
+            if (scored.chunk.id !in seenIds && scored.score > 2.0) {
                 // If top match is strongly identified, filter out conflicting outlier domains
                 if (topScoreVal >= 40.0 && dominantDocId != null) {
                     val isCompatible = isDomainCompatible(
@@ -46,6 +46,14 @@ object ElectoralHybridRetriever {
                 seenIds.add(scored.chunk.id)
                 distinctChunks.add(scored)
                 if (distinctChunks.size >= topK) break
+            }
+        }
+
+        // If no chunks were matched above threshold and query is electoral/general, provide foundational core chunks
+        if (distinctChunks.isEmpty() && analyzedQuery.intent != QueryIntentType.OUT_OF_SCOPE) {
+            val fallbackDocs = allChunks.filter { it.documentId in listOf("codigo_electoral", "instructivo_jrv", "constitucion") }.take(topK)
+            for (chunk in fallbackDocs) {
+                distinctChunks.add(ScoredChunk(chunk, 10.0, listOf("Documento base electoral")))
             }
         }
 

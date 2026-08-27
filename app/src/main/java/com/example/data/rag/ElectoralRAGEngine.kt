@@ -178,6 +178,29 @@ object ElectoralRAGEngine {
         analyzedQuery: AnalyzedQuery,
         retrievedChunks: List<ScoredChunk>
     ): String {
+        if (analyzedQuery.intent == QueryIntentType.GREETING) {
+            return """
+                📌 **Respuesta:**
+                ¡Hola! Soy tu **Capacitador y Asistente Electoral Virtual de El Salvador**, tu asistente técnico y jurídico oficial para procesos electorales.
+
+                📝 **Explicación:**
+                Estoy preparado para resolver de inmediato cualquier duda o consulta sobre:
+                • **Juntas Receptoras de Votos (JRV):** Instalación de mesa (06:00 AM), verificación de DUI en padrón, entrega de papeletas y votación (07:00 AM a 05:00 PM).
+                • **Cierre y Escrutinio Preliminar:** Clasificación de votos (válidos, nulos, impugnados, abstenciones), llenado de actas y transmisión al TSE.
+                • **Resolución de Incidentes:** Manejo de personas sin credencial, faltante de papeletas, auxilio de la PNC (Art. 290) y aplicación de Ley Seca (Art. 284).
+                • **Inclusión y Accesibilidad:** Voto asistido para adultos mayores, personas con discapacidad y mujeres en estado de gravidez.
+                • **Marco Normativo:** Código Electoral, Constitución (1983), Ley de Partidos Políticos, Reestructuración Municipal (44 Municipios) y Voto en el Exterior.
+
+                ⚖️ **Fundamento:**
+                Constitución de la República de El Salvador y Código Electoral (Decreto Legislativo No. 413).
+
+                📚 **Fuentes consultadas:**
+                Biblioteca Electoral Oficial de El Salvador (12 Textos Oficiales del TSE).
+
+                Esta respuesta es únicamente orientativa. Para una decisión oficial, consulte la normativa vigente y a la autoridad electoral correspondiente.
+            """.trimIndent()
+        }
+
         if (analyzedQuery.intent == QueryIntentType.OUT_OF_SCOPE) {
             return """
                 📌 **Respuesta:**

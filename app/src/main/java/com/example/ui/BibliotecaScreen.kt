@@ -28,9 +28,18 @@ fun BibliotecaScreen(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val directDoc by viewModel.activePdfReaderDoc.collectAsState()
+    val directPage by viewModel.activePdfReaderPage.collectAsState()
     var viewingDocument by remember { mutableStateOf<PdfDocument?>(null) }
     var searchingDocument by remember { mutableStateOf<PdfDocument?>(null) }
     var readerInitialPage by remember { mutableStateOf(0) }
+
+    LaunchedEffect(directDoc, directPage) {
+        if (directDoc != null) {
+            viewingDocument = directDoc
+            readerInitialPage = directPage
+        }
+    }
 
     // Discover any additional PDFs in assets
     val discoveredPdfs = remember(context) {
@@ -116,6 +125,7 @@ fun BibliotecaScreen(
             onClose = {
                 viewingDocument = null
                 readerInitialPage = 0
+                viewModel.closeDirectPdfReader()
             },
             viewModel = viewModel,
             modifier = modifier

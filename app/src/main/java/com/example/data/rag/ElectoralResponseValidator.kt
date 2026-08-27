@@ -104,14 +104,14 @@ object ElectoralResponseValidator {
         rawAnswer: String,
         retrievedChunks: List<ScoredChunk>
     ): String {
-        // 1. Control de Ámbito (Out-of-Scope)
-        if (analyzedQuery.intent == QueryIntentType.OUT_OF_SCOPE || isOutOfScopeQueryText(userQuery)) {
-            return OUT_OF_SCOPE_MESSAGE
+        // 1. Saludos y bienvenida
+        if (analyzedQuery.intent == QueryIntentType.GREETING) {
+            return rawAnswer.trim()
         }
 
-        // 2. Si no hay chunks recuperados y el texto no contiene fundamento oficial verificable
-        if (retrievedChunks.isEmpty() && !hasOfficialSourceCitation(rawAnswer)) {
-            return NO_OFFICIAL_INFO_MESSAGE
+        // 2. Control de Ámbito (Out-of-Scope)
+        if (analyzedQuery.intent == QueryIntentType.OUT_OF_SCOPE || isOutOfScopeQueryText(userQuery)) {
+            return OUT_OF_SCOPE_MESSAGE
         }
 
         // 3. Si la respuesta está vacía o es muy corta

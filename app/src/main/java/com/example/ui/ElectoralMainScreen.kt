@@ -470,34 +470,6 @@ fun ElectoralMainScreen(
                     )
                     .imePadding()
             ) {
-                // Warning message if API key is not configured
-                if (apiKeyStatus == ApiKeyStatus.MISSING) {
-                    Card(
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer),
-                        shape = RoundedCornerShape(0.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(10.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                Icons.Default.Lock,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onErrorContainer,
-                                modifier = Modifier.size(18.dp)
-                            )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(
-                                text = "Para respuestas con IA y Gemini, añada GEMINI_API_KEY en Secretos.",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onErrorContainer,
-                                fontSize = 11.5.sp
-                            )
-                        }
-                    }
-                }
-
                 // Core content area
                 Box(
                     modifier = Modifier
@@ -509,165 +481,14 @@ fun ElectoralMainScreen(
                         ElectoralScreen.CHAT -> {
                             when (val state = uiState) {
                                 is ElectoralUiState.Idle -> {
-                                    Column(
+                                    // Completely clean area initially prepared for consultations
+                                    Box(
                                         modifier = Modifier
                                             .fillMaxSize()
-                                            .verticalScroll(rememberScrollState())
-                                            .padding(horizontal = 20.dp, vertical = 16.dp),
-                                        horizontalAlignment = Alignment.Start
+                                            .padding(24.dp),
+                                        contentAlignment = Alignment.Center
                                     ) {
-                                        // App support banner
-                                        Surface(
-                                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.35f),
-                                            shape = RoundedCornerShape(12.dp),
-                                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)),
-                                            modifier = Modifier.fillMaxWidth()
-                                        ) {
-                                            Row(
-                                                modifier = Modifier.padding(12.dp),
-                                                verticalAlignment = Alignment.CenterVertically
-                                            ) {
-                                                Icon(
-                                                    Icons.Default.Info,
-                                                    contentDescription = null,
-                                                    tint = MaterialTheme.colorScheme.primary,
-                                                    modifier = Modifier.size(20.dp)
-                                                )
-                                                Spacer(modifier = Modifier.width(10.dp))
-                                                Text(
-                                                    text = "Herramienta de IA para apoyo electoral y consulta de leyes de El Salvador.",
-                                                    fontSize = 12.sp,
-                                                    color = MaterialTheme.colorScheme.onSurface
-                                                )
-                                            }
-                                        }
-
-                                        Spacer(modifier = Modifier.height(16.dp))
-
-                                        Text(
-                                            text = "Consultas Rápidas de IA",
-                                            fontSize = 20.sp,
-                                            fontWeight = FontWeight.Black,
-                                            color = MaterialTheme.colorScheme.onBackground
-                                        )
-
-                                        Text(
-                                            text = "Respuestas instantáneas fundamentadas en el Código Electoral, Constitución y directrices del TSE.",
-                                            fontSize = 12.5.sp,
-                                            lineHeight = 17.sp,
-                                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.65f),
-                                            modifier = Modifier.padding(bottom = 16.dp)
-                                        )
-
-                                        // Quick Topic Cards
-                                        ElectoralTopicCard(
-                                            title = "¿Cómo se integra e instala una JRV?",
-                                            subtitle = "Arts. 99-109, 190 Código Electoral",
-                                            icon = Icons.Default.Groups,
-                                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                            iconColor = MaterialTheme.colorScheme.primary,
-                                            onClick = {
-                                                val q = "¿Cómo se integra y a qué hora se instala una JRV según el Código Electoral de El Salvador?"
-                                                viewModel.onQueryInputChange(q)
-                                                viewModel.submitQuery(q)
-                                            }
-                                        )
-
-                                        Spacer(modifier = Modifier.height(8.dp))
-
-                                        ElectoralTopicCard(
-                                            title = "Permisos laborales con goce de sueldo",
-                                            subtitle = "Art. 113 Código Electoral",
-                                            icon = Icons.Default.WorkHistory,
-                                            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                            iconColor = MaterialTheme.colorScheme.secondary,
-                                            onClick = {
-                                                val q = "¿Qué permisos de trabajo con goce de sueldo tienen los miembros de JRV según el Art. 113 del Código Electoral?"
-                                                viewModel.onQueryInputChange(q)
-                                                viewModel.submitQuery(q)
-                                            }
-                                        )
-
-                                        Spacer(modifier = Modifier.height(8.dp))
-
-                                        ElectoralTopicCard(
-                                            title = "Prohibición de armas y seguridad",
-                                            subtitle = "Art. 290 Código Electoral • Rol PNC",
-                                            icon = Icons.Default.LocalPolice,
-                                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                                            iconColor = MaterialTheme.colorScheme.tertiary,
-                                            onClick = {
-                                                val q = "¿Cuáles son las normas de seguridad, prohibición de armas y rol de la PNC en los centros de votación en El Salvador?"
-                                                viewModel.onQueryInputChange(q)
-                                                viewModel.submitQuery(q)
-                                            }
-                                        )
-
-                                        Spacer(modifier = Modifier.height(8.dp))
-
-                                        ElectoralTopicCard(
-                                            title = "Protección de la mujer y LEIV",
-                                            subtitle = "Prevención de violencia política",
-                                            icon = Icons.Default.Shield,
-                                            containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f),
-                                            iconColor = MaterialTheme.colorScheme.error,
-                                            onClick = {
-                                                val q = "¿Qué medidas de protección para la mujer y prevención de violencia política aplican en las elecciones según la LEIV y el TSE?"
-                                                viewModel.onQueryInputChange(q)
-                                                viewModel.submitQuery(q)
-                                            }
-                                        )
-
-                                        if (historyList.isNotEmpty()) {
-                                            Spacer(modifier = Modifier.height(20.dp))
-                                            
-                                            Text(
-                                                text = "CONSULTAS RECIENTES",
-                                                fontSize = 11.sp,
-                                                fontWeight = FontWeight.Bold,
-                                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
-                                                letterSpacing = 1.sp,
-                                                modifier = Modifier.padding(bottom = 8.dp)
-                                            )
-
-                                            historyList.take(3).forEach { item ->
-                                                Card(
-                                                    modifier = Modifier
-                                                        .fillMaxWidth()
-                                                        .padding(vertical = 3.dp)
-                                                        .clickable { viewModel.selectHistoryItem(item) },
-                                                    colors = CardDefaults.cardColors(
-                                                        containerColor = MaterialTheme.colorScheme.surface
-                                                    ),
-                                                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.05f))
-                                                ) {
-                                                    Row(
-                                                        modifier = Modifier.padding(12.dp),
-                                                        verticalAlignment = Alignment.CenterVertically
-                                                    ) {
-                                                        Icon(
-                                                            Icons.Default.History,
-                                                            contentDescription = "Historial",
-                                                            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
-                                                            modifier = Modifier.size(16.dp)
-                                                        )
-                                                        Spacer(modifier = Modifier.width(10.dp))
-                                                        Text(
-                                                            text = item.question,
-                                                            fontSize = 12.5.sp,
-                                                            maxLines = 1,
-                                                            modifier = Modifier.weight(1f)
-                                                        )
-                                                        Icon(
-                                                            Icons.AutoMirrored.Default.KeyboardArrowRight,
-                                                            contentDescription = null,
-                                                            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.3f),
-                                                            modifier = Modifier.size(16.dp)
-                                                        )
-                                                    }
-                                                }
-                                            }
-                                        }
+                                        // Clean empty canvas without auto-generated messages or predefined cards
                                     }
                                 }
 
@@ -891,6 +712,76 @@ fun ElectoralMainScreen(
                                                 // Render Answer Body
                                                 SelectionContainer {
                                                     FormattedElectoralText(text = state.answer)
+                                                }
+
+                                                Spacer(modifier = Modifier.height(14.dp))
+
+                                                // "VER FUENTE" and Direct Action Buttons Bar
+                                                Row(
+                                                    modifier = Modifier.fillMaxWidth(),
+                                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                                    verticalAlignment = Alignment.CenterVertically
+                                                ) {
+                                                    // Primary "📖 VER FUENTE" Button
+                                                    Button(
+                                                        onClick = {
+                                                            // Determine most relevant doc and page from the answer
+                                                            val docId = when {
+                                                                state.answer.contains("Constitución", ignoreCase = true) -> "constitucion_republica_elsalvador"
+                                                                state.answer.contains("Instructivo", ignoreCase = true) || state.answer.contains("JRV", ignoreCase = true) -> "instructivo_jrv_tse_2024"
+                                                                state.answer.contains("Código Penal", ignoreCase = true) -> "codigo_penal_delitos_electorales"
+                                                                state.answer.contains("LEIV", ignoreCase = true) -> "ley_especial_integral_mujeres_leiv"
+                                                                else -> "codigo_electoral_decreto_413"
+                                                            }
+                                                            viewModel.openPdfDirectly(docId = docId, page = 1)
+                                                        },
+                                                        colors = ButtonDefaults.buttonColors(
+                                                            containerColor = MaterialTheme.colorScheme.primary
+                                                        ),
+                                                        shape = RoundedCornerShape(10.dp),
+                                                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 8.dp),
+                                                        modifier = Modifier
+                                                            .weight(1f)
+                                                            .testTag("btn_ver_fuente")
+                                                    ) {
+                                                        Icon(
+                                                            Icons.Default.MenuBook,
+                                                            contentDescription = null,
+                                                            tint = Color.White,
+                                                            modifier = Modifier.size(17.dp)
+                                                        )
+                                                        Spacer(modifier = Modifier.width(6.dp))
+                                                        Text(
+                                                            text = "📖 VER FUENTE",
+                                                            fontSize = 12.sp,
+                                                            fontWeight = FontWeight.Bold,
+                                                            color = Color.White
+                                                        )
+                                                    }
+
+                                                    // Secondary "🔎 BUSCAR EN BIBLIOTECA" Button
+                                                    OutlinedButton(
+                                                        onClick = {
+                                                            viewModel.setScreen(ElectoralScreen.BIBLIOTECA)
+                                                        },
+                                                        shape = RoundedCornerShape(10.dp),
+                                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+                                                        modifier = Modifier.testTag("btn_buscar_biblioteca")
+                                                    ) {
+                                                        Icon(
+                                                            Icons.Default.Search,
+                                                            contentDescription = null,
+                                                            tint = MaterialTheme.colorScheme.primary,
+                                                            modifier = Modifier.size(16.dp)
+                                                        )
+                                                        Spacer(modifier = Modifier.width(4.dp))
+                                                        Text(
+                                                            text = "Biblioteca",
+                                                            fontSize = 12.sp,
+                                                            fontWeight = FontWeight.SemiBold,
+                                                            color = MaterialTheme.colorScheme.primary
+                                                        )
+                                                    }
                                                 }
 
                                                 if (ttsPlaybackState == TtsPlaybackState.PLAYING || ttsPlaybackState == TtsPlaybackState.PAUSED) {
@@ -1309,7 +1200,7 @@ fun ElectoralMainScreen(
                                 TextField(
                                     value = queryInput,
                                     onValueChange = { viewModel.onQueryInputChange(it) },
-                                    placeholder = { Text("Escriba su consulta electoral...", fontSize = 13.sp) },
+                                    placeholder = { Text("Escriba una pregunta o situación electoral...", fontSize = 13.sp) },
                                     modifier = Modifier
                                         .weight(1f)
                                         .heightIn(min = 38.dp, max = 100.dp)
@@ -1457,8 +1348,295 @@ fun FormattedElectoralText(text: String) {
             }
 
             when {
-                // Section Badges (📌 Respuesta, 📝 Explicación, ⚖️ Fundamento, 📚 Fuentes consultadas)
-                trimmed.startsWith("📌") || trimmed.startsWith("📝") || trimmed.startsWith("⚖️") || trimmed.startsWith("📚") -> {
+                // Confidence Header Badges
+                trimmed.startsWith("✅ **Coincidencia encontrada**") || trimmed.startsWith("✅ Coincidencia encontrada") -> {
+                    Surface(
+                        color = Color(0xFFE8F5E9),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFF81C784)),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "✅", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Coincidencia encontrada",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF2E7D32)
+                            )
+                        }
+                    }
+                }
+
+                trimmed.startsWith("ℹ️ **Coincidencia probable**") || trimmed.startsWith("ℹ️ Coincidencia probable") -> {
+                    Surface(
+                        color = Color(0xFFE3F2FD),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFF90CAF9)),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "ℹ️", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Coincidencia probable",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFF1565C0)
+                            )
+                        }
+                    }
+                }
+
+                trimmed.startsWith("⚠️ **Coincidencia baja**") || trimmed.startsWith("⚠️ Coincidencia baja") -> {
+                    Surface(
+                        color = Color(0xFFFFF8E1),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFFFFD54F)),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 4.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "⚠️", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "No se encontró una coincidencia suficientemente precisa",
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFFE65100)
+                            )
+                        }
+                    }
+                }
+
+                // Section Headers (SITUACIÓN DETECTADA, ¿QUÉ HACER?, ¿QUÉ NO HACER?, FUNDAMENTO LEGAL, FUENTES, ¿QUIÉN PUEDE?, ¿QUIÉN NO PUEDE?, CONDICIONES)
+                trimmed == "SITUACIÓN DETECTADA" || trimmed == "SITUACIÓN" -> {
+                    Surface(
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "📌", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "SITUACIÓN DETECTADA",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.primary,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "¿QUÉ HACER?" || trimmed == "PROCEDIMIENTO" -> {
+                    Surface(
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.25f)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "📋", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "¿QUÉ HACER? — PROCEDIMIENTO",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.primary,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "¿QUÉ NO HACER?" -> {
+                    Surface(
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.35f),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.3f)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "🚫", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "¿QUÉ NO HACER? — ACCIONES PROHIBIDAS",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.error,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "¿QUIÉN PUEDE?" -> {
+                    Surface(
+                        color = Color(0xFFE8F5E9),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFF81C784)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "✔️", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "¿QUIÉN PUEDE? (FACULTADES)",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF2E7D32),
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "¿QUIÉN NO PUEDE?" -> {
+                    Surface(
+                        color = Color(0xFFFFEBEE),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFFE57373)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "❌", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "¿QUIÉN NO PUEDE? (PROHIBICIONES)",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFFC62828),
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "CONDICIONES" -> {
+                    Surface(
+                        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "⚖️", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "CONDICIONES REQUERIDAS",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.secondary,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "FUNDAMENTO LEGAL" -> {
+                    Surface(
+                        color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.35f),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary.copy(alpha = 0.25f)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "⚖️", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "FUNDAMENTO LEGAL",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.secondary,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "ADVERTENCIA" -> {
+                    Surface(
+                        color = Color(0xFFFFF3E0),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFFFFB74D)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "⚠️", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "ADVERTENCIA DE SEGURIDAD / PENAL",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFFE65100),
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "FUENTES" -> {
+                    Surface(
+                        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "📚", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "FUENTES DOCUMENTALES",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                // Section Badges with emojis (📌, 📝, ⚖️, 📚, 🚫)
+                trimmed.startsWith("📌") || trimmed.startsWith("📝") || trimmed.startsWith("⚖️") || trimmed.startsWith("📚") || trimmed.startsWith("🚫") -> {
                     Surface(
                         color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f),
                         shape = RoundedCornerShape(8.dp),
@@ -1477,66 +1655,6 @@ fun FormattedElectoralText(text: String) {
                     }
                 }
 
-                // Level 1 Header (# Title)
-                trimmed.startsWith("# ") -> {
-                    Text(
-                        text = trimmed.removePrefix("# ").trim(),
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(top = 8.dp, bottom = 3.dp)
-                    )
-                }
-
-                // Level 2 Header (## Title)
-                trimmed.startsWith("## ") -> {
-                    Text(
-                        text = trimmed.removePrefix("## ").trim(),
-                        fontSize = 14.5.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(top = 6.dp, bottom = 2.dp)
-                    )
-                }
-
-                // Level 3 Header (### Title)
-                trimmed.startsWith("### ") -> {
-                    Text(
-                        text = trimmed.removePrefix("### ").trim(),
-                        fontSize = 13.5.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.secondary,
-                        modifier = Modifier.padding(top = 4.dp, bottom = 2.dp)
-                    )
-                }
-
-                // Prohibition Item (❌ ...)
-                trimmed.startsWith("❌") -> {
-                    Surface(
-                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.45f),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                            verticalAlignment = Alignment.Top
-                        ) {
-                            Text(
-                                text = "❌",
-                                fontSize = 12.sp,
-                                modifier = Modifier.padding(end = 6.dp, top = 2.dp)
-                            )
-                            Text(
-                                text = trimmed.removePrefix("❌").trim(),
-                                fontSize = 12.5.sp,
-                                lineHeight = 18.sp,
-                                color = MaterialTheme.colorScheme.onErrorContainer,
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                    }
-                }
-
                 // Numbered Steps (e.g. "1. Paso uno...")
                 trimmed.matches(Regex("^\\d+\\..*")) -> {
                     val dotIndex = trimmed.indexOf('.')
@@ -1550,13 +1668,13 @@ fun FormattedElectoralText(text: String) {
                     ) {
                         Surface(
                             shape = CircleShape,
-                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
-                            modifier = Modifier.size(20.dp)
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.14f),
+                            modifier = Modifier.size(22.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Text(
                                     text = number.removeSuffix("."),
-                                    fontSize = 11.sp,
+                                    fontSize = 11.5.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.primary
                                 )
@@ -1576,6 +1694,7 @@ fun FormattedElectoralText(text: String) {
                 // Bullet Lists (•, -, *)
                 trimmed.startsWith("•") || trimmed.startsWith("- ") || trimmed.startsWith("* ") -> {
                     val bulletContent = trimmed.removePrefix("•").removePrefix("- ").removePrefix("* ").trim()
+                    val isNegative = bulletContent.startsWith("No ", ignoreCase = true) || bulletContent.startsWith("NO ")
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -1583,24 +1702,26 @@ fun FormattedElectoralText(text: String) {
                         verticalAlignment = Alignment.Top
                     ) {
                         Text(
-                            text = "•",
-                            fontSize = 14.sp,
+                            text = if (isNegative) "🚫" else "•",
+                            fontSize = if (isNegative) 12.sp else 14.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(horizontal = 6.dp)
+                            color = if (isNegative) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(horizontal = if (isNegative) 3.dp else 6.dp)
                         )
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
                             text = bulletContent.replace("**", ""),
                             fontSize = 13.sp,
                             lineHeight = 18.5.sp,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            color = if (isNegative) MaterialTheme.colorScheme.error.copy(alpha = 0.9f) else MaterialTheme.colorScheme.onSurface,
+                            fontWeight = if (isNegative) FontWeight.Medium else FontWeight.Normal,
                             modifier = Modifier.weight(1f)
                         )
                     }
                 }
 
                 // Orientative Disclaimer Footer
-                trimmed.startsWith("Esta respuesta es únicamente orientativa", ignoreCase = true) -> {
+                trimmed.startsWith("Esta respuesta es únicamente orientativa", ignoreCase = true) || trimmed.startsWith("Esta respuesta es de carácter orientativo", ignoreCase = true) -> {
                     Surface(
                         color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
                         shape = RoundedCornerShape(10.dp),

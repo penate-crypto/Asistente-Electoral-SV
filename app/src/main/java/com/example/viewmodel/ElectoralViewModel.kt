@@ -60,6 +60,13 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     private val _preferredBookTitle = MutableStateFlow<String?>(null)
     val preferredBookTitle: StateFlow<String?> = _preferredBookTitle.asStateFlow()
 
+    // Direct PDF Navigation State from Response Cards
+    private val _activePdfReaderDoc = MutableStateFlow<com.example.data.PdfDocument?>(null)
+    val activePdfReaderDoc: StateFlow<com.example.data.PdfDocument?> = _activePdfReaderDoc.asStateFlow()
+
+    private val _activePdfReaderPage = MutableStateFlow<Int>(0)
+    val activePdfReaderPage: StateFlow<Int> = _activePdfReaderPage.asStateFlow()
+
     // Voice conversation state machine
     private val _voiceState = MutableStateFlow(VoiceConversationState.IDLE)
     val voiceState: StateFlow<VoiceConversationState> = _voiceState.asStateFlow()
@@ -159,6 +166,21 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
         _preferredBookTitle.value = null
     }
 
+    fun openPdfDirectly(docId: String, page: Int = 1) {
+        val foundDoc = com.example.data.ElectoralLibraryData.documents.firstOrNull { it.id == docId }
+            ?: com.example.data.ElectoralLibraryData.documents.firstOrNull()
+        if (foundDoc != null) {
+            _activePdfReaderDoc.value = foundDoc
+            _activePdfReaderPage.value = (page - 1).coerceAtLeast(0)
+            _currentScreen.value = ElectoralScreen.BIBLIOTECA
+        }
+    }
+
+    fun closeDirectPdfReader() {
+        _activePdfReaderDoc.value = null
+        _activePdfReaderPage.value = 0
+    }
+
     fun getSuggestionsForInput(input: String): List<String> {
         return repository.getSpellingAndSmartSuggestions(input)
     }
@@ -250,7 +272,8 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     }
 
     fun submitQuery(customQuery: String? = null, isFromVoice: Boolean = false) {
-        val queryToSend = customQuery ?: _queryInput.value
+        val rawQuery = customQuery ?: _queryInput.value
+        val queryToSend = rawQuery.trim().replace("\\s+".toRegex(), " ")
         if (queryToSend.isBlank()) return
 
         // Clear text field after taking input for manual typing

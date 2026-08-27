@@ -135,6 +135,14 @@ object ElectoralQueryAnalyzer {
     }
 
     private fun determineIntent(text: String, articles: List<String>): QueryIntentType {
+        val trimmed = text.trim()
+        val isGreeting = trimmed in listOf("hola", "buenos dias", "buenas tardes", "buenas noches", "buenas", "saludos", "hola como estas", "quien eres", "que puedes hacer", "ayuda", "ayudame", "inicio", "empezar") ||
+                trimmed.startsWith("hola ") || trimmed.startsWith("buenos dias") || trimmed.startsWith("buenas tardes") || trimmed.startsWith("quien eres")
+
+        if (isGreeting) {
+            return QueryIntentType.GREETING
+        }
+
         if (isOutOfScopeQuery(text)) {
             return QueryIntentType.OUT_OF_SCOPE
         }

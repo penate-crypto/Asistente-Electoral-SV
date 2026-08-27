@@ -21,6 +21,7 @@ data class ScoredChunk(
 )
 
 enum class QueryIntentType {
+    GREETING,             // Saludo, bienvenida, presentación del asistente
     PROCEDURAL,           // Procedimiento paso a paso
     PROHIBITION,          // Prohibiciones, sanciones, ley seca, armas
     DEFINITION,           // Definiciones de votos, cargos, organismos
