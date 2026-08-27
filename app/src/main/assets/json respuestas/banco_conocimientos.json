@@ -1,0 +1,714 @@
+{
+  "version": "1.0",
+  "nombre": "Banco de Conocimientos - Asistente Electoral SV",
+  "formato": "BANCO_CONOCIMIENTOS_ELECTORAL_SV",
+  "fechaExportacion": "2026-08-27 09:19:23",
+  "totalRegistros": 6,
+  "situaciones": [
+    {
+      "id": "ESC-001",
+      "titulo": "Cierre de Votación a las 5:00 p.m. e Inicio del Escrutinio Preliminar",
+      "categoria": "Escrutinio",
+      "subcategoria": "Cierre y Conteo Preliminar",
+      "descripcion_situacion": "Protocolo de finalización de recepción de votos, inutilización de papeletas sobrantes y apertura de urnas para conteo público.",
+      "actores": [
+        "Presidente JRV",
+        "Secretario JRV",
+        "Vocales",
+        "Vigilantes de Partidos",
+        "Observadores Electorales"
+      ],
+      "objetos": [
+        "Tijeras especiales",
+        "Papeletas sobrantes",
+        "Urnas de votación",
+        "Borrador de Escrutinio",
+        "Acta de Cierre"
+      ],
+      "acciones": [
+        "Declaratoria de cierre a las 5:00 PM",
+        "Votación de ciudadanos que ya se encontraban en fila",
+        "Inutilización y conteo de sobrantes",
+        "Apertura de urnas"
+      ],
+      "contextos": [
+        "17:00 horas",
+        "Mesa JRV",
+        "Público y vigilantes"
+      ],
+      "intenciones": [
+        "Qué hacer",
+        "Procedimiento",
+        "Paso a paso",
+        "Obligaciones",
+        "Fundamento legal"
+      ],
+      "palabras_clave": [
+        "escrutinio",
+        "cierre de votación",
+        "5 pm",
+        "sobrantes",
+        "inutilización",
+        "conteo",
+        "urnas"
+      ],
+      "sinonimos": {
+        "escrutinio": [
+          "conteo de votos",
+          "escrutinio preliminar",
+          "recuento de mesa"
+        ],
+        "cierre": [
+          "clausura de votación",
+          "finalización del sufragio"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Llegada de las 17:00 horas, finalización del sufragio e inicio de las operaciones de conteo preliminar en la JRV.",
+        "que_hacer": [
+          "A las 17:00 horas en punto, el Presidente declarará cerrada la votación, permitiendo votar solo a quienes ya estaban en fila.",
+          "Contar y registrar las firmas y huellas en el padrón electoral de electores que emitieron su voto.",
+          "Contar las papeletas sobrantes sin usar, inutilizarlas cortando la esquina superior derecha y guardarlas en el sobre de sobrantes.",
+          "Abrir la urna correspondiente y contar el total de papeletas depositadas para verificar que coincidan con los votantes registrados.",
+          "Iniciar la clasificación pública de papeletas por partido, coalición, nulos y abstenciones."
+        ],
+        "que_no_hacer": [
+          "NO cerrar la votación antes de las 17:00 horas.",
+          "NO impedir el voto a ciudadanos que ya estaban formados en fila a las 5:00 p.m.",
+          "NO abrir las urnas antes de haber inutilizado y empacado las papeletas sobrantes."
+        ],
+        "quien_interviene": [
+          "Tribunal Supremo Electoral (TSE)",
+          "Junta Electoral Departamental (JED)",
+          "FGR"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "207",
+                "fuente": "Clausura formal de la votación a las 17:00 horas y excepción para votantes en fila."
+              },
+              {
+                "numero": "208",
+                "fuente": "Inutilización obligatoria de papeletas sobrantes previo a la apertura de urnas."
+              },
+              {
+                "numero": "209",
+                "fuente": "Apertura pública de urnas y verificación de correlación numérica."
+              },
+              {
+                "numero": "210",
+                "fuente": "Procedimiento secuencial de escrutinio preliminar y asignación de marcas."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Reglamento de Escrutinio Preliminar TSE",
+            "tipo": "Reglamento",
+            "pagina": "3-15",
+            "seccion": "Sección I: Procedimientos de Cierre",
+            "descripcion": "Directrices técnicas para el escrutinio de mesa y digitalización de actas.",
+            "documento_relacionado": "",
+            "ubicacion_pdf": ""
+          }
+        ]
+      },
+      "nivel_prioridad": "alta",
+      "estado": "vigente",
+      "creadoEn": 1787725015539,
+      "actualizadoEn": 1787809615539
+    },
+    {
+      "id": "JRV-001",
+      "titulo": "Instalación de la Junta Receptora de Votos y Verificación de Quórum",
+      "categoria": "JRV",
+      "subcategoria": "Instalación y Apertura",
+      "descripcion_situacion": "Procedimiento formal para la apertura, constitución y juramentación de los integrantes de la JRV a las 6:00 a.m. del día de la elección.",
+      "actores": [
+        "Presidente de JRV",
+        "Secretario de JRV",
+        "Primer Vocal",
+        "Segundo Vocal",
+        "Tercer Vocal",
+        "Vigilantes de Partidos Políticos",
+        "Fiscal Electoral"
+      ],
+      "objetos": [
+        "Paquete Electoral Sellado",
+        "Padrón Electoral",
+        "Acta de Instalación",
+        "Papeletas de Votación",
+        "Urnas Transparentes",
+        "Tinta Indeleble"
+      ],
+      "acciones": [
+        "Verificación de credenciales",
+        "Comprobación de quórum mínimo",
+        "Apertura del paquete electoral",
+        "Revisión de urnas vacías",
+        "Llenado del Acta de Instalación"
+      ],
+      "contextos": [
+        "Día de la elección",
+        "Centro de Votación",
+        "06:00 AM a 07:00 AM",
+        "Previo al ingreso de votantes"
+      ],
+      "intenciones": [
+        "Qué hacer",
+        "Procedimiento",
+        "Paso a paso",
+        "Quién puede",
+        "Fundamento legal"
+      ],
+      "palabras_clave": [
+        "instalación",
+        "jrv",
+        "quórum",
+        "paquete electoral",
+        "credencial",
+        "acta de instalación",
+        "urnas"
+      ],
+      "sinonimos": {
+        "instalación": [
+          "apertura de mesa",
+          "montaje de mesa",
+          "constitución de junta"
+        ],
+        "jrv": [
+          "mesa electoral",
+          "junta receptora",
+          "mesa de votación"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Inicio formal del proceso de instalación de la Junta Receptora de Votos y comprobación de quórum reglamentario a las 06:00 AM.",
+        "que_hacer": [
+          "Presentarse a las 6:00 a.m. con credencial oficial emitida por el TSE y DUI vigente.",
+          "Verificar la presencia de al menos 3 integrantes propietarios o suplentes para conformar quórum.",
+          "Abrir el paquete electoral en presencia de los vigilantes de partidos acreditados.",
+          "Contar las papeletas de votación recibidas y verificar correlativos sin desprenderlas de los talonarios.",
+          "Mostrar las urnas al público y vigilantes para verificar que se encuentren completamente vacías y sellarlas con sus marchamos.",
+          "Completar y firmar el Acta de Instalación por todos los miembros presentes."
+        ],
+        "que_no_hacer": [
+          "NO iniciar la votación antes de las 7:00 a.m. bajo ninguna circunstancia.",
+          "NO permitir la integración de personas sin credencial válida expedida por el TSE.",
+          "NO abrir el paquete electoral sin la presencia del quórum legal mínimo.",
+          "NO desprender sellos de seguridad antes de la hora fijada por ley."
+        ],
+        "quien_interviene": [
+          "Tribunal Supremo Electoral (TSE)",
+          "Junta Electoral Municipal (JEM)",
+          "Fiscalía General de la República (FGR)"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "100",
+                "fuente": "Establece la hora de comparecencia obligatoria a las 6:00 a.m. para los miembros de la JRV."
+              },
+              {
+                "numero": "101",
+                "fuente": "Regula los requisitos de quórum legal para la instalación de la Junta Receptora de Votos."
+              },
+              {
+                "numero": "195",
+                "fuente": "Verificación de útiles y paquetes electorales sellados."
+              },
+              {
+                "numero": "196",
+                "fuente": "Suscripción obligatoria del acta de instalación y apertura."
+              }
+            ]
+          },
+          {
+            "ley": "Constitución de la República de El Salvador",
+            "articulos": [
+              {
+                "numero": "208",
+                "fuente": "Regula la integración de los organismos electorales temporales y su independencia funcional."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Manual de Junta Receptora de Votos",
+            "tipo": "Manual",
+            "pagina": "14-18",
+            "seccion": "Fase 1: Instalación y Preparación",
+            "descripcion": "Instrucciones paso a paso para la apertura de la mesa electoral y verificación de útiles.",
+            "documento_relacionado": "manual_jrv_2024.pdf",
+            "ubicacion_pdf": "seccion_1_instalacion"
+          },
+          {
+            "nombre": "Código Electoral Decreto N° 413",
+            "tipo": "Decreto",
+            "pagina": "45",
+            "seccion": "Título VII: Del Sufragio",
+            "descripcion": "Texto oficial de la normativa electoral salvadoreña vigente.",
+            "documento_relacionado": "",
+            "ubicacion_pdf": ""
+          }
+        ]
+      },
+      "nivel_prioridad": "alta",
+      "estado": "vigente",
+      "creadoEn": 1787379415526,
+      "actualizadoEn": 1787804215526
+    },
+    {
+      "id": "JRV-002",
+      "titulo": "Sustitución de Miembros Ausentes de la JRV por Suplentes o Votantes de la Fila",
+      "categoria": "JRV",
+      "subcategoria": "Quórum y Ausencias",
+      "descripcion_situacion": "Mecanismo legal aplicable cuando a las 6:30 a.m. no se cuenta con el quórum mínimo requerido para la instalación de la JRV.",
+      "actores": [
+        "Presidente JRV",
+        "Delegado JEM",
+        "Suplentes designados",
+        "Ciudadanos en fila de espera"
+      ],
+      "objetos": [
+        "Credenciales de Suplentes",
+        "DUI",
+        "Acta de Sustitución"
+      ],
+      "acciones": [
+        "Llamamiento de suplentes",
+        "Designación por parte de JEM",
+        "Juramentación de nuevos miembros"
+      ],
+      "contextos": [
+        "Centro de votación",
+        "06:30 AM a 06:55 AM",
+        "Falta de quórum"
+      ],
+      "intenciones": [
+        "Qué hacer",
+        "Procedimiento",
+        "Quién puede",
+        "Quién no puede",
+        "Fundamento legal"
+      ],
+      "palabras_clave": [
+        "ausencia",
+        "suplente",
+        "sustitución",
+        "falta de quórum",
+        "fila de votantes",
+        "jem"
+      ],
+      "sinonimos": {
+        "suplente": [
+          "reemplazo",
+          "sustituto",
+          "miembro suplente"
+        ],
+        "falta de quórum": [
+          "ausencia de miembros",
+          "mesa incompleta"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Falta del quórum legal mínimo de 3 integrantes de la JRV a las 06:30 AM en la mesa correspondiente.",
+        "que_hacer": [
+          "A las 6:30 a.m., constatar la ausencia definitiva de los propietarios.",
+          "Llamar a los suplentes acreditados de la misma propuesta partidaria o institucional.",
+          "Si persistiere la falta de quórum a las 6:45 a.m., solicitar intervención del delegado de la JEM.",
+          "La JEM nombrará de entre los ciudadanos presentes en la fila con DUI correspondiente al padrón del centro.",
+          "Asentar la sustitución detallada en el apartado de incidencias del acta."
+        ],
+        "que_no_hacer": [
+          "NO instalar la junta con menos de 3 miembros.",
+          "NO incorporar personas que no pertenezcan al padrón electoral del municipio.",
+          "NO permitir que un partido político asuma cargos asignados legalmente a otro partido sin resolución de la JEM."
+        ],
+        "quien_interviene": [
+          "Junta Electoral Municipal (JEM)",
+          "TSE",
+          "Delegado de Centro"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "102",
+                "fuente": "Orden de prelación para la asunción de cargos por suplentes acreditados."
+              },
+              {
+                "numero": "197",
+                "fuente": "Facultad extraordinaria de la JEM para designar miembros de entre los electores en fila."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Instructivo de Contingencias Electorales",
+            "tipo": "Instructivo",
+            "pagina": "8-10",
+            "seccion": "Capítulo II: Mecanismos de Sustitución",
+            "descripcion": "Protocolo de integración extraordinaria ante ausencia de personal capacitado.",
+            "documento_relacionado": "",
+            "ubicacion_pdf": ""
+          }
+        ]
+      },
+      "nivel_prioridad": "alta",
+      "estado": "vigente",
+      "creadoEn": 1787465815528,
+      "actualizadoEn": 1787797015528
+    },
+    {
+      "id": "SEG-001",
+      "titulo": "Prohibición de Portación de Armas y Propaganda dentro del Centro de Votación",
+      "categoria": "Seguridad",
+      "subcategoria": "Armas y Propaganda",
+      "descripcion_situacion": "Medidas de seguridad, mantenimiento del orden y prohibición expresa de propaganda electoral y portación de armas de fuego el día de los comicios.",
+      "actores": [
+        "Presidente JRV",
+        "Agentes de la Policía Nacional Civil (PNC)",
+        "Coordinador de Centro",
+        "Ciudadanos"
+      ],
+      "objetos": [
+        "Armas de fuego",
+        "Carteles de propaganda",
+        "Distintivos partidarios prohibidos"
+      ],
+      "acciones": [
+        "Requerimiento de retiro de distintivos",
+        "Solicitud de auxilio a la PNC",
+        "Expulsión del infractor"
+      ],
+      "contextos": [
+        "Perímetro del centro de votación y recinto interior"
+      ],
+      "intenciones": [
+        "Qué hacer",
+        "Prohibiciones",
+        "Seguridad",
+        "Quién no puede",
+        "Fundamento legal"
+      ],
+      "palabras_clave": [
+        "armas",
+        "propaganda",
+        "pnc",
+        "seguridad",
+        "orden público",
+        "delito electoral",
+        "pistola",
+        "amenaza"
+      ],
+      "sinonimos": {
+        "armas": [
+          "arma de fuego",
+          "pistola",
+          "revólver",
+          "revolver",
+          "arma blanca"
+        ],
+        "propaganda": [
+          "publicidad política",
+          "distintivos partidarios",
+          "volantes electorales"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Detección de persona portando arma de fuego o realizando actos de propaganda política dentro o en las inmediaciones del centro.",
+        "que_hacer": [
+          "Constatar la presencia de persona armada o portando propaganda partidaria activa.",
+          "El Presidente de la JRV o Coordinador de Centro requerirá de inmediato la abstención o retiro voluntario.",
+          "Si la persona se negare o portare arma (incluso con licencia), solicitar de inmediato la intervención de la PNC asignada al centro.",
+          "La PNC procederá al decomiso del arma o desalojo conforme al protocolo de seguridad electoral.",
+          "Dejar constancia del hecho en el acta de incidencias."
+        ],
+        "que_no_hacer": [
+          "NO permitir el ingreso de personas armadas (excepto agentes de seguridad formalmente autorizados para custodia exterior).",
+          "NO permitir megáfonos, distribución de volantes o camisetas partidarias al ingresar a votar."
+        ],
+        "quien_interviene": [
+          "Policía Nacional Civil (PNC)",
+          "Fiscalía General de la República (FGR)",
+          "TSE"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "175",
+                "fuente": "Prohibición estricta de propaganda electoral durante el silencio electoral y día de comicios."
+              },
+              {
+                "numero": "231",
+                "fuente": "Prohibición de portación de armas a menos de 100 metros del centro de votación."
+              },
+              {
+                "numero": "232",
+                "fuente": "Atribución de las autoridades electorales para requerir auxilio inmediato de la fuerza pública."
+              }
+            ]
+          },
+          {
+            "ley": "Código Penal de El Salvador",
+            "articulos": [
+              {
+                "numero": "295",
+                "fuente": "Tipificación del delito de coacción y obstaculización al ejercicio del voto."
+              },
+              {
+                "numero": "296",
+                "fuente": "Sanciones por portación indebida de armas en centros de votación."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Decreto Ejecutivo de Veda de Armas",
+            "tipo": "Decreto",
+            "pagina": "1-2",
+            "seccion": "Disposiciones Generales de Seguridad",
+            "descripcion": "Suspensión de licencias de portación durante el evento electoral.",
+            "documento_relacionado": "",
+            "ubicacion_pdf": ""
+          }
+        ]
+      },
+      "nivel_prioridad": "alta",
+      "estado": "vigente",
+      "creadoEn": 1787757415540,
+      "actualizadoEn": 1787810515540
+    },
+    {
+      "id": "VOT-001",
+      "titulo": "Voto Asistido para Personas con Discapacidad o Adultos Mayores",
+      "categoria": "Votación",
+      "subcategoria": "Accesibilidad e Inclusión",
+      "descripcion_situacion": "Protocolo para garantizar el ejercicio del sufragio de personas con discapacidad visual, motriz o adultos mayores que requieran apoyo.",
+      "actores": [
+        "Ciudadano Votante",
+        "Acompañante de Confianza",
+        "Presidente JRV",
+        "Facilitador TSE"
+      ],
+      "objetos": [
+        "Papeleta Braille",
+        "Atril accesible",
+        "DUI del votante y acompañante"
+      ],
+      "acciones": [
+        "Verificación de necesidad",
+        "Entrega de plantilla Braille si se solicita",
+        "Acompañamiento reservado al atril secreto"
+      ],
+      "contextos": [
+        "Horario de votación 07:00 AM a 05:00 PM",
+        "Mesa de votación"
+      ],
+      "intenciones": [
+        "Qué hacer",
+        "Procedimiento",
+        "Derechos",
+        "Quién puede",
+        "Información general"
+      ],
+      "palabras_clave": [
+        "voto asistido",
+        "discapacidad",
+        "adulto mayor",
+        "braille",
+        "inclusión",
+        "accesibilidad"
+      ],
+      "sinonimos": {
+        "discapacidad": [
+          "movilidad reducida",
+          "ceguera",
+          "discapacidad visual",
+          "discapacidad física"
+        ],
+        "voto asistido": [
+          "ayuda para votar",
+          "sufragio asistido",
+          "acompañante de voto"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Ciudadano con discapacidad o adulto mayor requiere asistencia o materiales especiales para emitir su sufragio.",
+        "que_hacer": [
+          "El ciudadano manifiesta su condición o requerimiento de auxilio.",
+          "Permitir el ingreso de una persona de su estricta confianza o personal designado por el TSE.",
+          "Ofrecer la plantilla sobrepuesta en sistema Braille si la persona presenta discapacidad visual.",
+          "Garantizar que el acompañante respete la voluntad del votante y el secreto del voto.",
+          "Entregar el DUI y aplicar tinta indeleble con las adecuaciones físicas necesarias."
+        ],
+        "que_no_hacer": [
+          "NO obligar a la persona a recibir asistencia si prefiere votar sola.",
+          "NO permitir que los miembros de la JRV o vigilantes influyan en el voto.",
+          "NO permitir que un mismo acompañante asista a más de un votante, salvo familiares directos."
+        ],
+        "quien_interviene": [
+          "Tribunal Supremo Electoral (TSE)",
+          "Mesa de Inclusión y Género"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "199",
+                "fuente": "Garantiza las facilidades para personas con discapacidad y uso de material electoral adaptado."
+              },
+              {
+                "numero": "200",
+                "fuente": "Regula las condiciones del voto asistido por persona de confianza."
+              }
+            ]
+          },
+          {
+            "ley": "Ley Especial para la Inclusión de las Personas con Discapacidad",
+            "articulos": [
+              {
+                "numero": "62",
+                "fuente": "Obliga a las instituciones del Estado a proporcionar accesibilidad plena en procesos cívicos."
+              },
+              {
+                "numero": "63",
+                "fuente": "Derecho al sufragio en igualdad de condiciones con formatos accesibles."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Guía TSE de Accesibilidad Electoral",
+            "tipo": "Guía",
+            "pagina": "5-12",
+            "seccion": "Atención a Personas con Discapacidad",
+            "descripcion": "Normas de trato digno y materiales accesibles en centros de votación.",
+            "documento_relacionado": "",
+            "ubicacion_pdf": ""
+          }
+        ]
+      },
+      "nivel_prioridad": "normal",
+      "estado": "vigente",
+      "creadoEn": 1787552215536,
+      "actualizadoEn": 1787793415536
+    },
+    {
+      "id": "VOT-002",
+      "titulo": "Ciudadano con DUI Vigente que no Aparece en el Padrón Electoral de la JRV",
+      "categoria": "Votación",
+      "subcategoria": "Padrón y Documentos",
+      "descripcion_situacion": "Resolución ante el reclamo de un ciudadano cuyo Documento Único de Identidad no figura en el listado de electores de la mesa específica.",
+      "actores": [
+        "Ciudadano",
+        "Presidente JRV",
+        "Delegado de Centro TSE",
+        "Fiscal Electoral"
+      ],
+      "objetos": [
+        "DUI",
+        "Padrón de Consulta General",
+        "Sistema de Consulta TSE"
+      ],
+      "acciones": [
+        "Revisión minuciosa de correlativos de DUI",
+        "Orientación hacia el punto de información"
+      ],
+      "contextos": [
+        "Horario de votación ordinaria",
+        "Mesa receptora"
+      ],
+      "intenciones": [
+        "Qué hacer",
+        "Procedimiento",
+        "Quién no puede",
+        "Prohibiciones",
+        "Fundamento legal"
+      ],
+      "palabras_clave": [
+        "padrón electoral",
+        "no aparece",
+        "dui",
+        "consulta",
+        "número de jrv",
+        "exclusión"
+      ],
+      "sinonimos": {
+        "padrón": [
+          "lista de electores",
+          "registro electoral",
+          "listado"
+        ],
+        "no aparece": [
+          "no figura",
+          "no está inscrito",
+          "omisión de padrón"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "El número de DUI del ciudadano no se encuentra en el padrón físico asignado a la JRV consultada.",
+        "que_hacer": [
+          "Verificar cuidadosamente el número de DUI en el padrón físico y lista de búsqueda rápida.",
+          "Confirmar si el rango de DUIs asignado a la JRV comprende el documento presentado.",
+          "Si no corresponde a la JRV, orientar amablemente al ciudadano al centro de información del TSE en el recinto.",
+          "Si el rango corresponde pero no está en la lista, remitir al Delegado de Centro para consulta en sistema central."
+        ],
+        "que_no_hacer": [
+          "NO permitir votar a ninguna persona que no esté debidamente inscrita en el padrón de esa JRV.",
+          "NO retener indebidamente el DUI del ciudadano.",
+          "NO agregar manualmente nombres al padrón electoral."
+        ],
+        "quien_interviene": [
+          "TSE Delegación de Centro",
+          "Fiscalía General de la República (FGR)"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "198",
+                "fuente": "Establece como requisito indispensable para ejercer el sufragio aparecer inscrito en el padrón de la respectiva JRV."
+              },
+              {
+                "numero": "201",
+                "fuente": "Prohibición taxativa de permitir el voto fuera del padrón aprobado."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Manual de Procedimientos de Consulta Electoral",
+            "tipo": "Manual",
+            "pagina": "22",
+            "seccion": "Gestión de Padrón y Orientación al Votante",
+            "descripcion": "Criterios para la verificación y canalización de votantes no ubicados.",
+            "documento_relacionado": "",
+            "ubicacion_pdf": ""
+          }
+        ]
+      },
+      "nivel_prioridad": "alta",
+      "estado": "vigente",
+      "creadoEn": 1787638615537,
+      "actualizadoEn": 1787789815537
+    }
+  ]
+}
