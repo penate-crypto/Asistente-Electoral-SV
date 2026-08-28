@@ -64,6 +64,7 @@ class MainActivity : ComponentActivity() {
             viewModel = ViewModelProvider(this, factory)[ElectoralViewModel::class.java]
             viewModel.initSettings(this)
             BookInternalSearchEngine.init(this)
+            com.example.data.search.knowledge.ElectoralKnowledgeBase.init(this)
         } catch (e: Exception) {
             e.printStackTrace()
         }

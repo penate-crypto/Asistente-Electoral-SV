@@ -1,5 +1,6 @@
 package com.example.data.search.knowledge
 
+import android.content.Context
 import com.example.data.search.model.ElectoralSituation
 import com.example.data.search.model.StructuredElectoralResponse
 
@@ -927,9 +928,39 @@ object ElectoralKnowledgeBase {
         )
     )
 
+    private val _loadedSituations = mutableListOf<ElectoralSituation>()
+
+    /**
+     * Initializes the knowledge base by reading all JSON files in assets/json respuestas/
+     */
+    fun init(context: Context) {
+        try {
+            val jsonSituations = JsonKnowledgeLoader.loadAllFromAssets(context)
+            synchronized(_loadedSituations) {
+                _loadedSituations.clear()
+                _loadedSituations.addAll(jsonSituations)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     fun findById(id: String): ElectoralSituation? {
+        synchronized(_loadedSituations) {
+            val fromJson = _loadedSituations.firstOrNull { it.id.equals(id, ignoreCase = true) }
+            if (fromJson != null) return fromJson
+        }
         return SITUATIONS.firstOrNull { it.id.equals(id, ignoreCase = true) }
     }
 
-    fun getAll(): List<ElectoralSituation> = SITUATIONS
+    fun getAll(): List<ElectoralSituation> {
+        synchronized(_loadedSituations) {
+            if (_loadedSituations.isNotEmpty()) {
+                val jsonIds = _loadedSituations.map { it.id.lowercase() }.toSet()
+                val baseFiltered = SITUATIONS.filter { it.id.lowercase() !in jsonIds }
+                return _loadedSituations + baseFiltered
+            }
+        }
+        return SITUATIONS
+    }
 }
