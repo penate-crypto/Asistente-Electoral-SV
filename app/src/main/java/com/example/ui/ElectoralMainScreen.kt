@@ -1348,6 +1348,37 @@ fun FormattedElectoralText(text: String) {
             }
 
             when {
+                // Tema / Situación Header Banner
+                trimmed.startsWith("Tema:", ignoreCase = true) || trimmed.startsWith("TEMA / SITUACIÓN:", ignoreCase = true) -> {
+                    val topicTitle = trimmed.substringAfter(":").trim()
+                    Surface(
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.65f),
+                        shape = RoundedCornerShape(10.dp),
+                        border = BorderStroke(1.2.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)),
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 6.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
+                        ) {
+                            Text(
+                                text = "TEMA / SITUACIÓN",
+                                fontSize = 10.5.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.primary,
+                                letterSpacing = 0.8.sp
+                            )
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Text(
+                                text = topicTitle,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                lineHeight = 19.sp
+                            )
+                        }
+                    }
+                }
+
                 // Confidence Header Badges
                 trimmed.startsWith("✅ **Coincidencia encontrada**") || trimmed.startsWith("✅ Coincidencia encontrada") -> {
                     Surface(
@@ -1533,6 +1564,30 @@ fun FormattedElectoralText(text: String) {
                                 fontSize = 12.5.sp,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = Color(0xFFC62828),
+                                letterSpacing = 0.5.sp
+                            )
+                        }
+                    }
+                }
+
+                trimmed == "¿QUIÉN INTERVIENE?" || trimmed == "QUIÉN INTERVIENE" -> {
+                    Surface(
+                        color = Color(0xFFE0F2F1),
+                        shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFF80CBC4)),
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 2.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(text = "👥", fontSize = 13.sp)
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "¿QUIÉN INTERVIENE?",
+                                fontSize = 12.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
+                                color = Color(0xFF00695C),
                                 letterSpacing = 0.5.sp
                             )
                         }

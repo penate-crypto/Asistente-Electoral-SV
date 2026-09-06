@@ -3,7 +3,7 @@
   "nombre": "Banco de Conocimientos - Asistente Electoral SV",
   "formato": "BANCO_CONOCIMIENTOS_ELECTORAL_SV",
   "fechaExportacion": "2026-08-27 09:19:23",
-  "totalRegistros": 6,
+  "totalRegistros": 7,
   "situaciones": [
     {
       "id": "ESC-001",
@@ -709,6 +709,133 @@
       "estado": "vigente",
       "creadoEn": 1787638615537,
       "actualizadoEn": 1787789815537
+    },
+    {
+      "id": "VOT-003",
+      "titulo": "Discrepancia o Duda sobre la Identidad del Votante y la Fotografía del DUI",
+      "categoria": "Votación",
+      "subcategoria": "Identificación y Cotejo",
+      "descripcion_situacion": "Procedimiento ante dudas razonables sobre la concordancia entre los rasgos físicos del votante y la fotografía de su Documento Único de Identidad (DUI).",
+      "actores": [
+        "Presidente JRV",
+        "Secretario JRV",
+        "Vocales",
+        "Votante",
+        "Vigilantes de Partidos",
+        "Fiscal Electoral"
+      ],
+      "objetos": [
+        "DUI",
+        "Padrón Electoral",
+        "Hoja de Incidencias"
+      ],
+      "acciones": [
+        "Cotejo de rasgos fisonómicos",
+        "Preguntas de verificación",
+        "Consulta al padrón",
+        "Permitir el voto"
+      ],
+      "contextos": [
+        "Mesa receptora",
+        "07:00 AM a 05:00 PM",
+        "Presentación de DUI"
+      ],
+      "intenciones": [
+        "Qué hacer",
+        "Procedimiento",
+        "Prohibiciones",
+        "Quién interviene",
+        "Fundamento legal"
+      ],
+      "palabras_clave": [
+        "foto",
+        "fotografía",
+        "parece",
+        "no se parece",
+        "dui",
+        "rasgos",
+        "identidad",
+        "fisonomía",
+        "duda"
+      ],
+      "sinonimos": {
+        "foto": [
+          "fotografía",
+          "retrato",
+          "imagen del dui"
+        ],
+        "parece": [
+          "parecido",
+          "rasgos",
+          "fisonomía",
+          "apariencia",
+          "aspecto"
+        ],
+        "dui": [
+          "documento de identidad",
+          "cedula"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "El elector presenta su DUI pero surgen discrepancias o dudas sobre si sus rasgos fisonómicos actuales coinciden con la fotografía del documento.",
+        "que_hacer": [
+          "El Presidente y miembros de la JRV cotejarán con serenidad los rasgos morfológicos invariables (ojos, cejas, nariz, estructura facial) del ciudadano con la fotografía del DUI.",
+          "Comprobar que el número de DUI, nombre completo y fecha de nacimiento coincidan exactamente con la información del padrón electoral de la JRV.",
+          "Realizar preguntas de cotejo biográfico rápido (nombre de los padres, lugar de nacimiento o dirección asentada).",
+          "Si tras el cotejo la mayoría de la JRV determina que se trata del titular legítimo, se le entregará la papeleta para que ejerza su derecho al voto.",
+          "Si persiste duda fundada por parte de vigilantes de partidos, asentar la incidencia en el acta correspondiente sin suspender indebidamente el sufragio del ciudadano legítimo."
+        ],
+        "que_no_hacer": [
+          "NO negar el sufragio por cambios menores y naturales de apariencia (edad, peso, peinado, barba o vello facial).",
+          "NO retener ni destruir el DUI del ciudadano bajo ninguna circunstancia.",
+          "NO permitir que un suplantador evidente emita el voto; en caso de suplantación flagrante o delito electoral, solicitar de inmediato la intervención de la Fiscalía Electoral y la PNC."
+        ],
+        "quien_interviene": [
+          "Presidente JRV",
+          "Miembros de la JRV",
+          "Fiscalía General de la República (FGR)",
+          "Policía Nacional Civil (PNC)"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "198",
+                "fuente": "Exigencia de presentación del DUI y cotejo con el padrón electoral para votar."
+              },
+              {
+                "numero": "203",
+                "fuente": "Resolución de incidencias y dudas sobre la identidad del elector por mayoría de los miembros de la JRV."
+              }
+            ]
+          },
+          {
+            "ley": "Código Penal de El Salvador",
+            "articulos": [
+              {
+                "numero": "297",
+                "fuente": "Sanción penal a quien suplante la identidad de otra persona para votar (fraude electoral)."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Instructivo para Junta Receptora de Votos TSE",
+            "tipo": "Instructivo",
+            "pagina": "26-28",
+            "seccion": "Verificación de Identidad del Elector",
+            "descripcion": "Criterios técnicos para el cotejo fisonómico y tratamiento de cambios naturales de apariencia.",
+            "documento_relacionado": "instructivo_jrv_tse_2024",
+            "ubicacion_pdf": ""
+          }
+        ]
+      },
+      "nivel_prioridad": "alta",
+      "estado": "vigente",
+      "creadoEn": 1787820000000,
+      "actualizadoEn": 1787820000000
     }
   ]
 }

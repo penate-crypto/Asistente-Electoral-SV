@@ -67,6 +67,7 @@ data class ElectoralSituation(
     val categoria: String,
     val subcategoria: String,
     val titulo: String,
+    val descripcionSituacion: String = "",
     val keywords: List<String>,
     val sinonimos: List<String> = emptyList(),
     val actores: List<String> = emptyList(),
@@ -74,6 +75,7 @@ data class ElectoralSituation(
     val objetos: List<String> = emptyList(),
     val lugares: List<String> = emptyList(),
     val momentos: List<String> = emptyList(),
+    val contextos: List<String> = emptyList(),
     val intenciones: List<String> = emptyList(),
     val contexto: String = "",
     val prioridadJerarquica: Int = 2, // 1: Constitucion, 2: Codigo Electoral, 3: Leyes, 4: Reglamentos, 5: Manuales JRV

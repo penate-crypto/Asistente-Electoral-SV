@@ -12,6 +12,9 @@ object AuthSessionManager {
     private const val KEY_REMEMBER_USER = "auth_remember_user"
     private const val KEY_SAVED_DUI = "auth_saved_dui"
     private const val KEY_SESSION_TOKEN = "auth_session_token"
+    private const val KEY_CURRENT_DEVICE_ID = "auth_current_device_id"
+    private const val KEY_BOUND_DEVICE_PREFIX = "auth_bound_device_"
+    private const val KEY_SESSION_TIMESTAMP_PREFIX = "auth_session_time_"
 
     // Official Test Account Credentials
     const val TEST_USER_DUI = "12345678-9"
@@ -25,18 +28,43 @@ object AuthSessionManager {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
+    /**
+     * Gets or creates a persistent unique installation device ID
+     */
+    fun getOrCreateDeviceId(context: Context): String {
+        val prefs = getPrefs(context)
+        var deviceId = prefs.getString(KEY_CURRENT_DEVICE_ID, null)
+        if (deviceId.isNullOrBlank()) {
+            deviceId = "dev_${java.util.UUID.randomUUID()}"
+            prefs.edit().putString(KEY_CURRENT_DEVICE_ID, deviceId).apply()
+        }
+        return deviceId
+    }
+
     fun init(context: Context) {
         val prefs = getPrefs(context)
         val remember = prefs.getBoolean(KEY_REMEMBER_USER, false)
         val loggedIn = prefs.getBoolean(KEY_IS_LOGGED_IN, false)
-        _isLoggedInState.value = remember && loggedIn
+        val savedDui = prefs.getString(KEY_SAVED_DUI, "") ?: ""
+        val digits = extractDuiDigits(savedDui)
+        val currentDeviceId = getOrCreateDeviceId(context)
+        val boundDeviceId = prefs.getString(KEY_BOUND_DEVICE_PREFIX + digits, null)
+
+        val isValidDevice = boundDeviceId == null || boundDeviceId == currentDeviceId
+        _isLoggedInState.value = remember && loggedIn && isValidDevice
     }
 
     fun isUserLoggedIn(context: Context): Boolean {
         val prefs = getPrefs(context)
         val remember = prefs.getBoolean(KEY_REMEMBER_USER, false)
         val loggedIn = prefs.getBoolean(KEY_IS_LOGGED_IN, false)
-        return remember && loggedIn
+        val savedDui = prefs.getString(KEY_SAVED_DUI, "") ?: ""
+        val digits = extractDuiDigits(savedDui)
+        val currentDeviceId = getOrCreateDeviceId(context)
+        val boundDeviceId = prefs.getString(KEY_BOUND_DEVICE_PREFIX + digits, null)
+
+        val isValidDevice = boundDeviceId == null || boundDeviceId == currentDeviceId
+        return remember && loggedIn && isValidDevice
     }
 
     fun getRememberUser(context: Context): Boolean {
@@ -82,10 +110,17 @@ object AuthSessionManager {
     }
 
     /**
-     * Authenticates user with DUI and password.
-     * Supports the test account (12345678-9 / Abc123@#$) and standard accounts matching valid format.
+     * Authenticates user with DUI and password enforcing:
+     * 1 CREDENCIAL = 1 DISPOSITIVO.
+     * Prevents simultaneous logins on different devices.
      */
-    fun authenticate(context: Context, duiInput: String, passwordInput: String, rememberUser: Boolean): AuthResult {
+    fun authenticate(
+        context: Context,
+        duiInput: String,
+        passwordInput: String,
+        rememberUser: Boolean,
+        forceDeviceTransfer: Boolean = false
+    ): AuthResult {
         val digits = extractDuiDigits(duiInput)
         val formattedDui = formatDuiInput(duiInput)
 
@@ -97,19 +132,32 @@ object AuthSessionManager {
             return AuthResult.Error("La contraseña debe tener al menos 8 caracteres.")
         }
 
-        // Test account validation or valid formatted credential verification
         val isTestAccount = (digits == TEST_USER_DUI_DIGITS && passwordInput == TEST_USER_PASSWORD)
         val isValidGeneralAccount = (digits.length == 9 && passwordInput.length >= 8)
 
         if (isTestAccount || isValidGeneralAccount) {
             val prefs = getPrefs(context)
+            val currentDeviceId = getOrCreateDeviceId(context)
+            val boundKey = KEY_BOUND_DEVICE_PREFIX + digits
+            val existingBoundDevice = prefs.getString(boundKey, null)
+
+            // Strict 1 Credential = 1 Device verification
+            if (existingBoundDevice != null && existingBoundDevice != currentDeviceId && !forceDeviceTransfer) {
+                return AuthResult.DeviceConflict(
+                    message = "Esta credencial ya está activa en otro dispositivo (1 Credencial = 1 Dispositivo). ¿Desea transferir la sesión a este equipo?",
+                    dui = formattedDui
+                )
+            }
+
             val sessionToken = "sv_session_${digits}_${System.currentTimeMillis()}"
-            
+
             prefs.edit()
                 .putBoolean(KEY_IS_LOGGED_IN, true)
                 .putBoolean(KEY_REMEMBER_USER, rememberUser)
                 .putString(KEY_SAVED_DUI, if (rememberUser) formattedDui else "")
                 .putString(KEY_SESSION_TOKEN, sessionToken)
+                .putString(boundKey, currentDeviceId)
+                .putLong(KEY_SESSION_TIMESTAMP_PREFIX + digits, System.currentTimeMillis())
                 .apply()
 
             _isLoggedInState.value = true
@@ -123,6 +171,7 @@ object AuthSessionManager {
         val prefs = getPrefs(context)
         val remember = prefs.getBoolean(KEY_REMEMBER_USER, false)
         val savedDui = prefs.getString(KEY_SAVED_DUI, "") ?: ""
+        val digits = extractDuiDigits(savedDui)
 
         prefs.edit()
             .putBoolean(KEY_IS_LOGGED_IN, false)
@@ -141,4 +190,5 @@ object AuthSessionManager {
 sealed class AuthResult {
     data class Success(val dui: String) : AuthResult()
     data class Error(val message: String) : AuthResult()
+    data class DeviceConflict(val message: String, val dui: String) : AuthResult()
 }

@@ -185,20 +185,51 @@ object ElectoralSearchEngine {
             }
         }
 
+        // Encabezado claro de Tema
+        sb.append("Tema: ${situation.titulo}\n\n")
+
         // 1. SITUACIÓN DETECTADA
         sb.append("SITUACIÓN DETECTADA\n")
-        sb.append("${situation.titulo}\n")
         sb.append("${resp.situacion}\n\n")
 
-        // 2. ¿QUIÉN PUEDE? / ¿QUIÉN NO PUEDE? (Si existe para la situación)
+        // 2. ¿QUÉ HACER? (Procedimiento oficial numerado)
+        sb.append("¿QUÉ HACER?\n")
+        resp.procedimiento.forEachIndexed { index, proc ->
+            val stepNumber = index + 1
+            val cleanProc = proc.replace(Regex("^\\d+\\.\\s*"), "")
+            sb.append("$stepNumber. $cleanProc\n")
+        }
+        sb.append("\n")
+
+        // 3. ¿QUÉ NO HACER? (Prohibiciones y prevenciones de seguridad)
+        if (resp.noHacer.isNotEmpty()) {
+            sb.append("¿QUÉ NO HACER?\n")
+            resp.noHacer.forEach { no ->
+                val cleanNo = no.replace(Regex("^(NO\\s*|•\\s*)", RegexOption.IGNORE_CASE), "")
+                sb.append("- No $cleanNo\n")
+            }
+            sb.append("\n")
+        }
+
+        // 4. ¿QUIÉN INTERVIENE? / ¿QUIÉN PUEDE?
+        val intervienen = mutableListOf<String>()
         resp.autorizaciones?.let { auth ->
             if (auth.quienPuede.isNotEmpty()) {
-                sb.append("¿QUIÉN PUEDE?\n")
-                auth.quienPuede.forEach { item ->
-                    sb.append("• $item\n")
-                }
-                sb.append("\n")
+                intervienen.addAll(auth.quienPuede)
             }
+        }
+        if (intervienen.isEmpty() && situation.actores.isNotEmpty()) {
+            intervienen.addAll(situation.actores.map { it.replaceFirstChar { c -> c.uppercase() } })
+        }
+        if (intervienen.isNotEmpty()) {
+            sb.append("¿QUIÉN INTERVIENE?\n")
+            intervienen.distinct().forEach { item ->
+                sb.append("• $item\n")
+            }
+            sb.append("\n")
+        }
+
+        resp.autorizaciones?.let { auth ->
             if (auth.quienNoPuede.isNotEmpty()) {
                 sb.append("¿QUIÉN NO PUEDE?\n")
                 auth.quienNoPuede.forEach { item ->
@@ -213,25 +244,6 @@ object ElectoralSearchEngine {
                 }
                 sb.append("\n")
             }
-        }
-
-        // 3. ¿QUÉ HACER? (Procedimiento oficial numerado)
-        sb.append("¿QUÉ HACER?\n")
-        resp.procedimiento.forEachIndexed { index, proc ->
-            val stepNumber = index + 1
-            val cleanProc = proc.replace(Regex("^\\d+\\.\\s*"), "")
-            sb.append("$stepNumber. $cleanProc\n")
-        }
-        sb.append("\n")
-
-        // 4. ¿QUÉ NO HACER? (Prohibiciones y prevenciones de seguridad)
-        if (resp.noHacer.isNotEmpty()) {
-            sb.append("¿QUÉ NO HACER?\n")
-            resp.noHacer.forEach { no ->
-                val cleanNo = no.replace(Regex("^(NO\\s*|•\\s*)", RegexOption.IGNORE_CASE), "")
-                sb.append("- No $cleanNo\n")
-            }
-            sb.append("\n")
         }
 
         // 5. FUNDAMENTO LEGAL
@@ -274,7 +286,7 @@ object ElectoralSearchEngine {
             sb.append("• Tribunal Supremo Electoral (TSE)\n")
         }
 
-        sb.append("\nEsta respuesta es únicamente orientativa y basada en la normativa oficial salvadoreña.")
+        sb.append("\nEsta respuesta proviene exclusivamente del banco oficial de situaciones JSON.")
 
         return sb.toString().trim()
     }
@@ -282,13 +294,12 @@ object ElectoralSearchEngine {
     private fun buildAmbiguityClarificationMessage(options: List<ElectoralSituation>): String {
         val sb = StringBuilder()
         sb.append("ℹ️ **Coincidencia probable**\n\n")
-        sb.append("Encontré varias situaciones relacionadas en la base de conocimientos, pero necesito identificar con precisión cuál corresponde a su consulta:\n\n")
-        sb.append("Seleccione una de las siguientes opciones para ver el procedimiento exacto:\n\n")
+        sb.append("Encontré varias opciones en el banco de conocimientos. Por favor seleccione la que mejor describe su caso:\n\n")
         options.forEachIndexed { idx, opt ->
             sb.append("${idx + 1}. **${opt.titulo}**\n")
             sb.append("   ${opt.respuesta.situacion}\n\n")
         }
-        sb.append("O bien, presione la opción de su interés o reformule su consulta con más detalles.")
+        sb.append("Toque o escriba el número de opción para ver el procedimiento exacto.")
         return sb.toString().trim()
     }
 
@@ -319,21 +330,12 @@ object ElectoralSearchEngine {
 
     private fun buildLowMatchMessage(query: String, documentaryResults: List<DocumentarySearchResultItem>): String {
         val sb = StringBuilder()
-        sb.append("⚠️ **Coincidencia baja**\n\n")
-        sb.append("No encontré una coincidencia suficientemente precisa en la base de conocimientos de Asistente Electoral SV para:\n")
+        sb.append("⚠️ **No se encontró coincidencia suficiente**\n\n")
+        sb.append("No se encontró una situación coincidente en el banco de conocimientos para la consulta:\n")
         sb.append("\"$query\"\n\n")
-
-        if (documentaryResults.isNotEmpty()) {
-            sb.append("📚 **Coincidencias encontradas en la Biblioteca Electoral:**\n")
-            documentaryResults.forEach { item ->
-                sb.append("• **${item.documentTitle}** (Pág. ${item.pageNumber})\n")
-                sb.append("  *\"${item.matchedSnippet}\"*\n\n")
-            }
-        }
-
-        sb.append("📝 **Opciones disponibles:**\n")
-        sb.append("1. 🔎 **Buscar en biblioteca electoral:** Consulte directamente los textos normativos completos.\n")
-        sb.append("2. ✏️ **Reformular pregunta:** Describa el actor involucrado (ej. votante, vigilante, JRV) y la acción concreta.")
+        sb.append("Para proteger la certeza jurídica electoral, la aplicación no inventa respuestas que no existan en su banco oficial.\n\n")
+        sb.append("💡 **Sugerencia:**\n")
+        sb.append("Por favor, replantee su pregunta utilizando términos electorales oficiales (por ejemplo: \"instalación de mesa\", \"votante con DUI\", \"vigilante portando arma\", \"quién puede portar arma\", \"cierre de votación\").")
 
         return sb.toString().trim()
     }

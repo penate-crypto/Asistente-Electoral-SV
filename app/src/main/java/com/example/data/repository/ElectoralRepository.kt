@@ -13,18 +13,12 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class ElectoralRepository(
-    private val queryHistoryDao: QueryHistoryDao,
-    private val apiService: GeminiApiService = RetrofitClient.service
+    private val queryHistoryDao: QueryHistoryDao
 ) {
     val allHistory: Flow<List<QueryHistory>> = queryHistoryDao.getAllHistoryFlow()
 
     suspend fun getApiKeyStatus(): ApiKeyStatus {
-        val key = BuildConfig.GEMINI_API_KEY
-        return if (key.isBlank() || key == "MY_GEMINI_API_KEY") {
-            ApiKeyStatus.MISSING
-        } else {
-            ApiKeyStatus.AVAILABLE
-        }
+        return ApiKeyStatus.AVAILABLE
     }
 
     suspend fun clearHistory() {
@@ -138,59 +132,24 @@ class ElectoralRepository(
         val trimmedQuestion = question.trim()
         val smartSuggestions = getSpellingAndSmartSuggestions(trimmedQuestion)
 
-        // 1. Primary Knowledge Base Search (Normalization -> Entities -> Context -> Intent -> Scoring)
+        // Búsqueda inteligente en el Banco JSON
         val searchResult = ElectoralSearchEngine.search(trimmedQuestion)
 
-        if (searchResult.matchLevel == MatchConfidenceLevel.HIGH || searchResult.matchLevel == MatchConfidenceLevel.MEDIUM) {
-            val suggestions = if (searchResult.clarificationOptions.isNotEmpty()) {
-                val clarificationTitles = searchResult.clarificationOptions.map { it.titulo }
-                (clarificationTitles + smartSuggestions).distinct().take(3)
-            } else {
-                smartSuggestions
-            }
-
-            val finalAnswer = searchResult.formattedResponse
-            queryHistoryDao.insertHistory(
-                QueryHistory(
-                    question = trimmedQuestion,
-                    answer = finalAnswer
-                )
-            )
-            return@withContext AnswerResult.Success(finalAnswer, suggestions)
-        }
-
-        // 2. Query Analysis & Document Retrieval for unindexed or exploratory questions
-        val analyzedQuery = ElectoralQueryAnalyzer.analyze(
-            query = trimmedQuestion,
-            conversationContext = conversationHistory.lastOrNull()?.first
-        )
-
-        val retrievedChunks = ElectoralHybridRetriever.retrieve(
-            analyzedQuery = analyzedQuery,
-            preferredDocumentId = preferredDocumentId,
-            topK = 4
-        )
-
-        // Grounded Local Answer from official corpus
-        val localGroundedAnswer = if (retrievedChunks.isNotEmpty()) {
-            val rawLocal = ElectoralRAGEngine.buildLocalGroundedAnswer(analyzedQuery, retrievedChunks)
-            ElectoralResponseValidator.validateAndFormat(
-                userQuery = trimmedQuestion,
-                analyzedQuery = analyzedQuery,
-                rawAnswer = rawLocal,
-                retrievedChunks = retrievedChunks
-            )
+        val suggestions = if (searchResult.clarificationOptions.isNotEmpty()) {
+            val clarificationTitles = searchResult.clarificationOptions.map { it.titulo }
+            (clarificationTitles + smartSuggestions).distinct().take(3)
         } else {
-            searchResult.formattedResponse
+            smartSuggestions
         }
 
+        val finalAnswer = searchResult.formattedResponse
         queryHistoryDao.insertHistory(
             QueryHistory(
                 question = trimmedQuestion,
-                answer = localGroundedAnswer
+                answer = finalAnswer
             )
         )
-        return@withContext AnswerResult.Success(localGroundedAnswer, smartSuggestions)
+        return@withContext AnswerResult.Success(finalAnswer, suggestions)
     }
 }
 

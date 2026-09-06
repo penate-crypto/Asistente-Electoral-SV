@@ -956,9 +956,7 @@ object ElectoralKnowledgeBase {
     fun getAll(): List<ElectoralSituation> {
         synchronized(_loadedSituations) {
             if (_loadedSituations.isNotEmpty()) {
-                val jsonIds = _loadedSituations.map { it.id.lowercase() }.toSet()
-                val baseFiltered = SITUATIONS.filter { it.id.lowercase() !in jsonIds }
-                return _loadedSituations + baseFiltered
+                return _loadedSituations.toList()
             }
         }
         return SITUATIONS

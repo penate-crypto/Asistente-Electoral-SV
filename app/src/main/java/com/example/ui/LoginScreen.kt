@@ -57,6 +57,8 @@ fun LoginScreen(
     var passwordVisible by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(false) }
+    var showDeviceTransferDialog by remember { mutableStateOf(false) }
+    var deviceConflictMessage by remember { mutableStateOf("") }
 
     // Visual formatting of DUI: first 8 digits plain, at 9 digits -> ########-#
     val displayDui = remember(rawDuiDigits) {
@@ -69,7 +71,7 @@ fun LoginScreen(
 
     val isFormValid = rawDuiDigits.length == 9 && password.length >= 8
 
-    fun performLogin() {
+    fun performLogin(forceTransfer: Boolean = false) {
         focusManager.clearFocus()
         errorMessage = null
 
@@ -88,13 +90,19 @@ fun LoginScreen(
             context = context,
             duiInput = rawDuiDigits,
             passwordInput = password,
-            rememberUser = rememberUser
+            rememberUser = rememberUser,
+            forceDeviceTransfer = forceTransfer
         )
 
         isLoading = false
         when (result) {
             is AuthResult.Success -> {
+                showDeviceTransferDialog = false
                 onLoginSuccess()
+            }
+            is AuthResult.DeviceConflict -> {
+                deviceConflictMessage = result.message
+                showDeviceTransferDialog = true
             }
             is AuthResult.Error -> {
                 errorMessage = result.message
@@ -395,6 +403,49 @@ fun LoginScreen(
                     }
                 }
             }
+        }
+
+        if (showDeviceTransferDialog) {
+            AlertDialog(
+                onDismissRequest = { showDeviceTransferDialog = false },
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Warning,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(32.dp)
+                    )
+                },
+                title = {
+                    Text(
+                        text = "Control de Acceso (1 Dispositivo)",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 17.sp
+                    )
+                },
+                text = {
+                    Text(
+                        text = "$deviceConflictMessage\n\nAl transferir el acceso, la sesión anterior en el otro dispositivo quedará automáticamente invalidada.",
+                        fontSize = 14.sp,
+                        lineHeight = 20.sp
+                    )
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            showDeviceTransferDialog = false
+                            performLogin(forceTransfer = true)
+                        }
+                    ) {
+                        Text("Transferir a este equipo")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showDeviceTransferDialog = false }) {
+                        Text("Cancelar")
+                    }
+                }
+            )
         }
     }
 }
