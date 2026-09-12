@@ -232,36 +232,48 @@ object ElectoralScoringEngine {
             totalScore += cappedResponse
         }
 
-        // 12. Synergy Bonus: Multi-Element Match (+15)
+        // 12. Legal Reference Match (+12 if query mentions specific article or law in the situation)
+        val allLegalRefs = situation.respuesta.fundamentosDetallados.map { "${it.ley} ${it.articulo} ${it.incisoOrNumeral}" } + situation.respuesta.fundamento
+        for (ref in allLegalRefs) {
+            val cleanRef = ElectoralNormalizer.stripAccents(ref.lowercase())
+            val articleTokens = cleanRef.split(" ").filter { it.length > 2 }
+            if (articleTokens.any { queryText.contains(it) && it.any { c -> c.isDigit() } }) {
+                totalScore += 12.0
+                breakdown["referencia_legal"] = 12.0
+                break
+            }
+        }
+
+        // 13. Synergy Bonus: Multi-Element Match (+15)
         if (matchingActors.isNotEmpty() && matchingActions.isNotEmpty() && matchingObjects.isNotEmpty()) {
             breakdown["sinergia_elementos"] = WEIGHT_SYNERGY_BONUS
             totalScore += WEIGHT_SYNERGY_BONUS
         }
 
-        // 13. Disambiguation & Specific Scenario Rules:
-        if (queryText.contains("quien puede") && queryText.contains("arma") && situation.id == "ARM-010") {
+        // 14. Disambiguation & Specific Scenario Rules (strictly bounded per situation ID):
+        if (situation.id == "ARM-010" && queryText.contains("quien puede") && queryText.contains("arma")) {
             totalScore += 25.0
             breakdown["bonus_quien_puede"] = 25.0
         }
-        if (queryText.contains("vigilante") && queryText.contains("arma") && !queryText.contains("amenaz") && situation.id == "ARM-001") {
+        if (situation.id == "ARM-001" && queryText.contains("vigilante") && queryText.contains("arma") && !queryText.contains("amenaz")) {
             totalScore += 20.0
             breakdown["bonus_vigilante_arma"] = 20.0
         }
-        if ((queryText.contains("votante") || queryText.contains("elector")) && queryText.contains("amenaz") && situation.id == "ARM-002") {
+        if (situation.id == "ARM-002" && (queryText.contains("votante") || queryText.contains("elector")) && queryText.contains("amenaz")) {
             totalScore += 25.0
             breakdown["bonus_amenaza_votante"] = 25.0
         }
-        if ((queryText.contains("foto") || queryText.contains("fotografia")) && (queryText.contains("parece") || queryText.contains("rasgos")) && situation.id == "DUI-002") {
+        if (situation.id == "DUI-002" && (queryText.contains("foto") || queryText.contains("fotografia")) && (queryText.contains("parece") || queryText.contains("rasgos"))) {
             totalScore += 35.0
             breakdown["bonus_foto_dui"] = 35.0
         }
-        if (queryText.contains("instala") && (queryText.contains("mesa") || queryText.contains("jrv") || queryText.contains("necesita")) && (situation.id == "INST-001" || situation.id == "INS-001")) {
+        if ((situation.id == "INST-001" || situation.id == "INS-001") && queryText.contains("instala") && (queryText.contains("mesa") || queryText.contains("jrv") || queryText.contains("necesita"))) {
             totalScore += 30.0
             breakdown["bonus_instalacion_mesa"] = 30.0
         }
-        if (queryText.contains("cierre") || (queryText.contains("5") && (queryText.contains("pm") || queryText.contains("p.m."))) || queryText.contains("escrutinio") && situation.id == "ESC-001") {
-            totalScore += 25.0
-            breakdown["bonus_cierre_votacion"] = 25.0
+        if (situation.id == "ESC-001" && ((queryText.contains("cierre") && (queryText.contains("voto") || queryText.contains("votacion") || queryText.contains("mesa"))) || (queryText.contains("5") && (queryText.contains("cierre") || queryText.contains("escrutinio") || queryText.contains("tarde") || queryText.contains("pm"))))) {
+            totalScore += 35.0
+            breakdown["bonus_cierre_votacion"] = 35.0
         }
 
         return ScoredSituation(

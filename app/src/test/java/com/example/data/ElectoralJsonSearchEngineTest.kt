@@ -82,6 +82,27 @@ class ElectoralJsonSearchEngineTest {
     }
 
     @Test
+    fun testPruebaPromptMaestro_CierreVotosAlas5() {
+        val query = "que pasa con el cierre de votos alas 5"
+        val result = ElectoralSearchEngine.search(query)
+
+        assertTrue(result.matchLevel == MatchConfidenceLevel.HIGH || result.matchLevel == MatchConfidenceLevel.MEDIUM)
+        assertNotNull(result.topSituation)
+        assertEquals("ESC-001", result.topSituation?.id)
+        assertTrue(result.formattedResponse.contains("Cierre de Votación", ignoreCase = true) || result.formattedResponse.contains("5:00", ignoreCase = true))
+    }
+
+    @Test
+    fun testPruebaPromptMaestro_SinonimosPersonaQueFueAVotar() {
+        val query = "persona que fue a votar no aparece en el padron"
+        val result = ElectoralSearchEngine.search(query)
+
+        assertTrue(result.matchLevel == MatchConfidenceLevel.HIGH || result.matchLevel == MatchConfidenceLevel.MEDIUM)
+        assertNotNull(result.topSituation)
+        assertTrue(result.topSituation?.id?.startsWith("PAD") == true || result.topSituation?.id?.startsWith("DUI") == true || result.topSituation?.id?.startsWith("VOT") == true)
+    }
+
+    @Test
     fun testPrueba4_NonExistentQuery_NoHallucinations() {
         val nonElectoralQuery = "¿cuál es la receta tradicional para hornear un pastel de tres leches?"
         val result = ElectoralSearchEngine.search(nonElectoralQuery)
@@ -89,7 +110,7 @@ class ElectoralJsonSearchEngineTest {
         assertEquals(MatchConfidenceLevel.LOW, result.matchLevel)
         assertNull("No debe asignar ninguna situación para preguntas no electorales", result.topSituation)
         assertTrue("Debe informar con claridad el ámbito o falta de coincidencia",
-            result.formattedResponse.contains("Ámbito de Consulta", ignoreCase = true) || result.formattedResponse.contains("No se encontró", ignoreCase = true))
+            result.formattedResponse.contains("Ámbito de Consulta", ignoreCase = true) || result.formattedResponse.contains("No se encontró una respuesta relacionada", ignoreCase = true) || result.formattedResponse.contains("No se encontró", ignoreCase = true))
         assertFalse("No debe inventar leyes ni artículos electorales para pasteles",
             result.formattedResponse.contains("Art. 190 del Código Electoral"))
     }

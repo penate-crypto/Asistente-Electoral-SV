@@ -79,7 +79,41 @@ object ElectoralNormalizer {
         "electores" to "votante",
         "elector" to "votante",
         "ciudadanos" to "votante",
-        "ciudadano" to "votante"
+        "ciudadano" to "votante",
+        "escrutinioo" to "escrutinio",
+        "escrutineo" to "escrutinio",
+        "sufragar" to "votar",
+        "sufragio" to "voto",
+        "sufrago" to "voto",
+        "urnas" to "urna",
+        "cajas" to "urna",
+        "papeletotas" to "papeleta",
+        "boletin" to "papeleta",
+        "atril" to "atril",
+        "atriles" to "atril",
+        "mampara" to "atril",
+        "mamparas" to "atril",
+        "cabina" to "atril",
+        "cabinas" to "atril"
+    )
+
+    private val PHRASE_REPLACEMENTS = listOf(
+        Regex("\\balas\\s+5\\b", RegexOption.IGNORE_CASE) to "a las 5 de la tarde",
+        Regex("\\balas\\b", RegexOption.IGNORE_CASE) to "a las",
+        Regex("\\bcierre\\s+de\\s+votos\\b", RegexOption.IGNORE_CASE) to "cierre de votacion",
+        Regex("\\bcerrar\\s+los\\s+votos\\b", RegexOption.IGNORE_CASE) to "cierre de votacion",
+        Regex("\\bcerrar\\s+la\\s+mesa\\b", RegexOption.IGNORE_CASE) to "cierre de votacion",
+        Regex("\\bcontar\\s+votos\\b", RegexOption.IGNORE_CASE) to "escrutinio conteo de votos",
+        Regex("\\bconteo\\s+de\\s+votos\\b", RegexOption.IGNORE_CASE) to "escrutinio conteo de votos",
+        Regex("\\bpersona\\s+que\\s+fue\\s+a\\s+votar\\b", RegexOption.IGNORE_CASE) to "votante",
+        Regex("\\bpersona\\s+que\\s+va\\s+a\\s+votar\\b", RegexOption.IGNORE_CASE) to "votante",
+        Regex("\\bpersona\\s+que\\s+quiere\\s+sufragar\\b", RegexOption.IGNORE_CASE) to "votante",
+        Regex("\\bpersona\\s+que\\s+sufrago\\b", RegexOption.IGNORE_CASE) to "votante",
+        Regex("\\bciudadano\\s+que\\s+va\\s+a\\s+emitir\\s+su\\s+voto\\b", RegexOption.IGNORE_CASE) to "votante",
+        Regex("\\bcinco\\s+de\\s+la\\s+tarde\\b", RegexOption.IGNORE_CASE) to "5 pm cierre de votacion",
+        Regex("\\b5\\s*p\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "5 pm",
+        Regex("\\b7\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "7 am",
+        Regex("\\b6\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "6 am"
     )
 
     /**
@@ -93,13 +127,19 @@ object ElectoralNormalizer {
     /**
      * Normalize query text:
      * - Lowercase
+     * - Idiom / colloquial phrase replacement
      * - Remove diacritics
      * - Remove punctuation
      * - Replace typos and plural forms
      * - Filter out noise stopwords
      */
     fun normalize(rawQuery: String): NormalizedQuery {
-        val clean = stripAccents(rawQuery.lowercase())
+        var preprocessed = rawQuery.lowercase()
+        for ((pattern, replacement) in PHRASE_REPLACEMENTS) {
+            preprocessed = pattern.replace(preprocessed, replacement)
+        }
+
+        val clean = stripAccents(preprocessed)
             .replace("[^a-z0-9\\s]".toRegex(), " ")
             .replace("\\s+".toRegex(), " ")
             .trim()

@@ -48,13 +48,16 @@ object ElectoralEntityExtractor {
         "ingresar" to listOf("ingresar", "ingreso", "entrar", "entro", "acceder", "llego", "llegar"),
         "portar" to listOf("portar", "porta", "lleva", "llevaba", "cargar", "tenia", "traia", "saco", "mostrar"),
         "votar" to listOf("votar", "voto", "ejercer el sufragio", "sufragio", "emitir voto"),
-        "entregar" to listOf("entregar", "entrego", "dar", "dio", "recibir", "paso"),
+        "entregar" to listOf("entregar", "entrego", "dar", "dio", "recibir", "paso", "entrega", "recepcion"),
         "negar" to listOf("negar", "nego", "rechazar", "rechazo", "impedir", "impidio", "no dejar"),
         "fotografiar" to listOf("tomar foto", "fotografiar", "foto", "filmar", "grabar", "usar celular"),
         "romper" to listOf("romper", "rompio", "manchar", "danar", "destruir", "alterar"),
         "impugnar" to listOf("impugnar", "impugno", "reclamar", "objetar", "anular"),
-        "instalar" to listOf("instalar", "instalo", "armar", "apertura", "abrir"),
-        "contar" to listOf("contar", "conteo", "escrutar", "escrutinio", "clasificar")
+        "instalar" to listOf("instalar", "instalo", "armar", "apertura", "abrir", "instalacion"),
+        "cerrar" to listOf("cerrar", "cierre", "cierre de votacion", "finalizar", "concluir", "5 pm", "5:00", "cinco de la tarde"),
+        "contar" to listOf("contar", "conteo", "escrutar", "escrutinio", "clasificar", "separar"),
+        "verificar" to listOf("verificar", "cotejar", "comparar", "revisar", "inspeccionar"),
+        "sustituir" to listOf("sustituir", "sustitucion", "reemplazar", "suplente")
     )
 
     private val PLACE_PATTERNS = mapOf(

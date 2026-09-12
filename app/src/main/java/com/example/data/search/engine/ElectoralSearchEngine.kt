@@ -330,12 +330,11 @@ object ElectoralSearchEngine {
 
     private fun buildLowMatchMessage(query: String, documentaryResults: List<DocumentarySearchResultItem>): String {
         val sb = StringBuilder()
-        sb.append("⚠️ **No se encontró coincidencia suficiente**\n\n")
-        sb.append("No se encontró una situación coincidente en el banco de conocimientos para la consulta:\n")
-        sb.append("\"$query\"\n\n")
+        sb.append("⚠️ No se encontró una respuesta relacionada con esta consulta en el banco de conocimiento.\n\n")
+        sb.append("Consulta recibida:\n\"$query\"\n\n")
         sb.append("Para proteger la certeza jurídica electoral, la aplicación no inventa respuestas que no existan en su banco oficial.\n\n")
         sb.append("💡 **Sugerencia:**\n")
-        sb.append("Por favor, replantee su pregunta utilizando términos electorales oficiales (por ejemplo: \"instalación de mesa\", \"votante con DUI\", \"vigilante portando arma\", \"quién puede portar arma\", \"cierre de votación\").")
+        sb.append("Por favor, formule su pregunta utilizando términos del proceso electoral (por ejemplo: \"instalación de mesa\", \"votante con DUI\", \"vigilante portando arma\", \"quién puede portar arma\", \"cierre de votación\", \"permisos de trabajo art 113\").")
 
         return sb.toString().trim()
     }
