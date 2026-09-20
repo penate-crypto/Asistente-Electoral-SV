@@ -53,16 +53,16 @@ fun WelcomeIntroScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp)
         ) {
-            // 1. ICONO 2 NEW — Imagen de introducción
+            // 1. LOGO FULL COLOR 02 — Imagen oficial de introducción
             Box(
                 modifier = Modifier
-                    .fillMaxWidth(0.92f)
-                    .heightIn(min = 180.dp, max = 280.dp)
-                    .aspectRatio(1376f / 768f),
+                    .fillMaxWidth(0.95f)
+                    .heightIn(min = 160.dp, max = 260.dp)
+                    .aspectRatio(3251f / 989f),
                 contentAlignment = Alignment.Center
             ) {
                 TransparentAssetImage(
-                    assetPath = "imagenes/icono_2_new.png",
+                    assetPath = "imagenes/Logo full color-02.png",
                     contentDescription = "Introducción Asistente Electoral",
                     modifier = Modifier.fillMaxSize()
                 )

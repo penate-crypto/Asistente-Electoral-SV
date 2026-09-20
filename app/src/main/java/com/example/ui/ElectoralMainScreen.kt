@@ -124,7 +124,7 @@ fun ElectoralMainScreen(
                         .padding(18.dp)
                 ) {
                     TransparentAssetImage(
-                        assetPath = "imagenes/icono_1_new.png",
+                        assetPath = "imagenes/Isotipo-02.png",
                         contentDescription = "Logo Principal",
                         modifier = Modifier
                             .size(54.dp)
@@ -391,7 +391,7 @@ fun ElectoralMainScreen(
                             }
                             Spacer(modifier = Modifier.width(4.dp))
                             TransparentAssetImage(
-                                assetPath = "imagenes/icono_3_new.png",
+                                assetPath = "imagenes/Isotipo-02.png",
                                 contentDescription = "SV Identidad",
                                 modifier = Modifier
                                     .size(34.dp)
