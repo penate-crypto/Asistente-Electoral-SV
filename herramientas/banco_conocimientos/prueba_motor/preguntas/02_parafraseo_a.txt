@@ -1,0 +1,37 @@
+INST-001,INST-010|a que hora tenemos que llegar los de la mesa el dia de la eleccion
+INST-002|no vino el secretario quien lo reemplaza
+INST-003,INST-002|la jrv no tiene quorum que hacemos
+VOT-002|un señor dice que siempre ha votado aqui pero no sale en la lista
+DUI-002,VOT-015|la señora se ve muy distinta a la foto de su documento
+DUI-001|un joven no trajo su documento unico de identidad
+DUI-004|el documento de identidad esta roto y no se leen los datos
+VOT-004|un votante ya tiene la marca de tinta en el pulgar
+VOT-011,VIG-012|como vota alguien que no puede ver
+VOT-014,VOT-010|una anciana con baston puede pasar primero
+VOT-007|alguien saco el telefono dentro del anaquel
+ARM-001,ARM-010|un señor entro con un cuchillo al centro de votacion
+ARM-002|estan intimidando a la gente en la fila
+SEG-001|reparten volantes de un partido en la entrada de la escuela
+SEG-002|la vocal lleva una gorra con el logo de un partido
+SEG-005,VIG-013|el fiscal del partido no deja trabajar a la mesa
+VIG-001|que derechos tiene el fiscal de mesa
+VIG-003|pueden estar dos fiscales del mismo partido en la mesa
+ESC-001|ya son las cinco de la tarde que sigue
+ESC-005|marcaron dos partidos diferentes en la papeleta
+ESC-004|la persona marco con una x sobre la foto del candidato
+ESC-007|no se sabe por quien voto la persona
+ESC-010,VOT-025|marcaron candidatos de varios partidos para diputados
+ESC-016,ESC-017|que se hace con el acta original
+ESC-015|el tercer vocal se niega a firmar el acta
+ROL-003|cual es el papel del primer vocal
+ROL-005|que hace el vocal 3
+OET-005|me deben pagar el dia despues de la eleccion en mi trabajo
+OET-003|tengo mas de 60 años puedo excusarme de la jrv
+OET-004|como justifico que no fui a la jrv
+SEG-004|venden cerveza el dia de las elecciones
+REC-005|se puede anular una eleccion
+ELE-002|cuanto dura el periodo presidencial ahora
+VOT-030|puedo votar por internet desde españa
+DEL-001|que castigo tiene votar dos veces
+REG-001|hasta cuando puedo sacar el dui para votar
+-|cual es la receta del pastel de tres leches

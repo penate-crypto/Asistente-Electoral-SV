@@ -1,0 +1,140 @@
+ESC-001|que pasa con el cierre de votos alas 5
+INST-001|como se istala la mesa y q se necesita
+INST-001|Instalación de la Junta Receptora de Votos y Verificación de Quórum
+DUI-002|q pasa si el votante no c parece a la foto del dui
+ARM-001|un vigilante de partido tiene una pistola en la mesa
+VOT-002|persona que fue a votar no aparece en el padron
+INST-002|falta el presidente de la jrv que hacemos
+INST-003|solo llegaron dos miembros de la mesa
+VOT-004|llego un señor con el dedo manchado de tinta
+VOT-011|una persona ciega quiere votar
+VOT-010,VOT-014|señora en silla de ruedas quiere votar
+DUI-001|el votante olvido su dui puede votar
+DUI-003|puede votar con fotocopia del dui
+DUI-004|el dui parece falso que hago
+DUI-007|se puede votar con dui vencido
+VOT-007|un votante le esta tomando foto a la papeleta con el celular
+SEG-002|el secretario de la jrv anda camiseta del partido
+SEG-003|puede el vigilante usar camiseta de su partido
+SEG-005|el vigilante esta gritando e interrumpe a la mesa
+SEG-006|estan comprando votos afuera del centro
+ARM-010|quien puede portar armas en el centro de votacion
+ARM-002|un hombre amenazo a un votante
+ESC-005|cuando es nulo un voto
+ESC-007|que es un voto impugnado
+ESC-006|que pasa con las papeletas en blanco
+ESC-010|como se cuenta el voto cruzado
+ESC-016|a quien se le entrega cada copia del acta
+VIG-009|el vigilante quiere copia del acta
+VIG-008|el vigilante no quiere firmar el acta de escrutinio
+ROL-002|cuales son las funciones del secretario
+ROL-004|que hace el segundo vocal
+ROL-001|funciones del presidente de la jrv
+OET-005|mi jefe no me quiere dar permiso para ser jrv
+OET-004|que pasa si no me presento a la jrv multa
+OET-003|puedo renunciar a ser miembro de jrv
+OET-002|pueden estar dos hermanos en la misma jrv
+VOT-005|llego un votante borracho
+SEG-004|hasta cuando es la ley seca
+VOT-019|personas en la fila a las 5 de la tarde pueden votar
+REC-005|cuales son las causales de nulidad de una eleccion
+ELE-002|hay segunda vuelta presidencial
+ELE-003|cuantos municipios hay ahora
+VOT-030|como votan los salvadorenos en el extranjero
+DEL-001|que pena tiene el fraude electoral
+VIG-005|donde vota el jefe de centro
+INST-009|donde vota la policia
+VOT-022|se rompio la urna
+VOT-006|el votante daño la papeleta y quiere otra
+ESC-003|que se hace con las papeletas sobrantes
+OET-001|requisitos para ser miembro de jrv
+VOT-015,DUI-002|persona trans no se parece a la foto del dui
+PRO-002|se pueden publicar encuestas antes de la eleccion
+SEG-011|que puede hacer un observador internacional
+ESC-008|papeleta sin sello en el escrutinio
+INST-004|una persona sin credencial esta en la mesa como secretario
+INST-005|faltan papeletas en el paquete electoral
+INST-006|el vigilante no quiere firmar el acta de instalacion
+INST-007|hay que mostrar que la urna esta vacia
+INST-008|a que hora votan los miembros de la jrv
+INST-010|a que hora abren las urnas
+INST-011|como se sientan los miembros en la mesa
+INST-012|un miembro llego tarde a la jrv ya instalada
+VOT-001|cual es el procedimiento para recibir el voto
+VOT-003|el numero de dui no coincide con el padron
+VOT-009|votante sin manos donde se le pone la tinta
+VOT-012|una persona sorda viene a votar
+VOT-013|persona con discapacidad intelectual quiere votar
+VOT-014|las embarazadas pasan primero
+VOT-016|el votante no sabe firmar
+VOT-017|el votante no quiere que le pongan tinta
+VOT-018|un votante se tarda mucho en el anaquel
+VOT-020,ESC-001|podemos cerrar la mesa para almorzar
+VOT-021|el secretario no firmo la papeleta
+VOT-023|el votante metio la papeleta en la urna equivocada
+VOT-024|como se vota para presidente
+VOT-025|como votar por diputados por rostro
+VOT-026|como se vota para alcalde
+VOT-027|cuales son los requisitos para votar
+VOT-028|quienes no pueden votar
+VOT-029|alguien quiere votar con el dui de otra persona
+VOT-031|puedo entrar acompañado a votar
+VOT-008|puedo votar en otro centro de votacion
+DUI-005|el dui es nuevo y el numero es mayor al ultimo emitido
+DUI-006|la señora cambio su apellido por divorcio
+DUI-008|se pueden quedar con mi dui
+SEG-001|hay propaganda dentro del centro de votacion
+SEG-007|que hago si veo un delito electoral
+SEG-008|un candidato le esta dando ordenes a la jrv
+SEG-009|hay una pelea en el centro de votacion
+SEG-010|un policia esta haciendo campaña politica
+SEG-012|pueden los periodistas grabar el escrutinio
+SEG-013|se puede hacer propaganda el dia antes de la eleccion
+VIG-001|que funciones tiene el vigilante
+VIG-002|requisitos para ser vigilante
+VIG-003|cuantos vigilantes por partido puede haber en la mesa
+VIG-004|que hace el supervisor de partido
+VIG-006|el vigilante no tiene credencial
+VIG-007|el vigilante quiere ver el dui del votante
+VIG-010|un candidato puede ser vigilante
+VIG-012|el vigilante puede marcar la papeleta del ciego
+VIG-013|el vigilante tiene voto en la jrv
+ESC-002|que eleccion se cuenta primero
+ESC-004|cuando un voto es valido
+ESC-009|voto marcado en dos banderas de la coalicion
+ESC-011|marco la bandera y un candidato del mismo partido
+ESC-013|las papeletas no cuadran en el conteo
+ESC-014|que datos lleva el acta de cierre
+ESC-015|un miembro de la jrv no quiere firmar el acta
+ESC-017|como se transmite el acta
+ESC-018|donde se devuelve el paquete electoral
+ESC-019|hay mas votos que votantes en la urna
+ESC-020|la jrv solo tiene tres miembros en el escrutinio
+ESC-022|que hace la jem con las actas
+ESC-023|cuando es el escrutinio final
+ESC-025|aparecio una papeleta de otra jrv en la urna
+ROL-003|que hace el primer vocal
+ROL-005|funciones del tercer vocal
+ROL-006|que es la junta receptora de votos
+ROL-007|que hace la junta electoral municipal
+ROL-009|que es el tse
+ROL-010|que hace la fiscalia en la eleccion
+ROL-011|que es la junta de vigilancia electoral
+ROL-012|que hace la policia el dia de la eleccion
+OET-006|cuanto le pagan a la jrv
+OET-007|como se nombran los miembros de la jrv
+OET-008|es obligatoria la capacitacion
+REC-001|que recursos puedo interponer
+REC-004|como apelar una resolucion
+REC-006|como impugnar el escrutinio final
+DEL-003|cambiar la direccion del dui para votar en otro municipio
+DEL-004|mi jefe me obliga a votar por un partido
+PRO-001|cuando inicia la campaña electoral
+PRO-003|el gobierno puede inaugurar obras antes de la eleccion
+PRO-004|pintaron propaganda en mi casa sin permiso
+REG-002|no aparezco en el padron que hago
+REG-004|que tipos de padron hay
+ELE-001|cuantos diputados tiene la asamblea
+ELE-005|que es un candidato no partidario
+ELE-006|requisitos para ser alcalde
+ELE-007|cuales son las etapas del ciclo electoral

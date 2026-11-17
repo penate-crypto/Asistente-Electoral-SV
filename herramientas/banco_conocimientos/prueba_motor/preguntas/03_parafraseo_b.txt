@@ -1,0 +1,41 @@
+INST-001|que materiales trae el paquete y como se arma la mesa
+INST-004|alguien se sento en la mesa sin ser miembro
+INST-010|hasta que hora se puede votar
+VOT-001|cuales son los pasos para que alguien vote
+VOT-002|mi nombre no esta en la lista de la mesa
+DUI-003|traigo foto del dui en el telefono puedo votar
+DUI-006|aparece con apellido de casada y ya es viuda
+DUI-008|me retuvieron el dui despues de votar
+VOT-006|se le rompio la papeleta al votante
+VOT-010,VOT-014|llego una persona en muletas a votar
+VOT-012|el votante es sordomudo
+VOT-016|el señor no sabe escribir como firma el padron
+VOT-019|ya son las 5 y hay gente formada
+VOT-024|puedo marcar la foto del candidato a presidente
+VOT-031,VOT-010|mi hijo puede entrar conmigo al anaquel
+VOT-029|un tipo uso el dui de su hermano para votar
+ARM-010,ARM-001|el agente de seguridad privada puede entrar armado
+SEG-001,SEG-013|estan poniendo musica de un partido afuera de la escuela el dia de la eleccion
+SEG-009|hay un zafarrancho en el centro de votacion
+SEG-011|los observadores pueden tocar las papeletas
+VIG-002|el vigilante tiene que vivir en el municipio
+VIG-004|cuantos supervisores puede tener un partido
+VIG-007|el fiscal del partido pide ver el documento del votante
+VIG-009|al vigilante no le quieren dar el acta
+ESC-003|que hacemos con las papeletas que no se usaron
+ESC-005,ESC-012|el votante escribio groserias en la papeleta
+ESC-006|la papeleta salio sin ninguna marca
+ESC-009|marcaron los dos partidos de la coalicion
+ESC-014|que se escribe en el acta de escrutinio
+ESC-016|de que color es la copia para la fiscalia
+ESC-018|despues del conteo a donde llevamos la caja
+ESC-019|salieron 300 votos pero solo firmaron 280 en el padron
+ROL-001|que hace la presidenta de la mesa
+ROL-002|que le toca hacer al secretario durante la votacion
+OET-001|que se necesita para ser miembro de mesa
+OET-005|cuantos dias de permiso me dan en el trabajo
+OET-002|puede un policia ser miembro de la jrv
+REC-001|como puedo reclamar una decision de la junta
+DEL-003|cambiar el domicilio del dui para votar en otro lado es delito
+ELE-002|la proxima eleccion presidencial tendra segunda vuelta
+-|quien gano el partido de futbol ayer

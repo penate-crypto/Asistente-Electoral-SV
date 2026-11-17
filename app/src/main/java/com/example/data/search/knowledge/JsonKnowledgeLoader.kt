@@ -249,12 +249,18 @@ object JsonKnowledgeLoader {
                         val seccion = fuenteObj.optString("seccion", "")
                         val pagInt = paginaStr.filter { it.isDigit() }.toIntOrNull() ?: 1
 
+                        val pdfDocId = fuenteObj.optString("pdf_doc_id", "")
+                            .ifBlank { "codigo_electoral_decreto_413" }
+                        val articuloRel = fuenteObj.optString("documento_relacionado", "")
+                            .ifBlank { null }
                         fuentesDocumentales.add(
                             DocumentarySource(
                                 documento = nombre,
                                 tipoDocumento = tipo,
                                 pagina = pagInt,
-                                seccion = seccion
+                                articuloRelacionado = articuloRel,
+                                seccion = seccion,
+                                pdfDocId = pdfDocId
                             )
                         )
                         fuentesTexto.add("$nombre ($tipo)${if (paginaStr.isNotBlank()) " — Pág. $paginaStr" else ""}")
@@ -309,7 +315,11 @@ object JsonKnowledgeLoader {
                     prioridadJerarquica = prioridadNum,
                     estado = estadoEnum,
                     respuesta = structuredResponse,
-                    respuestasRelacionadas = emptyList()
+                    respuestasRelacionadas = jsonArrayToStringList(
+                        obj.optJSONArray("situaciones_relacionadas")
+                            ?: obj.optJSONArray("relacionadas")
+                            ?: obj.optJSONArray("related")
+                    )
                 )
             )
         }
