@@ -14,6 +14,10 @@ object ElectoralSearchEngine {
         "videojuego", "clima manana", "horoscopo", "astrologia"
     )
 
+    private val SPORTS_KEYWORDS = listOf(
+        "futbol", "messi", "ronaldo", "beisbol", "baloncesto", "gol", "mundial", "liga"
+    )
+
     /**
      * Master Search Function:
      * Receives raw query (from text or speech-to-text) and returns a validated,
@@ -35,7 +39,11 @@ object ElectoralSearchEngine {
             .replace("[^a-z0-9\\s]".toRegex(), " ")
             .replace("\\s+".toRegex(), " ")
             .trim()
-        if (OFF_TOPIC_KEYWORDS.any { ElectoralNormalizer.containsWholeWord(cleanRaw, it) } && !isElectoralQuery(cleanRaw)) {
+        // "partido" también es palabra de deportes: si la consulta habla de deportes, no cuenta como electoral.
+        val isSportsQuery = SPORTS_KEYWORDS.any { ElectoralNormalizer.containsWholeWord(cleanRaw, it) }
+        if (OFF_TOPIC_KEYWORDS.any { ElectoralNormalizer.containsWholeWord(cleanRaw, it) } &&
+            !isElectoralQuery(cleanRaw, ignorePartido = isSportsQuery)
+        ) {
             val offTopicMsg = """
                 ℹ️ **Ámbito de Consulta:**
                 Asistente Electoral SV está diseñado exclusivamente para consultas electorales, procedimientos de votación, normativa electoral, funciones de organismos electorales (JRV, JED, JEM, TSE, Fiscalía Electoral, PNC) y temas jurídicos electorales de la República de El Salvador.
@@ -149,7 +157,7 @@ object ElectoralSearchEngine {
         }
     }
 
-    private fun isElectoralQuery(cleanText: String): Boolean {
+    private fun isElectoralQuery(cleanText: String, ignorePartido: Boolean = false): Boolean {
         val electoralTerms = listOf(
             "jrv", "voto", "votacion", "votar", "dui", "urna", "papeleta", "electoral",
             "padron", "escrutinio", "mesa", "vigilante", "fiscal", "pnc", "fgr",
@@ -168,7 +176,10 @@ object ElectoralSearchEngine {
             "presidente", "jefe de centro", "supervisor", "gestor", "delegado",
             "silencio electoral", "encuesta", "encuestas", "rnpn", "registro"
         )
-        return electoralTerms.any { ElectoralNormalizer.containsWholeWord(cleanText, it) }
+        return electoralTerms.any {
+            !(ignorePartido && (it == "partido" || it == "partidos")) &&
+                ElectoralNormalizer.containsWholeWord(cleanText, it)
+        }
     }
 
     /**
