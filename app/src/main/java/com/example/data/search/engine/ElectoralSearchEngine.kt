@@ -31,8 +31,11 @@ object ElectoralSearchEngine {
         }
 
         // 0. Off-topic check
-        val lowerRaw = trimmed.lowercase()
-        if (OFF_TOPIC_KEYWORDS.any { lowerRaw.contains(it) } && !isElectoralQuery(lowerRaw)) {
+        val cleanRaw = ElectoralNormalizer.stripAccents(trimmed.lowercase())
+            .replace("[^a-z0-9\\s]".toRegex(), " ")
+            .replace("\\s+".toRegex(), " ")
+            .trim()
+        if (OFF_TOPIC_KEYWORDS.any { ElectoralNormalizer.containsWholeWord(cleanRaw, it) } && !isElectoralQuery(cleanRaw)) {
             val offTopicMsg = """
                 ℹ️ **Ámbito de Consulta:**
                 Asistente Electoral SV está diseñado exclusivamente para consultas electorales, procedimientos de votación, normativa electoral, funciones de organismos electorales (JRV, JED, JEM, TSE, Fiscalía Electoral, PNC) y temas jurídicos electorales de la República de El Salvador.
@@ -146,13 +149,26 @@ object ElectoralSearchEngine {
         }
     }
 
-    private fun isElectoralQuery(text: String): Boolean {
+    private fun isElectoralQuery(cleanText: String): Boolean {
         val electoralTerms = listOf(
-            "jrv", "voto", "votacion", "dui", "urna", "papeleta", "electoral",
+            "jrv", "voto", "votacion", "votar", "dui", "urna", "papeleta", "electoral",
             "padron", "escrutinio", "mesa", "vigilante", "fiscal", "pnc", "fgr",
-            "tse", "acta", "tinta", "centro de votacion", "impugnado", "nulo"
+            "tse", "acta", "tinta", "centro de votacion", "impugnado", "nulo",
+            "partido", "partidos", "escuela", "recinto", "propaganda", "campana",
+            "candidato", "candidata", "eleccion", "elecciones", "sufragio",
+            "jem", "jed", "jve", "jelvex", "observador", "credencial", "ley seca",
+            "conteo", "recuento", "instalacion", "apertura", "cierre", "boleta",
+            "municipio", "distrito", "alcalde", "diputado", "constitucion", "codigo",
+            "reglamento", "multa", "excusa", "permiso", "patrono", "exterior",
+            "extranjero", "consulado", "pasaporte", "bandera", "coalicion", "cruzado",
+            "asistido", "discapacidad", "braille", "sello", "crayon", "anaquel",
+            "cabina", "sobre", "paquete", "transmision", "nulidad", "recurso",
+            "delito", "fraude", "coaccion", "soborno", "violencia", "politica",
+            "leiv", "ciudadano", "elector", "votante", "vocal", "secretario",
+            "presidente", "jefe de centro", "supervisor", "gestor", "delegado",
+            "silencio electoral", "encuesta", "encuestas", "rnpn", "registro"
         )
-        return electoralTerms.any { text.contains(it) }
+        return electoralTerms.any { ElectoralNormalizer.containsWholeWord(cleanText, it) }
     }
 
     /**
@@ -211,14 +227,31 @@ object ElectoralSearchEngine {
             sb.append("\n")
         }
 
-        // 4. ¿QUIÉN INTERVIENE? / ¿QUIÉN PUEDE?
-        val intervienen = mutableListOf<String>()
+        // 4. ¿QUIÉN PUEDE? / ¿QUIÉN NO PUEDE? / ¿QUIÉN INTERVIENE? / CONDICIONES
         resp.autorizaciones?.let { auth ->
             if (auth.quienPuede.isNotEmpty()) {
-                intervienen.addAll(auth.quienPuede)
+                sb.append("¿QUIÉN PUEDE?\n")
+                auth.quienPuede.forEach { item ->
+                    sb.append("• $item\n")
+                }
+                sb.append("\n")
+            }
+            if (auth.quienNoPuede.isNotEmpty()) {
+                sb.append("¿QUIÉN NO PUEDE?\n")
+                auth.quienNoPuede.forEach { item ->
+                    sb.append("• $item\n")
+                }
+                sb.append("\n")
             }
         }
-        if (intervienen.isEmpty() && situation.actores.isNotEmpty()) {
+
+        val intervienen = mutableListOf<String>()
+        resp.autorizaciones?.let { auth ->
+            if (auth.quienInterviene.isNotEmpty()) {
+                intervienen.addAll(auth.quienInterviene)
+            }
+        }
+        if (intervienen.isEmpty() && (resp.autorizaciones?.quienPuede?.isEmpty() != false) && situation.actores.isNotEmpty()) {
             intervienen.addAll(situation.actores.map { it.replaceFirstChar { c -> c.uppercase() } })
         }
         if (intervienen.isNotEmpty()) {
@@ -230,13 +263,6 @@ object ElectoralSearchEngine {
         }
 
         resp.autorizaciones?.let { auth ->
-            if (auth.quienNoPuede.isNotEmpty()) {
-                sb.append("¿QUIÉN NO PUEDE?\n")
-                auth.quienNoPuede.forEach { item ->
-                    sb.append("• $item\n")
-                }
-                sb.append("\n")
-            }
             if (auth.condiciones.isNotEmpty()) {
                 sb.append("CONDICIONES\n")
                 auth.condiciones.forEach { item ->

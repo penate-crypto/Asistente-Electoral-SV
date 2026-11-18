@@ -152,7 +152,7 @@ object JsonKnowledgeLoader {
             // Parse Structured Response
             val respObj = obj.optJSONObject("respuesta") ?: obj.optJSONObject("response")
             val situacionDetectada = respObj?.optString("situacion_detectada")
-                ?.ifBlank { respObj.optString("situacion", descripcion) }
+                ?.ifBlank { respObj.optString("respuesta").ifBlank { respObj.optString("situacion", descripcion) } }
                 ?: descripcion
 
             val queHacer = jsonArrayToStringList(
@@ -167,9 +167,13 @@ object JsonKnowledgeLoader {
                     ?: respObj?.optJSONArray("no_hacer")
             )
 
-            val advertencia = if (respObj != null && respObj.has("advertencia")) respObj.optString("advertencia") else null
+            val advertencia = if (respObj != null && respObj.has("advertencia") && !respObj.isNull("advertencia")) {
+                respObj.optString("advertencia", "").takeIf { it.isNotBlank() && !it.equals("null", ignoreCase = true) }
+            } else {
+                null
+            }
 
-            // Autorizaciones (Quién puede / Quién no puede)
+            // Autorizaciones (Quién puede / Quién no puede / Quién interviene / Condiciones)
             val quienInterviene = jsonArrayToStringList(respObj?.optJSONArray("quien_interviene"))
             val quienPuede = jsonArrayToStringList(respObj?.optJSONArray("quien_puede"))
             val quienNoPuede = jsonArrayToStringList(respObj?.optJSONArray("quien_no_puede"))
@@ -177,8 +181,9 @@ object JsonKnowledgeLoader {
 
             val authRules = if (quienPuede.isNotEmpty() || quienNoPuede.isNotEmpty() || condiciones.isNotEmpty() || quienInterviene.isNotEmpty()) {
                 AuthorizationRules(
-                    quienPuede = if (quienPuede.isNotEmpty()) quienPuede else quienInterviene,
+                    quienPuede = quienPuede,
                     quienNoPuede = quienNoPuede,
+                    quienInterviene = quienInterviene,
                     condiciones = condiciones
                 )
             } else null
@@ -247,23 +252,22 @@ object JsonKnowledgeLoader {
                         val tipo = fuenteObj.optString("tipo", "Oficial")
                         val paginaStr = fuenteObj.optString("pagina", "")
                         val seccion = fuenteObj.optString("seccion", "")
+                        val pdfDocId = fuenteObj.optString("pdf_doc_id", "").ifBlank { "codigo_electoral_decreto_413" }
                         val pagInt = paginaStr.filter { it.isDigit() }.toIntOrNull() ?: 1
 
-                        val pdfDocId = fuenteObj.optString("pdf_doc_id", "")
-                            .ifBlank { "codigo_electoral_decreto_413" }
-                        val articuloRel = fuenteObj.optString("documento_relacionado", "")
-                            .ifBlank { null }
                         fuentesDocumentales.add(
                             DocumentarySource(
                                 documento = nombre,
                                 tipoDocumento = tipo,
                                 pagina = pagInt,
-                                articuloRelacionado = articuloRel,
-                                seccion = seccion,
+                                articuloRelacionado = seccion.ifBlank { null },
+                                seccion = seccion.ifBlank { null },
                                 pdfDocId = pdfDocId
                             )
                         )
-                        fuentesTexto.add("$nombre ($tipo)${if (paginaStr.isNotBlank()) " — Pág. $paginaStr" else ""}")
+                        val secInfo = if (seccion.isNotBlank()) " — $seccion" else ""
+                        val pagInfo = if (paginaStr.isNotBlank()) " — Pág. $paginaStr" else ""
+                        fuentesTexto.add("$nombre ($tipo)$secInfo$pagInfo")
                     } else {
                         val strFuente = fuentesArr.optString(j)
                         if (strFuente.isNotBlank()) {
@@ -273,6 +277,7 @@ object JsonKnowledgeLoader {
                 }
             }
 
+            val firstDocSource = fuentesDocumentales.firstOrNull()
             val structuredResponse = StructuredElectoralResponse(
                 situacion = situacionDetectada,
                 fundamento = fundamentosTexto,
@@ -282,7 +287,9 @@ object JsonKnowledgeLoader {
                 autorizaciones = authRules,
                 fuentes = fuentesTexto,
                 fuentesDocumentales = fuentesDocumentales,
-                advertencia = advertencia
+                advertencia = advertencia,
+                primaryPdfDocId = firstDocSource?.pdfDocId ?: "codigo_electoral_decreto_413",
+                primaryPdfPage = firstDocSource?.pagina ?: 1
             )
 
             val estadoStr = obj.optString("estado", "vigente").lowercase()
@@ -294,6 +301,10 @@ object JsonKnowledgeLoader {
 
             val nivelPrioridadStr = obj.optString("nivel_prioridad", "normal").lowercase()
             val prioridadNum = if (nivelPrioridadStr == "alta") 1 else 2
+
+            val relacionadas = jsonArrayToStringList(
+                obj.optJSONArray("situaciones_relacionadas") ?: obj.optJSONArray("respuestas_relacionadas")
+            )
 
             result.add(
                 ElectoralSituation(
@@ -315,11 +326,7 @@ object JsonKnowledgeLoader {
                     prioridadJerarquica = prioridadNum,
                     estado = estadoEnum,
                     respuesta = structuredResponse,
-                    respuestasRelacionadas = jsonArrayToStringList(
-                        obj.optJSONArray("situaciones_relacionadas")
-                            ?: obj.optJSONArray("relacionadas")
-                            ?: obj.optJSONArray("related")
-                    )
+                    respuestasRelacionadas = relacionadas
                 )
             )
         }

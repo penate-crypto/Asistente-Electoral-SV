@@ -39,6 +39,7 @@ data class DocumentarySource(
 data class AuthorizationRules(
     val quienPuede: List<String> = emptyList(),
     val quienNoPuede: List<String> = emptyList(),
+    val quienInterviene: List<String> = emptyList(),
     val condiciones: List<String> = emptyList()
 )
 

@@ -19,7 +19,7 @@ object AuthSessionManager {
     // Official Test Account Credentials
     const val TEST_USER_DUI = "12345678-9"
     const val TEST_USER_DUI_DIGITS = "123456789"
-    const val TEST_USER_PASSWORD = "Abc123@#$"
+    const val TEST_USER_PASSWORD = "abc123"
 
     private val _isLoggedInState = MutableStateFlow(false)
     val isLoggedInState: StateFlow<Boolean> = _isLoggedInState.asStateFlow()
@@ -103,10 +103,10 @@ object AuthSessionManager {
     }
 
     /**
-     * Validates password: flexible (letters, numbers, symbols, pure numbers) with min 8 chars
+     * Validates password: flexible (letters, numbers, symbols, pure numbers) with min 6 chars
      */
     fun isValidPasswordFormat(password: String): Boolean {
-        return password.length >= 8
+        return password.length >= 6
     }
 
     /**
@@ -128,12 +128,12 @@ object AuthSessionManager {
             return AuthResult.Error("El usuario debe contener exactamente 9 dígitos numéricos.")
         }
 
-        if (passwordInput.length < 8) {
-            return AuthResult.Error("La contraseña debe tener al menos 8 caracteres.")
+        if (passwordInput.length < 6) {
+            return AuthResult.Error("La contraseña debe tener al menos 6 caracteres.")
         }
 
         val isTestAccount = (digits == TEST_USER_DUI_DIGITS && passwordInput == TEST_USER_PASSWORD)
-        val isValidGeneralAccount = (digits.length == 9 && passwordInput.length >= 8)
+        val isValidGeneralAccount = (digits.length == 9 && passwordInput.length >= 6)
 
         if (isTestAccount || isValidGeneralAccount) {
             val prefs = getPrefs(context)

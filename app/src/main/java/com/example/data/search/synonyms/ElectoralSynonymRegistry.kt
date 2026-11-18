@@ -106,8 +106,7 @@ object ElectoralSynonymRegistry {
 
         for ((concept, synonyms) in SYNONYM_GROUPS) {
             for (synonym in synonyms) {
-                val cleanSyn = ElectoralNormalizer.stripAccents(synonym.lowercase())
-                if (clean.contains(cleanSyn)) {
+                if (ElectoralNormalizer.containsWholeWord(clean, synonym)) {
                     matchedConcepts.add(concept)
                     break
                 }
@@ -119,17 +118,32 @@ object ElectoralSynonymRegistry {
     /**
      * Checks if two terms or tokens share a synonym group
      */
+    // Grupos de sinónimos ya normalizados (sin tildes, minúsculas), calculados una sola vez.
+    private val NORMALIZED_GROUPS: List<List<String>> by lazy {
+        SYNONYM_GROUPS.values.map { group -> group.map { ElectoralNormalizer.stripAccents(it.lowercase()) } }
+    }
+
+    // Memoria: término normalizado -> índices de grupos a los que pertenece.
+    private val groupsCache = java.util.concurrent.ConcurrentHashMap<String, Set<Int>>()
+
+    private fun groupsOf(cleanTerm: String): Set<Int> = groupsCache.getOrPut(cleanTerm) {
+        val result = mutableSetOf<Int>()
+        NORMALIZED_GROUPS.forEachIndexed { index, group ->
+            if (group.any { it == cleanTerm || ElectoralNormalizer.containsWholeWord(cleanTerm, it) }) {
+                result.add(index)
+            }
+        }
+        result
+    }
+
     fun areSynonyms(termA: String, termB: String): Boolean {
         val cleanA = ElectoralNormalizer.stripAccents(termA.lowercase())
         val cleanB = ElectoralNormalizer.stripAccents(termB.lowercase())
         if (cleanA == cleanB) return true
-
-        for ((_, synonyms) in SYNONYM_GROUPS) {
-            val hasA = synonyms.any { ElectoralNormalizer.stripAccents(it.lowercase()) == cleanA || cleanA.contains(ElectoralNormalizer.stripAccents(it.lowercase())) }
-            val hasB = synonyms.any { ElectoralNormalizer.stripAccents(it.lowercase()) == cleanB || cleanB.contains(ElectoralNormalizer.stripAccents(it.lowercase())) }
-            if (hasA && hasB) return true
-        }
-        return false
+        val a = groupsOf(cleanA)
+        if (a.isEmpty()) return false
+        val b = groupsOf(cleanB)
+        return a.any { it in b }
     }
 
     /**

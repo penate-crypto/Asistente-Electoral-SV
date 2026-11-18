@@ -113,15 +113,21 @@ object ElectoralNormalizer {
         Regex("\\bcinco\\s+de\\s+la\\s+tarde\\b", RegexOption.IGNORE_CASE) to "5 pm cierre de votacion",
         Regex("\\b5\\s*p\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "5 pm",
         Regex("\\b7\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "7 am",
-        Regex("\\b6\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "6 am"
+        Regex("\\b6\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "6 am",
+        Regex("\\b(?:se\\s+)?arma(?:r)?\\s+(?:la\\s+)?(mesa|jrv)\\b", RegexOption.IGNORE_CASE) to "instalar la $1",
+        Regex("\\bcomo\\s+se\\s+arma\\b", RegexOption.IGNORE_CASE) to "como se instala"
     )
+
+    private val COMBINING_MARKS = "\\p{InCombiningDiacriticalMarks}+".toRegex()
 
     /**
      * Remove accents/diacritics and convert to ASCII
      */
     fun stripAccents(input: String): String {
+        // Camino rápido: texto ASCII puro no necesita normalización (la mayoría de las llamadas).
+        if (input.all { it.code < 128 }) return input
         val normalized = Normalizer.normalize(input, Normalizer.Form.NFD)
-        return normalized.replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
+        return normalized.replace(COMBINING_MARKS, "")
     }
 
     /**
@@ -163,9 +169,55 @@ object ElectoralNormalizer {
     }
 
     /**
+     * Checks if [text] (already lowercase and accent-stripped) contains [term] at word boundaries.
+     */
+    private fun isWordChar(c: Char) = c in 'a'..'z' || c in '0'..'9'
+
+    fun containsWholeWord(text: String, term: String): Boolean {
+        val cleanTerm = stripAccents(term.lowercase()).trim()
+        if (cleanTerm.isBlank()) return false
+        // Equivale a Regex("(?<![a-z0-9])term(?![a-z0-9])") pero sin compilar una regex por llamada.
+        var from = 0
+        while (true) {
+            val idx = text.indexOf(cleanTerm, from)
+            if (idx < 0) return false
+            val end = idx + cleanTerm.length
+            val before = idx == 0 || !isWordChar(text[idx - 1])
+            val after = end >= text.length || !isWordChar(text[end])
+            if (before && after) return true
+            from = idx + 1
+        }
+    }
+
+    /**
+     * Checks if [text] contains a word starting with [prefix] (for intentional verb stems like amenaz*, ingres*, romp*).
+     */
+    fun containsWordPrefix(text: String, prefix: String): Boolean {
+        val cleanPrefix = stripAccents(prefix.lowercase()).trim()
+        if (cleanPrefix.isBlank()) return false
+        var from = 0
+        while (true) {
+            val idx = text.indexOf(cleanPrefix, from)
+            if (idx < 0) return false
+            if (idx == 0 || !isWordChar(text[idx - 1])) return true
+            from = idx + 1
+        }
+    }
+
+    /**
+     * Tokenizes clean lowercase ASCII text and singularizes tokens.
+     */
+    fun tokenizeAndSingularize(cleanText: String): List<String> {
+        return cleanText.replace("[^a-z0-9\\s]".toRegex(), " ")
+            .split("\\s+".toRegex())
+            .filter { it.isNotBlank() }
+            .map { singularize(it) }
+    }
+
+    /**
      * Basic singularization for Spanish electoral terms
      */
-    private fun singularize(word: String): String {
+    fun singularize(word: String): String {
         return when {
             word.endsWith("ces") -> word.dropLast(3) + "z"
             word.endsWith("es") && (word.endsWith("nes") || word.endsWith("res") || word.endsWith("les")) -> word.dropLast(2)

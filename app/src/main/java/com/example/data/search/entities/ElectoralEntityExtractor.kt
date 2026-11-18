@@ -76,11 +76,17 @@ object ElectoralEntityExtractor {
 
     fun extract(normalizedText: String, rawQuery: String): ExtractedEntities {
         val clean = ElectoralNormalizer.stripAccents(rawQuery.lowercase())
+            .replace("[^a-z0-9\\s]".toRegex(), " ")
+            .replace("\\s+".toRegex(), " ")
+            .trim()
+        val isArmarMesaQuery = Regex("\\b(?:se\\s+)?arma(?:r)?\\s+(?:la\\s+)?(?:mesa|jrv)\\b").containsMatchIn(clean) &&
+            !listOf("pistola", "revolver", "rifle", "escopeta", "fusil", "cuchillo", "machete", "arma de fuego", "arma blanca")
+                .any { ElectoralNormalizer.containsWholeWord(clean, it) }
 
         // Extract Actors
         val actors = mutableListOf<String>()
         for ((actorKey, patterns) in ACTOR_PATTERNS) {
-            if (patterns.any { clean.contains(ElectoralNormalizer.stripAccents(it)) }) {
+            if (patterns.any { ElectoralNormalizer.containsWholeWord(clean, it) }) {
                 actors.add(actorKey)
             }
         }
@@ -88,7 +94,8 @@ object ElectoralEntityExtractor {
         // Extract Objects
         val objects = mutableListOf<String>()
         for ((objectKey, patterns) in OBJECT_PATTERNS) {
-            if (patterns.any { clean.contains(ElectoralNormalizer.stripAccents(it)) }) {
+            if (objectKey == "arma_de_fuego" && isArmarMesaQuery) continue
+            if (patterns.any { ElectoralNormalizer.containsWholeWord(clean, it) }) {
                 objects.add(objectKey)
             }
         }
@@ -96,7 +103,7 @@ object ElectoralEntityExtractor {
         // Extract Actions
         val actions = mutableListOf<String>()
         for ((actionKey, patterns) in ACTION_PATTERNS) {
-            if (patterns.any { clean.contains(ElectoralNormalizer.stripAccents(it)) }) {
+            if (patterns.any { ElectoralNormalizer.containsWholeWord(clean, it) }) {
                 actions.add(actionKey)
             }
         }
@@ -104,7 +111,7 @@ object ElectoralEntityExtractor {
         // Extract Places
         val places = mutableListOf<String>()
         for ((placeKey, patterns) in PLACE_PATTERNS) {
-            if (patterns.any { clean.contains(ElectoralNormalizer.stripAccents(it)) }) {
+            if (patterns.any { ElectoralNormalizer.containsWholeWord(clean, it) }) {
                 places.add(placeKey)
             }
         }
@@ -112,7 +119,7 @@ object ElectoralEntityExtractor {
         // Extract Moments
         val moments = mutableListOf<String>()
         for ((momentKey, patterns) in MOMENT_PATTERNS) {
-            if (patterns.any { clean.contains(ElectoralNormalizer.stripAccents(it)) }) {
+            if (patterns.any { ElectoralNormalizer.containsWholeWord(clean, it) }) {
                 moments.add(momentKey)
             }
         }
@@ -123,7 +130,7 @@ object ElectoralEntityExtractor {
         // Detect Intent
         val intent = detectIntent(clean, actions)
 
-        val canonicalConcepts = ElectoralSynonymRegistry.findCanonicalConcepts(clean)
+        val canonicalConcepts = ElectoralSynonymRegistry.findCanonicalConcepts(normalizedText.ifBlank { clean })
 
         return ExtractedEntities(
             actors = actors,
@@ -145,28 +152,67 @@ object ElectoralEntityExtractor {
         moments: List<String>
     ): String {
         return when {
-            "arma_de_fuego" in objects || "amenaza" in actions || "pnc" in actors || clean.contains("seguridad") || clean.contains("delito") -> "seguridad_electoral"
-            "dui" in objects || clean.contains("cedula") || clean.contains("apariencia") || clean.contains("identidad") -> "identificacion_elector"
-            "instalacion" in moments || clean.contains("instalar") || clean.contains("6 am") -> "instalacion_jrv"
-            "escrutinio" in moments || "contar" in actions || "acta" in objects || clean.contains("escrutinio") -> "escrutinio_conteo"
-            "tinta" in objects || clean.contains("manchado") -> "proceso_votacion"
-            clean.contains("discapacidad") || clean.contains("asistido") || clean.contains("ciego") || clean.contains("embarazada") -> "inclusion_asistencia"
+            "arma_de_fuego" in objects || "amenaza" in actions || "pnc" in actors ||
+                ElectoralNormalizer.containsWholeWord(clean, "seguridad") ||
+                ElectoralNormalizer.containsWholeWord(clean, "delito") -> "seguridad_electoral"
+            "dui" in objects ||
+                ElectoralNormalizer.containsWholeWord(clean, "cedula") ||
+                ElectoralNormalizer.containsWholeWord(clean, "apariencia") ||
+                ElectoralNormalizer.containsWholeWord(clean, "identidad") -> "identificacion_elector"
+            "instalacion" in moments ||
+                ElectoralNormalizer.containsWholeWord(clean, "instalar") ||
+                ElectoralNormalizer.containsWholeWord(clean, "6 am") -> "instalacion_jrv"
+            "escrutinio" in moments || "contar" in actions || "acta" in objects ||
+                ElectoralNormalizer.containsWholeWord(clean, "escrutinio") -> "escrutinio_conteo"
+            "tinta" in objects ||
+                ElectoralNormalizer.containsWholeWord(clean, "manchado") -> "proceso_votacion"
+            ElectoralNormalizer.containsWholeWord(clean, "discapacidad") ||
+                ElectoralNormalizer.containsWholeWord(clean, "asistido") ||
+                ElectoralNormalizer.containsWholeWord(clean, "ciego") ||
+                ElectoralNormalizer.containsWholeWord(clean, "embarazada") -> "inclusion_asistencia"
             "vigilante" in actors || "credencial" in objects -> "acreditacion_vigilancia"
-            clean.contains("permiso") || clean.contains("trabajo") || clean.contains("sueldo") || clean.contains("patrono") -> "derechos_laborales"
+            ElectoralNormalizer.containsWholeWord(clean, "permiso") ||
+                ElectoralNormalizer.containsWholeWord(clean, "trabajo") ||
+                ElectoralNormalizer.containsWholeWord(clean, "sueldo") ||
+                ElectoralNormalizer.containsWholeWord(clean, "patrono") -> "derechos_laborales"
             else -> "proceso_votacion"
         }
     }
 
     private fun detectIntent(clean: String, actions: List<String>): String {
         return when {
-            clean.contains("que dice el reglamento") || clean.contains("que dice la ley") || clean.contains("segun el codigo") || clean.contains("fundamento") || clean.contains("articulo") -> "consulta_legal_normativa"
-            clean.contains("que debo hacer") || clean.contains("que hago") || clean.contains("como actuar") || clean.contains("cual es el procedimiento") || clean.contains("pasos a seguir") || clean.contains("como se hace") -> "procedimiento"
-            clean.contains("se puede") || clean.contains("esta permitido") || clean.contains("es permitido") || clean.contains("puedo") || clean.contains("puede un") -> "consulta_permiso_prohibicion"
-            clean.contains("prohibido") || clean.contains("prohibicion") || clean.contains("sancion") || clean.contains("castigo") || clean.contains("delito") || clean.contains("multa") -> "prohibicion_sancion"
-            clean.contains("quien puede") || clean.contains("quienes pueden") || clean.contains("autorizados") -> "competencia_quien_puede"
-            clean.contains("quien no puede") || clean.contains("quienes no pueden") -> "quien_no_puede"
-            clean.contains("funciones") || clean.contains("papel") || clean.contains("atribuciones") || clean.contains("rol") -> "funciones_atribuciones"
-            clean.contains("derechos") -> "derechos"
+            ElectoralNormalizer.containsWholeWord(clean, "que dice el reglamento") ||
+                ElectoralNormalizer.containsWholeWord(clean, "que dice la ley") ||
+                ElectoralNormalizer.containsWholeWord(clean, "segun el codigo") ||
+                ElectoralNormalizer.containsWholeWord(clean, "fundamento") ||
+                ElectoralNormalizer.containsWholeWord(clean, "articulo") -> "consulta_legal_normativa"
+            ElectoralNormalizer.containsWholeWord(clean, "quien puede") ||
+                ElectoralNormalizer.containsWholeWord(clean, "quienes pueden") ||
+                ElectoralNormalizer.containsWholeWord(clean, "autorizados") -> "competencia_quien_puede"
+            ElectoralNormalizer.containsWholeWord(clean, "quien no puede") ||
+                ElectoralNormalizer.containsWholeWord(clean, "quienes no pueden") -> "quien_no_puede"
+            ElectoralNormalizer.containsWholeWord(clean, "que debo hacer") ||
+                ElectoralNormalizer.containsWholeWord(clean, "que hago") ||
+                ElectoralNormalizer.containsWholeWord(clean, "como actuar") ||
+                ElectoralNormalizer.containsWholeWord(clean, "cual es el procedimiento") ||
+                ElectoralNormalizer.containsWholeWord(clean, "pasos a seguir") ||
+                ElectoralNormalizer.containsWholeWord(clean, "como se hace") -> "procedimiento"
+            ElectoralNormalizer.containsWholeWord(clean, "se puede") ||
+                ElectoralNormalizer.containsWholeWord(clean, "esta permitido") ||
+                ElectoralNormalizer.containsWholeWord(clean, "es permitido") ||
+                ElectoralNormalizer.containsWholeWord(clean, "puedo") ||
+                ElectoralNormalizer.containsWholeWord(clean, "puede un") -> "consulta_permiso_prohibicion"
+            ElectoralNormalizer.containsWholeWord(clean, "prohibido") ||
+                ElectoralNormalizer.containsWholeWord(clean, "prohibicion") ||
+                ElectoralNormalizer.containsWholeWord(clean, "sancion") ||
+                ElectoralNormalizer.containsWholeWord(clean, "castigo") ||
+                ElectoralNormalizer.containsWholeWord(clean, "delito") ||
+                ElectoralNormalizer.containsWholeWord(clean, "multa") -> "prohibicion_sancion"
+            ElectoralNormalizer.containsWholeWord(clean, "funciones") ||
+                ElectoralNormalizer.containsWholeWord(clean, "papel") ||
+                ElectoralNormalizer.containsWholeWord(clean, "atribuciones") ||
+                ElectoralNormalizer.containsWholeWord(clean, "rol") -> "funciones_atribuciones"
+            ElectoralNormalizer.containsWholeWord(clean, "derechos") -> "derechos"
             "amenaza" in actions -> "procedimiento_emergencia"
             else -> "procedimiento"
         }
