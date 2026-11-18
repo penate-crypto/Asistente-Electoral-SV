@@ -725,15 +725,21 @@ fun ElectoralMainScreen(
                                                     // Primary "📖 VER FUENTE" Button
                                                     Button(
                                                         onClick = {
-                                                            // Determine most relevant doc and page from the answer
-                                                            val docId = when {
-                                                                state.answer.contains("Constitución", ignoreCase = true) -> "constitucion_republica_elsalvador"
-                                                                state.answer.contains("Instructivo", ignoreCase = true) || state.answer.contains("JRV", ignoreCase = true) -> "instructivo_jrv_tse_2024"
+                                                            val docId = state.primaryPdfDocId ?: when {
+                                                                state.answer.contains("Constitución", ignoreCase = true) -> "constitucion_republica_1983"
+                                                                state.answer.contains("Instructivo", ignoreCase = true) || state.answer.contains("JRV", ignoreCase = true) -> "instructivo_jrv_tse"
                                                                 state.answer.contains("Código Penal", ignoreCase = true) -> "codigo_penal_delitos_electorales"
-                                                                state.answer.contains("LEIV", ignoreCase = true) -> "ley_especial_integral_mujeres_leiv"
+                                                                state.answer.contains("Sufragio en el Extranjero", ignoreCase = true) || state.answer.contains("542", ignoreCase = true) -> "ley_sufragio_extranjero_542"
+                                                                state.answer.contains("Reestructuración Municipal", ignoreCase = true) || state.answer.contains("763", ignoreCase = true) -> "ley_reestructuracion_municipal_763"
+                                                                state.answer.contains("Observación Electoral", ignoreCase = true) -> "reglamento_observacion_electoral"
+                                                                state.answer.contains("Partidos Políticos", ignoreCase = true) -> "ley_de_partidos_politicos"
+                                                                state.answer.contains("No Partidarias", ignoreCase = true) -> "disposiciones_candidaturas_no_partidarias"
+                                                                state.answer.contains("Ciclo Electoral", ignoreCase = true) -> "ciclo_electoral_salvadoreno"
+                                                                state.answer.contains("Acuerdo Legislativo", ignoreCase = true) -> "acuerdo_legislativo_reforma_electoral"
                                                                 else -> "codigo_electoral_decreto_413"
                                                             }
-                                                            viewModel.openPdfDirectly(docId = docId, page = 1)
+                                                            val page = if (state.primaryPdfDocId != null) state.primaryPdfPage else 1
+                                                            viewModel.openPdfDirectly(docId = docId, page = page)
                                                         },
                                                         colors = ButtonDefaults.buttonColors(
                                                             containerColor = MaterialTheme.colorScheme.primary

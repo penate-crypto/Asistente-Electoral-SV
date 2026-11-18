@@ -304,7 +304,9 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
                     _uiState.value = ElectoralUiState.Success(
                         question = queryToSend,
                         answer = result.text,
-                        suggestions = result.suggestions
+                        suggestions = result.suggestions,
+                        primaryPdfDocId = result.primaryPdfDocId,
+                        primaryPdfPage = result.primaryPdfPage
                     )
                 }
                 is AnswerResult.Error -> {
@@ -347,7 +349,13 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
 sealed class ElectoralUiState {
     object Idle : ElectoralUiState()
     data class Loading(val question: String) : ElectoralUiState()
-    data class Success(val question: String, val answer: String, val suggestions: List<String> = emptyList()) : ElectoralUiState()
+    data class Success(
+        val question: String,
+        val answer: String,
+        val suggestions: List<String> = emptyList(),
+        val primaryPdfDocId: String? = null,
+        val primaryPdfPage: Int = 1
+    ) : ElectoralUiState()
     data class Error(val question: String, val message: String) : ElectoralUiState()
 }
 

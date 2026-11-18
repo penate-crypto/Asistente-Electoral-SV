@@ -59,11 +59,18 @@ object ElectoralScoringEngine {
 
         // 1. Título Match
         val cleanTitle = ElectoralNormalizer.stripAccents(situation.titulo.lowercase())
+            .replace("[^a-z0-9\\s]".toRegex(), " ")
+            .replace("\\s+".toRegex(), " ")
+            .trim()
+        val titleTokens = ElectoralNormalizer.tokenizeAndSingularize(cleanTitle).toSet()
         var titleScore = 0.0
         for (kw in queryKeywords) {
-            if (cleanTitle.contains(kw)) {
+            if (kw in titleTokens || ElectoralNormalizer.containsWholeWord(cleanTitle, kw)) {
                 titleScore += WEIGHT_TITLE_MATCH
             }
+        }
+        if (cleanTitle.length > 10 && (cleanTitle == queryText || ElectoralNormalizer.containsWholeWord(queryText, cleanTitle))) {
+            titleScore += 60.0
         }
         if (titleScore > 0) {
             breakdown["titulo"] = titleScore
@@ -73,9 +80,10 @@ object ElectoralScoringEngine {
         // 2. Descripción de la Situación Match
         if (situation.descripcionSituacion.isNotBlank()) {
             val cleanDesc = ElectoralNormalizer.stripAccents(situation.descripcionSituacion.lowercase())
+            val descTokens = ElectoralNormalizer.tokenizeAndSingularize(cleanDesc).toSet()
             var descScore = 0.0
             for (kw in queryKeywords) {
-                if (cleanDesc.contains(kw)) {
+                if (kw in descTokens || ElectoralNormalizer.containsWholeWord(cleanDesc, kw)) {
                     descScore += WEIGHT_DESCRIPTION_MATCH
                 }
             }
@@ -89,7 +97,10 @@ object ElectoralScoringEngine {
         var keywordScore = 0.0
         for (kw in situation.keywords) {
             val cleanKw = ElectoralNormalizer.stripAccents(kw.lowercase())
-            if (queryKeywords.contains(cleanKw) || queryText.contains(cleanKw) || queryTokens.contains(cleanKw)) {
+            if (queryKeywords.contains(cleanKw) ||
+                queryTokens.contains(cleanKw) ||
+                ElectoralNormalizer.containsWholeWord(queryText, cleanKw)
+            ) {
                 keywordScore += WEIGHT_KEYWORD
             }
         }
@@ -102,7 +113,10 @@ object ElectoralScoringEngine {
         var synonymScore = 0.0
         for (syn in situation.sinonimos) {
             val cleanSyn = ElectoralNormalizer.stripAccents(syn.lowercase())
-            if (queryText.contains(cleanSyn) || queryTokens.contains(cleanSyn) || queryKeywords.any { ElectoralSynonymRegistry.areSynonyms(it, cleanSyn) }) {
+            if (ElectoralNormalizer.containsWholeWord(queryText, cleanSyn) ||
+                queryTokens.contains(cleanSyn) ||
+                queryKeywords.any { ElectoralSynonymRegistry.areSynonyms(it, cleanSyn) }
+            ) {
                 synonymScore += WEIGHT_SYNONYM
             }
         }
@@ -117,15 +131,20 @@ object ElectoralScoringEngine {
             val cleanActor = ElectoralNormalizer.stripAccents(actor.lowercase())
             entities.actors.contains(actor) ||
             actor in entities.canonicalConcepts ||
-            queryText.contains(cleanActor) ||
-            (cleanActor.contains("vigilante") && (queryText.contains("vigilante") || queryText.contains("fiscal"))) ||
-            (cleanActor.contains("votante") && (queryText.contains("votante") || queryText.contains("elector") || queryText.contains("ciudadano"))) ||
-            (cleanActor.contains("presidente") && queryText.contains("presidente")) ||
-            (cleanActor.contains("secretario") && queryText.contains("secretario")) ||
-            (cleanActor.contains("vocal") && queryText.contains("vocal")) ||
-            (cleanActor.contains("pnc") && (queryText.contains("pnc") || queryText.contains("policia"))) ||
-            (cleanActor.contains("fiscal") && (queryText.contains("fgr") || queryText.contains("fiscalia"))) ||
-            (cleanActor.contains("patrono") && (queryText.contains("patrono") || queryText.contains("jefe") || queryText.contains("empresa") || queryText.contains("trabajo")))
+            ElectoralNormalizer.containsWholeWord(queryText, cleanActor) ||
+            (cleanActor.contains("vigilante") && (ElectoralNormalizer.containsWholeWord(queryText, "vigilante") || ElectoralNormalizer.containsWholeWord(queryText, "fiscal"))) ||
+            (cleanActor.contains("votante") && (ElectoralNormalizer.containsWholeWord(queryText, "votante") || ElectoralNormalizer.containsWholeWord(queryText, "elector") || ElectoralNormalizer.containsWholeWord(queryText, "ciudadano"))) ||
+            (cleanActor.contains("presidente") && ElectoralNormalizer.containsWholeWord(queryText, "presidente")) ||
+            (cleanActor.contains("secretario") && ElectoralNormalizer.containsWholeWord(queryText, "secretario")) ||
+            (cleanActor.contains("vocal") && ElectoralNormalizer.containsWholeWord(queryText, "vocal")) ||
+            (cleanActor.contains("pnc") && (ElectoralNormalizer.containsWholeWord(queryText, "pnc") || ElectoralNormalizer.containsWholeWord(queryText, "policia"))) ||
+            (cleanActor.contains("fiscal") && (ElectoralNormalizer.containsWholeWord(queryText, "fgr") || ElectoralNormalizer.containsWholeWord(queryText, "fiscalia"))) ||
+            (cleanActor.contains("patrono") && (ElectoralNormalizer.containsWholeWord(queryText, "patrono") || ElectoralNormalizer.containsWholeWord(queryText, "jefe") || ElectoralNormalizer.containsWholeWord(queryText, "empresa") || ElectoralNormalizer.containsWholeWord(queryText, "trabajo"))) ||
+            (cleanActor.contains("observador") && ElectoralNormalizer.containsWholeWord(queryText, "observador")) ||
+            (cleanActor.contains("jefe de centro") && ElectoralNormalizer.containsWholeWord(queryText, "jefe de centro")) ||
+            (cleanActor.contains("jem") && ElectoralNormalizer.containsWholeWord(queryText, "jem")) ||
+            (cleanActor.contains("jed") && ElectoralNormalizer.containsWholeWord(queryText, "jed")) ||
+            (cleanActor.contains("tse") && ElectoralNormalizer.containsWholeWord(queryText, "tse"))
         }
         if (matchingActors.isNotEmpty()) {
             actorScore = matchingActors.size * WEIGHT_ACTOR
@@ -138,16 +157,16 @@ object ElectoralScoringEngine {
         val matchingActions = situation.acciones.filter { action ->
             val cleanAction = ElectoralNormalizer.stripAccents(action.lowercase())
             entities.actions.contains(action) ||
-            queryText.contains(cleanAction) ||
-            (cleanAction.contains("amenaza") && (queryText.contains("amenaz") || queryText.contains("apunto") || queryText.contains("intimido"))) ||
-            (cleanAction.contains("ingresar") && (queryText.contains("ingres") || queryText.contains("entro") || queryText.contains("llego"))) ||
-            (cleanAction.contains("portar") && (queryText.contains("porta") || queryText.contains("lleva") || queryText.contains("tenia") || queryText.contains("saco"))) ||
-            (cleanAction.contains("votar") && (queryText.contains("votar") || queryText.contains("voto"))) ||
-            (cleanAction.contains("cotejo") && (queryText.contains("parece") || queryText.contains("foto") || queryText.contains("rasgos"))) ||
-            (cleanAction.contains("instala") && (queryText.contains("instala") || queryText.contains("abrir") || queryText.contains("inicio"))) ||
-            (cleanAction.contains("cerrar") && (queryText.contains("cierre") || queryText.contains("cierra") || queryText.contains("5 pm") || queryText.contains("5:00"))) ||
-            (cleanAction.contains("romper") && (queryText.contains("romp") || queryText.contains("dano") || queryText.contains("mancho"))) ||
-            (cleanAction.contains("fotografiar") && (queryText.contains("foto") || queryText.contains("celular") || queryText.contains("camara") || queryText.contains("grabar")))
+            ElectoralNormalizer.containsWholeWord(queryText, cleanAction) ||
+            (cleanAction.contains("amenaza") && (ElectoralNormalizer.containsWordPrefix(queryText, "amenaz") || ElectoralNormalizer.containsWholeWord(queryText, "apunto") || ElectoralNormalizer.containsWholeWord(queryText, "intimido"))) ||
+            (cleanAction.contains("ingresar") && (ElectoralNormalizer.containsWordPrefix(queryText, "ingres") || ElectoralNormalizer.containsWholeWord(queryText, "entro") || ElectoralNormalizer.containsWholeWord(queryText, "llego"))) ||
+            (cleanAction.contains("portar") && (ElectoralNormalizer.containsWordPrefix(queryText, "porta") || ElectoralNormalizer.containsWholeWord(queryText, "lleva") || ElectoralNormalizer.containsWholeWord(queryText, "tenia") || ElectoralNormalizer.containsWholeWord(queryText, "saco"))) ||
+            (cleanAction.contains("votar") && (ElectoralNormalizer.containsWholeWord(queryText, "votar") || ElectoralNormalizer.containsWholeWord(queryText, "voto"))) ||
+            (cleanAction.contains("cotejo") && (ElectoralNormalizer.containsWholeWord(queryText, "parece") || ElectoralNormalizer.containsWholeWord(queryText, "foto") || ElectoralNormalizer.containsWholeWord(queryText, "fotografia") || ElectoralNormalizer.containsWholeWord(queryText, "rasgos"))) ||
+            (cleanAction.contains("instala") && (ElectoralNormalizer.containsWordPrefix(queryText, "instala") || ElectoralNormalizer.containsWholeWord(queryText, "abrir") || ElectoralNormalizer.containsWholeWord(queryText, "inicio"))) ||
+            (cleanAction.contains("cerrar") && (ElectoralNormalizer.containsWholeWord(queryText, "cierre") || ElectoralNormalizer.containsWholeWord(queryText, "cierra") || ElectoralNormalizer.containsWholeWord(queryText, "5 pm") || ElectoralNormalizer.containsWholeWord(queryText, "5 00"))) ||
+            (cleanAction.contains("romper") && (ElectoralNormalizer.containsWordPrefix(queryText, "romp") || ElectoralNormalizer.containsWordPrefix(queryText, "dan") || ElectoralNormalizer.containsWholeWord(queryText, "mancho"))) ||
+            (cleanAction.contains("fotografiar") && (ElectoralNormalizer.containsWholeWord(queryText, "foto") || ElectoralNormalizer.containsWholeWord(queryText, "fotografia") || ElectoralNormalizer.containsWholeWord(queryText, "celular") || ElectoralNormalizer.containsWholeWord(queryText, "camara") || ElectoralNormalizer.containsWholeWord(queryText, "grabar")))
         }
         if (matchingActions.isNotEmpty()) {
             actionScore = matchingActions.size * WEIGHT_ACTION
@@ -160,15 +179,15 @@ object ElectoralScoringEngine {
         val matchingObjects = situation.objetos.filter { obj ->
             val cleanObj = ElectoralNormalizer.stripAccents(obj.lowercase())
             entities.objects.contains(obj) ||
-            queryText.contains(cleanObj) ||
-            (cleanObj.contains("arma") && (queryText.contains("arma") || queryText.contains("pistola") || queryText.contains("revolver") || queryText.contains("cuchillo"))) ||
-            (cleanObj.contains("dui") && (queryText.contains("dui") || queryText.contains("cedula") || queryText.contains("identidad") || queryText.contains("foto"))) ||
-            (cleanObj.contains("papeleta") && (queryText.contains("papeleta") || queryText.contains("boleta"))) ||
-            (cleanObj.contains("padron") && (queryText.contains("padron") || queryText.contains("lista"))) ||
-            (cleanObj.contains("tinta") && (queryText.contains("tinta") || queryText.contains("manchado"))) ||
-            (cleanObj.contains("acta") && (queryText.contains("acta") || queryText.contains("conteo"))) ||
-            (cleanObj.contains("urna") && queryText.contains("urna")) ||
-            (cleanObj.contains("celular") && (queryText.contains("celular") || queryText.contains("telefono") || queryText.contains("camara")))
+            ElectoralNormalizer.containsWholeWord(queryText, cleanObj) ||
+            (ElectoralNormalizer.containsWholeWord(cleanObj, "arma") && ("arma_de_fuego" in entities.objects || ElectoralNormalizer.containsWholeWord(queryText, "arma") || ElectoralNormalizer.containsWholeWord(queryText, "pistola") || ElectoralNormalizer.containsWholeWord(queryText, "revolver") || ElectoralNormalizer.containsWholeWord(queryText, "cuchillo"))) ||
+            (ElectoralNormalizer.containsWholeWord(cleanObj, "dui") && (ElectoralNormalizer.containsWholeWord(queryText, "dui") || ElectoralNormalizer.containsWholeWord(queryText, "cedula") || ElectoralNormalizer.containsWholeWord(queryText, "identidad") || ElectoralNormalizer.containsWholeWord(queryText, "foto") || ElectoralNormalizer.containsWholeWord(queryText, "fotografia"))) ||
+            (cleanObj.contains("papeleta") && (ElectoralNormalizer.containsWholeWord(queryText, "papeleta") || ElectoralNormalizer.containsWholeWord(queryText, "boleta"))) ||
+            (cleanObj.contains("padron") && (ElectoralNormalizer.containsWholeWord(queryText, "padron") || ElectoralNormalizer.containsWholeWord(queryText, "lista"))) ||
+            (ElectoralNormalizer.containsWholeWord(cleanObj, "tinta") && (ElectoralNormalizer.containsWholeWord(queryText, "tinta") || ElectoralNormalizer.containsWholeWord(queryText, "manchado"))) ||
+            (ElectoralNormalizer.containsWholeWord(cleanObj, "acta") && (ElectoralNormalizer.containsWholeWord(queryText, "acta") || ElectoralNormalizer.containsWholeWord(queryText, "conteo"))) ||
+            (ElectoralNormalizer.containsWholeWord(cleanObj, "urna") && ElectoralNormalizer.containsWholeWord(queryText, "urna")) ||
+            (cleanObj.contains("celular") && (ElectoralNormalizer.containsWholeWord(queryText, "celular") || ElectoralNormalizer.containsWholeWord(queryText, "telefono") || ElectoralNormalizer.containsWholeWord(queryText, "camara")))
         }
         if (matchingObjects.isNotEmpty()) {
             objectScore = matchingObjects.size * WEIGHT_OBJECT
@@ -181,7 +200,7 @@ object ElectoralScoringEngine {
         var contextScore = 0.0
         for (ctx in allContexts) {
             val cleanCtx = ElectoralNormalizer.stripAccents(ctx.lowercase())
-            if (queryText.contains(cleanCtx) || cleanCtx == entities.context) {
+            if (ElectoralNormalizer.containsWholeWord(queryText, cleanCtx) || cleanCtx == entities.context) {
                 contextScore += WEIGHT_CONTEXT
                 break
             }
@@ -194,9 +213,9 @@ object ElectoralScoringEngine {
         // 9. Intent Match (+8)
         val matchingIntents = situation.intenciones.filter { intent ->
             intent == entities.intent ||
-            (intent.contains("quien_puede") && (queryText.contains("quien puede") || queryText.contains("quienes pueden") || queryText.contains("autorizados"))) ||
-            (intent.contains("prohibicion") && (queryText.contains("prohibido") || queryText.contains("sancion") || queryText.contains("delito") || queryText.contains("no hacer"))) ||
-            (intent.contains("procedimiento") && (queryText.contains("que hacer") || queryText.contains("como se") || queryText.contains("que pasa") || queryText.contains("que se necesita") || queryText.contains("procedimiento")))
+            (intent.contains("quien_puede") && (ElectoralNormalizer.containsWholeWord(queryText, "quien puede") || ElectoralNormalizer.containsWholeWord(queryText, "quienes pueden") || ElectoralNormalizer.containsWholeWord(queryText, "autorizados"))) ||
+            (intent.contains("prohibicion") && (ElectoralNormalizer.containsWholeWord(queryText, "prohibido") || ElectoralNormalizer.containsWholeWord(queryText, "sancion") || ElectoralNormalizer.containsWholeWord(queryText, "delito") || ElectoralNormalizer.containsWholeWord(queryText, "no hacer"))) ||
+            (intent.contains("procedimiento") && (ElectoralNormalizer.containsWholeWord(queryText, "que hacer") || ElectoralNormalizer.containsWholeWord(queryText, "como se") || ElectoralNormalizer.containsWholeWord(queryText, "que pasa") || ElectoralNormalizer.containsWholeWord(queryText, "que se necesita") || ElectoralNormalizer.containsWholeWord(queryText, "procedimiento")))
         }
         if (matchingIntents.isNotEmpty()) {
             val intentScore = WEIGHT_INTENT
@@ -207,22 +226,26 @@ object ElectoralScoringEngine {
         // 10. Category & Subcategory Match (+5)
         val cleanCat = ElectoralNormalizer.stripAccents(situation.categoria.lowercase())
         val cleanSubcat = ElectoralNormalizer.stripAccents(situation.subcategoria.lowercase())
-        if (queryText.contains(cleanCat) || (cleanSubcat.isNotBlank() && queryText.contains(cleanSubcat))) {
+        if (ElectoralNormalizer.containsWholeWord(queryText, cleanCat) ||
+            (cleanSubcat.isNotBlank() && ElectoralNormalizer.containsWholeWord(queryText, cleanSubcat))
+        ) {
             breakdown["categoria"] = WEIGHT_CATEGORY
             totalScore += WEIGHT_CATEGORY
         }
 
-        // 11. Response Content Match (situacion, que_hacer, que_no_hacer)
+        // 11. Response Content Match (situacion, que_hacer, que_no_hacer, advertencia)
         val respContent = buildString {
             append(situation.respuesta.situacion)
             append(" ")
             situation.respuesta.procedimiento.forEach { append(it).append(" ") }
             situation.respuesta.noHacer.forEach { append(it).append(" ") }
+            situation.respuesta.advertencia?.let { append(it).append(" ") }
         }.lowercase()
         val cleanRespContent = ElectoralNormalizer.stripAccents(respContent)
+        val respTokens = ElectoralNormalizer.tokenizeAndSingularize(cleanRespContent).toSet()
         var responseScore = 0.0
         for (kw in queryKeywords) {
-            if (cleanRespContent.contains(kw)) {
+            if (kw in respTokens || ElectoralNormalizer.containsWholeWord(cleanRespContent, kw)) {
                 responseScore += 2.0
             }
         }
@@ -237,7 +260,7 @@ object ElectoralScoringEngine {
         for (ref in allLegalRefs) {
             val cleanRef = ElectoralNormalizer.stripAccents(ref.lowercase())
             val articleTokens = cleanRef.split(" ").filter { it.length > 2 }
-            if (articleTokens.any { queryText.contains(it) && it.any { c -> c.isDigit() } }) {
+            if (articleTokens.any { it.any { c -> c.isDigit() } && ElectoralNormalizer.containsWholeWord(queryText, it) }) {
                 totalScore += 12.0
                 breakdown["referencia_legal"] = 12.0
                 break
@@ -251,27 +274,46 @@ object ElectoralScoringEngine {
         }
 
         // 14. Disambiguation & Specific Scenario Rules (strictly bounded per situation ID):
-        if (situation.id == "ARM-010" && queryText.contains("quien puede") && queryText.contains("arma")) {
+        if (situation.id == "ARM-010" &&
+            ElectoralNormalizer.containsWholeWord(queryText, "quien puede") &&
+            ElectoralNormalizer.containsWholeWord(queryText, "arma")
+        ) {
             totalScore += 25.0
             breakdown["bonus_quien_puede"] = 25.0
         }
-        if (situation.id == "ARM-001" && queryText.contains("vigilante") && queryText.contains("arma") && !queryText.contains("amenaz")) {
+        if (situation.id == "ARM-001" &&
+            ElectoralNormalizer.containsWholeWord(queryText, "vigilante") &&
+            ElectoralNormalizer.containsWholeWord(queryText, "arma") &&
+            !ElectoralNormalizer.containsWordPrefix(queryText, "amenaz")
+        ) {
             totalScore += 20.0
             breakdown["bonus_vigilante_arma"] = 20.0
         }
-        if (situation.id == "ARM-002" && (queryText.contains("votante") || queryText.contains("elector")) && queryText.contains("amenaz")) {
+        if (situation.id == "ARM-002" &&
+            (ElectoralNormalizer.containsWholeWord(queryText, "votante") || ElectoralNormalizer.containsWholeWord(queryText, "elector")) &&
+            ElectoralNormalizer.containsWordPrefix(queryText, "amenaz")
+        ) {
             totalScore += 25.0
             breakdown["bonus_amenaza_votante"] = 25.0
         }
-        if (situation.id == "DUI-002" && (queryText.contains("foto") || queryText.contains("fotografia")) && (queryText.contains("parece") || queryText.contains("rasgos"))) {
+        if (situation.id == "DUI-002" &&
+            (ElectoralNormalizer.containsWholeWord(queryText, "foto") || ElectoralNormalizer.containsWholeWord(queryText, "fotografia")) &&
+            (ElectoralNormalizer.containsWholeWord(queryText, "parece") || ElectoralNormalizer.containsWholeWord(queryText, "rasgos"))
+        ) {
             totalScore += 35.0
             breakdown["bonus_foto_dui"] = 35.0
         }
-        if ((situation.id == "INST-001" || situation.id == "INS-001") && queryText.contains("instala") && (queryText.contains("mesa") || queryText.contains("jrv") || queryText.contains("necesita"))) {
+        if ((situation.id == "INST-001" || situation.id == "INS-001") &&
+            ElectoralNormalizer.containsWordPrefix(queryText, "instala") &&
+            (ElectoralNormalizer.containsWholeWord(queryText, "mesa") || ElectoralNormalizer.containsWholeWord(queryText, "jrv") || ElectoralNormalizer.containsWholeWord(queryText, "necesita"))
+        ) {
             totalScore += 30.0
             breakdown["bonus_instalacion_mesa"] = 30.0
         }
-        if (situation.id == "ESC-001" && ((queryText.contains("cierre") && (queryText.contains("voto") || queryText.contains("votacion") || queryText.contains("mesa"))) || (queryText.contains("5") && (queryText.contains("cierre") || queryText.contains("escrutinio") || queryText.contains("tarde") || queryText.contains("pm"))))) {
+        if (situation.id == "ESC-001" &&
+            ((ElectoralNormalizer.containsWholeWord(queryText, "cierre") && (ElectoralNormalizer.containsWholeWord(queryText, "voto") || ElectoralNormalizer.containsWholeWord(queryText, "votacion") || ElectoralNormalizer.containsWholeWord(queryText, "mesa"))) ||
+                (ElectoralNormalizer.containsWholeWord(queryText, "5") && (ElectoralNormalizer.containsWholeWord(queryText, "cierre") || ElectoralNormalizer.containsWholeWord(queryText, "escrutinio") || ElectoralNormalizer.containsWholeWord(queryText, "tarde") || ElectoralNormalizer.containsWholeWord(queryText, "pm"))))
+        ) {
             totalScore += 35.0
             breakdown["bonus_cierre_votacion"] = 35.0
         }

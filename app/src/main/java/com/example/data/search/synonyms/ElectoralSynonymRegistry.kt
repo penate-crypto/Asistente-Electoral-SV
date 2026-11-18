@@ -106,8 +106,7 @@ object ElectoralSynonymRegistry {
 
         for ((concept, synonyms) in SYNONYM_GROUPS) {
             for (synonym in synonyms) {
-                val cleanSyn = ElectoralNormalizer.stripAccents(synonym.lowercase())
-                if (clean.contains(cleanSyn)) {
+                if (ElectoralNormalizer.containsWholeWord(clean, synonym)) {
                     matchedConcepts.add(concept)
                     break
                 }
@@ -125,8 +124,14 @@ object ElectoralSynonymRegistry {
         if (cleanA == cleanB) return true
 
         for ((_, synonyms) in SYNONYM_GROUPS) {
-            val hasA = synonyms.any { ElectoralNormalizer.stripAccents(it.lowercase()) == cleanA || cleanA.contains(ElectoralNormalizer.stripAccents(it.lowercase())) }
-            val hasB = synonyms.any { ElectoralNormalizer.stripAccents(it.lowercase()) == cleanB || cleanB.contains(ElectoralNormalizer.stripAccents(it.lowercase())) }
+            val hasA = synonyms.any {
+                val cleanSyn = ElectoralNormalizer.stripAccents(it.lowercase())
+                cleanSyn == cleanA || ElectoralNormalizer.containsWholeWord(cleanA, cleanSyn)
+            }
+            val hasB = synonyms.any {
+                val cleanSyn = ElectoralNormalizer.stripAccents(it.lowercase())
+                cleanSyn == cleanB || ElectoralNormalizer.containsWholeWord(cleanB, cleanSyn)
+            }
             if (hasA && hasB) return true
         }
         return false

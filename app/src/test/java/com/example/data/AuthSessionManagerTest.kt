@@ -50,8 +50,8 @@ class AuthSessionManagerTest {
 
     @Test
     fun testIsValidPasswordFormat() {
-        assertTrue("Contraseña de 8 o más caracteres debe ser válida", AuthSessionManager.isValidPasswordFormat("Abc123@#$"))
-        assertTrue("Contraseña numérica de 8 o más caracteres debe ser válida", AuthSessionManager.isValidPasswordFormat("12345678"))
-        assertFalse("Contraseña menor a 8 caracteres debe ser inválida", AuthSessionManager.isValidPasswordFormat("12345"))
+        assertTrue("La contraseña abc123 debe ser válida", AuthSessionManager.isValidPasswordFormat(AuthSessionManager.TEST_USER_PASSWORD))
+        assertTrue("Contraseña numérica de 6 o más caracteres debe ser válida", AuthSessionManager.isValidPasswordFormat("123456"))
+        assertFalse("Contraseña menor a 6 caracteres debe ser inválida", AuthSessionManager.isValidPasswordFormat("12345"))
     }
 }

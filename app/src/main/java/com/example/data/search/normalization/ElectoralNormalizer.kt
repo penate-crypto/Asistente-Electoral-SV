@@ -113,7 +113,9 @@ object ElectoralNormalizer {
         Regex("\\bcinco\\s+de\\s+la\\s+tarde\\b", RegexOption.IGNORE_CASE) to "5 pm cierre de votacion",
         Regex("\\b5\\s*p\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "5 pm",
         Regex("\\b7\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "7 am",
-        Regex("\\b6\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "6 am"
+        Regex("\\b6\\s*a\\.?m\\.?\\b", RegexOption.IGNORE_CASE) to "6 am",
+        Regex("\\b(?:se\\s+)?arma(?:r)?\\s+(?:la\\s+)?(mesa|jrv)\\b", RegexOption.IGNORE_CASE) to "instalar la $1",
+        Regex("\\bcomo\\s+se\\s+arma\\b", RegexOption.IGNORE_CASE) to "como se instala"
     )
 
     /**
@@ -163,9 +165,39 @@ object ElectoralNormalizer {
     }
 
     /**
+     * Checks if [text] (already lowercase and accent-stripped) contains [term] at word boundaries.
+     */
+    fun containsWholeWord(text: String, term: String): Boolean {
+        val cleanTerm = stripAccents(term.lowercase()).trim()
+        if (cleanTerm.isBlank()) return false
+        val escaped = Regex.escape(cleanTerm)
+        return Regex("(?<![a-z0-9])$escaped(?![a-z0-9])").containsMatchIn(text)
+    }
+
+    /**
+     * Checks if [text] contains a word starting with [prefix] (for intentional verb stems like amenaz*, ingres*, romp*).
+     */
+    fun containsWordPrefix(text: String, prefix: String): Boolean {
+        val cleanPrefix = stripAccents(prefix.lowercase()).trim()
+        if (cleanPrefix.isBlank()) return false
+        val escaped = Regex.escape(cleanPrefix)
+        return Regex("(?<![a-z0-9])$escaped").containsMatchIn(text)
+    }
+
+    /**
+     * Tokenizes clean lowercase ASCII text and singularizes tokens.
+     */
+    fun tokenizeAndSingularize(cleanText: String): List<String> {
+        return cleanText.replace("[^a-z0-9\\s]".toRegex(), " ")
+            .split("\\s+".toRegex())
+            .filter { it.isNotBlank() }
+            .map { singularize(it) }
+    }
+
+    /**
      * Basic singularization for Spanish electoral terms
      */
-    private fun singularize(word: String): String {
+    fun singularize(word: String): String {
         return when {
             word.endsWith("ces") -> word.dropLast(3) + "z"
             word.endsWith("es") && (word.endsWith("nes") || word.endsWith("res") || word.endsWith("les")) -> word.dropLast(2)

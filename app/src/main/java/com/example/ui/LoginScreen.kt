@@ -69,7 +69,7 @@ fun LoginScreen(
         }
     }
 
-    val isFormValid = rawDuiDigits.length == 9 && password.length >= 8
+    val isFormValid = rawDuiDigits.length == 9 && password.length >= 6
 
     fun performLogin(forceTransfer: Boolean = false) {
         focusManager.clearFocus()
@@ -80,8 +80,8 @@ fun LoginScreen(
             return
         }
 
-        if (password.length < 8) {
-            errorMessage = "La contraseña debe tener un mínimo de 8 caracteres."
+        if (password.length < 6) {
+            errorMessage = "La contraseña debe tener un mínimo de 6 caracteres."
             return
         }
 

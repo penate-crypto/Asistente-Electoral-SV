@@ -143,18 +143,32 @@ class ElectoralRepository(
         }
 
         val finalAnswer = searchResult.formattedResponse
+        val firstDocSource = searchResult.topSituation?.respuesta?.fuentesDocumentales?.firstOrNull()
+        val primaryDocId = firstDocSource?.pdfDocId ?: searchResult.topSituation?.respuesta?.primaryPdfDocId
+        val primaryPage = firstDocSource?.pagina ?: searchResult.topSituation?.respuesta?.primaryPdfPage ?: 1
+
         queryHistoryDao.insertHistory(
             QueryHistory(
                 question = trimmedQuestion,
                 answer = finalAnswer
             )
         )
-        return@withContext AnswerResult.Success(finalAnswer, suggestions)
+        return@withContext AnswerResult.Success(
+            text = finalAnswer,
+            suggestions = suggestions,
+            primaryPdfDocId = primaryDocId,
+            primaryPdfPage = primaryPage
+        )
     }
 }
 
 sealed class AnswerResult {
-    data class Success(val text: String, val suggestions: List<String> = emptyList()) : AnswerResult()
+    data class Success(
+        val text: String,
+        val suggestions: List<String> = emptyList(),
+        val primaryPdfDocId: String? = null,
+        val primaryPdfPage: Int = 1
+    ) : AnswerResult()
     data class Error(val errorMessage: String) : AnswerResult()
 }
 
