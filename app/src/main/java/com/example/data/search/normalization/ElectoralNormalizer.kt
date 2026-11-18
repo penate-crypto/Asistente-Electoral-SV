@@ -118,12 +118,16 @@ object ElectoralNormalizer {
         Regex("\\bcomo\\s+se\\s+arma\\b", RegexOption.IGNORE_CASE) to "como se instala"
     )
 
+    private val COMBINING_MARKS = "\\p{InCombiningDiacriticalMarks}+".toRegex()
+
     /**
      * Remove accents/diacritics and convert to ASCII
      */
     fun stripAccents(input: String): String {
+        // Camino rápido: texto ASCII puro no necesita normalización (la mayoría de las llamadas).
+        if (input.all { it.code < 128 }) return input
         val normalized = Normalizer.normalize(input, Normalizer.Form.NFD)
-        return normalized.replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
+        return normalized.replace(COMBINING_MARKS, "")
     }
 
     /**
@@ -167,11 +171,22 @@ object ElectoralNormalizer {
     /**
      * Checks if [text] (already lowercase and accent-stripped) contains [term] at word boundaries.
      */
+    private fun isWordChar(c: Char) = c in 'a'..'z' || c in '0'..'9'
+
     fun containsWholeWord(text: String, term: String): Boolean {
         val cleanTerm = stripAccents(term.lowercase()).trim()
         if (cleanTerm.isBlank()) return false
-        val escaped = Regex.escape(cleanTerm)
-        return Regex("(?<![a-z0-9])$escaped(?![a-z0-9])").containsMatchIn(text)
+        // Equivale a Regex("(?<![a-z0-9])term(?![a-z0-9])") pero sin compilar una regex por llamada.
+        var from = 0
+        while (true) {
+            val idx = text.indexOf(cleanTerm, from)
+            if (idx < 0) return false
+            val end = idx + cleanTerm.length
+            val before = idx == 0 || !isWordChar(text[idx - 1])
+            val after = end >= text.length || !isWordChar(text[end])
+            if (before && after) return true
+            from = idx + 1
+        }
     }
 
     /**
@@ -180,8 +195,13 @@ object ElectoralNormalizer {
     fun containsWordPrefix(text: String, prefix: String): Boolean {
         val cleanPrefix = stripAccents(prefix.lowercase()).trim()
         if (cleanPrefix.isBlank()) return false
-        val escaped = Regex.escape(cleanPrefix)
-        return Regex("(?<![a-z0-9])$escaped").containsMatchIn(text)
+        var from = 0
+        while (true) {
+            val idx = text.indexOf(cleanPrefix, from)
+            if (idx < 0) return false
+            if (idx == 0 || !isWordChar(text[idx - 1])) return true
+            from = idx + 1
+        }
     }
 
     /**
