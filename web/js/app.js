@@ -41,13 +41,13 @@ ctx.abrirLibro = (docId, pagina = 1, buscar = false) => {
   if (!doc) { toast("Documento no encontrado en la biblioteca"); return; }
   abrirPdf({ doc, pagina, buscar });
 };
-ctx.nav = (ruta) => { if (location.hash !== "#/" + ruta) location.hash = "#/" + ruta; else ctx.render(); };
+ctx.nav = (ruta) => { if (location.hash !== "#" + ruta) location.hash = "#" + ruta; else ctx.render(); };
 ctx.preguntar = (q) => { ctx.consultaPendiente = q; if (ctx.ruta === "chat" && ctx.consultar) { ctx.consultaPendiente = null; ctx.consultar(q); } else ctx.nav("chat"); };
 ctx.cerrarSesion = () => { ctx.lector.detener(); ctx.oyente.detener(); store.del("sesion"); ctx.usuario = null; arrancar(); };
 
 let limpiar = null, main, titulo, subtitulo, bottom, drawer;
 ctx.render = () => {
-  const ruta = (location.hash.replace(/^#\//, "") || "chat").split("?")[0];
+  const ruta = (location.hash.replace(/^#\/?/, "") || "chat").split("?")[0];
   ctx.ruta = PANTALLAS[ruta] ? ruta : "chat";
   limpiar?.(); limpiar = null;
   const sec = SECCIONES.find((s) => s[0] === ctx.ruta);
