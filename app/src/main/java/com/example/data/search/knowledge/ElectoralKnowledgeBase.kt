@@ -934,6 +934,7 @@ object ElectoralKnowledgeBase {
      * Initializes the knowledge base by reading all JSON files in assets/json respuestas/
      */
     fun init(context: Context) {
+        com.example.data.search.synonyms.ElectoralConceptRegistry.init(context)
         try {
             val jsonSituations = JsonKnowledgeLoader.loadAllFromAssets(context)
             synchronized(_loadedSituations) {

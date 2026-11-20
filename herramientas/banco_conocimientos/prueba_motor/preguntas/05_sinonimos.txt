@@ -1,0 +1,11 @@
+VOT-005|persona bolo
+VOT-005|persona bola
+VOT-005|un bolo quiere votar
+VOT-005|hay un señor tomado en la fila
+VOT-005|una borracha llego a votar
+VOT-005|persona en estado de ebriedad
+VOT-005|alguien alcoholizado en la mesa
+VOT-005|un tipo ebrio
+VOT-005|llego un bolito a votar
+VOT-005|un votante que anda pasado de tragos
+VOT-005|persona con aliento a licor quiere votar
