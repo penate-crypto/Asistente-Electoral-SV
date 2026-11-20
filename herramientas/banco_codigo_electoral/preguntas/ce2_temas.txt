@@ -1,0 +1,50 @@
+284|en el codigo electoral donde habla de bebidas embriagantes
+284|codigo electoral borrachos y venta de licor el dia de las elecciones
+284|codigo electoral ley seca
+284|que dice el codigo electoral sobre un bolo votando
+207|en el codigo electoral donde aparece el voto nulo
+207|codigo electoral votos nulos
+206|codigo electoral voto impugnado
+204|codigo electoral papeletas inutilizadas
+6|codigo electoral documento para votar
+7|codigo electoral inhabilidades para votar
+195|codigo electoral inicio de la votacion a que hora empieza
+198|codigo electoral hasta que hora se vota
+193|codigo electoral colocacion del padron
+192|codigo electoral acta de instalacion
+191|codigo electoral acreditacion de vigilantes
+175|codigo electoral propaganda anticipada
+176|codigo electoral encuestas prohibidas
+177|codigo electoral simbolos partidarios
+226|codigo electoral sancion por hacer propaganda
+232|codigo electoral multa a miembros de la junta receptora
+250|codigo electoral usurpacion de cargo en la junta receptora
+246|codigo electoral perturbacion del proceso electoral
+247|codigo electoral expulsion de extranjeros
+289|codigo electoral fuerza armada
+290|codigo electoral prohibicion de armas
+290|en el codigo electoral quien puede portar armas
+289,290|codigo electoral militares el dia de votacion
+287|codigo electoral transporte colectivo
+270,272,273|codigo electoral causales de nulidad de elecciones
+217|codigo electoral asignacion de escaños
+223|codigo electoral protesta de ley diputados parlacen
+221|codigo electoral acta de escrutinio final
+220|codigo electoral declaratoria firme
+256,278|codigo electoral fiscal electoral
+211|codigo electoral copias del acta de cierre
+209|codigo electoral formularios de actas
+194|codigo electoral anaqueles y depositos
+197|codigo electoral como se emite el voto
+196|codigo electoral procedimiento de votacion
+5|codigo electoral inscripcion en el registro electoral
+28|codigo electoral informar defunciones
+248|codigo electoral residencia falsa
+249|codigo electoral propaganda calumniosa
+255|codigo electoral plazo para pagar multas
+198|codigo electoral hora de cierre
+ONLY:193|codigo electoral colocacion del padron
+-|que hora cierra la votacion
+-|codigo penal articulo 295
+-|el codigo electoral de mexico
+-|futbol codigo electoral messi

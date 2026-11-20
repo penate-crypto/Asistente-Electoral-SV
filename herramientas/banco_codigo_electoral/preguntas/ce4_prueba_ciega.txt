@@ -1,0 +1,41 @@
+198|codigo electoral cierre de votacion
+207|en el codigo electoral que dice de la papeleta nula
+290|codigo electoral prohibido portar armas en el centro
+284|en el codigo electoral hay algo de bebidas alcoholicas en elecciones
+284|codigo electoral consumo de bebidas embriagantes
+195|codigo electoral inicio de votacion
+193|codigo electoral donde se coloca el padron en la mesa
+194|codigo electoral donde se guardan las papeletas
+204|codigo electoral papeletas que sobran
+205|codigo electoral cuando un voto es valido
+208|codigo electoral como saber si la papeleta es autentica
+209|codigo electoral formularios de acta
+211|codigo electoral quien recibe copia del acta de cierre
+213|codigo electoral traslado de actas al tribunal
+214|codigo electoral procedimiento del escrutinio final
+216|codigo electoral segunda eleccion convocatoria
+218|codigo electoral diputados electos
+221|codigo electoral publicacion del acta de escrutinio final
+226|codigo electoral sancion por hacer propaganda
+228|codigo electoral uso de vehiculos oficiales en campana
+230|codigo electoral publicidad del gobierno
+231|codigo electoral propaganda en oficinas publicas
+235|codigo electoral sancion a jed y jem por no entregar actas
+236|codigo electoral responsabilidad personal
+237|codigo electoral credenciales fraudulentas
+246|codigo electoral perturbar el proceso electoral
+249|codigo electoral propaganda injuriosa
+252|codigo electoral denuncia de infracciones
+254|codigo electoral proceso sancionatorio
+258|codigo electoral medios de impugnacion
+274|codigo electoral presupuesto del tribunal
+277|codigo electoral patrimonio del tribunal
+279|codigo electoral fomento del conocimiento de la legislacion electoral
+281|codigo electoral campanas de publicidad del tribunal
+284|codigo electoral venta de bebidas embriagantes
+10|codigo electoral circunscripciones
+12|codigo electoral integracion de concejos municipales
+13|codigo electoral integracion de la asamblea legislativa
+20|codigo electoral suspension de inscripciones
+23|codigo electoral inscripciones repetidas
+26|codigo electoral exclusion conforme a derecho

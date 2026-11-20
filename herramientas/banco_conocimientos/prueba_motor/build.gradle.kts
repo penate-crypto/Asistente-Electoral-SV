@@ -16,12 +16,12 @@ sourceSets {
     main {
         kotlin {
             srcDir("../../../app/src/main/java")
-            include("com/example/data/search/**", "com/example/data/ElectoralPdfData.kt", "Main.kt")
+            include("com/example/data/search/**", "com/example/data/ElectoralPdfData.kt", "Main.kt", "CodeMain.kt")
         }
     }
 }
 
-application { mainClass.set("MainKt") }
+application { mainClass.set(System.getenv("MAINCLS") ?: "MainKt") }
 
 tasks.named<JavaExec>("run") {
     workingDir = projectDir

@@ -935,6 +935,7 @@ object ElectoralKnowledgeBase {
      */
     fun init(context: Context) {
         com.example.data.search.synonyms.ElectoralConceptRegistry.init(context)
+        com.example.data.search.codigo.ElectoralCodeBank.init(context)
         try {
             val jsonSituations = JsonKnowledgeLoader.loadAllFromAssets(context)
             synchronized(_loadedSituations) {

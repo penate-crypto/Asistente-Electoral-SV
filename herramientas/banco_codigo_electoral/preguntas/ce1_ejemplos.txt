@@ -1,0 +1,11 @@
+198|en el codigo electoral donde aparece la hora de cierre de la votacion
+200,212|en el codigo electoral donde aparece el escrutinio preliminar
+290|codigo electoral armas en el centro de votacion
+290|segun el codigo electoral puede entrar un policia armado
+112,98,99,100|en el codigo electoral donde aparece lo de la JRV
+198|codigo electoral articulo 198
+198|art. 198 del codigo electral
+200,201,202,203|codigo electoral articulos 200 al 203
+-|que dice el articulo 198
+-|como se instala la mesa
+-|codigo electoral articulo 9999

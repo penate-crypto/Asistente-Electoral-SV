@@ -1,0 +1,32 @@
+198|segun el codigo electoral a que hora se termina de votar
+195|en el codigo electoral a que hora abre la votacion
+284|codigo electoral se puede vender guaro el dia de la eleccion
+284|codigo electoral prohibicion de alcohol el dia de elecciones
+207|que articulo del codigo electoral habla de los votos nulos
+206|codigo electoral votos que se impugnan
+290|codigo electoral se pueden llevar pistolas a votar
+250|codigo electoral alguien que se hace pasar por miembro de la junta
+232|codigo electoral que pasa si un miembro de la jrv falta
+242|codigo electoral negarse a ser parte de la junta
+192|codigo electoral el acta cuando se instala la mesa
+191|codigo electoral como se acredita un vigilante
+212|codigo electoral conteo preliminar de votos
+220|codigo electoral cuando queda firme la eleccion
+273,270,272|codigo electoral cuando se anulan las elecciones
+175|codigo electoral hacer campaña antes de tiempo
+177|codigo electoral banderas y simbolos del partido
+241|codigo electoral pastores y propaganda
+247|codigo electoral extranjeros que se meten en politica
+248|codigo electoral dar una direccion falsa para votar
+6|codigo electoral con que documento se vota
+5|codigo electoral como me inscribo para votar
+25|codigo electoral cambio de domicilio
+21,28|codigo electoral muertos en el registro electoral
+224|codigo electoral credenciales de los alcaldes
+223|codigo electoral juramento de diputados parlacen
+287|codigo electoral buses para llevar votantes
+255|codigo electoral cuanto tiempo tengo para pagar una multa
+198|codigo electral hora de cierre
+139,200,212|cod electoral escrutinio
+-|donde dice cuanto dura la votacion
+-|constitucion articulo 72
