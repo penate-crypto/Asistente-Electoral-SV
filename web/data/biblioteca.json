@@ -1,0 +1,133 @@
+{
+ "categorias": [
+  "Todos",
+  "Disposiciones Fundamentales",
+  "Organismos Electorales (JRV, JEM, JED, TSE)",
+  "Fiscalización y Vigilancia",
+  "Votación y Escrutinio",
+  "Sanciones, Delitos y Recursos",
+  "Organización Territorial y Municipal"
+ ],
+ "documentos": [
+  {
+   "id": "codigo_electoral_decreto_413",
+   "title": "Código Electoral de la República de El Salvador (Decreto 413)",
+   "category": "Disposiciones Fundamentales",
+   "summary": "Decreto No. 413 de la Asamblea Legislativa de la República de El Salvador (D.O. No. 138, Tomo No. 400). Texto oficial consolidado con todas sus reformas, interpretaciones auténticas y sentencias de la Sala de lo Constitucional.",
+   "authority": "Asamblea Legislativa de El Salvador • Tribunal Supremo Electoral",
+   "releaseDate": "D.O. No. 138, Tomo No. 400 (Actualizado)",
+   "assetPath": "libros/codigo_electoral_decreto_413.pdf",
+   "totalPaginas": 105
+  },
+  {
+   "id": "constitucion_republica_1983",
+   "title": "Constitución de la República de El Salvador (1983)",
+   "category": "Disposiciones Fundamentales",
+   "summary": "Carta Magna y Ley Suprema de la República de El Salvador. Contiene los principios fundamentales del sistema político democrático, la soberanía ciudadana, los derechos políticos fundamentales (Arts. 71-89) y las atribuciones del Tribunal Supremo Electoral (Arts. 208-209).",
+   "authority": "Asamblea Constituyente de 1983 • República de El Salvador",
+   "releaseDate": "D.O. No. 234, Tomo No. 281 (1983)",
+   "assetPath": "libros/constitucion_republica_1983.pdf",
+   "totalPaginas": 62
+  },
+  {
+   "id": "ley_de_partidos_politicos",
+   "title": "Ley de Partidos Políticos (Decreto No. 307)",
+   "category": "Fiscalización y Vigilancia",
+   "summary": "Regula la constitución, organización, funcionamiento, financiamiento público y privado, democracia interna, cuotas de género y fiscalización de los partidos políticos en El Salvador.",
+   "authority": "Asamblea Legislativa • Tribunal Supremo Electoral",
+   "releaseDate": "Decreto Legislativo No. 307",
+   "assetPath": "libros/ley_de_partidos_politicos.pdf",
+   "totalPaginas": 41
+  },
+  {
+   "id": "ley_acceso_informacion_publica",
+   "title": "Ley de Acceso a la Información Pública (LAIP)",
+   "category": "Disposiciones Fundamentales",
+   "summary": "Garantiza el derecho de toda persona a acceder a la información en poder de los órganos del Estado, instituciones electorales y partidos políticos receptores de fondos públicos.",
+   "authority": "Instituto de Acceso a la Información Pública (IAIP) • Asamblea Legislativa",
+   "releaseDate": "Decreto Legislativo No. 534",
+   "assetPath": "libros/ley_acceso_informacion_publica.pdf",
+   "totalPaginas": 41
+  },
+  {
+   "id": "ley_sufragio_extranjero_542",
+   "title": "Ley Especial para el Ejercicio del Sufragio en el Extranjero (Decreto No. 542)",
+   "category": "Votación y Escrutinio",
+   "summary": "Decreto Legislativo No. 542 que regula las modalidades de votación electrónica por internet (remota) y votación electrónica presencial en sedes diplomáticas y consulares para salvadoreños en el exterior, padrón electoral del exterior y JELVEX.",
+   "authority": "Asamblea Legislativa de El Salvador • Tribunal Supremo Electoral",
+   "releaseDate": "Decreto Legislativo No. 542 (Vigente)",
+   "assetPath": "libros/ley_sufragio_extranjero_542.pdf",
+   "totalPaginas": 12
+  },
+  {
+   "id": "ley_reestructuracion_municipal_763",
+   "title": "Ley Especial para la Reestructuración Municipal (Decreto No. 763)",
+   "category": "Organización Territorial y Municipal",
+   "summary": "Decreto Legislativo No. 763 que reorganiza la división político-administrativa de El Salvador en 44 Municipios y 262 Distritos Municipales, regulando los Concejos Municipales, cabeceras y circunscripciones electorales.",
+   "authority": "Asamblea Legislativa de El Salvador",
+   "releaseDate": "Decreto Legislativo No. 763 (D.O. No. 110, Tomo 439)",
+   "assetPath": "libros/ley_reestructuracion_municipal_763.pdf",
+   "totalPaginas": 19
+  },
+  {
+   "id": "codigo_penal_delitos_electorales",
+   "title": "Código Penal de El Salvador (Delitos Electorales)",
+   "category": "Sanciones, Delitos y Recursos",
+   "summary": "Tipificación de delitos contra los derechos cívicos y electorales (Arts. 295 a 302): Fraude electoral, coacción del sufragio, falsedad documental, obstaculización, usurpación de funciones y penas de prisión de hasta 15 años.",
+   "authority": "Asamblea Legislativa • Órgano Judicial de El Salvador",
+   "releaseDate": "Código Penal Consolidado",
+   "assetPath": "libros/codigo_penal_delitos_electorales.pdf",
+   "totalPaginas": 131
+  },
+  {
+   "id": "acuerdo_legislativo_reforma_electoral",
+   "title": "Acuerdo Legislativo - Reforma y Normativa Electoral",
+   "category": "Fiscalización y Vigilancia",
+   "summary": "Acuerdo legislativo y reformas procesales relativas a los cómputos de escrutinio, mayorías absolutas, adjudicación de escaños y plazos para elecciones en la República de El Salvador.",
+   "authority": "Asamblea Legislativa de El Salvador",
+   "releaseDate": "Acuerdos Legislativos Oficiales",
+   "assetPath": "libros/acuerdo_legislativo_reforma_electoral.pdf",
+   "totalPaginas": 6
+  },
+  {
+   "id": "ciclo_electoral_salvadoreno",
+   "title": "Ciclo Electoral Salvadoreño • Guía Doctrinal y Operativa",
+   "category": "Organismos Electorales (JRV, JEM, JED, TSE)",
+   "summary": "Guía integral del Tribunal Supremo Electoral sobre las tres macro-etapas del ciclo eleccionario salvadoreño: Pre-electoral (PLAGEL, padrón, candidaturas), Electoral (jornada y escrutinio preliminar) y Post-electoral (escrutinio final y credenciales).",
+   "authority": "Tribunal Supremo Electoral • Dirección de Capacitación",
+   "releaseDate": "Guía Metodológica TSE",
+   "assetPath": "libros/ciclo_electoral_salvadoreno.pdf",
+   "totalPaginas": 1
+  },
+  {
+   "id": "disposiciones_candidaturas_no_partidarias",
+   "title": "Disposiciones Especiales para Candidaturas No Partidarias",
+   "category": "Disposiciones Fundamentales",
+   "summary": "Normas que regulan los requisitos de inscripción, recolección de firmas ciudadanas, financiamiento y fiscalización para aspirantes independientes no afiliados a partidos políticos.",
+   "authority": "Asamblea Legislativa • Sentencias Sala de lo Constitucional",
+   "releaseDate": "Decreto Legislativo de Candidaturas Independientes",
+   "assetPath": "libros/disposiciones_candidaturas_no_partidarias.pdf",
+   "totalPaginas": 8
+  },
+  {
+   "id": "reglamento_observacion_electoral",
+   "title": "Reglamento General para la Observación Electoral Nacional e Internacional",
+   "category": "Fiscalización y Vigilancia",
+   "summary": "Normas y procedimientos dictados por el TSE para la acreditación, derechos, deberes y código de conducta de las misiones de observación electoral nacionales e internacionales.",
+   "authority": "Tribunal Supremo Electoral (TSE)",
+   "releaseDate": "Reglamento Oficial TSE",
+   "assetPath": "libros/reglamento_observacion_electoral.pdf",
+   "totalPaginas": 12
+  },
+  {
+   "id": "instructivo_jrv_tse",
+   "title": "Instructivo Oficial para Juntas Receptoras de Votos (JRV)",
+   "category": "Organismos Electorales (JRV, JEM, JED, TSE)",
+   "summary": "Guía operativa oficial emitida por el Tribunal Supremo Electoral para los integrantes de las Juntas Receptoras de Votos (JRV). Describe paso a paso la instalación a las 06:00 AM, apertura a las 07:00 AM, recepción de sufragios, escrutinio preliminar a las 05:00 PM y llenado de actas.",
+   "authority": "Tribunal Supremo Electoral (TSE)",
+   "releaseDate": "Instructivo Oficial de Capacitación",
+   "assetPath": "libros/instructivo_jrv_tse.pdf",
+   "totalPaginas": 62
+  }
+ ]
+}

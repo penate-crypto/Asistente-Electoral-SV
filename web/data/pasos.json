@@ -1,0 +1,784 @@
+{
+ "roles": {
+  "PRESIDENTE": [
+   {
+    "id": "pres_1",
+    "stageName": "1. Llegada e Instalación (06:00 AM)",
+    "timeLabel": "06:00 AM - 07:00 AM",
+    "overview": "Apertura del paquete electoral, verificación de miembros y acondicionamiento del área de votación.",
+    "items": [
+     {
+      "title": "Presentación",
+      "detail": "Presentarse a las 6:00 AM con DUI vigente y credencial oficial del TSE.",
+      "icon": ""
+     },
+     {
+      "title": "Recepción del Paquete",
+      "detail": "Recibir de la JEM el paquete electoral sellado y cotejar su número de JRV.",
+      "icon": ""
+     },
+     {
+      "title": "Verificación de Quórum",
+      "detail": "Constatar la presencia de al menos 3 miembros propietarios; de faltar, llamar suplentes a las 6:15 AM.",
+      "icon": ""
+     },
+     {
+      "title": "Revisión de Urnas",
+      "detail": "Mostrar a los vigilantes que las urnas plásticas están vacías y cerrarlas con los sellos.",
+      "icon": ""
+     },
+     {
+      "title": "Firma del Acta de Instalación",
+      "detail": "Firmar junto a los integrantes y vigilantes presentes el Acta de Instalación.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 100, 190, 191, 192",
+    "prohibitedOrWarning": "No puede iniciar la votación antes de las 7:00 AM ni con menos de 3 miembros acreditados."
+   },
+   {
+    "id": "pres_2",
+    "stageName": "2. Apertura y Conducción de la Votación (07:00 AM)",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Anuncio en voz alta del inicio de votación, orden en la mesa y resolución de incidencias.",
+    "items": [
+     {
+      "title": "Voto de Miembros y Vigilantes",
+      "detail": "A las 7:00 AM convocar a miembros y vigilantes para votar primero y retener temporalmente sus DUI.",
+      "icon": ""
+     },
+     {
+      "title": "Anuncio de Apertura",
+      "detail": "Declarar formalmente en voz alta abierta la votación para los ciudadanos en fila.",
+      "icon": ""
+     },
+     {
+      "title": "Verificación de Elector",
+      "detail": "Constatar que el elector figure en el padrón y que su DUI coincida.",
+      "icon": ""
+     },
+     {
+      "title": "Mantenimiento del Orden",
+      "detail": "Requerir auxilio inmediato de la PNC en caso de desórdenes, armas o propaganda.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 195, 196, 290",
+    "prohibitedOrWarning": "Prohibido admitir votantes sin DUI vigente o personas que ya tengan el dedo entintado."
+   },
+   {
+    "id": "pres_3",
+    "stageName": "3. Cierre y Escrutinio Preliminar (05:00 PM)",
+    "timeLabel": "05:00 PM en adelante",
+    "overview": "Cierre de la mesa, conteo voto por voto, calificación y firma del acta oficial.",
+    "items": [
+     {
+      "title": "Cierre a las 5:00 PM",
+      "detail": "Declarar cerrada la votación. Solo votan quienes ya estaban en la fila de la JRV.",
+      "icon": ""
+     },
+     {
+      "title": "Inutilización de Sobrantes",
+      "detail": "Presenciar que el Secretario cuente e inutilice las papeletas sobrantes.",
+      "icon": ""
+     },
+     {
+      "title": "Conteo Voto por Voto",
+      "detail": "Abrir la urna, extraer las papeletas y cantar en voz alta la calificación de cada voto.",
+      "icon": ""
+     },
+     {
+      "title": "Firma y Transmisión",
+      "detail": "Firmar el Acta de Escrutinio, entregar copias a vigilantes y entregar el original al transmisor del TSE.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 198, 200, 205, 209, 211",
+    "prohibitedOrWarning": "La firma del acta de escrutinio es obligatoria e inexcusable para todos los miembros (Art. 114)."
+   }
+  ],
+  "SECRETARIO": [
+   {
+    "id": "sec_1",
+    "stageName": "1. Conteo y Preparación de Papeletas (06:00 AM)",
+    "timeLabel": "06:00 AM - 07:00 AM",
+    "overview": "Revisión cuantitativa de paquetes, conteo de papeletas y firma previa en el reverso.",
+    "items": [
+     {
+      "title": "Inventario de Paquete",
+      "detail": "Verificar cantidad exacta de papeletas recibidas y correlativos numéricos.",
+      "icon": ""
+     },
+     {
+      "title": "Firma y Sellado",
+      "detail": "Firmar y estampar el sello oficial de la JRV en el reverso de cada papeleta.",
+      "icon": ""
+     },
+     {
+      "title": "Redacción del Acta de Instalación",
+      "detail": "Llenar con letra clara el Acta de Instalación y recabar firmas.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 186, 192",
+    "prohibitedOrWarning": "No entregar ninguna papeleta sin que antes haya sido firmada y sellada por el Secretario."
+   },
+   {
+    "id": "sec_2",
+    "stageName": "2. Entrega de Papeletas al Votante (07:00 AM)",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Retiro de la esquina desprendible y entrega formal de la papeleta doblada al ciudadano.",
+    "items": [
+     {
+      "title": "Mostrar Reverso",
+      "detail": "Mostrar al elector y vigilantes que la papeleta tiene la firma y el sello de la mesa.",
+      "icon": ""
+     },
+     {
+      "title": "Desprender Esquina",
+      "detail": "Retirar la esquina perforada con el número correlativo y depositarla en la bolsa especial.",
+      "icon": ""
+     },
+     {
+      "title": "Entrega al Votante",
+      "detail": "Entregar la papeleta al ciudadano indicándole que pase solo al anaquel secreto.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 186 inc. 3°, 196 inc. 2°",
+    "prohibitedOrWarning": "Nunca entregar la papeleta con la esquina correlativa pegada."
+   },
+   {
+    "id": "sec_3",
+    "stageName": "3. Llenado del Acta de Escrutinio Preliminar",
+    "timeLabel": "05:00 PM en adelante",
+    "overview": "Inutilización de sobrantes, registro de votos y entrega de copias oficiales.",
+    "items": [
+     {
+      "title": "Inutilizar Papeletas Sobrantes",
+      "detail": "Contar sobrantes, consignar número en el acta y rasgarlas o cruzarlas.",
+      "icon": ""
+     },
+     {
+      "title": "Llenado de Formulario",
+      "detail": "Anotar votos válidos por partido/coalición, nulos, abstenciones e impugnados.",
+      "icon": ""
+     },
+     {
+      "title": "Copias a Vigilantes",
+      "detail": "Llenar y sellar las copias en papel carbón/autocopiante para cada vigilante acreditado.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 200, 209, 211",
+    "prohibitedOrWarning": "La omisión de entregar copias selladas a vigilantes es sancionada legalmente (Art. 235)."
+   }
+  ],
+  "VOCAL_1": [
+   {
+    "id": "voc1_1",
+    "stageName": "1. Padrón de Búsqueda y Acondicionamiento (06:00 AM)",
+    "timeLabel": "06:00 AM - 07:00 AM",
+    "overview": "Colocación visible del padrón de consulta externa y organización del padrón de firmas.",
+    "items": [
+     {
+      "title": "Fijación del Padrón",
+      "detail": "Pegar un ejemplar del padrón en un muro visible cercano a la mesa.",
+      "icon": ""
+     },
+     {
+      "title": "Preparación de Tinta",
+      "detail": "Verificar el frasco de tinta indeleble y su almohadilla o aplicador.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 193, 197",
+    "prohibitedOrWarning": "El padrón debe colocarse donde no obstruya el paso ni sea dañado por la intemperie."
+   },
+   {
+    "id": "voc1_2",
+    "stageName": "2. Padrón de Firmas y Tinta Indeleble (07:00 AM)",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Recolección de firma/huella del ciudadano tras votar y aplicación de tinta indeleble.",
+    "items": [
+     {
+      "title": "Firma o Huella",
+      "detail": "Ubicar la casilla del elector en el padrón de firmas y solicitar su firma o huella dactilar.",
+      "icon": ""
+     },
+     {
+      "title": "Aplicación de Tinta",
+      "detail": "Manchar la cutícula del dedo pulgar derecho (o lugar visible) con tinta indeleble.",
+      "icon": ""
+     },
+     {
+      "title": "Devolución del DUI",
+      "detail": "Devolver el Documento de Identidad al elector tras constatar el entintado.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Art. 197 inc. final",
+    "prohibitedOrWarning": "No devolver el DUI antes de que el elector haya firmado y recibido la tinta indeleble."
+   },
+   {
+    "id": "voc1_3",
+    "stageName": "3. Cuadre del Padrón en el Escrutinio (05:00 PM)",
+    "timeLabel": "05:00 PM en adelante",
+    "overview": "Conteo exacto de firmas y huellas para cuadrar con las papeletas extraídas de la urna.",
+    "items": [
+     {
+      "title": "Conteo de Firmas",
+      "detail": "Sumar el total de ciudadanos que efectivamente firmaron en el padrón.",
+      "icon": ""
+     },
+     {
+      "title": "Cotejo con Urna",
+      "detail": "Cotejar que el total de firmas coincida con el total de votos dentro de la urna.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 200, 202 lit. k",
+    "prohibitedOrWarning": "Cualquier sobrante o faltante debe consignarse detalladamente en el acta."
+   }
+  ],
+  "VOCAL_2": [
+   {
+    "id": "voc2_1",
+    "stageName": "1. Búsqueda Rápida y Verificación de Electores",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Revisión rápida en el padrón alfabético para agilizar la fila de votantes.",
+    "items": [
+     {
+      "title": "Búsqueda en Padrón",
+      "detail": "Buscar el número de correlativo del votante en el padrón de búsqueda.",
+      "icon": ""
+     },
+     {
+      "title": "Constatación de Vigencia",
+      "detail": "Confirmar que los datos del DUI coincidan con el padrón electoral.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Art. 196",
+    "prohibitedOrWarning": "Si el DUI no coincide o está vencido/alterado, avisar al Presidente para resolución."
+   },
+   {
+    "id": "voc2_2",
+    "stageName": "2. Apoyo en Escrutinio y Clasificación de Papeletas",
+    "timeLabel": "05:00 PM en adelante",
+    "overview": "Separación ordenada de votos por partido, nulos, válidos y abstenciones.",
+    "items": [
+     {
+      "title": "Pilas de Votos",
+      "detail": "Colocar las papeletas en montones según la bandera o candidatura calificada.",
+      "icon": ""
+     },
+     {
+      "title": "Reconteo de Seguridad",
+      "detail": "Recontar en grupos de 10 papeletas para verificar la exactitud de los totales.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 200, 205",
+    "prohibitedOrWarning": "Manipular las papeletas siempre a la vista de todos los vigilantes presentes."
+   }
+  ],
+  "VOCAL_3": [
+   {
+    "id": "voc3_1",
+    "stageName": "1. Custodia de Anaqueles y Voto Accesible",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Resguardo de la privacidad del voto y asistencia prioritaria a grupos vulnerables.",
+    "items": [
+     {
+      "title": "Privacidad del Anaquel",
+      "detail": "Verificar que nadie observe ni tome fotografías a la papeleta dentro del anaquel.",
+      "icon": ""
+     },
+     {
+      "title": "Voto Preferente",
+      "detail": "Facilitar acceso prioritario a adultos mayores, embarazadas y personas con discapacidad.",
+      "icon": ""
+     },
+     {
+      "title": "Crayones",
+      "detail": "Constatar permanentemente que los crayones no se hayan agotado o roto en los anaqueles.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 194, 197",
+    "prohibitedOrWarning": "Prohibido el ingreso de acompañantes al anaquel salvo casos de asistencia a discapacidad severa."
+   },
+   {
+    "id": "voc3_2",
+    "stageName": "2. Empaque y Sellado de Paquetes Finales",
+    "timeLabel": "Finalización de la jornada",
+    "overview": "Organización de sobres y custodia física del paquete electoral para entrega a la JEM.",
+    "items": [
+     {
+      "title": "Empaque de Sobres",
+      "detail": "Introducir papeletas válidas, nulas, sobrantes e impugnadas en sus bolsas rotuladas.",
+      "icon": ""
+     },
+     {
+      "title": "Sellado de Caja",
+      "detail": "Cerrar la caja del paquete con la cinta de seguridad adhesiva oficial.",
+      "icon": ""
+     },
+     {
+      "title": "Entrega a la JEM",
+      "detail": "Acompañar al Presidente y Secretario a la entrega del paquete a la JEM y firmar recibo.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Art. 210",
+    "prohibitedOrWarning": "Nunca abandonar el paquete electoral desatendido en ningún momento."
+   }
+  ],
+  "VIGILANTE": [
+   {
+    "id": "vig_1",
+    "stageName": "1. Acreditación e Instalación (06:00 AM)",
+    "timeLabel": "06:00 AM - 07:00 AM",
+    "overview": "Presentación de credencial sellada y fiscalización del armado de urnas y conteo inicial.",
+    "items": [
+     {
+      "title": "Acreditación ante JRV",
+      "detail": "Presentar credencial emitida por el partido o TSE junto a su DUI.",
+      "icon": ""
+     },
+     {
+      "title": "Vigilancia de Urnas",
+      "detail": "Comprobar visualmente que las urnas estén completamente vacías antes de sellarlas.",
+      "icon": ""
+     },
+     {
+      "title": "Firma de Instalación",
+      "detail": "Firmar el Acta de Instalación de la mesa (o manifestar inconformidad si hubiere anomalía).",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 123, 128, 192",
+    "prohibitedOrWarning": "Prohibido tocar físicamente papeletas o urnas (Art. 129)."
+   },
+   {
+    "id": "vig_2",
+    "stageName": "2. Fiscalización de la Votación (07:00 AM)",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Observar la verificación de identidad en padrón y reportar anomalías a su supervisor o jefe de centro.",
+    "items": [
+     {
+      "title": "Emisión del Voto",
+      "detail": "Votar en la mesa donde está acreditado a las 7:00 AM reteniendo temporalmente su DUI.",
+      "icon": ""
+     },
+     {
+      "title": "Fiscalización de Votantes",
+      "detail": "Exigir que todo elector presente su DUI original y no tenga el dedo manchado.",
+      "icon": ""
+     },
+     {
+      "title": "Derecho a Voz",
+      "detail": "Intervenir con respeto ante irregularidades sin interrumpir las funciones de la mesa.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 127, 128, 195",
+    "prohibitedOrWarning": "Prohibido hacer propaganda política o portar distintivos partidarios dentro del centro (Arts. 175, 177)."
+   },
+   {
+    "id": "vig_3",
+    "stageName": "3. Escrutinio, Impugnaciones y Copia del Acta",
+    "timeLabel": "05:00 PM en adelante",
+    "overview": "Fiscalización voto por voto, derecho a solicitar impugnaciones y recepción obligatoria de copia sellada.",
+    "items": [
+     {
+      "title": "Vigilancia del Conteo",
+      "detail": "Presenciar la apertura de urna y la calificación de cada papeleta en voz alta.",
+      "icon": ""
+     },
+     {
+      "title": "Impugnación Fundada",
+      "detail": "Solicitar la impugnación de votos dudosos para resolución en escrutinio final.",
+      "icon": ""
+     },
+     {
+      "title": "Recepción de Copia Sellada",
+      "detail": "Exigir y recibir copia certificada, firmada y sellada del Acta de Escrutinio Preliminar.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 200, 206, 209, 211",
+    "prohibitedOrWarning": "La negativa de la JRV a entregar copia del acta es delito sancionable por ley (Art. 235)."
+   }
+  ],
+  "SUPERVISOR": [
+   {
+    "id": "sup_1",
+    "stageName": "1. Coordinación e Instalación de Mesas (06:00 AM)",
+    "timeLabel": "06:00 AM - 07:00 AM",
+    "overview": "Supervisión de hasta 20 JRV asignadas, verificación de llegada de vigilantes y provisión de insumos.",
+    "items": [
+     {
+      "title": "Acreditación",
+      "detail": "Portar credencial de Supervisor emitida por el partido político contendiente.",
+      "icon": ""
+     },
+     {
+      "title": "Pase de Lista de Vigilantes",
+      "detail": "Verificar que cada mesa asignada cuente con su vigilante propietario o suplente.",
+      "icon": ""
+     },
+     {
+      "title": "Sustituciones Oportunas",
+      "detail": "Coordinar con la JEM la incorporación de vigilantes suplentes ante ausencias.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 125, 127",
+    "prohibitedOrWarning": "No puede integrar una JRV como miembro de mesa; su rol es fiscalizador."
+   },
+   {
+    "id": "sup_2",
+    "stageName": "2. Emisión del Voto y Asesoría Legal",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Voto en la 2ª JRV del centro y asesoría legal continua a los vigilantes de mesa.",
+    "items": [
+     {
+      "title": "Voto en 2ª JRV",
+      "detail": "Votar en la 2ª JRV del centro de votación si el centro tiene más de 20 mesas.",
+      "icon": ""
+     },
+     {
+      "title": "Asistencia Legal",
+      "detail": "Asesorar a los vigilantes ante discrepancias en padrón o calificación de votos.",
+      "icon": ""
+     },
+     {
+      "title": "Coordinación con Jefe de Centro",
+      "detail": "Reportar anomalías graves al Jefe de Centro y Fiscal Electoral.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 125, 195 inc. 2°",
+    "prohibitedOrWarning": "Prohibido interferir físicamente en el desarrollo de las votaciones."
+   },
+   {
+    "id": "sup_3",
+    "stageName": "3. Recopilación de Copias de Actas de Escrutinio",
+    "timeLabel": "05:00 PM en adelante",
+    "overview": "Consolidar las copias de actas de las 20 JRV asignadas y entregarlas al Jefe de Centro.",
+    "items": [
+     {
+      "title": "Monitoreo de Escrutinio",
+      "detail": "Supervisar que el conteo en todas las mesas a su cargo transcurra con normalidad.",
+      "icon": ""
+     },
+     {
+      "title": "Recolección de Actas",
+      "detail": "Recibir de los vigilantes las copias originales selladas de las actas de escrutinio.",
+      "icon": ""
+     },
+     {
+      "title": "Entrega al Jefe de Centro",
+      "detail": "Entregar el paquete de actas consolidadas al centro de cómputo partidario.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 125, 211",
+    "prohibitedOrWarning": "Asegurar que todas las copias cuenten con las firmas y sellos oficiales legibles."
+   }
+  ],
+  "JEFE_DE_CENTRO": [
+   {
+    "id": "jefe_1",
+    "stageName": "1. Apertura del Centro de Votación y Logística (05:30 AM)",
+    "timeLabel": "05:30 AM - 07:00 AM",
+    "overview": "Máxima representación del partido en el centro escolar o sede de votación.",
+    "items": [
+     {
+      "title": "Presentación",
+      "detail": "Acreditarse ante el Delegado de la JEM y la PNC con su credencial oficial.",
+      "icon": ""
+     },
+     {
+      "title": "Despliegue de Vigilancia",
+      "detail": "Verificar la correcta distribución de supervisores y vigilantes en todas las mesas.",
+      "icon": ""
+     },
+     {
+      "title": "Colaboración en Instalación",
+      "detail": "Colaborar con las autoridades electorales para facilitar la instalación ordenada.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 125, 127, 192",
+    "prohibitedOrWarning": "No puede realizar actividades proselitistas dentro del centro de votación."
+   },
+   {
+    "id": "jefe_2",
+    "stageName": "2. Emisión del Voto y Representación Institucional",
+    "timeLabel": "07:00 AM - 05:00 PM",
+    "overview": "Voto en la 1ª JRV del centro e interlocución directa con Fiscalía, JEM y PNC.",
+    "items": [
+     {
+      "title": "Voto en 1ª JRV",
+      "detail": "Votar en la primera Junta Receptora de Votos del centro donde está acreditado.",
+      "icon": ""
+     },
+     {
+      "title": "Interlocución con Autoridades",
+      "detail": "Gestionar con la JEM y la Fiscalía Electoral cualquier incidencia grave o delito.",
+      "icon": ""
+     },
+     {
+      "title": "Resolución de Conflictos",
+      "detail": "Apoyar la solución pacífica de discrepancias entre vigilantes y miembros de JRV.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 125, 195 inc. 2°, 252",
+    "prohibitedOrWarning": "Cualquier denuncia formal debe acompañarse de prueba documental o testimonial pertinente."
+   },
+   {
+    "id": "jefe_3",
+    "stageName": "3. Transmisión de Resultados y Consolidación",
+    "timeLabel": "05:00 PM en adelante",
+    "overview": "Presenciar la transmisión de actas al TSE y custodiar el archivo partidario de actas.",
+    "items": [
+     {
+      "title": "Presenciar Transmisión",
+      "detail": "Presenciar el escaneo y transmisión de actas por el operador del TSE (Art. 210 inc. 6°).",
+      "icon": ""
+     },
+     {
+      "title": "Consolidación General",
+      "detail": "Recibir las copias de actas de todos los supervisores del centro.",
+      "icon": ""
+     },
+     {
+      "title": "Custodia de Salida",
+      "detail": "Acompañar el retiro y custodia policial de los paquetes electorales hacia la JEM.",
+      "icon": ""
+     }
+    ],
+    "legalRef": "Código Electoral Arts. 210, 211, 212",
+    "prohibitedOrWarning": "Verificar que ningún paquete electoral salga del centro sin custodia de la PNC."
+   }
+  ]
+ },
+ "resumenes": {
+  "PRESIDENTE": "Máxima autoridad de la mesa. Dirige la instalación, coordina las votaciones, canta los votos en el escrutinio y custodia el orden.",
+  "SECRETARIO": "Responsable de la fe pública. Firma y sella cada papeleta, desprende la esquina con número y llena las actas oficiales.",
+  "VOCAL_1": "Encargado de la identificación y registro. Verifica el DUI en el padrón de firmas y aplica la tinta indeleble tras votar.",
+  "VOCAL_2": "Auxiliar en la búsqueda de electores en el padrón y entrega de crayones y auxilio de flujo en anaqueles.",
+  "VOCAL_3": "Custodia del anaquel y la urna. Garantiza que el voto sea secreto y orienta a adultos mayores y personas con discapacidad.",
+  "VIGILANTE": "Fiscaliza las operaciones de mesa en nombre de su partido. Tiene derecho a voz, vigila conteo, impugna votos y recibe copia sellada del acta.",
+  "SUPERVISOR": "Coordina y asesora a los vigilantes de su partido en hasta 20 JRV del centro. Vota en la 2ª JRV y apoya la logística.",
+  "JEFE_DE_CENTRO": "Representante máximo del partido en el centro. Asesora a vigilantes, vigila instalación/transmisión y vota en la 1ª JRV del centro."
+ },
+ "general": [
+  {
+   "id": "gen_1",
+   "stageName": "Etapa 1: Llegada y Recepción de Paquetes (06:00 AM)",
+   "timeLabel": "06:00 AM - 06:15 AM",
+   "overview": "Reunión de integrantes acreditados, presentación de credenciales y recepción de materiales de la JEM.",
+   "items": [
+    {
+     "title": "Presentación",
+     "detail": "Llegada puntual a las 6:00 AM con DUI vigente y credencial oficial del TSE.",
+     "icon": ""
+    },
+    {
+     "title": "Recepción de Material",
+     "detail": "Recibir el paquete electoral sellado y comprobar que coincida con el número de JRV.",
+     "icon": ""
+    },
+    {
+     "title": "Acreditación de Vigilantes",
+     "detail": "Revisar credenciales de los vigilantes de partidos políticos presentes.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Arts. 100, 189, 190"
+  },
+  {
+   "id": "gen_2",
+   "stageName": "Etapa 2: Instalación de Mesa y Armado de Urnas (06:15 - 07:00 AM)",
+   "timeLabel": "06:15 AM - 07:00 AM",
+   "overview": "Conteo y firma de papeletas por el Secretario, vaciado y sellado de urnas, y firma del Acta de Instalación.",
+   "items": [
+    {
+     "title": "Conteo de Papeletas",
+     "detail": "El Secretario cuenta y firma en el reverso las papeletas oficiales.",
+     "icon": ""
+    },
+    {
+     "title": "Cierre de Urnas",
+     "detail": "Verificar que las urnas estén vacías y colocar los sellos adhesivos de seguridad.",
+     "icon": ""
+    },
+    {
+     "title": "Pegado de Padrón",
+     "detail": "Pegar un ejemplar del padrón de electores en un lugar exterior visible.",
+     "icon": ""
+    },
+    {
+     "title": "Acta de Instalación",
+     "detail": "Llenar y firmar el Acta de Instalación por miembros de JRV y vigilantes.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Arts. 186, 192, 193, 194"
+  },
+  {
+   "id": "gen_3",
+   "stageName": "Etapa 3: Apertura y Voto de Autoridades de Mesa (07:00 AM)",
+   "timeLabel": "07:00 AM",
+   "overview": "Inicio formal del sufragio. Votación de integrantes de mesa, vigilantes y apertura al público.",
+   "items": [
+    {
+     "title": "Voto de JRV y Vigilantes",
+     "detail": "Votan en primer lugar los integrantes de la mesa y vigilantes acreditados.",
+     "icon": ""
+    },
+    {
+     "title": "Retención de DUI",
+     "detail": "El Presidente retiene los DUI de los miembros de mesa hasta el cierre.",
+     "icon": ""
+    },
+    {
+     "title": "Anuncio de Apertura",
+     "detail": "El Presidente anuncia en voz alta el inicio de la votación ciudadana.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Art. 195"
+  },
+  {
+   "id": "gen_4",
+   "stageName": "Etapa 4: Recepción Continua de Votos Ciudadanos (07:00 AM - 05:00 PM)",
+   "timeLabel": "07:00 AM - 05:00 PM",
+   "overview": "Flujo ininterrumpido de votación: verificación, papeleta sellada, voto secreto, firma y entintado.",
+   "items": [
+    {
+     "title": "Identificación",
+     "detail": "El elector presenta su DUI original vigente; se constata en el padrón de búsqueda.",
+     "icon": ""
+    },
+    {
+     "title": "Papeleta y Desprendible",
+     "detail": "El Secretario retira la esquina correlativa y entrega la papeleta sellada.",
+     "icon": ""
+    },
+    {
+     "title": "Voto Secreto",
+     "detail": "El ciudadano vota a solas en el anaquel y deposita la papeleta doblada en la urna.",
+     "icon": ""
+    },
+    {
+     "title": "Firma y Tinta",
+     "detail": "El ciudadano firma en el padrón de firmas, se mancha el pulgar con tinta indeleble y se le devuelve el DUI.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Arts. 196, 197"
+  },
+  {
+   "id": "gen_5",
+   "stageName": "Etapa 5: Cierre de Votación (05:00 PM) e Inutilización de Sobrantes",
+   "timeLabel": "05:00 PM",
+   "overview": "Cierre formal de la votación ciudadana y conteo/inutilización inmediata de papeletas no utilizadas.",
+   "items": [
+    {
+     "title": "Cierre de Puertas",
+     "detail": "A las 5:00 PM se declara cerrada la votación. Solo votan electores ya formados en la fila.",
+     "icon": ""
+    },
+    {
+     "title": "Voto de PNC y FAES",
+     "detail": "Los agentes destacados votan en la última JRV del centro según Art. 195.",
+     "icon": ""
+    },
+    {
+     "title": "Inutilización de Sobrantes",
+     "detail": "Se cuentan y anulan las papeletas sobrantes antes de abrir la urna.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Arts. 195 inc. 3°, 198, 200 lit. a"
+  },
+  {
+   "id": "gen_6",
+   "stageName": "Etapa 6: Escrutinio Preliminar Voto por Voto",
+   "timeLabel": "05:15 PM en adelante",
+   "overview": "Apertura de la urna, conteo público y calificación de votos válidos, nulos e impugnados.",
+   "items": [
+    {
+     "title": "Apertura de Urna",
+     "detail": "Abrir la urna y verificar que el total de papeletas cuadre con las firmas del padrón.",
+     "icon": ""
+    },
+    {
+     "title": "Calificación en Voz Alta",
+     "detail": "El Presidente muestra cada papeleta y canta el voto por partido/candidato.",
+     "icon": ""
+    },
+    {
+     "title": "Clasificación de Votos",
+     "detail": "Separación en montones: Votos Válidos, Votos Nulos y Votos Impugnados.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Arts. 200, 205, 206, 207"
+  },
+  {
+   "id": "gen_7",
+   "stageName": "Etapa 7: Llenado de Actas, Copias a Vigilantes y Transmisión",
+   "timeLabel": "Conclusión del conteo",
+   "overview": "Redacción del Acta Oficial de Escrutinio, entrega de copias selladas y transmisión de resultados.",
+   "items": [
+    {
+     "title": "Llenado del Acta",
+     "detail": "Consignar resultados numéricos y firmar/sellar por todos los miembros.",
+     "icon": ""
+    },
+    {
+     "title": "Entrega a Vigilantes",
+     "detail": "Entregar obligatoriamente copia sellada y firmada a cada vigilante acreditado.",
+     "icon": ""
+    },
+    {
+     "title": "Transmisión al TSE",
+     "detail": "Entregar el acta original al técnico transmisor del TSE en presencia de Fiscales y Jefes de Centro.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Arts. 209, 210 inc. 6°, 211"
+  },
+  {
+   "id": "gen_8",
+   "stageName": "Etapa 8: Empaque, Devolución y Custodia Policial",
+   "timeLabel": "Final de la jornada",
+   "overview": "Empaque de todo el material en la caja oficial, entrega a la JEM y custodia armada de la PNC.",
+   "items": [
+    {
+     "title": "Empaque en Bolsas",
+     "detail": "Guardar papeletas en sobres rotulados y sellar la caja con cinta de seguridad.",
+     "icon": ""
+    },
+    {
+     "title": "Entrega a la JEM",
+     "detail": "Entregar personalmente el paquete a la JEM y firmar el acta de entrega y recepción.",
+     "icon": ""
+    },
+    {
+     "title": "Custodia de PNC",
+     "detail": "La Policía Nacional Civil acompaña el traslado seguro de los paquetes.",
+     "icon": ""
+    }
+   ],
+   "legalRef": "Código Electoral Arts. 210, 212, 290"
+  }
+ ]
+}

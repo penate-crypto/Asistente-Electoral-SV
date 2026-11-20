@@ -1,0 +1,15 @@
+{
+  "name": "Asistente Electoral SV",
+  "short_name": "Asistente Electoral",
+  "description": "Consulta de procedimientos y normativa electoral de El Salvador (no oficial).",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#E9F7F8",
+  "theme_color": "#00C6D7",
+  "lang": "es",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
