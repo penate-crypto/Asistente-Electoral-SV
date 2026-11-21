@@ -1,0 +1,297 @@
+{
+ "version": "1.0",
+ "descripcion": "Grupos de palabras con el mismo significado (jerga, sinónimos y variantes). Si la pregunta usa cualquiera de los términos, las situaciones que mencionan cualquier otro término del mismo grupo reciben puntos extra. Edite este archivo para agregar palabras.",
+ "conceptos": [
+  {
+   "id": "ebriedad",
+   "descripcion": "Persona en estado de ebriedad",
+   "terminos": [
+    "ebrio",
+    "ebria",
+    "ebriedad",
+    "estado de ebriedad",
+    "borracho",
+    "borracha",
+    "borrachito",
+    "borrachera",
+    "bolo",
+    "bola",
+    "bolito",
+    "bolita",
+    "tomado",
+    "tomada",
+    "alcoholizado",
+    "alcoholizada",
+    "bebido",
+    "pasado de tragos",
+    "pasado de copas",
+    "aliento a licor",
+    "aliento alcoholico",
+    "bajo los efectos del alcohol",
+    "cuete",
+    "jalado",
+    "mareado de trago"
+   ]
+  },
+  {
+   "id": "drogado",
+   "descripcion": "Persona bajo efecto de drogas",
+   "terminos": [
+    "drogado",
+    "drogada",
+    "drogas",
+    "bajo efectos de drogas",
+    "bajo los efectos de drogas",
+    "marihuanero",
+    "estado de drogadiccion",
+    "intoxicado"
+   ]
+  },
+  {
+   "id": "documento",
+   "descripcion": "DUI / documento de identidad",
+   "terminos": [
+    "dui",
+    "documento unico de identidad",
+    "documento de identidad",
+    "cedula",
+    "carnet de identidad",
+    "identificacion",
+    "papel de identidad"
+   ]
+  },
+  {
+   "id": "arma",
+   "descripcion": "Arma",
+   "terminos": [
+    "arma",
+    "armas",
+    "pistola",
+    "revolver",
+    "fierro",
+    "machete",
+    "cuchillo",
+    "escopeta",
+    "arma de fuego",
+    "arma blanca",
+    "fusil"
+   ]
+  },
+  {
+   "id": "policia",
+   "descripcion": "Policía (PNC)",
+   "terminos": [
+    "pnc",
+    "policia",
+    "policia nacional civil",
+    "policia civil",
+    "autoridad policial"
+   ]
+  },
+  {
+   "id": "tinta",
+   "descripcion": "Tinta indeleble",
+   "terminos": [
+    "tinta",
+    "tinta indeleble",
+    "marca en el dedo",
+    "dedo manchado",
+    "manchar el dedo",
+    "entintar"
+   ]
+  },
+  {
+   "id": "celular",
+   "descripcion": "Celular / foto",
+   "terminos": [
+    "celular",
+    "telefono",
+    "movil",
+    "telefono movil",
+    "tomar foto",
+    "fotografiar",
+    "fotografia a la papeleta",
+    "selfie",
+    "foto del voto",
+    "foto de la papeleta"
+   ]
+  },
+  {
+   "id": "propaganda",
+   "descripcion": "Propaganda",
+   "terminos": [
+    "propaganda",
+    "campana electoral",
+    "proselitismo",
+    "publicidad politica",
+    "afiche",
+    "rotulo de partido",
+    "banderas del partido",
+    "regalar camisetas",
+    "camisetas del partido",
+    "parlante con musica del partido"
+   ]
+  },
+  {
+   "id": "compra_voto",
+   "descripcion": "Compra de votos",
+   "terminos": [
+    "compra de votos",
+    "comprar votos",
+    "comprar el voto",
+    "pago por voto",
+    "dar dinero por el voto",
+    "soborno electoral",
+    "regalo a cambio del voto",
+    "vender el voto",
+    "vender mi voto"
+   ]
+  },
+  {
+   "id": "discapacidad",
+   "descripcion": "Persona con discapacidad",
+   "terminos": [
+    "discapacidad",
+    "discapacitado",
+    "discapacitada",
+    "persona con discapacidad",
+    "silla de ruedas",
+    "ciego",
+    "invidente",
+    "no vidente",
+    "sordo",
+    "muletas",
+    "movilidad reducida",
+    "persona minusvalida"
+   ]
+  },
+  {
+   "id": "adulto_mayor",
+   "descripcion": "Adulto mayor",
+   "terminos": [
+    "adulto mayor",
+    "anciano",
+    "anciana",
+    "persona de la tercera edad",
+    "tercera edad",
+    "abuelito",
+    "abuelita",
+    "persona mayor",
+    "viejito",
+    "viejita"
+   ]
+  },
+  {
+   "id": "embarazada",
+   "descripcion": "Mujer embarazada",
+   "terminos": [
+    "embarazada",
+    "embarazo",
+    "mujer en estado",
+    "en estado de gestacion",
+    "en espera de bebe"
+   ]
+  },
+  {
+   "id": "trans",
+   "descripcion": "Persona trans",
+   "terminos": [
+    "trans",
+    "transexual",
+    "transgenero",
+    "persona trans",
+    "mujer trans",
+    "hombre trans",
+    "identidad de genero",
+    "expresion de genero",
+    "no binario"
+   ]
+  },
+  {
+   "id": "no_aparece",
+   "descripcion": "No aparece en padrón",
+   "terminos": [
+    "no aparece",
+    "no sale",
+    "no esta en la lista",
+    "no figura",
+    "no lo encuentran",
+    "no lo encuentro",
+    "no esta en el padron",
+    "no sale en el padron",
+    "no aparece en el padron"
+   ]
+  },
+  {
+   "id": "negar_voto",
+   "descripcion": "Negar el voto",
+   "terminos": [
+    "negar el voto",
+    "no dejar votar",
+    "impedir votar",
+    "no permitir votar",
+    "rechazar el voto",
+    "no lo dejan votar",
+    "prohibir votar",
+    "impedir el voto"
+   ]
+  },
+  {
+   "id": "amenaza",
+   "descripcion": "Amenaza / violencia",
+   "terminos": [
+    "amenaza",
+    "amenazar",
+    "amenazando",
+    "intimidar",
+    "intimidacion",
+    "coaccionar",
+    "coaccion",
+    "presionar",
+    "presion",
+    "agredir",
+    "agresion",
+    "pelea",
+    "pelear",
+    "golpear",
+    "violencia",
+    "escandalo",
+    "desorden",
+    "alboroto",
+    "riña"
+   ]
+  },
+  {
+   "id": "menor",
+   "descripcion": "Menor de edad",
+   "terminos": [
+    "menor de edad",
+    "menor",
+    "adolescente",
+    "cipote",
+    "cipota",
+    "nino",
+    "nina",
+    "joven sin dui",
+    "bicho",
+    "bicha",
+    "chiquito",
+    "chiquita"
+   ]
+  },
+  {
+   "id": "extranjero",
+   "descripcion": "Extranjero",
+   "terminos": [
+    "extranjero",
+    "extranjera",
+    "salvadoreno en el exterior",
+    "voto en el exterior",
+    "voto en el extranjero",
+    "diaspora",
+    "migrante",
+    "residente en el exterior"
+   ]
+  }
+ ]
+}

@@ -6,6 +6,9 @@ import com.example.data.api.*
 import com.example.data.database.QueryHistory
 import com.example.data.database.QueryHistoryDao
 import com.example.data.rag.*
+import com.example.data.search.codigo.CodeMatchKind
+import com.example.data.search.codigo.CodeSearchResult
+import com.example.data.search.codigo.ElectoralCodeSearch
 import com.example.data.search.engine.ElectoralSearchEngine
 import com.example.data.search.model.MatchConfidenceLevel
 import kotlinx.coroutines.Dispatchers
@@ -130,9 +133,50 @@ class ElectoralRepository(
         conversationHistory: List<Pair<String, String>> = emptyList()
     ): AnswerResult = withContext(Dispatchers.IO) {
         val trimmedQuestion = question.trim()
+
+        // Paso 1: Si la consulta menciona "código electoral", buscar primero en el Banco Código Electoral (100% local)
+        val codigo = ElectoralCodeSearch.search(trimmedQuestion)
+        if (codigo != null) {
+            val header = if (codigo.kind == CodeMatchKind.ARTICLE_NUMBER) {
+                "Artículo(s) solicitado(s) del Código Electoral:"
+            } else {
+                "Artículos del Código Electoral sobre: ${codigo.topic}"
+            }
+            val readableText = buildString {
+                appendLine(header)
+                appendLine()
+                codigo.articles.forEach { art ->
+                    appendLine("Código Electoral · Art. ${art.numero}${if (art.derogado) " (Derogado)" else ""}")
+                    if (art.titulo.isNotBlank()) appendLine(art.titulo)
+                    if (art.capitulo.isNotBlank()) appendLine(art.capitulo)
+                    appendLine(art.textoLegible)
+                    appendLine()
+                }
+                append("Texto tomado del Código Electoral (Decreto 413). Verifícalo con el PDF de la biblioteca.")
+            }.trim()
+
+            val firstArt = codigo.articles.firstOrNull()
+            val primaryDocId = firstArt?.pdfDocId?.ifBlank { "codigo_electoral_decreto_413" } ?: "codigo_electoral_decreto_413"
+            val primaryPage = firstArt?.paginaPdf ?: 1
+
+            queryHistoryDao.insertHistory(
+                QueryHistory(
+                    question = trimmedQuestion,
+                    answer = readableText
+                )
+            )
+            return@withContext AnswerResult.Success(
+                text = readableText,
+                suggestions = emptyList(),
+                primaryPdfDocId = primaryDocId,
+                primaryPdfPage = primaryPage,
+                codeSearchResult = codigo
+            )
+        }
+
         val smartSuggestions = getSpellingAndSmartSuggestions(trimmedQuestion)
 
-        // Búsqueda inteligente en el Banco JSON
+        // Búsqueda inteligente en el Banco JSON principal (154 situaciones)
         val searchResult = ElectoralSearchEngine.search(trimmedQuestion)
 
         val suggestions = if (searchResult.clarificationOptions.isNotEmpty()) {
@@ -167,7 +211,8 @@ sealed class AnswerResult {
         val text: String,
         val suggestions: List<String> = emptyList(),
         val primaryPdfDocId: String? = null,
-        val primaryPdfPage: Int = 1
+        val primaryPdfPage: Int = 1,
+        val codeSearchResult: CodeSearchResult? = null
     ) : AnswerResult()
     data class Error(val errorMessage: String) : AnswerResult()
 }

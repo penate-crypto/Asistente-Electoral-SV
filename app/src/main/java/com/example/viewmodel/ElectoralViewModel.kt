@@ -12,6 +12,11 @@ import com.example.data.database.QueryHistory
 import com.example.data.repository.AnswerResult
 import com.example.data.repository.ApiKeyStatus
 import com.example.data.repository.ElectoralRepository
+import com.example.data.search.codigo.CodeSearchResult
+import com.example.data.search.codigo.ElectoralCodeSearch
+import com.example.data.search.engine.ElectoralSearchEngine
+import com.example.data.search.knowledge.ElectoralKnowledgeBase
+import com.example.data.search.model.MatchConfidenceLevel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -306,7 +311,8 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
                         answer = result.text,
                         suggestions = result.suggestions,
                         primaryPdfDocId = result.primaryPdfDocId,
-                        primaryPdfPage = result.primaryPdfPage
+                        primaryPdfPage = result.primaryPdfPage,
+                        codeSearchResult = result.codeSearchResult
                     )
                 }
                 is AnswerResult.Error -> {
@@ -325,13 +331,35 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
         }
     }
 
+    fun openSituationById(situationId: String) {
+        val situation = ElectoralKnowledgeBase.findById(situationId) ?: return
+        val formatted = ElectoralSearchEngine.formatStructuredResponse(
+            situation = situation,
+            confidenceLevel = MatchConfidenceLevel.HIGH
+        )
+        val firstDocSource = situation.respuesta.fuentesDocumentales.firstOrNull()
+        val primaryDocId = firstDocSource?.pdfDocId ?: situation.respuesta.primaryPdfDocId
+        val primaryPage = firstDocSource?.pagina ?: situation.respuesta.primaryPdfPage
+        _currentScreen.value = ElectoralScreen.CHAT
+        _uiState.value = ElectoralUiState.Success(
+            question = situation.titulo,
+            answer = formatted,
+            suggestions = emptyList(),
+            primaryPdfDocId = primaryDocId,
+            primaryPdfPage = primaryPage,
+            codeSearchResult = null
+        )
+    }
+
     fun selectHistoryItem(item: QueryHistory) {
         _currentScreen.value = ElectoralScreen.CHAT
-        val suggestions = repository.getSpellingAndSmartSuggestions(item.question)
+        val codigo = ElectoralCodeSearch.search(item.question)
+        val suggestions = if (codigo != null) emptyList() else repository.getSpellingAndSmartSuggestions(item.question)
         _uiState.value = ElectoralUiState.Success(
             question = item.question,
             answer = item.answer,
-            suggestions = suggestions
+            suggestions = suggestions,
+            codeSearchResult = codigo
         )
     }
 
@@ -354,7 +382,8 @@ sealed class ElectoralUiState {
         val answer: String,
         val suggestions: List<String> = emptyList(),
         val primaryPdfDocId: String? = null,
-        val primaryPdfPage: Int = 1
+        val primaryPdfPage: Int = 1,
+        val codeSearchResult: CodeSearchResult? = null
     ) : ElectoralUiState()
     data class Error(val question: String, val message: String) : ElectoralUiState()
 }

@@ -4,6 +4,7 @@ import com.example.data.search.entities.ExtractedEntities
 import com.example.data.search.model.ElectoralSituation
 import com.example.data.search.normalization.ElectoralNormalizer
 import com.example.data.search.normalization.NormalizedQuery
+import com.example.data.search.synonyms.ElectoralConceptRegistry
 import com.example.data.search.synonyms.ElectoralSynonymRegistry
 
 data class ScoredSituation(
@@ -316,6 +317,15 @@ object ElectoralScoringEngine {
         ) {
             totalScore += 35.0
             breakdown["bonus_cierre_votacion"] = 35.0
+        }
+
+        // 15. Conceptos equivalentes (bolo = borracho = estado de ebriedad): +30 por concepto compartido (máx. 2)
+        val sharedConcepts = ElectoralConceptRegistry.queryConcepts(queryText)
+            .intersect(ElectoralConceptRegistry.situationConcepts(situation))
+        if (sharedConcepts.isNotEmpty()) {
+            val conceptBonus = 30.0 * minOf(sharedConcepts.size, 2)
+            totalScore += conceptBonus
+            breakdown["conceptos_equivalentes"] = conceptBonus
         }
 
         return ScoredSituation(

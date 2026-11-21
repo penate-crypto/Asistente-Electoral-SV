@@ -40,6 +40,7 @@ import com.example.viewmodel.ElectoralUiState
 import com.example.viewmodel.ElectoralViewModel
 import com.example.viewmodel.ElectoralScreen
 import com.example.viewmodel.VoiceConversationState
+import com.example.ui.components.ElectoralCodeResultsView
 import com.example.ui.components.TransparentAssetImage
 import com.example.ui.theme.*
 import kotlinx.coroutines.delay
@@ -594,6 +595,24 @@ fun ElectoralMainScreen(
                                             }
                                         }
 
+                                        if (state.codeSearchResult != null) {
+                                            ElectoralCodeResultsView(
+                                                codeResult = state.codeSearchResult,
+                                                plainAnswerText = state.answer,
+                                                ttsPlaybackState = ttsPlaybackState,
+                                                onSpeakText = onSpeakText,
+                                                onPauseSpeaking = onPauseSpeaking,
+                                                onResumeSpeaking = onResumeSpeaking,
+                                                onStopSpeaking = onStopSpeaking,
+                                                onRestartSpeaking = onRestartSpeaking,
+                                                onOpenPdf = { docId, page ->
+                                                    viewModel.openPdfDirectly(docId = docId, page = page)
+                                                },
+                                                onOpenSituation = { situationId ->
+                                                    viewModel.openSituationById(situationId)
+                                                }
+                                            )
+                                        } else {
                                         // Structured Official & Orientative Answer Card
                                         Card(
                                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -943,6 +962,7 @@ fun ElectoralMainScreen(
                                                     color = Color(0xFF5D4037)
                                                 )
                                             }
+                                        }
                                         }
                                     }
                                 }
