@@ -9,6 +9,7 @@ import com.example.data.rag.*
 import com.example.data.search.codigo.CodeMatchKind
 import com.example.data.search.codigo.CodeSearchResult
 import com.example.data.search.codigo.ElectoralCodeSearch
+import com.example.data.search.codigo.ElectoralConstitutionSearch
 import com.example.data.search.engine.ElectoralSearchEngine
 import com.example.data.search.model.MatchConfidenceLevel
 import kotlinx.coroutines.Dispatchers
@@ -134,29 +135,40 @@ class ElectoralRepository(
     ): AnswerResult = withContext(Dispatchers.IO) {
         val trimmedQuestion = question.trim()
 
-        // Paso 1: Si la consulta menciona "código electoral", buscar primero en el Banco Código Electoral (100% local)
+        // Paso 1: Buscar primero en Código Electoral y luego en Constitución de la República (100% local)
         val codigo = ElectoralCodeSearch.search(trimmedQuestion)
-        if (codigo != null) {
-            val header = if (codigo.kind == CodeMatchKind.ARTICLE_NUMBER) {
-                "Artículo(s) solicitado(s) del Código Electoral:"
+        val constitucion = if (codigo == null) ElectoralConstitutionSearch.search(trimmedQuestion) else null
+        val resultadoLey = codigo ?: constitucion
+        if (resultadoLey != null) {
+            val firstArt = resultadoLey.articles.firstOrNull()
+            val isConstitucion = firstArt?.pdfDocId == "constitucion_republica_1983"
+            val shortTitle = if (isConstitucion) "Constitución" else "Código Electoral"
+            val lawGenitive = if (isConstitucion) "de la Constitución" else "del Código Electoral"
+            val defaultDocId = if (isConstitucion) "constitucion_republica_1983" else "codigo_electoral_decreto_413"
+            val disclaimer = if (isConstitucion) {
+                "Texto tomado de la Constitución de la República. Verifícalo con el PDF de la biblioteca."
             } else {
-                "Artículos del Código Electoral sobre: ${codigo.topic}"
+                "Texto tomado del Código Electoral (Decreto 413). Verifícalo con el PDF de la biblioteca."
+            }
+            val header = if (resultadoLey.kind == CodeMatchKind.ARTICLE_NUMBER) {
+                "Artículo(s) solicitado(s) $lawGenitive:"
+            } else {
+                "Artículos $lawGenitive sobre: ${resultadoLey.topic}"
             }
             val readableText = buildString {
                 appendLine(header)
                 appendLine()
-                codigo.articles.forEach { art ->
-                    appendLine("Código Electoral · Art. ${art.numero}${if (art.derogado) " (Derogado)" else ""}")
+                resultadoLey.articles.forEach { art ->
+                    appendLine("$shortTitle · Art. ${art.numero}${if (art.derogado) " (Derogado)" else ""}")
                     if (art.titulo.isNotBlank()) appendLine(art.titulo)
                     if (art.capitulo.isNotBlank()) appendLine(art.capitulo)
                     appendLine(art.textoLegible)
                     appendLine()
                 }
-                append("Texto tomado del Código Electoral (Decreto 413). Verifícalo con el PDF de la biblioteca.")
+                append(disclaimer)
             }.trim()
 
-            val firstArt = codigo.articles.firstOrNull()
-            val primaryDocId = firstArt?.pdfDocId?.ifBlank { "codigo_electoral_decreto_413" } ?: "codigo_electoral_decreto_413"
+            val primaryDocId = firstArt?.pdfDocId?.ifBlank { defaultDocId } ?: defaultDocId
             val primaryPage = firstArt?.paginaPdf ?: 1
 
             queryHistoryDao.insertHistory(
@@ -170,7 +182,7 @@ class ElectoralRepository(
                 suggestions = emptyList(),
                 primaryPdfDocId = primaryDocId,
                 primaryPdfPage = primaryPage,
-                codeSearchResult = codigo
+                codeSearchResult = resultadoLey
             )
         }
 

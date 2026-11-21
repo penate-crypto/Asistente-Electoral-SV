@@ -14,6 +14,7 @@ import com.example.data.repository.ApiKeyStatus
 import com.example.data.repository.ElectoralRepository
 import com.example.data.search.codigo.CodeSearchResult
 import com.example.data.search.codigo.ElectoralCodeSearch
+import com.example.data.search.codigo.ElectoralConstitutionSearch
 import com.example.data.search.engine.ElectoralSearchEngine
 import com.example.data.search.knowledge.ElectoralKnowledgeBase
 import com.example.data.search.model.MatchConfidenceLevel
@@ -354,12 +355,17 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     fun selectHistoryItem(item: QueryHistory) {
         _currentScreen.value = ElectoralScreen.CHAT
         val codigo = ElectoralCodeSearch.search(item.question)
-        val suggestions = if (codigo != null) emptyList() else repository.getSpellingAndSmartSuggestions(item.question)
+        val constitucion = if (codigo == null) ElectoralConstitutionSearch.search(item.question) else null
+        val resultadoLey = codigo ?: constitucion
+        val firstArt = resultadoLey?.articles?.firstOrNull()
+        val suggestions = if (resultadoLey != null) emptyList() else repository.getSpellingAndSmartSuggestions(item.question)
         _uiState.value = ElectoralUiState.Success(
             question = item.question,
             answer = item.answer,
             suggestions = suggestions,
-            codeSearchResult = codigo
+            primaryPdfDocId = firstArt?.pdfDocId,
+            primaryPdfPage = firstArt?.paginaPdf ?: 1,
+            codeSearchResult = resultadoLey
         )
     }
 

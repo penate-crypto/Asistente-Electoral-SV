@@ -189,7 +189,7 @@ fun TestConocimientosScreen(
                                         fontWeight = FontWeight.Bold,
                                         color = when {
                                             isCurrent -> MaterialTheme.colorScheme.onPrimary
-                                            isExamSubmitted && (isCorrect || !isCorrect) -> Color.White
+                                            isExamSubmitted && (isCorrect || isAnswered) -> Color.White
                                             isAnswered -> MaterialTheme.colorScheme.onSecondaryContainer
                                             else -> MaterialTheme.colorScheme.onSurfaceVariant
                                         }
@@ -536,7 +536,12 @@ fun TestConocimientosScreen(
                                 fontSize = 14.5.sp,
                                 lineHeight = 21.sp,
                                 fontWeight = if (isSelected || (currentMode == TestMode.ESTUDIO && isCorrectOption)) FontWeight.SemiBold else FontWeight.Normal,
-                                color = if (currentMode == TestMode.ESTUDIO && isCorrectOption) Color(0xFF1B5E20) else MaterialTheme.colorScheme.onSurface,
+                                color = when {
+                                    // Fondos verde/rojo claro fijos: el texto debe ser oscuro también en tema oscuro
+                                    (currentMode == TestMode.ESTUDIO && isCorrectOption) || (isSelected && isCorrectOption) -> Color(0xFF1B5E20)
+                                    isSelected && !isCorrectOption -> Color(0xFFB71C1C)
+                                    else -> MaterialTheme.colorScheme.onSurface
+                                },
                                 modifier = Modifier.weight(1f)
                             )
 
@@ -663,7 +668,10 @@ fun TestConocimientosScreen(
                     } else if (currentMode == TestMode.EXAMEN) {
                         Button(
                             onClick = { isExamSubmitted = true },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2E7D32)),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF2E7D32),
+                                contentColor = Color.White
+                            ),
                             shape = RoundedCornerShape(10.dp),
                             modifier = Modifier.weight(1f)
                         ) {
@@ -837,7 +845,7 @@ fun Exam125ResultsView(
             Card(
                 shape = RoundedCornerShape(14.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = if (isCorrect) Color(0xFFE8F5E9).copy(alpha = 0.5f) else Color(0xFFFFEBEE).copy(alpha = 0.5f)
+                    containerColor = if (isCorrect) Color(0xFFE8F5E9) else Color(0xFFFFEBEE)
                 ),
                 border = BorderStroke(1.dp, if (isCorrect) Color(0xFF81C784) else Color(0xFFE57373)),
                 modifier = Modifier.fillMaxWidth()
@@ -852,7 +860,7 @@ fun Exam125ResultsView(
                             text = "Pregunta ${qIndex + 1}",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
-                            color = if (isCorrect) Color(0xFF2E7D32) else Color(0xFFC62828)
+                            color = if (isCorrect) Color(0xFF1B5E20) else Color(0xFFB71C1C)
                         )
 
                         Surface(
@@ -873,7 +881,7 @@ fun Exam125ResultsView(
                         text = q.questionText,
                         fontSize = 13.5.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = if (isCorrect) Color(0xFF1B5E20) else Color(0xFFB71C1C)
                     )
 
                     val userLetter = if (userSelected != null) optionLetters.getOrElse(userSelected) { "-" } else "Sin responder"
@@ -886,13 +894,14 @@ fun Exam125ResultsView(
                             text = "Tu respuesta: $userLetter) $userText",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.SemiBold,
-                            color = Color(0xFFC62828)
+                            color = Color(0xFFB71C1C)
                         )
                     }
 
                     Surface(
                         color = Color(0xFFE8F5E9),
                         shape = RoundedCornerShape(8.dp),
+                        border = BorderStroke(1.dp, Color(0xFFA5D6A7)),
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Column(modifier = Modifier.padding(8.dp)) {
@@ -926,6 +935,10 @@ fun Exam125ResultsView(
 
                         OutlinedButton(
                             onClick = { onOpenSource(q) },
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                contentColor = Color(0xFF0D47A1)
+                            ),
+                            border = BorderStroke(1.dp, Color(0xFF0D47A1)),
                             contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp),
                             shape = RoundedCornerShape(6.dp),
                             modifier = Modifier.height(28.dp)

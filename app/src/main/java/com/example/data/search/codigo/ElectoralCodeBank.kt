@@ -37,13 +37,14 @@ data class CodeArticle(
     internal val sinStems: Set<String>
 )
 
-object ElectoralCodeBank {
+/** Un banco de artículos de una ley (Código Electoral, Constitución...), leído de un JSON en assets. */
+class LawBank(private val assetPath: String) {
     @Volatile private var articles: List<CodeArticle> = emptyList()
     @Volatile private var byNumber: Map<String, CodeArticle> = emptyMap()
 
     fun init(context: Context) {
         try {
-            val json = context.assets.open("codigo_electoral/banco_codigo_electoral.json").bufferedReader().use { it.readText() }
+            val json = context.assets.open(assetPath).bufferedReader().use { it.readText() }
             val arr = JSONObject(json).getJSONArray("articulos")
             val list = ArrayList<CodeArticle>(arr.length())
             for (i in 0 until arr.length()) {
@@ -96,3 +97,9 @@ object ElectoralCodeBank {
     private fun n(s: String) = ElectoralNormalizer.stripAccents(s.lowercase())
         .replace("[^a-z0-9\\s]".toRegex(), " ").replace("\\s+".toRegex(), " ").trim()
 }
+
+/** Código Electoral (297 artículos). */
+val ElectoralCodeBank = LawBank("codigo_electoral/banco_codigo_electoral.json")
+
+/** Constitución de la República (274 artículos). */
+val ElectoralConstitutionBank = LawBank("constitucion/banco_constitucion.json")

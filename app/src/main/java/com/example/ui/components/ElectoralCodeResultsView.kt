@@ -45,11 +45,24 @@ fun ElectoralCodeResultsView(
         if (showMore) codeResult.articles + codeResult.moreArticles else codeResult.articles
     }
 
-    val headerLabel = remember(codeResult) {
+    val isConstitucion = remember(codeResult) {
+        codeResult.articles.firstOrNull()?.pdfDocId == "constitucion_republica_1983"
+    }
+
+    val headerLabel = remember(codeResult, isConstitucion) {
         if (codeResult.kind == CodeMatchKind.ARTICLE_NUMBER) {
             "Artículo(s) solicitado(s)"
         } else {
-            "Artículos del Código Electoral sobre: ${codeResult.topic}"
+            val lawGenitive = if (isConstitucion) "de la Constitución" else "del Código Electoral"
+            "Artículos $lawGenitive sobre: ${codeResult.topic}"
+        }
+    }
+
+    val disclaimerText = remember(isConstitucion) {
+        if (isConstitucion) {
+            "Texto tomado de la Constitución de la República. Verifícalo con el PDF de la biblioteca."
+        } else {
+            "Texto tomado del Código Electoral (Decreto 413). Verifícalo con el PDF de la biblioteca."
         }
     }
 
@@ -165,6 +178,7 @@ fun ElectoralCodeResultsView(
         displayedArticles.forEach { article ->
             ElectoralCodeArticleCard(
                 article = article,
+                isConstitucion = isConstitucion,
                 onOpenPdf = onOpenPdf,
                 onOpenSituation = onOpenSituation
             )
@@ -217,7 +231,7 @@ fun ElectoralCodeResultsView(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Texto tomado del Código Electoral (Decreto 413). Verifícalo con el PDF de la biblioteca.",
+                    text = disclaimerText,
                     fontSize = 11.5.sp,
                     lineHeight = 16.sp,
                     fontWeight = FontWeight.Medium,
@@ -233,10 +247,21 @@ fun ElectoralCodeResultsView(
 @Composable
 private fun ElectoralCodeArticleCard(
     article: CodeArticle,
+    isConstitucion: Boolean,
     onOpenPdf: (docId: String, page: Int) -> Unit,
     onOpenSituation: (situationId: String) -> Unit
 ) {
     var showLiteral by remember(article.id) { mutableStateOf(false) }
+    val cardHeader = if (isConstitucion) {
+        "🏛 Constitución · Art. ${article.numero}"
+    } else {
+        "📖 Código Electoral · Art. ${article.numero}"
+    }
+    val defaultPdfDocId = if (isConstitucion) {
+        "constitucion_republica_1983"
+    } else {
+        "codigo_electoral_decreto_413"
+    }
 
     Card(
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -248,14 +273,14 @@ private fun ElectoralCodeArticleCard(
             .testTag("codigo_article_card_${article.numero}")
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            // Card Header: "📖 Código Electoral · Art. {numero}" + optional "Derogado" badge
+            // Card Header: "📖 Código Electoral · Art. N" o "🏛 Constitución · Art. N" + badge opcional "Derogado"
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "📖 Código Electoral · Art. ${article.numero}",
+                    text = cardHeader,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.primary,
@@ -349,7 +374,7 @@ private fun ElectoralCodeArticleCard(
             // Button: "Abrir en la biblioteca (pág. {paginaPdf})"
             Button(
                 onClick = {
-                    val targetDocId = article.pdfDocId.ifBlank { "codigo_electoral_decreto_413" }
+                    val targetDocId = article.pdfDocId.ifBlank { defaultPdfDocId }
                     onOpenPdf(targetDocId, article.paginaPdf)
                 },
                 colors = ButtonDefaults.buttonColors(
