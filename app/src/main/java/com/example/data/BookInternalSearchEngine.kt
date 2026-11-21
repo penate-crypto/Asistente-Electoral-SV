@@ -170,9 +170,10 @@ object BookInternalSearchEngine {
         val queryWords = normalizedQuery.split("\\s+".toRegex()).filter { it.length > 1 }
 
         // Extract potential article numbers like "190", "art 190", "art. 190", "articulo 190"
-        val articleNumberPattern = "(?:art(?:[íi]cu?lo|\\.)?|articulo)?\\s*\\.?\\s*(\\d+)".toRegex(RegexOption.IGNORE_CASE)
+        // Solo "art 190", "artículo 190", "art. 190" o el número solo ("190"); un año o una cifra dentro de una frase no es un artículo.
+        val articleNumberPattern = "^\\s*(?:(?:art(?:[íi]cu?lo|\\.)?|articulo)\\s*\\.?\\s*)?(\\d{1,3})\\s*$|\\bart(?:[íi]cu?lo|\\.)?\\s*\\.?\\s*(\\d{1,3})\\b".toRegex(RegexOption.IGNORE_CASE)
         val articleMatch = articleNumberPattern.find(trimmedQuery)
-        val targetArticleInt = articleMatch?.groupValues?.getOrNull(1)?.toIntOrNull()
+        val targetArticleInt = articleMatch?.groupValues?.drop(1)?.firstOrNull { it.isNotEmpty() }?.toIntOrNull()
 
         val results = mutableListOf<BookSearchResult>()
         val seenSignatures = mutableSetOf<String>()
