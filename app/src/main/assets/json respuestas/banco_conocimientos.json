@@ -2,7 +2,7 @@
   "version": "2.0",
   "nombre": "Banco de Conocimientos - Asistente Electoral SV",
   "formato": "BANCO_CONOCIMIENTOS_ELECTORAL_SV",
-  "fechaExportacion": "2026-11-17 19:51:34",
+  "fechaExportacion": "2026-11-18 03:12:57",
   "totalRegistros": 154,
   "categorias": {
     "Instalación": 12,
@@ -239,8 +239,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-002",
@@ -375,8 +375,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-003",
@@ -554,8 +554,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-004",
@@ -692,8 +692,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-005",
@@ -844,8 +844,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-006",
@@ -946,8 +946,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-007",
@@ -1050,8 +1050,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-008",
@@ -1163,8 +1163,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-009",
@@ -1287,8 +1287,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-010",
@@ -1438,8 +1438,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-011",
@@ -1539,8 +1539,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "INST-012",
@@ -1660,8 +1660,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-001",
@@ -1835,8 +1835,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-002",
@@ -1995,8 +1995,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-003",
@@ -2096,8 +2096,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-004",
@@ -2219,8 +2219,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-005",
@@ -2337,8 +2337,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-006",
@@ -2454,8 +2454,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-007",
@@ -2615,8 +2615,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-008",
@@ -2747,8 +2747,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-009",
@@ -2846,8 +2846,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-010",
@@ -2989,8 +2989,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-011",
@@ -3135,8 +3135,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-012",
@@ -3235,8 +3235,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-013",
@@ -3337,8 +3337,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-014",
@@ -3466,8 +3466,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-015",
@@ -3584,8 +3584,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-016",
@@ -3691,8 +3691,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-017",
@@ -3793,8 +3793,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-018",
@@ -3894,8 +3894,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-019",
@@ -4010,8 +4010,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-020",
@@ -4143,8 +4143,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-021",
@@ -4260,8 +4260,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-022",
@@ -4357,8 +4357,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-023",
@@ -4468,8 +4468,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-024",
@@ -4604,8 +4604,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-025",
@@ -4728,8 +4728,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-026",
@@ -4842,8 +4842,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-027",
@@ -5012,8 +5012,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-028",
@@ -5161,8 +5161,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-029",
@@ -5292,8 +5292,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-030",
@@ -5452,8 +5452,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VOT-031",
@@ -5572,8 +5572,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-001",
@@ -5700,8 +5700,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-002",
@@ -5824,8 +5824,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-003",
@@ -5939,8 +5939,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-004",
@@ -6077,8 +6077,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-005",
@@ -6174,8 +6174,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-006",
@@ -6268,8 +6268,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-007",
@@ -6384,8 +6384,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DUI-008",
@@ -6425,7 +6425,14 @@
         "retuvieron",
         "me retuvieron",
         "despues de votar",
-        "no me devolvieron el dui"
+        "no me devolvieron el dui",
+        "se pueden quedar con mi dui",
+        "quedar con mi dui",
+        "quedarse con el dui",
+        "se quedan con el dui",
+        "se quedaron con mi dui",
+        "pueden quedar",
+        "quedar"
       ],
       "sinonimos": {
         "retener": [
@@ -6509,8 +6516,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ARM-001",
@@ -6656,8 +6663,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ARM-002",
@@ -6796,8 +6803,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ARM-010",
@@ -6923,8 +6930,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-001",
@@ -7042,8 +7049,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-002",
@@ -7159,8 +7166,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-003",
@@ -7261,8 +7268,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-004",
@@ -7369,8 +7376,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-005",
@@ -7497,8 +7504,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-006",
@@ -7641,8 +7648,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-007",
@@ -7770,8 +7777,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-008",
@@ -7913,8 +7920,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-009",
@@ -8059,8 +8066,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-010",
@@ -8202,8 +8209,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-011",
@@ -8373,8 +8380,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-012",
@@ -8493,8 +8500,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "SEG-013",
@@ -8597,8 +8604,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-001",
@@ -8792,8 +8799,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-002",
@@ -8939,8 +8946,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-003",
@@ -9055,8 +9062,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-004",
@@ -9195,8 +9202,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-005",
@@ -9292,8 +9299,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-006",
@@ -9399,8 +9406,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-007",
@@ -9497,8 +9504,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-008",
@@ -9630,8 +9637,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-009",
@@ -9741,8 +9748,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-010",
@@ -9845,8 +9852,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-011",
@@ -9947,8 +9954,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-012",
@@ -10045,8 +10052,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-013",
@@ -10163,8 +10170,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-014",
@@ -10276,8 +10283,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "VIG-015",
@@ -10394,8 +10401,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-001",
@@ -10595,8 +10602,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-002",
@@ -10700,8 +10707,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-003",
@@ -10853,8 +10860,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-004",
@@ -10978,8 +10985,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-005",
@@ -11082,8 +11089,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-006",
@@ -11187,8 +11194,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-007",
@@ -11323,8 +11330,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-008",
@@ -11429,8 +11436,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-009",
@@ -11527,8 +11534,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-010",
@@ -11692,8 +11699,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-011",
@@ -11794,8 +11801,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-012",
@@ -11886,8 +11893,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-013",
@@ -12013,8 +12020,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-014",
@@ -12131,8 +12138,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-015",
@@ -12262,8 +12269,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-016",
@@ -12383,8 +12390,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-017",
@@ -12516,8 +12523,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-018",
@@ -12641,8 +12648,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-019",
@@ -12773,8 +12780,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-020",
@@ -12867,8 +12874,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-021",
@@ -12988,8 +12995,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-022",
@@ -13109,8 +13116,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-023",
@@ -13230,8 +13237,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-024",
@@ -13358,8 +13365,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ESC-025",
@@ -13468,8 +13475,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-001",
@@ -13619,8 +13626,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-002",
@@ -13795,8 +13802,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-003",
@@ -13911,8 +13918,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-004",
@@ -14028,8 +14035,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-005",
@@ -14038,9 +14045,7 @@
       "subcategoria": "Vocales de JRV",
       "descripcion_situacion": "Funciones del tercer vocal durante la votación y el escrutinio.",
       "actores": [
-        "Tercer vocal",
-        "Vocal 3",
-        "Tercera vocalía"
+        "Tercer vocal"
       ],
       "objetos": [
         "Anaquel",
@@ -14068,6 +14073,9 @@
         "que hace el tercer vocal",
         "tercera vocalia",
         "tercer vocal",
+        "vocal 3",
+        "vocal tres",
+        "el vocal 3",
         "orden de la fila"
       ],
       "sinonimos": {
@@ -14157,8 +14165,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-006",
@@ -14300,8 +14308,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-007",
@@ -14432,8 +14440,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-008",
@@ -14535,8 +14543,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-009",
@@ -14698,8 +14706,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-010",
@@ -14841,8 +14849,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-011",
@@ -14970,8 +14978,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ROL-012",
@@ -15119,8 +15127,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-001",
@@ -15269,8 +15277,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-002",
@@ -15391,8 +15399,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-003",
@@ -15521,8 +15529,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-004",
@@ -15650,8 +15658,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-005",
@@ -15755,8 +15763,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-006",
@@ -15847,8 +15855,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-007",
@@ -16002,8 +16010,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-008",
@@ -16119,8 +16127,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "OET-009",
@@ -16248,8 +16256,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REC-001",
@@ -16349,8 +16357,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REC-002",
@@ -16432,8 +16440,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REC-003",
@@ -16543,8 +16551,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REC-004",
@@ -16673,8 +16681,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REC-005",
@@ -16809,8 +16817,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REC-006",
@@ -16910,8 +16918,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REC-007",
@@ -17029,8 +17037,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DEL-001",
@@ -17158,8 +17166,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DEL-002",
@@ -17283,8 +17291,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DEL-003",
@@ -17420,8 +17428,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "DEL-004",
@@ -17556,8 +17564,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "PRO-001",
@@ -17677,8 +17685,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "PRO-002",
@@ -17776,8 +17784,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "PRO-003",
@@ -17890,8 +17898,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "PRO-004",
@@ -17993,8 +18001,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REG-001",
@@ -18135,8 +18143,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REG-002",
@@ -18252,8 +18260,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REG-003",
@@ -18354,8 +18362,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "REG-004",
@@ -18469,8 +18477,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ELE-001",
@@ -18619,8 +18627,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ELE-002",
@@ -18769,8 +18777,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ELE-003",
@@ -18914,8 +18922,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ELE-004",
@@ -19072,8 +19080,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ELE-005",
@@ -19190,8 +19198,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ELE-006",
@@ -19289,8 +19297,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     },
     {
       "id": "ELE-007",
@@ -19398,8 +19406,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794945093358,
-      "actualizadoEn": 1794945093358
+      "creadoEn": 1794971577285,
+      "actualizadoEn": 1794971577285
     }
   ]
 }
