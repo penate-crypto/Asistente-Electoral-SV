@@ -536,7 +536,12 @@ fun TestConocimientosScreen(
                                 fontSize = 14.5.sp,
                                 lineHeight = 21.sp,
                                 fontWeight = if (isSelected || (currentMode == TestMode.ESTUDIO && isCorrectOption)) FontWeight.SemiBold else FontWeight.Normal,
-                                color = if (currentMode == TestMode.ESTUDIO && isCorrectOption) Color(0xFF1B5E20) else MaterialTheme.colorScheme.onSurface,
+                                color = when {
+                                    // Fondos verde/rojo claro fijos: el texto debe ser oscuro también en tema oscuro
+                                    (currentMode == TestMode.ESTUDIO && isCorrectOption) || (isSelected && isCorrectOption) -> Color(0xFF1B5E20)
+                                    isSelected && !isCorrectOption -> Color(0xFFB71C1C)
+                                    else -> MaterialTheme.colorScheme.onSurface
+                                },
                                 modifier = Modifier.weight(1f)
                             )
 

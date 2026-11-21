@@ -1,5 +1,6 @@
 // Prueba del buscador del Banco Código Electoral.
 // Uso: MAINCLS=CodeMainKt gradle -q run --args="../../banco_codigo_electoral/preguntas/ce1_ejemplos.txt"
+// LEY=constitucion para probar la Constitución (por defecto Código Electoral).
 // Formato: "ARTICULOS_ESPERADOS|pregunta" (el primero mostrado debe estar en la lista); "-" = no debe responder el Código; "ONLY:n" = solo el artículo n.
 import android.content.Context
 import android.content.res.AssetManager
@@ -9,12 +10,14 @@ import java.io.File
 fun main(args: Array<String>) {
     val assets = if (args.size > 1) args[1] else "../../../app/src/main/assets"
     ElectoralCodeBank.init(Context(AssetManager(File(assets))))
-    println("Artículos cargados: " + ElectoralCodeBank.all().size)
+    ElectoralConstitutionBank.init(Context(AssetManager(File(assets))))
+    val search = if (System.getenv("LEY") == "constitucion") ElectoralConstitutionSearch else ElectoralCodeSearch
+    println("Artículos cargados: " + ElectoralCodeBank.all().size + " (Código) / " + ElectoralConstitutionBank.all().size + " (Constitución)")
     var ok = 0; var total = 0
     for (line in File(args[0]).readLines()) {
         if (line.isBlank() || !line.contains("|")) continue
         val (expected, q) = line.split("|", limit = 2)
-        val r = ElectoralCodeSearch.search(q.trim())
+        val r = search.search(q.trim())
         val got = r?.articles?.map { it.numero } ?: emptyList()
         val exp = expected.trim()
         val pass = when {

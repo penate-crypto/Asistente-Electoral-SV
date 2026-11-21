@@ -44,3 +44,7 @@ Resultados: ce1 11/11, ce2 50/50, ce3 32/32 (estas tres sirvieron para ajustar),
 Es búsqueda por palabras, no entiende frases nuevas del todo. Los artículos reformados mantienen la nota
 de reforma "(8)" del PDF. El Art. 116 tiene una interpretación auténtica (Decreto 870) que no se copió aquí;
 está en el PDF. Los 3 artículos derogados (103, 104, 291-A) no salen en búsquedas por tema.
+
+## Constitución
+
+Mismo sistema en `herramientas/banco_constitucion/` (274 artículos, `app/src/main/assets/constitucion/banco_constitucion.json`).
