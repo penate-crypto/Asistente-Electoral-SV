@@ -842,7 +842,7 @@ fun Exam125ResultsView(
             Card(
                 shape = RoundedCornerShape(14.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = if (isCorrect) Color(0xFFE8F5E9).copy(alpha = 0.5f) else Color(0xFFFFEBEE).copy(alpha = 0.5f)
+                    containerColor = if (isCorrect) Color(0xFFE8F5E9) else Color(0xFFFFEBEE)
                 ),
                 border = BorderStroke(1.dp, if (isCorrect) Color(0xFF81C784) else Color(0xFFE57373)),
                 modifier = Modifier.fillMaxWidth()
@@ -878,7 +878,7 @@ fun Exam125ResultsView(
                         text = q.questionText,
                         fontSize = 13.5.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = OnLightPanel
                     )
 
                     val userLetter = if (userSelected != null) optionLetters.getOrElse(userSelected) { "-" } else "Sin responder"

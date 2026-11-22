@@ -1014,7 +1014,12 @@ private fun ActiveExamQuestionView(
                             text = optionText,
                             fontSize = 13.5.sp,
                             fontWeight = if (isSelected || (hasAnswered && isCorrectOption)) FontWeight.Bold else FontWeight.Normal,
-                            color = MaterialTheme.colorScheme.onSurface,
+                            // Fondos verde/rojo claro fijos: texto oscuro también en tema oscuro
+                            color = when {
+                                hasAnswered && isCorrectOption -> OnLightOk
+                                hasAnswered && isSelected && !isCorrectOption -> OnLightBad
+                                else -> MaterialTheme.colorScheme.onSurface
+                            },
                             modifier = Modifier.weight(1f)
                         )
 
@@ -1066,14 +1071,14 @@ private fun ActiveExamQuestionView(
                         text = "Explicación:",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = OnLightPanel
                     )
 
                     Text(
                         text = currentQuestion.explanation,
                         fontSize = 12.5.sp,
                         lineHeight = 17.sp,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = OnLightPanel
                     )
 
                     Spacer(modifier = Modifier.height(2.dp))
@@ -1237,7 +1242,7 @@ private fun ExamResultsSummaryView(
                         "Se requiere un mínimo de 70% (18 aciertos de 25) para aprobar.",
                     fontSize = 12.sp,
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = OnLightPanelSoft
                 )
 
                 Spacer(modifier = Modifier.height(14.dp))
@@ -1249,12 +1254,12 @@ private fun ExamResultsSummaryView(
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(text = "$correctCount/25", fontSize = 18.sp, fontWeight = FontWeight.Black, color = Color(0xFF2E7D32))
-                        Text(text = "Aciertos", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(text = "Aciertos", fontSize = 11.sp, color = OnLightPanelSoft)
                     }
 
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(text = "$incorrectCount/25", fontSize = 18.sp, fontWeight = FontWeight.Black, color = Color(0xFFC62828))
-                        Text(text = "Fallos", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(text = "Fallos", fontSize = 11.sp, color = OnLightPanelSoft)
                     }
 
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
