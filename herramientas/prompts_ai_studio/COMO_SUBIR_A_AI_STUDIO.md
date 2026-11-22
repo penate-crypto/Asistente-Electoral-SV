@@ -1,5 +1,7 @@
 # Cómo subir el Bloque C a AI Studio (sin .zip)
 
+> **Actualización:** el código ya viene escrito DENTRO de los Prompts 8 y 9. Solo hay que subir los archivos de datos (.json): 13 con el Prompt 8 (el índice y los 12 `_pdf.json`) y 10 con el Prompt 9 (8 bancos de leyes más `banco_codigo_electoral.json` y `banco_constitucion.json`). No hace falta subir ningún `.kt`.
+
 AI Studio no acepta archivos .zip. Hay tres formas; la primera es la más fácil:
 
 ## Opción 1 (recomendada): por GitHub
