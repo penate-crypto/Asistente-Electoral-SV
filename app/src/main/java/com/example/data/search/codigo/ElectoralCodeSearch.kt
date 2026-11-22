@@ -38,27 +38,36 @@ class LawSearch(private val bank: LawBank, private val triggerFn: (List<String>)
 
     fun mentionsCode(cleanText: String): Boolean = triggerFn(cleanText.split(" ").filter { it.isNotBlank() }) >= 0
 
-    fun search(rawQuery: String): CodeSearchResult? {
+    /** Con palabra de activación ("código electoral ..."). Devuelve null si no la menciona. */
+    fun search(rawQuery: String): CodeSearchResult? = run(rawQuery, requireTrigger = true)
+
+    /** Búsqueda directa dentro de este banco (botón «Buscar en libros»): no necesita nombrar la ley. */
+    fun searchDirect(rawQuery: String): CodeSearchResult? = run(rawQuery, requireTrigger = false)
+
+    private fun run(rawQuery: String, requireTrigger: Boolean): CodeSearchResult? {
         if (!bank.isLoaded()) return null
         val clean = ElectoralNormalizer.stripAccents(rawQuery.lowercase())
             .replace("[^a-z0-9\\s-]".toRegex(), " ").replace("\\s+".toRegex(), " ").trim()
-        if (!mentionsCode(clean)) return null
+        if (clean.isBlank()) return null
+        if (requireTrigger && !mentionsCode(clean)) return null
 
-        // 1) Búsqueda directa por número: "artículo 198", "art. 200 al 203", "del 198 al 200"
-        val nums = articleNumbers(clean)
+        // 1) Búsqueda directa por número: "artículo 198", "art. 200 al 203", "del 198 al 200" (en modo directo, también "198" o "5 al 8")
+        val nums = articleNumbers(clean, direct = !requireTrigger)
         if (nums.isNotEmpty()) {
             val found = nums.mapNotNull { bank.findByNumber(it) }
             if (found.isNotEmpty()) {
                 return CodeSearchResult(found.take(MAX_SHOWN), maxOf(0, found.size - MAX_SHOWN), found.drop(MAX_SHOWN),
                     CodeMatchKind.ARTICLE_NUMBER, nums.joinToString(", "))
             }
-            return null // ese artículo no existe en el Código: que responda el buscador normal
+            return null // ese artículo no existe en este documento
         }
 
         // 2) Búsqueda por tema
         val all = clean.split(" ").filter { it.isNotBlank() }
-        val trig = triggerFn(all)
-        val topicTokens = all.filterIndexed { i, w -> (i < trig || i >= trig + triggerLen) && (w !in TRIGGER_FILLER || w == "electoral") }
+        val trig = if (requireTrigger) triggerFn(all) else -1
+        val topicTokens = all.filterIndexed { i, w ->
+            (trig < 0 || i < trig || i >= trig + triggerLen) && (w !in TRIGGER_FILLER || w == "electoral")
+        }
         val topic = topicTokens.joinToString(" ")
         if (topic.isBlank()) return null
         val keywords = keywordsOf(topicTokens)
@@ -128,20 +137,22 @@ class LawSearch(private val bank: LawBank, private val triggerFn: (List<String>)
     }
 
     /** Extrae números de artículo y rangos: "198", "200 al 203", "198 y 199", "214-a". */
-    fun articleNumbers(clean: String): List<String> {
+    fun articleNumbers(clean: String, direct: Boolean = false): List<String> {
         val out = LinkedHashSet<String>()
         val rango = Regex("""(\d{1,3})\s*(?:al|a|hasta|-)\s*(\d{1,3})\b""")
         val used = mutableListOf<IntRange>()
         for (m in rango.findAll(clean)) {
             val a = m.groupValues[1].toInt(); val b = m.groupValues[2].toInt()
-            if (b >= a && b - a < RANGE_LIMIT && (clean.contains("art") || clean.contains("del "))) {
+            if (b >= a && b - a < RANGE_LIMIT && (direct || clean.contains("art") || clean.contains("del "))) {
                 for (x in a..b) out.add(x.toString()); used.add(m.range)
             }
         }
         val rest = StringBuilder(clean)
         for (r in used) for (i in r) rest.setCharAt(i, ' ')
         val tieneArt = Regex("""\bart(?:iculos?)?\b""").containsMatchIn(clean)
-        if (tieneArt || Regex("""\b\d{1,3}-[a-z]\b""").containsMatchIn(clean)) {
+        // En modo directo, una consulta que es solo un número ("198") es un artículo.
+        val soloNumero = direct && Regex("""^\d{1,3}(?:-[a-z])?$""").matches(clean)
+        if (tieneArt || soloNumero || Regex("""\b\d{1,3}-[a-z]\b""").containsMatchIn(clean)) {
             for (m in Regex("""\b(\d{1,3}(?:-[a-z])?)\b""").findAll(rest.toString())) out.add(m.groupValues[1].uppercase().let { if (it.contains('-')) it else it })
         }
         return out.toList()

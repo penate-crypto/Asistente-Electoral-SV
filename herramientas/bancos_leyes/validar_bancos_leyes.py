@@ -27,7 +27,7 @@ def main():
             vistos.add(a["id"])
             cuerpo = re.sub(r"^Art\. \S+?\.-\s*", "", a["texto_literal"])
             sin_nota = re.sub(r"(\s*\(\d+\))+$", "", cuerpo)
-            ini, fin = norm(cuerpo[:28]), norm(sin_nota[-22:])
+            ini, fin = norm(cuerpo[:20]), norm(sin_nota[-22:])
             ventana_ini = "".join(pags[max(0, pg - 2):pg + 1])
             if ("art" + n) not in ventana_ini and ("articulo" + n) not in ventana_ini:
                 err.append(f"{a['id']}: no aparece 'Art. {n}' cerca de la página {pg}")

@@ -34,6 +34,7 @@ PAT = re.compile(r"^[ \t]*Art(?:[íi]culo|\.)[ \t]*(\d+)[ \t]*(?:[.\-–°º]|$)
 
 
 def articulos_de(pdf):
+    sin_titulos = pdf in bi.SIN_TITULOS
     """[(n, pagina, titulo, texto_literal)] del PDF."""
     ruta = os.path.join(A, "libros", pdf)
     pags = subprocess.run(["pdftotext", "-layout", ruta, "-"], capture_output=True, text=True).stdout.split("\f")
@@ -49,7 +50,7 @@ def articulos_de(pdf):
         if n in vistos:
             continue
         vistos.add(n)
-        titulo, ini_tit = bi.bloque_titulo(t[:m.end()], m.start())
+        titulo, ini_tit = bi.bloque_titulo(t[:m.end()], m.start()) if not sin_titulos else ("", m.start())
         inicios.append((n, m.start(), m.end(), titulo, ini_tit))
     out = []
     for k, (n, s, e, titulo, ini_tit) in enumerate(inicios):

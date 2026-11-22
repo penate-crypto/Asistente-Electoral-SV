@@ -14,6 +14,8 @@ A = os.path.join(REPO, "app", "src", "main", "assets")
 LIBROS = os.path.join(A, "libros")
 SALIDA_IDX = os.path.join(A, "libros_indice_completo.json")
 SALIDA_PAL = os.path.join(A, "libros_palabras")
+# PDF que no imprimen encabezados al margen (la línea anterior es texto del propio artículo)
+SIN_TITULOS = {"ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf"}
 PAT_ART = re.compile(r"^[ \t]*Art(?:[íi]culo|\.)[ \t]*(\d+)[ \t]*(?:[.\-–°º]|$)", re.M | re.I)
 PAG = re.compile(r'<page width="([\d.]+)" height="([\d.]+)">(.*?)</page>', re.S)
 PAL = re.compile(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">(.*?)</word>')
@@ -96,7 +98,7 @@ def main():
                     continue  # decretos interpretativos pegados al final
                 vistos.add(n)
                 cuerpo = " ".join(t[m.end():].split())[:400]
-                titulo = (ce.get(str(n)) if nombre == "Codigo-Electoral.pdf" else cn.get(str(n)) if nombre == "constitucion.pdf" else titulo_previo(t, m.start())) or "Artículo %d" % n
+                titulo = (ce.get(str(n)) if nombre == "Codigo-Electoral.pdf" else cn.get(str(n)) if nombre == "constitucion.pdf" else ("" if nombre in SIN_TITULOS else titulo_previo(t, m.start()))) or "Artículo %d" % n
                 arts.append({"article": "Art. %d" % n, "articleNumber": n, "title": titulo, "page": i, "snippet": ("- " + cuerpo) if cuerpo else ""})
         if not arts and previo.get("articles"):
             # sin artículos numerados (instructivo): se conservan los temas y se ubican en la página donde de verdad aparecen

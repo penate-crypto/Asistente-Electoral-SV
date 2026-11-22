@@ -1,0 +1,45 @@
+# idLibro|consulta|artículos esperados (el primero mostrado debe estar entre ellos) o "-" si no debe haber resultado
+ley_partidos|cuota de genero|38
+ley_partidos|derecho de afiliacion|35
+ley_partidos|elecciones internas|37
+ley_partidos|coaliciones|39,40,41,42
+ley_partidos|solicitud de inscripcion|13,46
+ley_partidos|suspension de inscripciones|19
+ley_partidos|artículo 21|21
+ley_partidos|21|21
+ley_partidos|artículos 5 al 7|5
+ley_acceso_informacion|informacion reservada|19
+ley_acceso_informacion|plazo de reserva|20
+ley_acceso_informacion|datos personales|31,32,36,37
+ley_acceso_informacion|recurso de apelacion|38
+ley_acceso_informacion|versiones publicas|30
+ley_acceso_informacion|entes obligados|7
+ley_sufragio_exterior|votacion remota por internet|13,18
+ley_sufragio_exterior|cierre de votacion|20
+ley_sufragio_exterior|papeleta|15
+ley_sufragio_exterior|transmision de resultados|21
+ley_sufragio_exterior|transparencia|22
+reglamento_observacion|acreditacion del observador|10
+reglamento_observacion|impedidos|16
+reglamento_observacion|principios|4
+reglamento_observacion|acuerdos bilaterales|26
+candidaturas_no_partidarias|recoleccion de firmas|6
+candidaturas_no_partidarias|financiamiento|10
+candidaturas_no_partidarias|retiro de candidaturas|11
+candidaturas_no_partidarias|grupos de apoyo|4
+candidaturas_no_partidarias|prohibiciones|9
+ley_reestructuracion_municipal|organizacion de los distritos|7
+ley_reestructuracion_municipal|empleados municipales|9
+ley_reestructuracion_municipal|vigencia|3,14
+ley_reestructuracion_municipal|facultades del tribunal supremo electoral|13
+codigo_penal_electoral|fraude electoral|295
+codigo_penal_electoral|votar mas de una vez|295
+codigo_penal_electoral|295|295
+codigo_penal_electoral|robo de celular|-
+codigo_electoral|bebidas embriagantes|284
+codigo_electoral|198|198
+codigo_electoral|artículos 5 al 7|5
+constitucion|derechos politicos|72
+constitucion|208|208
+constitucion|pastores partidos politicos|82
+ley_partidos|articulo 9999|-

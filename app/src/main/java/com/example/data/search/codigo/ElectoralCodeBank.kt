@@ -42,6 +42,12 @@ class LawBank(private val assetPath: String) {
     @Volatile private var articles: List<CodeArticle> = emptyList()
     @Volatile private var byNumber: Map<String, CodeArticle> = emptyMap()
 
+    /** Carga el banco la primera vez que se necesita (no al abrir la app). Llamar fuera del hilo principal. */
+    @Synchronized
+    fun ensureLoaded(context: Context) {
+        if (articles.isEmpty()) init(context)
+    }
+
     fun init(context: Context) {
         try {
             val json = context.assets.open(assetPath).bufferedReader().use { it.readText() }
