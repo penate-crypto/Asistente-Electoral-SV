@@ -1,6 +1,6 @@
 # Plan de trabajo — Asistente Electoral SV
 
-Estado: **A** hecho (en el repositorio; falta aplicarlo en AI Studio con el Prompt 5). El resto, pendiente.
+Estado: **A** y **B** hechos en el repositorio (falta aplicarlos en AI Studio con los Prompts 5 y 6). El resto, pendiente.
 
 ## Decisiones tomadas
 - Subrayado amarillo también **sobre la imagen del PDF** (se genera la posición de cada palabra).
