@@ -142,12 +142,7 @@ fun ElectoralMainScreen(
                         color = Color.White.copy(alpha = 0.85f),
                         fontSize = 11.5.sp
                     )
-                    Text(
-                        text = "Creador: Rodrigo Peñate",
-                        color = Color(0xFFFFD54F),
-                        fontSize = 11.5.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    // Creador: Rodrigo Peñate (crédito interno; no se muestra en la aplicación)
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
