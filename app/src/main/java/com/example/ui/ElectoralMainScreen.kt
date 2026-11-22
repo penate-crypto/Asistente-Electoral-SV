@@ -132,13 +132,13 @@ fun ElectoralMainScreen(
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Asistente Virtual Electoral",
+                        text = "Asistente Electoral",
                         color = Color.White,
                         fontSize = 17.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "App de IA para apoyo electoral",
+                        text = "App de apoyo electoral",
                         color = Color.White.copy(alpha = 0.85f),
                         fontSize = 11.5.sp
                     )
@@ -163,7 +163,7 @@ fun ElectoralMainScreen(
 
                 NavigationDrawerItem(
                     icon = { Icon(Icons.Default.Forum, contentDescription = null) },
-                    label = { Text("Asistente IA", fontSize = 13.5.sp, fontWeight = FontWeight.SemiBold) },
+                    label = { Text("Asistente", fontSize = 13.5.sp, fontWeight = FontWeight.SemiBold) },
                     selected = currentScreen == ElectoralScreen.CHAT,
                     onClick = {
                         viewModel.setScreen(ElectoralScreen.CHAT)
@@ -346,13 +346,13 @@ fun ElectoralMainScreen(
                     title = {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
-                                text = "Asistente Virtual Electoral",
+                                text = "Asistente Electoral",
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = "El Salvador - Apoyo electoral IA",
+                                text = "El Salvador - Apoyo electoral",
                                 fontSize = 10.sp,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                             )
@@ -422,8 +422,8 @@ fun ElectoralMainScreen(
                             .testTag("electoral_navigation_bar")
                     ) {
                         NavigationBarItem(
-                            icon = { Icon(Icons.Default.Forum, contentDescription = "Asistente IA") },
-                            label = { Text("Asistente IA", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) },
+                            icon = { Icon(Icons.Default.Forum, contentDescription = "Asistente") },
+                            label = { Text("Asistente", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) },
                             selected = currentScreen == ElectoralScreen.CHAT,
                             onClick = { viewModel.setScreen(ElectoralScreen.CHAT) },
                             modifier = Modifier.testTag("nav_item_chat")

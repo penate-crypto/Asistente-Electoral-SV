@@ -17,7 +17,7 @@ export function renderBiblioteca(ctx, root) {
       h("div", { class: "row2" },
         h("button", { class: "btn sm", onclick: () => ctx.abrirLibro(d.id, 1, true) }, "🔎 BUSCADOR DEL LIBRO"),
         h("button", { class: "btn sec sm", onclick: () => ctx.abrirLibro(d.id, 1) }, "📄 ABRIR PDF"),
-        h("button", { class: "btn ghost sm", onclick: () => { ctx.libroPreferido = d; ctx.nav("chat"); } }, "💬 CONSULTAR IA")))));
+        h("button", { class: "btn ghost sm", onclick: () => { ctx.libroPreferido = d; ctx.nav("chat"); } }, "💬 CONSULTAR ASISTENTE")))));
     if (!docs.length) lista.replaceChildren(h("p", { class: "muted" }, "No hay documentos en esta categoría."));
   };
   pintar();

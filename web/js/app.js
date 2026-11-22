@@ -30,7 +30,7 @@ ctx.fijarEscala = (e) => { ctx.escala = e; store.set("escala", e); aplicarEscala
 aplicarTema(); aplicarEscala();
 
 const SECCIONES = [
-  ["chat", "Asistente IA", "💬", "Asistente Virtual Electoral"], ["biblioteca", "Biblioteca", "📚", "Biblioteca Electoral (PDF)"],
+  ["chat", "Asistente", "💬", "Asistente Electoral"], ["biblioteca", "Biblioteca", "📚", "Biblioteca Electoral (PDF)"],
   ["test", "Test", "📝", "Test Electoral"], ["paso", "Paso a Paso", "🧭", "Paso a Paso"], ["capacitacion", "Capacitación", "🎓", "Capacitación"], ["config", "Ajustes", "⚙️", "Configuración"],
 ];
 const PANTALLAS = { chat: renderChat, biblioteca: renderBiblioteca, test: renderSimulacion, paso: renderPaso, capacitacion: renderCapacitacion, config: renderConfig };

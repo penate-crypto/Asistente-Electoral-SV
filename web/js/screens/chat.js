@@ -96,12 +96,12 @@ export function renderChat(ctx, root) {
     const libro = ctx.libroPreferido;
     return h("div", {},
       h("div", { class: "hero" }, h("img", { src: "img/logo.png", alt: "Asistente Electoral SV" }),
-        h("h1", {}, "Asistente Virtual Electoral"), h("p", { class: "muted" }, "El Salvador · Apoyo electoral")),
+        h("h1", {}, "Asistente Electoral"), h("p", { class: "muted" }, "El Salvador · Apoyo electoral")),
       libro && h("p", { class: "voicepill" }, `Priorizando: ${libro.title}`),
       h("div", { class: "card" },
         h("div", { class: "eyebrow" }, "ORIENTACIÓN LEGAL ELECTORAL"),
         h("p", {}, "Escribe una situación o una pregunta sobre la jornada electoral (JRV, vigilantes, DUI, escrutinio, delitos…) y recibirás pasos, fundamento legal y la página exacta del libro."),
-        h("p", { class: "muted" }, "Esta aplicación es una herramienta de consulta independiente. NO es oficial del TSE. Funciona sin gastar datos de IA: responde con el banco de conocimientos propio.")),
+        h("p", { class: "muted" }, "Esta aplicación es una herramienta de consulta independiente. NO es oficial del TSE. No usa inteligencia artificial: responde con su propio banco de conocimientos, sin internet.")),
       h("div", { class: "eyebrow", style: { margin: "14px 2px 8px" } }, "CONSULTAS RECOMENDADAS"),
       h("div", { class: "chips" }, BANCO_SUGERENCIAS.slice(0, 8).map((s) => h("button", { class: "chip", onclick: () => consultar(s) }, s))));
   }

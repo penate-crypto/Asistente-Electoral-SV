@@ -478,7 +478,7 @@ fun PasoAPasoScreen(
                                 ) {
                                     Icon(Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(14.dp))
                                     Spacer(modifier = Modifier.width(6.dp))
-                                    Text("Consultar detalles a la IA", fontSize = 11.5.sp)
+                                    Text("Consultar detalles en el asistente", fontSize = 11.5.sp)
                                 }
                             }
                         }

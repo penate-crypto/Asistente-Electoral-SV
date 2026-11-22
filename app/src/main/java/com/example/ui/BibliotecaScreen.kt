@@ -164,7 +164,7 @@ fun BibliotecaScreen(
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = "Cada libro cuenta con buscador interno exclusivo, visor PDF y consulta con IA",
+                    text = "Cada libro cuenta con buscador interno exclusivo, visor PDF y consulta en el asistente",
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -261,7 +261,7 @@ fun BibliotecaScreen(
 
                         Spacer(modifier = Modifier.height(8.dp))
 
-                        // Secondary Action Buttons: [ ABRIR PDF ] and [ CONSULTAR CON IA ]
+                        // Secondary Action Buttons: [ ABRIR PDF ] and [ CONSULTAR ASISTENTE ]
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -291,7 +291,7 @@ fun BibliotecaScreen(
                                 )
                             }
 
-                            // [ CONSULTAR CON IA ]
+                            // [ CONSULTAR ASISTENTE ]
                             Button(
                                 onClick = {
                                     val priorityPrompt = "¿Qué disposiciones y procedimientos principales establece el documento '${doc.title}'?"
@@ -312,7 +312,7 @@ fun BibliotecaScreen(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "CONSULTAR IA",
+                                    text = "CONSULTAR ASISTENTE",
                                     fontSize = 11.5.sp,
                                     fontWeight = FontWeight.Bold
                                 )

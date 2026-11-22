@@ -460,7 +460,7 @@ fun BookSearchResultCard(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "Preguntar a IA",
+                        text = "Preguntar al asistente",
                         fontSize = 11.5.sp,
                         fontWeight = FontWeight.Bold
                     )

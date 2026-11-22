@@ -231,7 +231,7 @@ class MainActivity : ComponentActivity() {
                                     }
                                     SpeechRecognizer.ERROR_NETWORK,
                                     SpeechRecognizer.ERROR_NETWORK_TIMEOUT -> {
-                                        viewModel.onVoiceError("No hay conexión disponible para consultar la IA.")
+                                        viewModel.onVoiceError("El reconocimiento de voz necesita conexión a internet en este teléfono. Puedes escribir tu pregunta.")
                                     }
                                     SpeechRecognizer.ERROR_CLIENT -> {
                                         viewModel.cancelVoiceListening("Escucha cancelada.")
@@ -282,7 +282,7 @@ class MainActivity : ComponentActivity() {
                 ttsManager.stop()
             }
             currentVoiceState == VoiceConversationState.PROCESSING -> {
-                Toast.makeText(this, "Procesando respuesta con IA...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Buscando la respuesta...", Toast.LENGTH_SHORT).show()
             }
             else -> {
                 ttsManager.stop()
@@ -302,7 +302,7 @@ class MainActivity : ComponentActivity() {
 
     private fun startVoiceListeningFlow(speechIntentLauncher: ActivityResultLauncher<Intent>) {
         if (!isNetworkConnected()) {
-            viewModel.onVoiceError("No hay conexión disponible para consultar la IA.")
+            viewModel.onVoiceError("El reconocimiento de voz necesita conexión a internet en este teléfono. Puedes escribir tu pregunta.")
             return
         }
 

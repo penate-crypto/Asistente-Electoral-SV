@@ -709,7 +709,7 @@ private fun CaseDetailScreen(
         ) {
             Icon(Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(16.dp))
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Consultar este caso con el Asistente IA", fontSize = 13.sp, fontWeight = FontWeight.Bold)
+            Text("Consultar este caso en el asistente", fontSize = 13.sp, fontWeight = FontWeight.Bold)
         }
 
         Spacer(modifier = Modifier.height(20.dp))
