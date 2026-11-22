@@ -1,0 +1,40 @@
+# archivo|consulta|páginas esperadas (la primera mostrada debe estar entre ellas) o "-" si no debe haber resultados
+Codigo-Electoral.pdf|artículo 2|1
+Codigo-Electoral.pdf|art. 198|67
+Codigo-Electoral.pdf|198|67
+Codigo-Electoral.pdf|Artículo 290|97
+Codigo-Electoral.pdf|artículos 200 al 202|68
+Codigo-Electoral.pdf|art 9999|-
+Codigo-Electoral.pdf|ebriedad|85
+Codigo-Electoral.pdf|EBRIEDAD|85
+Codigo-Electoral.pdf|bebidas embriagantes|96
+Codigo-Electoral.pdf|bebidas  embriagantes de cualquier naturaleza|96
+Codigo-Electoral.pdf|diecisiete horas|67
+Codigo-Electoral.pdf|tinta indeleble|45
+Codigo-Electoral.pdf|votos nulos|68,70,71,93
+Codigo-Electoral.pdf|voto nulo|68,70,71,93
+Codigo-Electoral.pdf|palabra que no existe zzzz|-
+constitucion.pdf|72|15
+constitucion.pdf|artículo 208|47
+constitucion.pdf|tribunal supremo electoral|16,27,47,52
+constitucion.pdf|soberanía|17,31,35,36,48
+constitucion.pdf|insurrección|18
+constitucion.pdf|insurreccion|18
+Código Penal.pdf|295|90
+Código Penal.pdf|fraude electoral|90
+ley-de-partidos-politicos.pdf|financiamiento|1,3,11,12,13,16,27,30,31,32,33,34
+ley-de-partidos-politicos.pdf|coalición|13,25,26,27,29,31,32
+Ley-de-Acceso-a-la-Informacion-Publica.pdf|información reservada|4,11,13,14,25,31
+Ley-de-Acceso-a-la-Informacion-Publica.pdf|informacion reservada|4,11,13,14,25,31
+instructivo-JRV.pdf|papeletas sobrantes|34,35,37,40,46
+instructivo-JRV.pdf|quórum|-
+REGLAMENTO-GENERAL-PARA-LA-OBSERVACION-ELECTORAL-NACIONAL-E-INTERNACIONAL-EN-EL-SALVADOR.pdf|observadores internacionales|2,3,7
+LEY ESPECIAL PARA LA REESTRUCTURACIÓN MUNICIPAL.pdf|concejo municipal|16
+Disposciones-Especiales-Candidaturas-no-partidarias.pdf|candidaturas no partidarias|1,3,4,5
+BOX:Codigo-Electoral.pdf|67|diecisiete|1
+BOX:Codigo-Electoral.pdf|67|diecisiete horas|2
+BOX:Codigo-Electoral.pdf|67|198|2
+BOX:Codigo-Electoral.pdf|67|artículo 197|2
+BOX:Codigo-Electoral.pdf|66|198|0
+BOX:Codigo-Electoral.pdf|85|ebriedad|1
+BOX:constitucion.pdf|47|tribunal supremo electoral|9
