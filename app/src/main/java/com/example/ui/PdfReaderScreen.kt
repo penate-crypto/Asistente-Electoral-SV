@@ -40,6 +40,7 @@ import com.example.viewmodel.ElectoralViewModel
 fun PdfReaderScreen(
     document: PdfDocument,
     initialPageIndex: Int = 0,
+    highlightQuery: String = "",
     onClose: () -> Unit,
     viewModel: ElectoralViewModel,
     modifier: Modifier = Modifier
@@ -52,6 +53,10 @@ fun PdfReaderScreen(
     var currentBitmap by remember { mutableStateOf<Bitmap?>(null) }
     var isRenderingPage by remember { mutableStateOf(false) }
     var showInReaderSearch by remember { mutableStateOf(false) }
+    // Lo buscado se subraya en amarillo sobre la página (viene de la búsqueda del libro) y en el panel de texto.
+    var activeHighlight by remember(document, highlightQuery) { mutableStateOf(highlightQuery) }
+    var highlightBoxes by remember { mutableStateOf<List<com.example.data.BookSearch.Box>>(emptyList()) }
+    var showPageText by remember { mutableStateOf(false) }
 
     // Touch gesture zoom and pan
     var scale by remember { mutableStateOf(1f) }
@@ -86,6 +91,15 @@ fun PdfReaderScreen(
     }
 
     val totalPages = renderSession?.totalPages ?: document.pages.size.coerceAtLeast(1)
+
+    // Posición de las palabras a subrayar en la página actual (se calcula fuera del hilo principal)
+    LaunchedEffect(currentPageIndex, activeHighlight, document) {
+        highlightBoxes = if (activeHighlight.isBlank()) emptyList<com.example.data.BookSearch.Box>() else kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+            val file = com.example.data.BookSearch.resolveFileName(document.id, document.assetPath)
+            if (file == null) emptyList<com.example.data.BookSearch.Box>()
+            else com.example.data.BookSearch.highlightBoxes(context.applicationContext, file, currentPageIndex + 1, activeHighlight)
+        }
+    }
 
     // Render bitmap when page or session changes
     LaunchedEffect(currentPageIndex, renderSession) {
@@ -162,6 +176,13 @@ fun PdfReaderScreen(
                         )
                         .testTag("rendered_pdf_page_image"),
                     contentScale = ContentScale.Fit
+                )
+                PdfHighlightOverlay(
+                    boxes = highlightBoxes,
+                    bitmapWidth = currentBitmap!!.width,
+                    bitmapHeight = currentBitmap!!.height,
+                    scale = scale,
+                    offset = offset
                 )
             } else if (isRenderingPage) {
                 CircularProgressIndicator(
@@ -302,6 +323,30 @@ fun PdfReaderScreen(
                 )
             }
 
+            // Texto de la página (con lo buscado en amarillo)
+            Button(
+                onClick = { showPageText = true },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black.copy(alpha = 0.75f),
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(20.dp),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp),
+                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
+                modifier = Modifier
+                    .height(38.dp)
+                    .testTag("btn_reader_page_text")
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Description,
+                    contentDescription = "Texto de la página",
+                    tint = SearchHighlightYellow,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(text = "TEXTO", fontWeight = FontWeight.Bold, fontSize = 11.5.sp, color = Color.White)
+            }
+
             // Close button
             Button(
                 onClick = onClose,
@@ -337,10 +382,21 @@ fun PdfReaderScreen(
             InReaderSearchModal(
                 document = document,
                 onClose = { showInReaderSearch = false },
-                onSelectPage = { page ->
+                onSelectPage = { page, query ->
                     currentPageIndex = (page - 1).coerceIn(0, totalPages - 1)
+                    activeHighlight = query
                     showInReaderSearch = false
                 }
+            )
+        }
+
+        if (showPageText) {
+            PageTextSheet(
+                document = document,
+                pageNumber = currentPageIndex + 1,
+                query = activeHighlight,
+                onClearHighlight = { activeHighlight = "" },
+                onClose = { showPageText = false }
             )
         }
 
@@ -406,21 +462,30 @@ fun PdfReaderScreen(
 private fun InReaderSearchModal(
     document: PdfDocument,
     onClose: () -> Unit,
-    onSelectPage: (Int) -> Unit
+    onSelectPage: (Int, String) -> Unit
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     var query by remember { mutableStateOf("") }
-    val results = remember(query, document) {
-        if (query.trim().isNotEmpty()) {
-            BookInternalSearchEngine.searchDocument(
-                documentId = document.id,
-                documentTitle = document.title,
-                query = query,
-                assetPath = document.assetPath,
-                context = context
-            )
+    // Búsqueda en segundo plano, con una pequeña espera mientras se escribe
+    var results by remember { mutableStateOf<List<com.example.data.BookSearchResult>>(emptyList()) }
+    var searchMessage by remember { mutableStateOf<String?>(null) }
+    var isSearching by remember { mutableStateOf(false) }
+    LaunchedEffect(query, document) {
+        if (query.trim().isEmpty()) {
+            results = emptyList(); searchMessage = null; isSearching = false
         } else {
-            emptyList()
+            isSearching = true
+            kotlinx.coroutines.delay(250)
+            val (found, message) = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Default) {
+                BookInternalSearchEngine.searchOutcome(
+                    documentId = document.id,
+                    documentTitle = document.title,
+                    query = query,
+                    assetPath = document.assetPath,
+                    context = context
+                )
+            }
+            results = found; searchMessage = message; isSearching = false
         }
     }
 
@@ -499,6 +564,13 @@ private fun InReaderSearchModal(
                         modifier = Modifier.padding(24.dp)
                     )
                 }
+            } else if (results.isEmpty() && isSearching) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) { CircularProgressIndicator(modifier = Modifier.size(32.dp)) }
             } else if (results.isEmpty()) {
                 Box(
                     modifier = Modifier
@@ -507,7 +579,7 @@ private fun InReaderSearchModal(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "No se encontraron coincidencias en ${document.title}.",
+                        text = searchMessage ?: "No se encontraron coincidencias en ${document.title}.",
                         fontSize = 13.5.sp,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
@@ -530,7 +602,7 @@ private fun InReaderSearchModal(
                     items(results.size) { index ->
                         val res = results[index]
                         Card(
-                            onClick = { onSelectPage(res.pageNumber) },
+                            onClick = { onSelectPage(res.pageNumber, query) },
                             shape = RoundedCornerShape(10.dp),
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
                             modifier = Modifier.fillMaxWidth()
@@ -563,7 +635,7 @@ private fun InReaderSearchModal(
                                 }
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text(
-                                    text = res.snippet,
+                                    text = highlightedText(res.snippet, res.highlights),
                                     fontSize = 12.sp,
                                     lineHeight = 16.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant

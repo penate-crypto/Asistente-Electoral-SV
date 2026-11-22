@@ -19,6 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -34,24 +37,33 @@ import com.example.data.PdfDocument
 fun BookInternalSearchScreen(
     document: PdfDocument,
     onClose: () -> Unit,
-    onOpenPage: (Int) -> Unit,
+    onOpenPage: (Int, String) -> Unit,
     onConsultAi: (queryText: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     var searchQuery by remember { mutableStateOf("") }
 
-    val searchResults = remember(searchQuery, document) {
-        if (searchQuery.trim().isNotEmpty()) {
-            BookInternalSearchEngine.searchDocument(
-                documentId = document.id,
-                documentTitle = document.title,
-                query = searchQuery,
-                assetPath = document.assetPath,
-                context = context
-            )
+    // La búsqueda corre en segundo plano y espera a que el usuario termine de escribir (no traba la pantalla).
+    var searchResults by remember { mutableStateOf<List<BookSearchResult>>(emptyList()) }
+    var searchMessage by remember { mutableStateOf<String?>(null) }
+    var isSearching by remember { mutableStateOf(false) }
+    LaunchedEffect(searchQuery, document) {
+        if (searchQuery.trim().isEmpty()) {
+            searchResults = emptyList(); searchMessage = null; isSearching = false
         } else {
-            emptyList()
+            isSearching = true
+            delay(250)
+            val (found, message) = withContext(Dispatchers.Default) {
+                BookInternalSearchEngine.searchOutcome(
+                    documentId = document.id,
+                    documentTitle = document.title,
+                    query = searchQuery,
+                    assetPath = document.assetPath,
+                    context = context
+                )
+            }
+            searchResults = found; searchMessage = message; isSearching = false
         }
     }
 
@@ -60,8 +72,8 @@ fun BookInternalSearchScreen(
         when (document.id) {
             "codigo_electoral_decreto_413" -> listOf(
                 "Art. 190 (Instalación)", "Art. 3 (Sufragio)", "Art. 7 (Inhábiles)",
-                "Art. 38 (Organismos)", "Art. 113 (Permiso laboral)", "Art. 284 (Armas)",
-                "Art. 205 (Voto nulo)", "Escrutinio", "Vigilantes"
+                "Art. 38 (Organismos)", "Art. 113 (Permiso laboral)", "Art. 290 (Armas)",
+                "Art. 207 (Voto nulo)", "Escrutinio", "Vigilantes"
             )
             "constitucion_republica_1983" -> listOf(
                 "Art. 72 (Derechos)", "Art. 73 (Deberes)", "Art. 75 (Pérdida derechos)",
@@ -73,9 +85,6 @@ fun BookInternalSearchScreen(
             )
             "ley_de_partidos_politicos" -> listOf(
                 "Vigilantes", "Fiscalización", "Propaganda", "Derechos partidarios"
-            )
-            "ley_genero_electoral" -> listOf(
-                "Violencia política", "Paridad", "Inclusión", "LEIV"
             )
             else -> listOf("Artículos", "Votación", "Escrutinio", "JRV", "Sanciones")
         }
@@ -255,6 +264,10 @@ fun BookInternalSearchScreen(
                     textAlign = androidx.compose.ui.text.style.TextAlign.Center
                 )
             }
+        } else if (searchResults.isEmpty() && isSearching) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator(modifier = Modifier.size(32.dp))
+            }
         } else if (searchResults.isEmpty()) {
             // No results state
             Column(
@@ -279,7 +292,7 @@ fun BookInternalSearchScreen(
                 )
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(
-                    text = "No se encontraron coincidencias para «$searchQuery» en ${document.title}. Intenta con otras palabras clave o número de artículo.",
+                    text = searchMessage ?: "No se encontraron coincidencias para «$searchQuery» en ${document.title}. Intenta con otras palabras clave o número de artículo.",
                     fontSize = 12.5.sp,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = androidx.compose.ui.text.style.TextAlign.Center
@@ -319,7 +332,7 @@ fun BookInternalSearchScreen(
                     BookSearchResultCard(
                         result = result,
                         searchQuery = searchQuery,
-                        onOpenPage = { onOpenPage(result.pageNumber) },
+                        onOpenPage = { onOpenPage(result.pageNumber, searchQuery) },
                         onConsultAi = {
                             val prompt = "¿Qué establece el ${result.articleRef ?: result.sectionTitle} de '${result.documentTitle}' y cuál es su procedimiento?"
                             onConsultAi(prompt)
@@ -396,8 +409,8 @@ fun BookSearchResultCard(
             Spacer(modifier = Modifier.height(6.dp))
 
             // Snippet with highlighted search query
-            val annotatedSnippet = remember(result.snippet, searchQuery) {
-                buildHighlightedString(result.snippet, searchQuery)
+            val annotatedSnippet = remember(result.snippet, result.highlights) {
+                highlightedText(result.snippet, result.highlights)
             }
 
             Surface(

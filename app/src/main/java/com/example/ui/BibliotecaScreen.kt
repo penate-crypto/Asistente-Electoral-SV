@@ -33,6 +33,7 @@ fun BibliotecaScreen(
     var viewingDocument by remember { mutableStateOf<PdfDocument?>(null) }
     var searchingDocument by remember { mutableStateOf<PdfDocument?>(null) }
     var readerInitialPage by remember { mutableStateOf(0) }
+    var readerHighlightQuery by remember { mutableStateOf("") }
 
     LaunchedEffect(directDoc, directPage) {
         if (directDoc != null) {
@@ -101,8 +102,9 @@ fun BibliotecaScreen(
         BookInternalSearchScreen(
             document = searchingDocument!!,
             onClose = { searchingDocument = null },
-            onOpenPage = { page ->
+            onOpenPage = { page, query ->
                 viewingDocument = searchingDocument
+                readerHighlightQuery = query
                 readerInitialPage = (page - 1).coerceAtLeast(0)
                 searchingDocument = null
             },
@@ -122,9 +124,11 @@ fun BibliotecaScreen(
         PdfReaderScreen(
             document = viewingDocument!!,
             initialPageIndex = readerInitialPage,
+            highlightQuery = readerHighlightQuery,
             onClose = {
                 viewingDocument = null
                 readerInitialPage = 0
+                readerHighlightQuery = ""
                 viewModel.closeDirectPdfReader()
             },
             viewModel = viewModel,
@@ -271,6 +275,7 @@ fun BibliotecaScreen(
                                 onClick = {
                                     viewingDocument = doc
                                     readerInitialPage = 0
+                                    readerHighlightQuery = ""
                                 },
                                 shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
