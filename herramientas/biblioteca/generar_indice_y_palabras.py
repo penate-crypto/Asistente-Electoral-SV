@@ -24,6 +24,39 @@ def norm(s):
     return re.sub(r"[^a-z0-9]+", " ", "".join(c for c in s if not unicodedata.combining(c))).strip()
 
 
+RUIDO = re.compile(r"^\s*(_{4,}|[ÍI]NDICE LEGISLATIVO|ASAMBLEA LEGISLATIVA.*|\d{1,3})\s*$", re.I)
+PEQ = {"de", "del", "la", "las", "los", "y", "e", "en", "a", "o", "el", "por", "para", "con", "al", "u"}
+
+
+def bloque_titulo(texto, pos):
+    """(título, posición donde empieza su línea) del encabezado impreso justo antes de 'Art. N' (en 'pos').
+    Si no hay un encabezado claro devuelve ("", pos)."""
+    lineas = texto[:pos].split("\n")
+    offs, acc = [], 0
+    for ln in lineas:
+        offs.append(acc); acc += len(ln) + 1
+    juntas, i = [], len(lineas) - 1
+    while i >= 0 and (not lineas[i].strip() or RUIDO.match(lineas[i])):
+        i -= 1
+        if len(lineas) - 1 - i > 3:
+            return "", pos
+    inicio = pos
+    while i >= 0 and lineas[i].strip() and not RUIDO.match(lineas[i]):
+        juntas.insert(0, lineas[i].strip()); inicio = offs[i]; i -= 1
+        if len(juntas) > 3:
+            return "", pos
+    s = re.sub(r"\(\d+\)", "", " ".join(juntas)).strip(" .")
+    if not s or len(s) > 140 or re.match(r"^(Art|CAP|T[ÍI]T|SECC)", s, re.I) or re.search(r"[.;:,]$", " ".join(juntas).strip()):
+        return "", pos
+    if sum(c.isupper() for c in s) > 0.8 * sum(c.isalpha() for c in s):
+        s = " ".join(w.lower() if k and w.lower() in PEQ else w.capitalize() for k, w in enumerate(s.split()))
+    return s, inicio
+
+
+def titulo_previo(texto, pos):
+    return bloque_titulo(texto, pos)[0]
+
+
 def leer_palabras(ruta):
     xml = subprocess.run(["pdftotext", "-bbox", "-enc", "UTF-8", ruta, "-"], capture_output=True, text=True, check=True).stdout
     paginas = []
@@ -63,7 +96,7 @@ def main():
                     continue  # decretos interpretativos pegados al final
                 vistos.add(n)
                 cuerpo = " ".join(t[m.end():].split())[:400]
-                titulo = (ce.get(str(n)) if nombre == "Codigo-Electoral.pdf" else cn.get(str(n)) if nombre == "constitucion.pdf" else tit_prev.get(n)) or "Artículo %d" % n
+                titulo = (ce.get(str(n)) if nombre == "Codigo-Electoral.pdf" else cn.get(str(n)) if nombre == "constitucion.pdf" else titulo_previo(t, m.start())) or "Artículo %d" % n
                 arts.append({"article": "Art. %d" % n, "articleNumber": n, "title": titulo, "page": i, "snippet": ("- " + cuerpo) if cuerpo else ""})
         if not arts and previo.get("articles"):
             # sin artículos numerados (instructivo): se conservan los temas y se ubican en la página donde de verdad aparecen
