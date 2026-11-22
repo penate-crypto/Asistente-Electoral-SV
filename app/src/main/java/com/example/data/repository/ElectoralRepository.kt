@@ -43,7 +43,6 @@ class ElectoralRepository(
         "¿Qué derechos y prohibiciones tienen los vigilantes de partidos políticos?",
         "¿Cuáles son las atribuciones del Tribunal Supremo Electoral (TSE)?",
         "¿Quiénes están autorizados a portar armas y cómo aplica el Art. 290 del Código Electoral?",
-        "¿Cómo protege la ley LEIV (Art. 55) a las mujeres en el proceso electoral?",
         "¿Qué sanciones contempla la Ley Seca (Art. 284) y los delitos electorales?",
         "¿Qué hacer si un ciudadano no presenta su DUI o no aparece en el padrón?",
         "¿Cómo se garantiza el voto asistido para personas con discapacidad o adultos mayores?",

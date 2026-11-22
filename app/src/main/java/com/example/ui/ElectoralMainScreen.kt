@@ -232,8 +232,7 @@ fun ElectoralMainScreen(
                         "¿Cómo se integra una JRV?" to "¿Cómo se integra una Junta Receptora de Votos (JRV)?",
                         "Permisos de trabajo (Art. 113)" to "¿Qué establece el Art. 113 del Código Electoral sobre los permisos laborales con goce de sueldo?",
                         "Prohibición de armas en centros" to "¿Qué normativa regula la prohibición de armas en centros de votación en El Salvador?",
-                        "Procedimiento de Escrutinio" to "¿Cuál es el procedimiento paso a paso para realizar el escrutinio de votos?",
-                        "Protección a la mujer (LEIV)" to "¿Cómo protege la ley a las mujeres miembros de mesa contra violencia política?"
+                        "Procedimiento de Escrutinio" to "¿Cuál es el procedimiento paso a paso para realizar el escrutinio de votos?"
                     )
                     
                     recommendedList.forEach { (label, question) ->

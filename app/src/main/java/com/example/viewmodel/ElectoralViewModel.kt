@@ -166,8 +166,16 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     }
 
     fun startDocumentSpecificQuery(docId: String, docTitle: String) {
-        _preferredBookId.value = docId
-        _preferredBookTitle.value = docTitle
+        val book = com.example.data.search.codigo.LawLibrary.byPdfDocId(docId)
+        if (book != null) {
+            // El libro tiene banco de artículos: la pregunta se busca DENTRO de ese libro.
+            _preferredBookId.value = null
+            _preferredBookTitle.value = null
+            _bookSearchBook.value = book.id to book.title
+        } else {
+            _preferredBookId.value = docId
+            _preferredBookTitle.value = docTitle
+        }
         _currentScreen.value = ElectoralScreen.CHAT
     }
 

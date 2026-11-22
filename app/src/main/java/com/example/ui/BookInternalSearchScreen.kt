@@ -334,7 +334,10 @@ fun BookInternalSearchScreen(
                         searchQuery = searchQuery,
                         onOpenPage = { onOpenPage(result.pageNumber, searchQuery) },
                         onConsultAi = {
-                            val prompt = "¿Qué establece el ${result.articleRef ?: result.sectionTitle} de '${result.documentTitle}' y cuál es su procedimiento?"
+                            // Si el libro tiene banco de artículos, se busca dentro del libro (el artículo o lo que escribió el usuario).
+                            val hasBank = com.example.data.search.codigo.LawLibrary.byPdfDocId(document.id) != null
+                            val prompt = if (hasBank) (result.articleRef ?: searchQuery)
+                            else "¿Qué establece el ${result.articleRef ?: result.sectionTitle} de '${result.documentTitle}' y cuál es su procedimiento?"
                             onConsultAi(prompt)
                         }
                     )
