@@ -1,0 +1,221 @@
+{
+ "version": "1.0",
+ "id": "acuerdo_legislativo",
+ "nombre": "Acuerdo Legislativo: reforma y supresión de la segunda elección",
+ "fuente": {
+  "documento": "Acuerdo Legislativo: reforma y supresión de la segunda elección",
+  "ubicacion_pdf": "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+  "pdf_doc_id": "acuerdo_legislativo_reforma_electoral"
+ },
+ "nota": "Texto literal leído del PDF de la biblioteca. Los títulos son los encabezados impresos en el PDF; si no hay, dice «Artículo N». Los artículos en MAYÚSCULAS en el PDF (reformados) se muestran en 'texto_legible' en minúsculas normales.",
+ "total_articulos": 6,
+ "articulos": [
+  {
+   "id": "AL-1",
+   "numero": "1",
+   "titulo": "Artículo 1",
+   "titulo_es_oficial": false,
+   "titulo_del_codigo": "",
+   "capitulo": "",
+   "texto_literal": "Art. 1.- Refórmase el Art. 75, de la siguiente manera: “Art. 75.- Pierden los derechos de ciudadano: 1º. Los de conducta notoriamente viciada; 2º. Los condenados por delito; 3º. Los que compren o vendan votos en las elecciones; 4º. Los funcionarios, las autoridades y los agentes de éstas que coarten la libertad del sufragio. En estos casos, los derechos de ciudadanía se recuperarán por rehabilitación expresa declarada por autoridad competente.”",
+   "texto_legible": "Art. 1.- Refórmase el Art. 75, de la siguiente manera: “Art. 75.- Pierden los derechos de ciudadano: 1º. Los de conducta notoriamente viciada; 2º. Los condenados por delito; 3º. Los que compren o vendan votos en las elecciones; 4º. Los funcionarios, las autoridades y los agentes de éstas que coarten la libertad del sufragio. En estos casos, los derechos de ciudadanía se recuperarán por rehabilitación expresa declarada por autoridad competente.”",
+   "mayusculas_en_pdf": false,
+   "estado": "vigente",
+   "pagina_pdf": 4,
+   "ubicacion_pdf": "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+   "pdf_doc_id": "acuerdo_legislativo_reforma_electoral",
+   "palabras_clave": [
+    "derechos",
+    "pierden",
+    "ciudadano",
+    "conducta",
+    "notoriamente",
+    "viciada",
+    "condenados",
+    "delito"
+   ],
+   "sinonimos": [],
+   "sinonimos_secundarios": [
+    "multa",
+    "sancion",
+    "castigo",
+    "delito",
+    "carcel",
+    "pena"
+   ],
+   "articulos_citados": [],
+   "situaciones_relacionadas": [
+    "ELE-002",
+    "VOT-028"
+   ]
+  },
+  {
+   "id": "AL-2",
+   "numero": "2",
+   "titulo": "Artículo 2",
+   "titulo_es_oficial": false,
+   "titulo_del_codigo": "",
+   "capitulo": "",
+   "texto_literal": "Art. 2.- Refórmase los incisos segundo y tercero del artículo 80, de la siguiente manera: “Se considerarán electos como Presidente y Vicepresidente de la Republica, los candidatos que hayan obtenido el mayor número de votos válidos en el correspondiente proceso electoral.”",
+   "texto_legible": "Art. 2.- Refórmase los incisos segundo y tercero del artículo 80, de la siguiente manera: “Se considerarán electos como Presidente y Vicepresidente de la Republica, los candidatos que hayan obtenido el mayor número de votos válidos en el correspondiente proceso electoral.”",
+   "mayusculas_en_pdf": false,
+   "estado": "vigente",
+   "pagina_pdf": 5,
+   "ubicacion_pdf": "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+   "pdf_doc_id": "acuerdo_legislativo_reforma_electoral",
+   "palabras_clave": [
+    "incisos",
+    "tercero",
+    "consideraran",
+    "electos",
+    "obtenido",
+    "mayor",
+    "numero",
+    "validos"
+   ],
+   "sinonimos": [],
+   "sinonimos_secundarios": [
+    "candidato",
+    "candidatura",
+    "candidatos"
+   ],
+   "articulos_citados": [
+    "80"
+   ],
+   "situaciones_relacionadas": [
+    "ELE-002"
+   ]
+  },
+  {
+   "id": "AL-3",
+   "numero": "3",
+   "titulo": "Artículo 3",
+   "titulo_es_oficial": false,
+   "titulo_del_codigo": "",
+   "capitulo": "",
+   "texto_literal": "Art. 3.- Refórmase el artículo 152, de la siguiente manera: “Art. 152.- No podrán ser candidatos a Presidente de la República: 1º. El cónyuge y los parientes dentro del cuarto grado de consanguinidad o segundo de afinidad de cualquiera de las personas que hayan ejercido la Presidencia en el período que finaliza. 2º. El que haya sido Presidente de la Asamblea Legislativa o Presidente de la Corte Suprema de Justicia durante el año anterior al día del inicio del período presidencial; 3º. El que haya sido Ministro, Viceministro de Estado o Presidente de alguna institución oficial autónoma y el Director General de la Policía Nacional Civil, dentro del último año del período presidencial inmediato anterior. 4º. Los militares de profesión que estuvieren de alta o que lo hayan estado en los tres años anteriores al día del inicio del período presidencial; 5º. El Vicepresidente o Designado que llamado legalmente a ejercer la Presidencia en el período inmediato anterior, se negare a desempeñarla sin justa causa, entendiéndose que ésta existe cuando el Vicepresidente o Designado manifieste su intención de ser candidato a la Presidencia de la República, dentro de los seis meses anteriores al inicio del período presidencial; 6º. Las personas comprendidas en los ordinales 2°, 3°, 4°, 5° y 6°, del artículo 127 de esta Constitución.”",
+   "texto_legible": "Art. 3.- Refórmase el artículo 152, de la siguiente manera: “Art. 152.- No podrán ser candidatos a Presidente de la República: 1º. El cónyuge y los parientes dentro del cuarto grado de consanguinidad o segundo de afinidad de cualquiera de las personas que hayan ejercido la Presidencia en el período que finaliza. 2º. El que haya sido Presidente de la Asamblea Legislativa o Presidente de la Corte Suprema de Justicia durante el año anterior al día del inicio del período presidencial; 3º. El que haya sido Ministro, Viceministro de Estado o Presidente de alguna institución oficial autónoma y el Director General de la Policía Nacional Civil, dentro del último año del período presidencial inmediato anterior. 4º. Los militares de profesión que estuvieren de alta o que lo hayan estado en los tres años anteriores al día del inicio del período presidencial; 5º. El Vicepresidente o Designado que llamado legalmente a ejercer la Presidencia en el período inmediato anterior, se negare a desempeñarla sin justa causa, entendiéndose que ésta existe cuando el Vicepresidente o Designado manifieste su intención de ser candidato a la Presidencia de la República, dentro de los seis meses anteriores al inicio del período presidencial; 6º. Las personas comprendidas en los ordinales 2°, 3°, 4°, 5° y 6°, del artículo 127 de esta Constitución.”",
+   "mayusculas_en_pdf": false,
+   "estado": "vigente",
+   "pagina_pdf": 5,
+   "ubicacion_pdf": "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+   "pdf_doc_id": "acuerdo_legislativo_reforma_electoral",
+   "palabras_clave": [
+    "dentro",
+    "anterior",
+    "inicio",
+    "periodo",
+    "personas",
+    "sido",
+    "estado",
+    "inmediato"
+   ],
+   "sinonimos": [],
+   "sinonimos_secundarios": [
+    "candidato",
+    "candidatura",
+    "candidatos"
+   ],
+   "articulos_citados": [
+    "127",
+    "152"
+   ],
+   "situaciones_relacionadas": [
+    "ELE-002"
+   ]
+  },
+  {
+   "id": "AL-4",
+   "numero": "4",
+   "titulo": "Artículo 4",
+   "titulo_es_oficial": false,
+   "titulo_del_codigo": "",
+   "capitulo": "",
+   "texto_literal": "Art. 4.- Refórmase el artículo 154 de la siguiente manera: “Art. 154.- El período presidencial será de seis años y comenzará y terminará el día primero de junio, sin que la persona que haya ejercido la Presidencia pueda continuar en sus funciones ni un día más. En el caso de una reelección, el primer día del nuevo mandato, no constituye un día más del periodo que finalizó.”",
+   "texto_legible": "Art. 4.- Refórmase el artículo 154 de la siguiente manera: “Art. 154.- El período presidencial será de seis años y comenzará y terminará el día primero de junio, sin que la persona que haya ejercido la Presidencia pueda continuar en sus funciones ni un día más. En el caso de una reelección, el primer día del nuevo mandato, no constituye un día más del periodo que finalizó.”",
+   "mayusculas_en_pdf": false,
+   "estado": "vigente",
+   "pagina_pdf": 5,
+   "ubicacion_pdf": "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+   "pdf_doc_id": "acuerdo_legislativo_reforma_electoral",
+   "palabras_clave": [
+    "comenzara",
+    "terminara",
+    "persona",
+    "pueda",
+    "continuar",
+    "funciones",
+    "caso",
+    "reeleccion"
+   ],
+   "sinonimos": [],
+   "sinonimos_secundarios": [],
+   "articulos_citados": [
+    "154"
+   ],
+   "situaciones_relacionadas": [
+    "ELE-002"
+   ]
+  },
+  {
+   "id": "AL-5",
+   "numero": "5",
+   "titulo": "Artículo 5",
+   "titulo_es_oficial": false,
+   "titulo_del_codigo": "",
+   "capitulo": "",
+   "texto_literal": "Art. 5.- Disposición transitoria. “El período presidencial iniciado el primero de junio del año dos mil veinticuatro y que concluiría el primero de junio del año dos mil veintinueve, finalizará anticipadamente, el primero de junio del año dos mil veintisiete, con el propósito de unificar las elecciones de Presidente y Vicepresidente de la República, Diputados a la Asamblea Legislativa y Concejos Municipales, debiendo realizarse en ese año, elecciones para Presidente y Vicepresidente de la República, Diputados a la Asamblea Legislativa y Concejos Municipales.”",
+   "texto_legible": "Art. 5.- Disposición transitoria. “El período presidencial iniciado el primero de junio del año dos mil veinticuatro y que concluiría el primero de junio del año dos mil veintinueve, finalizará anticipadamente, el primero de junio del año dos mil veintisiete, con el propósito de unificar las elecciones de Presidente y Vicepresidente de la República, Diputados a la Asamblea Legislativa y Concejos Municipales, debiendo realizarse en ese año, elecciones para Presidente y Vicepresidente de la República, Diputados a la Asamblea Legislativa y Concejos Municipales.”",
+   "mayusculas_en_pdf": false,
+   "estado": "vigente",
+   "pagina_pdf": 5,
+   "ubicacion_pdf": "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+   "pdf_doc_id": "acuerdo_legislativo_reforma_electoral",
+   "palabras_clave": [
+    "diputados",
+    "concejos",
+    "municipales",
+    "primero",
+    "junio",
+    "elecciones",
+    "disposicion",
+    "transitoria"
+   ],
+   "sinonimos": [],
+   "sinonimos_secundarios": [],
+   "articulos_citados": [],
+   "situaciones_relacionadas": [
+    "ELE-002"
+   ]
+  },
+  {
+   "id": "AL-6",
+   "numero": "6",
+   "titulo": "Artículo 6",
+   "titulo_es_oficial": false,
+   "titulo_del_codigo": "",
+   "capitulo": "",
+   "texto_literal": "Art. 6.- Ratificación de las reformas Las reformas a la Constitución aprobadas por esta Asamblea Legislativa mediante el presente acuerdo, deberán ser sometidas a ratificación por la presente Legislatura. DADO EN EL SALON AZUL DEL PALACIO LEGISLATIVO, en el Distrito de San Salvador, Municipio de San Salvador Centro, Departamento de San Salvador, a los treinta y un días del mes de julio del año dos mil veinticinco. ERNESTO ALFREDO CASTRO ALDANA, PRESIDENTE. SUECY BEVERLEY CALLEJAS ESTRADA, KATHERYN ALEXIA RIVAS GONZÁLEZ, PRIMERA VICEPRESIDENTA. SEGUNDA VICEPRESIDENTA. ELISA MARCELA ROSALES RAMÍREZ, REYNALDO ANTONIO LÓPEZ CARDOZA, PRIMERA SECRETARIA. SEGUNDO SECRETARIO. REINALDO ALCIDES CARBALLO CARBALLO, TERCER SECRETARIO. D. O. N° 143 Tomo N° 448 Fecha: 31 de julio de 2025 GM/scf 12-08-2025",
+   "texto_legible": "Art. 6.- Ratificación de las reformas Las reformas a la Constitución aprobadas por esta Asamblea Legislativa mediante el presente acuerdo, deberán ser sometidas a ratificación por la presente Legislatura. DADO EN EL SALON AZUL DEL PALACIO LEGISLATIVO, en el Distrito de San Salvador, Municipio de San Salvador Centro, Departamento de San Salvador, a los treinta y un días del mes de julio del año dos mil veinticinco. ERNESTO ALFREDO CASTRO ALDANA, PRESIDENTE. SUECY BEVERLEY CALLEJAS ESTRADA, KATHERYN ALEXIA RIVAS GONZÁLEZ, PRIMERA VICEPRESIDENTA. SEGUNDA VICEPRESIDENTA. ELISA MARCELA ROSALES RAMÍREZ, REYNALDO ANTONIO LÓPEZ CARDOZA, PRIMERA SECRETARIA. SEGUNDO SECRETARIO. REINALDO ALCIDES CARBALLO CARBALLO, TERCER SECRETARIO. D. O. N° 143 Tomo N° 448 Fecha: 31 de julio de 2025 GM/scf 12-08-2025",
+   "mayusculas_en_pdf": false,
+   "estado": "vigente",
+   "pagina_pdf": 6,
+   "ubicacion_pdf": "libros/ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf",
+   "pdf_doc_id": "acuerdo_legislativo_reforma_electoral",
+   "palabras_clave": [
+    "salvador",
+    "ratificacion",
+    "reformas",
+    "julio",
+    "primera",
+    "vicepresidenta",
+    "secretario",
+    "carballo"
+   ],
+   "sinonimos": [],
+   "sinonimos_secundarios": [],
+   "articulos_citados": [],
+   "situaciones_relacionadas": []
+  }
+ ]
+}

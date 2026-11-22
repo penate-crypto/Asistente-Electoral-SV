@@ -1,6 +1,6 @@
 # PROMPT 9 para AI Studio — «Buscar en libros» con bancos de artículos (Bloque C, partes 2 a 5)
 
-Aplica DESPUÉS del Prompt 8. Este prompt REEMPLAZA a los Prompts 2 y 3 (ya no se activa escribiendo «código electoral»: ahora hay un botón «Buscar en libros»). Si ya aplicaste el 2 o el 3, sobrescribe sus archivos con los de aquí. Adjunta la carpeta `entrega_bloque_C`.
+Aplica DESPUÉS del Prompt 8. Este prompt REEMPLAZA a los Prompts 2 y 3 (ya no se activa escribiendo «código electoral»: ahora hay un botón «Buscar en libros»). Si ya aplicaste el 2 o el 3, sobrescribe sus archivos con los de aquí. Los archivos vienen sueltos (sin carpetas) en `entrega_bloque_C_planos`; en `COMO_SUBIR_A_AI_STUDIO.md` está la ruta de destino de cada uno. Si tu proyecto está conectado a GitHub, ya están en la rama `claude/electoral-knowledge-base-json-ha2mpw`.
 
 ---
 

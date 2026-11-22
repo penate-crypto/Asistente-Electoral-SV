@@ -331,12 +331,22 @@ object BookSearch {
 
     private class WordsFile(val pages: List<Triple<Pair<Float, Float>, List<String>, IntArray>>)
 
+    /** Nombre simple del archivo de palabras: sin tildes ni espacios (ej. "Código Penal.pdf" -> "codigo_penal_pdf"). */
+    private fun simpleName(fileName: String): String {
+        val sb = StringBuilder()
+        for (c in fileName) {
+            val f = foldChar(c)
+            if (f in 'a'..'z' || f in '0'..'9') sb.append(f) else if (sb.isNotEmpty() && sb.last() != '_') sb.append('_')
+        }
+        return sb.toString().trim('_')
+    }
+
     @Volatile private var wordsCache: Pair<String, WordsFile>? = null
 
     private fun loadWords(context: Context, fileName: String): WordsFile? {
         wordsCache?.let { if (it.first == fileName) return it.second }
         return try {
-            val json = context.assets.open("libros_palabras/$fileName.json").bufferedReader().use { it.readText() }
+            val json = context.assets.open("libros_palabras/${simpleName(fileName)}.json").bufferedReader().use { it.readText() }
             val arr = JSONObject(json).getJSONArray("pages")
             val pages = ArrayList<Triple<Pair<Float, Float>, List<String>, IntArray>>()
             for (i in 0 until arr.length()) {

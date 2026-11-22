@@ -1,6 +1,6 @@
 # PROMPT 8 para AI Studio — Buscador de la biblioteca: índice real, búsqueda exacta y subrayado amarillo (Bloque C, parte 1)
 
-Aplica ANTES los Prompts 1, 5, 6 y 7. Adjunta la carpeta `entrega_bloque_C` (viene en el .zip con la misma estructura de rutas que el proyecto).
+Aplica ANTES los Prompts 1, 5, 6 y 7. Los archivos vienen sueltos (sin carpetas) en `entrega_bloque_C_planos`; en `COMO_SUBIR_A_AI_STUDIO.md` está la ruta de destino de cada uno. Si tu proyecto está conectado a GitHub, ya están en la rama `claude/electoral-knowledge-base-json-ha2mpw`.
 
 ---
 
@@ -8,7 +8,7 @@ La búsqueda de la biblioteca (lector PDF) fallaba: el índice tenía páginas e
 
 ## 1) Datos (assets) — copiar tal cual, sin modificar ni resumir
 - Reemplaza `app/src/main/assets/libros_indice_completo.json` por el adjunto (texto real de cada página de los 12 PDF e índice de artículos con su página real).
-- Crea la carpeta `app/src/main/assets/libros_palabras/` con los 12 archivos `.pdf.json` adjuntos (posición de cada palabra, para subrayar sobre la imagen del PDF). Importante: los nombres deben quedar IDÉNTICOS (por ejemplo `Codigo-Electoral.pdf.json`, `Código Penal.pdf.json`).
+- Crea la carpeta `app/src/main/assets/libros_palabras/` con los 12 archivos adjuntos cuyo nombre termina en `_pdf.json` (posición de cada palabra, para subrayar sobre la imagen del PDF). Los nombres deben quedar IDÉNTICOS a los adjuntos (por ejemplo `codigo_electoral_pdf.json`, `codigo_penal_pdf.json`).
 
 ## 2) Código nuevo (copiar el archivo completo)
 - `app/src/main/java/com/example/data/BookSearch.kt` (nuevo): motor de búsqueda. «artículo N» muestra solo ese artículo; palabras y frases sin importar tildes ni mayúsculas, sin palabras vacías; devuelve qué subrayar en amarillo.

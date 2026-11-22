@@ -2,7 +2,7 @@
 """Genera, leyendo los PDF reales de la biblioteca:
 
   1. app/src/main/assets/libros_indice_completo.json   texto de cada página + índice de artículos (con su página real)
-  2. app/src/main/assets/libros_palabras/<archivo>.json posición (caja) de cada palabra de cada página, para subrayar en amarillo
+  2. app/src/main/assets/libros_palabras/<nombre_simple>.json posición (caja) de cada palabra de cada página, para subrayar en amarillo
 
 El texto de la página y las cajas salen de la MISMA lectura (pdftotext -bbox), por lo que siempre coinciden.
 Uso: python3 herramientas/biblioteca/generar_indice_y_palabras.py      (requiere pdftotext / poppler-utils)
@@ -19,6 +19,12 @@ SIN_TITULOS = {"ACUERDO LEGISLATIVO - REFORMA - SUPRECIÓN SEGUNDA ELECCIÓN.pdf
 PAT_ART = re.compile(r"^[ \t]*Art(?:[íi]culo|\.)[ \t]*(\d+)[ \t]*(?:[.\-–°º]|$)", re.M | re.I)
 PAG = re.compile(r'<page width="([\d.]+)" height="([\d.]+)">(.*?)</page>', re.S)
 PAL = re.compile(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">(.*?)</word>')
+
+
+def slug(nombre):
+    """Nombre de archivo simple (sin tildes ni espacios) para el archivo de palabras de cada PDF."""
+    s = unicodedata.normalize("NFKD", nombre.lower())
+    return re.sub(r"[^a-z0-9]+", "_", "".join(c for c in s if not unicodedata.combining(c))).strip("_")
 
 
 def norm(s):
@@ -81,6 +87,8 @@ def main():
     ce = {a["numero"]: a["titulo"] for a in json.load(open(os.path.join(A, "codigo_electoral", "banco_codigo_electoral.json"), encoding="utf-8"))["articulos"]}
     cn = {a["numero"]: a["titulo"] for a in json.load(open(os.path.join(A, "constitucion", "banco_constitucion.json"), encoding="utf-8"))["articulos"]}
     os.makedirs(SALIDA_PAL, exist_ok=True)
+    for viejo_f in os.listdir(SALIDA_PAL):
+        os.remove(os.path.join(SALIDA_PAL, viejo_f))
     indice = {}
     for nombre in sorted(os.listdir(LIBROS)):
         if not nombre.lower().endswith(".pdf"):
@@ -110,7 +118,7 @@ def main():
         indice[nombre] = {"fileName": nombre, "totalPages": len(paginas), "articles": arts,
                           "pages": [{"pageNumber": i, "text": p["t"]} for i, p in enumerate(paginas, 1)]}
         json.dump({"pages": [{"w": round(p["w"], 1), "h": round(p["h"], 1), "t": p["t"], "b": p["b"]} for p in paginas]},
-                  open(os.path.join(SALIDA_PAL, nombre + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+                  open(os.path.join(SALIDA_PAL, slug(nombre) + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
         print("%-62s págs %3d · artículos %3d · palabras %6d" % (nombre[:62], len(paginas), len(arts), sum(len(p["b"]) // 4 for p in paginas)))
     for v in indice.values():
         for a in v["articles"]:

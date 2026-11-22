@@ -1,0 +1,65 @@
+{
+ "version": "1.0",
+ "id": "codigo_penal_electoral",
+ "nombre": "Código Penal: delitos electorales",
+ "fuente": {
+  "documento": "Código Penal: delitos electorales",
+  "ubicacion_pdf": "libros/Código Penal.pdf",
+  "pdf_doc_id": "codigo_penal_delitos_electorales"
+ },
+ "nota": "Texto literal leído del PDF de la biblioteca. Los títulos son los encabezados impresos en el PDF; si no hay, dice «Artículo N». Los artículos en MAYÚSCULAS en el PDF (reformados) se muestran en 'texto_legible' en minúsculas normales.",
+ "total_articulos": 1,
+ "articulos": [
+  {
+   "id": "PE-295",
+   "numero": "295",
+   "titulo": "Fraude Electoral",
+   "titulo_es_oficial": true,
+   "titulo_del_codigo": "",
+   "capitulo": "",
+   "texto_literal": "Art. 295.- SERÁ SANCIONADO CON PENA DE PRISIÓN DE CUATRO A SEIS AÑOS, SI EL FRAUDE ELECTORAL FUERE COMETIDO CON CUALQUIERA DE LAS SIGUIENTES CIRCUNSTANCIAS: (5) (6) (27) a) VOTAR SIN TENER DERECHO, SUPLANTAR A OTRO ELECTOR O VOTAR MÁS DE UNA VEZ EN LA MISMA ELECCIÓN; (5) (6) (27) b) EL QUE PAGARE DINERO O ESPECIE O POR MEDIO DE OFERTAS DE BENEFICIOS PARTICULARES RECIBIDAS O PROMETIDAS, PARA INDUCIR A UN ELECTOR A VOTAR POR DETERMINADO PARTIDO O CANDIDATO O PARA ABSTENERSE DE VOTAR O ANULAR SU VOTO; (5) (6) (27) c) EL QUE ALTERARE UN REGISTRO ELECTORAL SUPRIMIENDO LAS ESPECIFICACIONES QUE ESTABLECE EL CÓDIGO ELECTORAL, ALTERANDO LAS ORIGINALES; (5) (6) (27) d) EL QUE SUSTRAJERE O DESTRUYERE TOTAL O PARCIALMENTE UN PADRÓN ELECTORAL Y CUALQUIERA DE LOS DOCUMENTOS NECESARIOS PARA LLEVAR A CABO LAS VOTACIONES O VERIFICAR LEGALMENTE SUS RESULTADOS; (5) (6) (27) e) EL QUE SUSTRAJERE, INUTILIZARE, SUSTITUYERE O DESTRUYERE LAS PAPELETAS DE VOTACIÓN DESDE EL MOMENTO EN QUE ÉSTAS FUERON SEÑALADAS POR EL TRIBUNAL SUPREMO ELECTORAL, HASTA LA TERMINACIÓN DEL ESCRUTINIO; (5) (6) (27) f) EL QUE SUSTRAJERE, INUTILIZARE, SUSTITUYERE O DESTRUYERE LAS URNAS DE VOTACIÓN DESDE EL MOMENTO EN QUE ÉSTAS FUERON ENTREGADAS A LOS ORGANISMOS ELECTORALES POR EL TRIBUNAL SUPREMO ELECTORAL, HASTA ANTES DE PRACTICARSE EL ESCRUTINIO; (5) (6) (27) g) EL QUE POR CUALQUIER MEDIO IMPIDIERE U OBSTACULIZARE LA ELABORACIÓN DEL REGISTRO ELECTORAL, O EL LIBRE EJERCICIO DEL SUFRAGIO O EL ESCRUTINIO DE VOTOS; (5) (6) (27) h) EL QUE COACCIONARE A UN ELECTOR PARA VOTAR A FAVOR DE ALGÚN CANDIDATO O VIOLARE EL SECRETO DEL VOTO DEL ELECTOR; e, (5) (6) (27) i) QUIEN CON EL PROPÓSITO DE VOTAR EN UNA CIRCUNSCRIPCIÓN DISTINTA A LA QUE LEGALMENTE LE CORRESPONDE, CAMBIE DE DOMICILIO Y MODIFIQUE SU LUGAR DE RESIDENCIA EN SU DOCUMENTO ÚNICO DE IDENTIDAD. (35) SI LOS SUJETOS QUE PARTICIPARON DE LAS CONDUCTAS PREVISTAS ANTERIORMENTE FUERAN FUNCIONARIOS PÚBLICOS O FUNCIONARIOS ELECTORALES, SERÁN SANCIONADOS CON PENA DE SIETE A DIEZ AÑOS DE PRISIÓN E INHABILITACIÓN PARA EL EJERCICIO DEL CARGO POR UN PERÍODO IGUAL. (5) (6) (27)",
+   "texto_legible": "Art. 295.- Será sancionado con pena de prisión de cuatro a seis años, si el fraude electoral fuere cometido con cualquiera de las siguientes circunstancias: (5) (6) (27) A) votar sin tener derecho, suplantar a otro elector o votar más de una vez en la misma elección; (5) (6) (27) B) el que pagare dinero o especie o por medio de ofertas de beneficios particulares recibidas o prometidas, para inducir a un elector a votar por determinado partido o candidato o para abstenerse de votar o anular su voto; (5) (6) (27) C) el que alterare un registro electoral suprimiendo las especificaciones que establece el Código Electoral, alterando las originales; (5) (6) (27) D) el que sustrajere o destruyere total o parcialmente un padrón electoral y cualquiera de los documentos necesarios para llevar a cabo las votaciones o verificar legalmente sus resultados; (5) (6) (27) E) el que sustrajere, inutilizare, sustituyere o destruyere las papeletas de votación desde el momento en que éstas fueron señaladas por el Tribunal Supremo Electoral, hasta la terminación del escrutinio; (5) (6) (27) F) el que sustrajere, inutilizare, sustituyere o destruyere las urnas de votación desde el momento en que éstas fueron entregadas a los organismos electorales por el Tribunal Supremo Electoral, hasta antes de practicarse el escrutinio; (5) (6) (27) G) el que por cualquier medio impidiere u obstaculizare la elaboración del registro electoral, o el libre ejercicio del sufragio o el escrutinio de votos; (5) (6) (27) H) el que coaccionare a un elector para votar a favor de algún candidato o violare el secreto del voto del elector; E, (5) (6) (27) I) quien con el propósito de votar en una circunscripción distinta a la que legalmente le corresponde, cambie de domicilio y modifique su lugar de residencia en su documento único de identidad. (35) Si los sujetos que participaron de las conductas previstas anteriormente fueran funcionarios públicos o funcionarios electorales, serán sancionados con pena de siete a diez años de prisión e inhabilitación para el ejercicio del cargo por un período igual. (5) (6) (27)",
+   "mayusculas_en_pdf": true,
+   "estado": "vigente",
+   "pagina_pdf": 90,
+   "ubicacion_pdf": "libros/Código Penal.pdf",
+   "pdf_doc_id": "codigo_penal_delitos_electorales",
+   "palabras_clave": [
+    "fraude electoral",
+    "fraude",
+    "electoral",
+    "votar",
+    "elector",
+    "sustrajere",
+    "destruyere",
+    "escrutinio",
+    "pena"
+   ],
+   "sinonimos": [],
+   "sinonimos_secundarios": [
+    "multa",
+    "sancion",
+    "castigo",
+    "delito",
+    "carcel",
+    "pena"
+   ],
+   "articulos_citados": [],
+   "situaciones_relacionadas": [
+    "ARM-002",
+    "DEL-001",
+    "DEL-002",
+    "DEL-003",
+    "DEL-004",
+    "ESC-003",
+    "ESC-019",
+    "SEG-006",
+    "SEG-009",
+    "VOT-004",
+    "VOT-007",
+    "VOT-029",
+    "VOT-031"
+   ]
+  }
+ ]
+}
