@@ -334,32 +334,20 @@ object ElectoralLibraryData {
             id = "codigo_penal_delitos_electorales",
             title = "Código Penal de El Salvador (Delitos Electorales)",
             category = "Sanciones, Delitos y Recursos",
-            summary = "Tipificación de delitos contra los derechos cívicos y electorales (Arts. 295 a 302): Fraude electoral, coacción del sufragio, falsedad documental, obstaculización, usurpación de funciones y penas de prisión de hasta 15 años.",
+            summary = "Delito electoral del Código Penal de El Salvador: Fraude electoral (Art. 295), con sus circunstancias y penas. El resto del Código Penal puede consultarse en el PDF.",
             authority = "Asamblea Legislativa • Órgano Judicial de El Salvador",
             releaseDate = "Código Penal Consolidado",
             assetPath = "libros/Código Penal.pdf",
             pages = listOf(
                 PdfPage(
                     pageNumber = 1,
-                    headerTitle = "CÓDIGO PENAL • LIBRO SEGUNDO • TÍTULO XIII",
-                    subtitle = "DELITOS CONTRA LOS DERECHOS CÍVICOS Y ELECTORALES",
+                    headerTitle = "CÓDIGO PENAL • LIBRO SEGUNDO • TÍTULO XIV",
+                    subtitle = "DELITOS RELATIVOS A LOS DERECHOS Y GARANTÍAS FUNDAMENTALES DE LA PERSONA",
                     sections = listOf(
                         PdfSection(
                             title = "Fraude Electoral (Art. 295)",
-                            content = "Art. 295.- Votar más de una vez, suplantar a otro elector, votar sin derecho o alterar padrones o actas. Pena: 4 a 6 años de prisión (aumenta si es miembro de organismo electoral).",
+                            content = "Art. 295.- Prisión de cuatro a seis años si el fraude electoral se comete, entre otras circunstancias, votando sin derecho, suplantando a otro elector o votando más de una vez; pagando u ofreciendo beneficios para inducir el voto o la abstención; alterando el registro electoral; sustrayendo o destruyendo el padrón, las papeletas o las urnas; impidiendo u obstaculizando el registro, el ejercicio del sufragio o el escrutinio; coaccionando a un elector o violando el secreto del voto; o cambiando de domicilio para votar en otra circunscripción. Si participan funcionarios públicos o electorales: prisión de siete a diez años e inhabilitación del cargo por igual período. Lea el texto completo en el PDF.",
                             articleRef = "Art. 295",
-                            isWarning = true
-                        ),
-                        PdfSection(
-                            title = "Coacción del Sufragio (Art. 296)",
-                            content = "Art. 296.- Impedir, amenazar o coartar el voto de un elector o forzarlo a votar en determinado sentido o abstenerse. Pena: 3 a 6 años de prisión.",
-                            articleRef = "Art. 296",
-                            isWarning = true
-                        ),
-                        PdfSection(
-                            title = "Falsedad y Obstaculización (Arts. 297-298)",
-                            content = "Arts. 297 y 298.- Alterar o destruir credenciales, actas, papeletas o perturbar la instalación o escrutinio de JRV. Pena: 4 a 8 años de prisión.",
-                            articleRef = "Arts. 297-298",
                             isWarning = true
                         )
                     )
