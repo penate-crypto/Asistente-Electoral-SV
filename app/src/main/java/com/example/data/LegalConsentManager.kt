@@ -63,7 +63,7 @@ Esta aplicación NO es una herramienta oficial del Tribunal Supremo Electoral de
 La aplicación NO utiliza inteligencia artificial, modelos de lenguaje, agentes ni asistentes externos (como Gemini, ChatGPT, Claude u otros) para responder las consultas.
 Las respuestas se obtienen con un algoritmo de búsqueda propio que se ejecuta en el teléfono: normaliza el texto de la pregunta, identifica palabras clave y las compara con un banco de conocimiento incluido en la aplicación. La aplicación solo muestra lo que existe en ese banco; si no encuentra una coincidencia suficiente, lo indica y no inventa respuestas.
 El banco de conocimiento se elaboró a partir de documentos oficiales incluidos en la Biblioteca de la aplicación (Código Electoral, Constitución de la República, leyes, reglamentos e instructivos). Aun así, puede contener errores u omisiones, y los textos legales pueden haber cambiado después de la fecha de los documentos incluidos.
-La consulta y la lectura de la Biblioteca funcionan sin conexión a internet. El dictado por voz depende del servicio de reconocimiento de voz del teléfono, que en la mayoría de los dispositivos requiere internet (ver Política de Privacidad).
+La consulta y la lectura de la Biblioteca funcionan sin conexión a internet. El dictado por voz depende del servicio de reconocimiento de voz del teléfono: funciona sin internet si el español está descargado en el teléfono (ver Ajustes › Voz sin conexión) y, si no, puede requerir internet (ver Política de Privacidad).
 
 3. CÓMO SE CREÓ LA APLICACIÓN
 La aplicación se creó con apoyo de herramientas de inteligencia artificial:
@@ -126,7 +126,8 @@ Estos datos permanecen en su dispositivo. Android puede incluirlos en las copias
 
 5. MICRÓFONO Y RECONOCIMIENTO DE VOZ
 - La función de consulta por voz utiliza el servicio de reconocimiento de voz del sistema Android.
-- En la mayoría de los teléfonos, ese servicio necesita internet y puede enviar el audio a los servidores de su proveedor (por ejemplo, Google), conforme a las políticas de ese proveedor. La aplicación solo recibe el texto transcrito.
+- La aplicación pide al reconocedor que trabaje sin conexión cuando el teléfono tiene el español descargado (ver Ajustes › Voz sin conexión); en ese caso el audio puede procesarse en el propio teléfono.
+- Si el teléfono no tiene el español descargado, el reconocedor puede necesitar internet y enviar el audio a los servidores de su proveedor (por ejemplo, Google), conforme a las políticas de ese proveedor. La aplicación solo recibe el texto transcrito.
 - El micrófono se activa únicamente cuando usted presiona el botón de voz. La aplicación no graba ni guarda el audio.
 - La lectura de las respuestas en voz alta usa el servicio de voz del teléfono.
 

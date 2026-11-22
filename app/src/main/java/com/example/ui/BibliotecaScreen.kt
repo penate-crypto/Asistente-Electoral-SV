@@ -306,7 +306,7 @@ fun BibliotecaScreen(
                                     .testTag("btn_consult_ai_${doc.id}")
                             ) {
                                 Icon(
-                                    Icons.Default.AutoAwesome,
+                                    Icons.Default.QuestionAnswer,
                                     contentDescription = null,
                                     modifier = Modifier.size(15.dp)
                                 )

@@ -177,7 +177,7 @@ fun ElectoralMainScreen(
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp)
                 )
                 NavigationDrawerItem(
-                    icon = { Icon(Icons.Default.Psychology, contentDescription = null) },
+                    icon = { Icon(Icons.Default.Quiz, contentDescription = null) },
                     label = { Text("Test Electoral", fontSize = 13.5.sp, fontWeight = FontWeight.SemiBold) },
                     selected = currentScreen == ElectoralScreen.SIMULADOR,
                     onClick = {
@@ -431,7 +431,7 @@ fun ElectoralMainScreen(
                             modifier = Modifier.testTag("nav_item_biblioteca")
                         )
                         NavigationBarItem(
-                            icon = { Icon(Icons.Default.Psychology, contentDescription = "Test") },
+                            icon = { Icon(Icons.Default.Quiz, contentDescription = "Test") },
                             label = { Text("Test", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) },
                             selected = currentScreen == ElectoralScreen.SIMULADOR,
                             onClick = { viewModel.setScreen(ElectoralScreen.SIMULADOR) },
@@ -1108,7 +1108,7 @@ fun ElectoralMainScreen(
                                     Icon(
                                         imageVector = when (voiceState) {
                                             VoiceConversationState.LISTENING -> Icons.Default.Mic
-                                            VoiceConversationState.PROCESSING -> Icons.Default.AutoAwesome
+                                            VoiceConversationState.PROCESSING -> Icons.Default.HourglassTop
                                             VoiceConversationState.SPEAKING -> Icons.Default.VolumeUp
                                             VoiceConversationState.ERROR -> Icons.Default.Info
                                             VoiceConversationState.IDLE -> Icons.Default.MicNone

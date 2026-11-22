@@ -1,6 +1,6 @@
 # Plan de trabajo — Asistente Electoral SV
 
-Estado: **A** y **B** hechos en el repositorio (falta aplicarlos en AI Studio con los Prompts 5 y 6). El resto, pendiente.
+Estado: **A**, **B** y **V** hechos en el repositorio (falta aplicarlos en AI Studio con los Prompts 5, 6 y 7). Pendiente: C.
 
 ## Decisiones tomadas
 - Subrayado amarillo también **sobre la imagen del PDF** (se genera la posición de cada palabra).
@@ -12,7 +12,7 @@ Estado: **A** y **B** hechos en el repositorio (falta aplicarlos en AI Studio co
 ## Bloques
 **A. Quitar "IA" de la interfaz** — HECHO en el repositorio (Android y web). Pendiente: aplicar Prompt 5 en AI Studio. Queda para el bloque de limpieza: eliminar el código sin uso `data/rag` y `data/api` (no se borró aún por no poder compilar aquí).
 
-**V. Voz sin conexión** (nuevo, va justo después de A)
+**V. Voz sin conexión** — HECHO en el repositorio (Prompt 7)
 1. Pedir al reconocedor del sistema que prefiera el modo sin conexión (`EXTRA_PREFER_OFFLINE`); probar `es-SV`, y si no hay paquete, `es-419`/`es-US`.
 2. Declarar `ACCESS_NETWORK_STATE` **solo junto con** este cambio y NO bloquear el micrófono cuando no hay red: intentar primero sin conexión; si falla por red, mostrar el mensaje y ofrecer escribir.
 3. Guía en Ajustes: cómo descargar la voz en español sin conexión.

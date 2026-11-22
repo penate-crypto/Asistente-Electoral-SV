@@ -454,7 +454,7 @@ fun BookSearchResultCard(
                         .height(38.dp)
                 ) {
                     Icon(
-                        Icons.Default.AutoAwesome,
+                        Icons.Default.QuestionAnswer,
                         contentDescription = null,
                         modifier = Modifier.size(15.dp)
                     )

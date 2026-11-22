@@ -707,7 +707,7 @@ private fun CaseDetailScreen(
                 .fillMaxWidth()
                 .padding(top = 6.dp)
         ) {
-            Icon(Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(16.dp))
+            Icon(Icons.Default.QuestionAnswer, contentDescription = null, modifier = Modifier.size(16.dp))
             Spacer(modifier = Modifier.width(8.dp))
             Text("Consultar este caso en el asistente", fontSize = 13.sp, fontWeight = FontWeight.Bold)
         }

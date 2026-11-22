@@ -6,8 +6,6 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -49,6 +47,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var ttsManager: ElectoralTtsManager
     private var speechRecognizer: SpeechRecognizer? = null
+    private var voiceRetryDone = false
 
     private lateinit var viewModel: ElectoralViewModel
     private val mainHandler = Handler(Looper.getMainLooper())
@@ -230,8 +229,21 @@ class MainActivity : ComponentActivity() {
                                         viewModel.onVoiceError("No pude entender la consulta. Intenta nuevamente.")
                                     }
                                     SpeechRecognizer.ERROR_NETWORK,
-                                    SpeechRecognizer.ERROR_NETWORK_TIMEOUT -> {
-                                        viewModel.onVoiceError("El reconocimiento de voz necesita conexión a internet en este teléfono. Puedes escribir tu pregunta.")
+                                    SpeechRecognizer.ERROR_NETWORK_TIMEOUT,
+                                    SpeechRecognizer.ERROR_SERVER,
+                                    ERROR_LANGUAGE_NOT_SUPPORTED,
+                                    ERROR_LANGUAGE_UNAVAILABLE -> {
+                                        // Primer intento: es-SV con preferencia sin conexión. Segundo intento: español latino (es-419).
+                                        if (!voiceRetryDone && retryVoiceInLatinSpanish()) {
+                                            return@post
+                                        }
+                                        viewModel.onVoiceError(VOICE_OFFLINE_HELP_MESSAGE)
+                                    }
+                                    SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS -> {
+                                        viewModel.onVoiceError("Falta el permiso del micrófono. Actívalo en los ajustes del teléfono.")
+                                    }
+                                    SpeechRecognizer.ERROR_RECOGNIZER_BUSY -> {
+                                        viewModel.onVoiceError("El reconocimiento de voz está ocupado. Intenta nuevamente en unos segundos.")
                                     }
                                     SpeechRecognizer.ERROR_CLIENT -> {
                                         viewModel.cancelVoiceListening("Escucha cancelada.")
@@ -301,19 +313,10 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun startVoiceListeningFlow(speechIntentLauncher: ActivityResultLauncher<Intent>) {
-        if (!isNetworkConnected()) {
-            viewModel.onVoiceError("El reconocimiento de voz necesita conexión a internet en este teléfono. Puedes escribir tu pregunta.")
-            return
-        }
-
-        val speechIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "es-SV")
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "es-SV")
-            putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, "es-SV")
-            putExtra(RecognizerIntent.EXTRA_PROMPT, "¿Cuál es su consulta electoral?")
-            putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
-        }
+        // Ya no se bloquea el micrófono cuando no hay internet: el reconocedor del teléfono puede tener el
+        // español descargado y trabajar sin conexión. Si no puede, avisa por onError (VOICE_OFFLINE_HELP_MESSAGE).
+        voiceRetryDone = false
+        val speechIntent = buildSpeechIntent("es-SV")
 
         viewModel.startVoiceListening()
 
@@ -341,22 +344,36 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /** Intent de dictado que prefiere el reconocimiento SIN conexión (si el teléfono tiene el idioma descargado). */
+    private fun buildSpeechIntent(languageTag: String): Intent =
+        Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, languageTag)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, languageTag)
+            putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, languageTag)
+            putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true)
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "¿Cuál es su consulta electoral?")
+            putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
+        }
+
+    /** Segundo y último intento con español latino. Devuelve true si logró iniciarlo. */
+    private fun retryVoiceInLatinSpanish(): Boolean {
+        voiceRetryDone = true
+        val recognizer = speechRecognizer ?: return false
+        return try {
+            recognizer.cancel()
+            recognizer.startListening(buildSpeechIntent("es-419"))
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
     private fun stopSpeechRecognition() {
         try {
             speechRecognizer?.stopListening()
             speechRecognizer?.cancel()
         } catch (_: Exception) {}
-    }
-
-    private fun isNetworkConnected(): Boolean {
-        return try {
-            val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager ?: return true
-            val activeNetwork = cm.activeNetwork ?: return false
-            val caps = cm.getNetworkCapabilities(activeNetwork) ?: return false
-            caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        } catch (e: Exception) {
-            true
-        }
     }
 
     override fun onDestroy() {
@@ -371,3 +388,10 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
     }
 }
+
+// Códigos de SpeechRecognizer disponibles desde Android 12 (se usan como números para que compile en versiones anteriores).
+private const val ERROR_LANGUAGE_NOT_SUPPORTED = 12
+private const val ERROR_LANGUAGE_UNAVAILABLE = 13
+
+private const val VOICE_OFFLINE_HELP_MESSAGE =
+    "No se pudo reconocer la voz sin internet. Descarga el español sin conexión (Ajustes › Voz sin conexión) o escribe tu pregunta."

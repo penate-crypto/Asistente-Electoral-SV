@@ -343,7 +343,7 @@ fun ConfiguracionScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            Icons.Default.Psychology,
+                            Icons.Default.Quiz,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onPrimary,
                             modifier = Modifier.size(26.dp)
@@ -454,6 +454,81 @@ fun ConfiguracionScreen(
                     Icon(Icons.Default.Logout, contentDescription = null, modifier = Modifier.size(16.dp))
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("Cerrar Sesión", fontSize = 13.sp, fontWeight = FontWeight.Bold)
+                }
+            }
+        }
+
+        // Voz sin conexión
+        Card(
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            elevation = CardDefaults.cardElevation(2.dp),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)),
+            modifier = Modifier
+                .fillMaxWidth()
+                .testTag("card_voz_sin_conexion")
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Mic, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(22.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "VOZ SIN CONEXIÓN",
+                        fontSize = 14.5.sp,
+                        fontWeight = FontWeight.Black,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = "Para dictar tu consulta sin internet, el teléfono necesita tener el español descargado en su reconocimiento de voz. " +
+                        "Los nombres de los menús cambian según la marca del teléfono:",
+                    fontSize = 12.5.sp,
+                    lineHeight = 18.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    text = "1. Abre los ajustes de voz (botón de abajo) o: Ajustes › Idioma y entrada › Entrada de voz.\n" +
+                        "2. Entra a «Reconocimiento de voz de Google» (o el reconocimiento de voz de tu teléfono).\n" +
+                        "3. Elige «Reconocimiento sin conexión» y descarga «Español».\n" +
+                        "4. Prueba el micrófono con el teléfono en modo avión.",
+                    fontSize = 12.5.sp,
+                    lineHeight = 18.sp,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    text = "Si tu teléfono no lo permite, escribe tu pregunta: la búsqueda en la aplicación funciona siempre sin internet.",
+                    fontSize = 11.5.sp,
+                    lineHeight = 16.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                OutlinedButton(
+                    onClick = {
+                        val abrir = { accion: String ->
+                            context.startActivity(
+                                android.content.Intent(accion).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                            )
+                        }
+                        try {
+                            abrir(android.provider.Settings.ACTION_VOICE_INPUT_SETTINGS)
+                        } catch (e: Exception) {
+                            try {
+                                abrir(android.provider.Settings.ACTION_SETTINGS)
+                            } catch (_: Exception) {
+                            }
+                        }
+                    },
+                    shape = RoundedCornerShape(10.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("btn_ajustes_voz")
+                ) {
+                    Icon(Icons.Default.Settings, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Abrir ajustes de voz", fontSize = 13.sp, fontWeight = FontWeight.Bold)
                 }
             }
         }
