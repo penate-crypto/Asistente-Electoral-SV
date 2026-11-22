@@ -165,7 +165,7 @@ fun LoginScreen(
                 ) {
                     TransparentAssetImage(
                         assetPath = "imagenes/Isotipo-02.png",
-                        contentDescription = "Logo Capacitador Electoral SV",
+                        contentDescription = "Logo Asistente Electoral SV",
                         modifier = Modifier
                             .size(88.dp)
                             .clip(CircleShape)
@@ -174,7 +174,7 @@ fun LoginScreen(
             }
 
             Text(
-                text = "Capacitador Electoral SV",
+                text = "Asistente Electoral SV",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Black,
                 color = MaterialTheme.colorScheme.primary,

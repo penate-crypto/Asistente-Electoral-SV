@@ -341,7 +341,7 @@ fun LegalNoticeScreen(
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
-                            text = "Consulta cómo se procesa la información y la IA.",
+                            text = "Consulta cómo funciona la aplicación y cómo se tratan tus datos.",
                             fontSize = 11.5.sp,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

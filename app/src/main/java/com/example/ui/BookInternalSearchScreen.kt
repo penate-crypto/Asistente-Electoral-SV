@@ -454,13 +454,13 @@ fun BookSearchResultCard(
                         .height(38.dp)
                 ) {
                     Icon(
-                        Icons.Default.AutoAwesome,
+                        Icons.Default.QuestionAnswer,
                         contentDescription = null,
                         modifier = Modifier.size(15.dp)
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = "Preguntar a IA",
+                        text = "Preguntar al asistente",
                         fontSize = 11.5.sp,
                         fontWeight = FontWeight.Bold
                     )

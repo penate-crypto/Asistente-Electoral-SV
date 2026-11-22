@@ -220,9 +220,9 @@ fun CapacitacionScreen(
                                         .fillMaxWidth()
                                         .testTag("ask_about_topic_${topic.title.replace(" ", "_").lowercase()}")
                                 ) {
-                                    Icon(Icons.Default.Psychology, contentDescription = null, modifier = Modifier.size(16.dp))
+                                    Icon(Icons.Default.QuestionAnswer, contentDescription = null, modifier = Modifier.size(16.dp))
                                     Spacer(modifier = Modifier.width(8.dp))
-                                    Text("Consultar a la IA sobre este tema", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    Text("Consultar en el asistente sobre este tema", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
                         }

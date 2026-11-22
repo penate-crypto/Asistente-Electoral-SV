@@ -133,22 +133,17 @@ fun ElectoralMainScreen(
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Asistente Virtual Electoral",
+                        text = "Asistente Electoral",
                         color = Color.White,
                         fontSize = 17.sp,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "App de IA para apoyo electoral",
+                        text = "App de apoyo electoral",
                         color = Color.White.copy(alpha = 0.85f),
                         fontSize = 11.5.sp
                     )
-                    Text(
-                        text = "Creador: Rodrigo Peñate",
-                        color = Color(0xFFFFD54F),
-                        fontSize = 11.5.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    // Creador: Rodrigo Peñate (crédito interno; no se muestra en la aplicación)
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -164,7 +159,7 @@ fun ElectoralMainScreen(
 
                 NavigationDrawerItem(
                     icon = { Icon(Icons.Default.Forum, contentDescription = null) },
-                    label = { Text("Asistente IA", fontSize = 13.5.sp, fontWeight = FontWeight.SemiBold) },
+                    label = { Text("Asistente", fontSize = 13.5.sp, fontWeight = FontWeight.SemiBold) },
                     selected = currentScreen == ElectoralScreen.CHAT,
                     onClick = {
                         viewModel.setScreen(ElectoralScreen.CHAT)
@@ -183,7 +178,7 @@ fun ElectoralMainScreen(
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp)
                 )
                 NavigationDrawerItem(
-                    icon = { Icon(Icons.Default.Psychology, contentDescription = null) },
+                    icon = { Icon(Icons.Default.Quiz, contentDescription = null) },
                     label = { Text("Test Electoral", fontSize = 13.5.sp, fontWeight = FontWeight.SemiBold) },
                     selected = currentScreen == ElectoralScreen.SIMULADOR,
                     onClick = {
@@ -347,13 +342,13 @@ fun ElectoralMainScreen(
                     title = {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
-                                text = "Asistente Virtual Electoral",
+                                text = "Asistente Electoral",
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Text(
-                                text = "El Salvador - Apoyo electoral IA",
+                                text = "El Salvador - Apoyo electoral",
                                 fontSize = 10.sp,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                             )
@@ -423,8 +418,8 @@ fun ElectoralMainScreen(
                             .testTag("electoral_navigation_bar")
                     ) {
                         NavigationBarItem(
-                            icon = { Icon(Icons.Default.Forum, contentDescription = "Asistente IA") },
-                            label = { Text("Asistente IA", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) },
+                            icon = { Icon(Icons.Default.Forum, contentDescription = "Asistente") },
+                            label = { Text("Asistente", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) },
                             selected = currentScreen == ElectoralScreen.CHAT,
                             onClick = { viewModel.setScreen(ElectoralScreen.CHAT) },
                             modifier = Modifier.testTag("nav_item_chat")
@@ -437,7 +432,7 @@ fun ElectoralMainScreen(
                             modifier = Modifier.testTag("nav_item_biblioteca")
                         )
                         NavigationBarItem(
-                            icon = { Icon(Icons.Default.Psychology, contentDescription = "Test") },
+                            icon = { Icon(Icons.Default.Quiz, contentDescription = "Test") },
                             label = { Text("Test", fontSize = 10.5.sp, fontWeight = FontWeight.Bold) },
                             selected = currentScreen == ElectoralScreen.SIMULADOR,
                             onClick = { viewModel.setScreen(ElectoralScreen.SIMULADOR) },
@@ -1133,7 +1128,7 @@ fun ElectoralMainScreen(
                                     Icon(
                                         imageVector = when (voiceState) {
                                             VoiceConversationState.LISTENING -> Icons.Default.Mic
-                                            VoiceConversationState.PROCESSING -> Icons.Default.AutoAwesome
+                                            VoiceConversationState.PROCESSING -> Icons.Default.HourglassTop
                                             VoiceConversationState.SPEAKING -> Icons.Default.VolumeUp
                                             VoiceConversationState.ERROR -> Icons.Default.Info
                                             VoiceConversationState.IDLE -> Icons.Default.MicNone

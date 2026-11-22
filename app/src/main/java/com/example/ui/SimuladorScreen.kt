@@ -901,7 +901,7 @@ fun InteractiveScenarioCard(
                         ) {
                             Icon(Icons.Default.AutoAwesome, contentDescription = null, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(6.dp))
-                            Text("Consultar dudas de este caso a la IA", fontSize = 12.sp)
+                            Text("Consultar dudas de este caso en el asistente", fontSize = 12.sp)
                         }
                     }
                 }
