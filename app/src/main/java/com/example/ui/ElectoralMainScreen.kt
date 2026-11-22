@@ -66,6 +66,8 @@ fun ElectoralMainScreen(
 
     val queryInput by viewModel.queryInput.collectAsState()
     val uiState by viewModel.uiState.collectAsState()
+    val bookSearchBook by viewModel.bookSearchBook.collectAsState()
+    var showBookPicker by remember { mutableStateOf(false) }
     val voiceState by viewModel.voiceState.collectAsState()
     val voiceStatusMessage by viewModel.voiceStatusMessage.collectAsState()
     val ttsPlaybackState by viewModel.ttsPlaybackState.collectAsState()
@@ -942,6 +944,16 @@ fun ElectoralMainScreen(
                                     }
                                 }
 
+                                is ElectoralUiState.BookSearch -> {
+                                    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+                                        BookSearchResultsView(
+                                            question = state.question,
+                                            bookId = state.bookId,
+                                            bookTitle = state.bookTitle,
+                                            viewModel = viewModel
+                                        )
+                                    }
+                                }
                                 is ElectoralUiState.Error -> {
                                     Column(
                                         modifier = Modifier
@@ -1015,6 +1027,37 @@ fun ElectoralMainScreen(
                             .padding(horizontal = 14.dp, vertical = 4.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        // «Buscar en libros»: distintivo del libro elegido o botón para elegirlo
+                        if (bookSearchBook != null) {
+                            BookSearchBadge(
+                                bookTitle = bookSearchBook!!.second,
+                                onClear = { viewModel.clearBookSearchBook() },
+                                modifier = Modifier.padding(bottom = 6.dp)
+                            )
+                        } else {
+                            OutlinedButton(
+                                onClick = { showBookPicker = true },
+                                shape = RoundedCornerShape(10.dp),
+                                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(34.dp)
+                                    .padding(bottom = 2.dp)
+                                    .testTag("btn_buscar_en_libros")
+                            ) {
+                                Icon(Icons.Default.MenuBook, contentDescription = null, modifier = Modifier.size(15.dp))
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Text("Buscar en libros", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
+                            Spacer(modifier = Modifier.height(4.dp))
+                        }
+                        if (showBookPicker) {
+                            BookPickerSheet(
+                                onPick = { book -> viewModel.setBookSearchBook(book.id, book.title); showBookPicker = false },
+                                onClose = { showBookPicker = false }
+                            )
+                        }
+
                         // Focus on specific book badge if selected
                         if (preferredBookTitle != null) {
                             Surface(

@@ -30,6 +30,7 @@ fun BibliotecaScreen(
     val context = LocalContext.current
     val directDoc by viewModel.activePdfReaderDoc.collectAsState()
     val directPage by viewModel.activePdfReaderPage.collectAsState()
+    val directHighlight by viewModel.activePdfReaderHighlight.collectAsState()
     var viewingDocument by remember { mutableStateOf<PdfDocument?>(null) }
     var searchingDocument by remember { mutableStateOf<PdfDocument?>(null) }
     var readerInitialPage by remember { mutableStateOf(0) }
@@ -39,6 +40,7 @@ fun BibliotecaScreen(
         if (directDoc != null) {
             viewingDocument = directDoc
             readerInitialPage = directPage
+            readerHighlightQuery = directHighlight
         }
     }
 

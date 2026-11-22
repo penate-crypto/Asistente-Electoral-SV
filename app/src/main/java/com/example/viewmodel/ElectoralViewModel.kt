@@ -64,6 +64,16 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     private val _activePdfReaderDoc = MutableStateFlow<com.example.data.PdfDocument?>(null)
     val activePdfReaderDoc: StateFlow<com.example.data.PdfDocument?> = _activePdfReaderDoc.asStateFlow()
 
+    private val _activePdfReaderHighlight = MutableStateFlow("")
+    val activePdfReaderHighlight: StateFlow<String> = _activePdfReaderHighlight.asStateFlow()
+
+    // «Buscar en libros»: libro elegido (id, título). Mientras está activo, las preguntas (escritas o dictadas) buscan en ese libro.
+    private val _bookSearchBook = MutableStateFlow<Pair<String, String>?>(null)
+    val bookSearchBook: StateFlow<Pair<String, String>?> = _bookSearchBook.asStateFlow()
+
+    fun setBookSearchBook(id: String, title: String) { _bookSearchBook.value = id to title }
+    fun clearBookSearchBook() { _bookSearchBook.value = null }
+
     private val _activePdfReaderPage = MutableStateFlow<Int>(0)
     val activePdfReaderPage: StateFlow<Int> = _activePdfReaderPage.asStateFlow()
 
@@ -166,12 +176,13 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
         _preferredBookTitle.value = null
     }
 
-    fun openPdfDirectly(docId: String, page: Int = 1) {
+    fun openPdfDirectly(docId: String, page: Int = 1, highlight: String = "") {
         val foundDoc = com.example.data.ElectoralLibraryData.documents.firstOrNull { it.id == docId }
             ?: com.example.data.ElectoralLibraryData.documents.firstOrNull()
         if (foundDoc != null) {
             _activePdfReaderDoc.value = foundDoc
             _activePdfReaderPage.value = (page - 1).coerceAtLeast(0)
+            _activePdfReaderHighlight.value = highlight
             _currentScreen.value = ElectoralScreen.BIBLIOTECA
         }
     }
@@ -179,6 +190,7 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
     fun closeDirectPdfReader() {
         _activePdfReaderDoc.value = null
         _activePdfReaderPage.value = 0
+        _activePdfReaderHighlight.value = ""
     }
 
     fun getSuggestionsForInput(input: String): List<String> {
@@ -281,6 +293,20 @@ class ElectoralViewModel(private val repository: ElectoralRepository) : ViewMode
             _queryInput.value = ""
         }
 
+        // Modo «Buscar en libros»: la pregunta se busca en el libro elegido (sin pasar por el asistente de situaciones).
+        val bookMode = _bookSearchBook.value
+        if (bookMode != null) {
+            _currentScreen.value = ElectoralScreen.CHAT
+            if (isFromVoice) {
+                // El dictado ya terminó: no hay respuesta que leer en voz alta, se muestran las tarjetas.
+                _voiceState.value = VoiceConversationState.IDLE
+                _voiceStatusMessage.value = "Pulsa el micrófono para hablar"
+                _isVoiceTurn.value = false
+            }
+            _uiState.value = ElectoralUiState.BookSearch(queryToSend, bookMode.first, bookMode.second)
+            return
+        }
+
         if (isFromVoice) {
             _isVoiceTurn.value = true
             _voiceState.value = VoiceConversationState.PROCESSING
@@ -357,6 +383,8 @@ sealed class ElectoralUiState {
         val primaryPdfPage: Int = 1
     ) : ElectoralUiState()
     data class Error(val question: String, val message: String) : ElectoralUiState()
+    /** Resultado de «Buscar en libros»: se muestran artículos del libro elegido. */
+    data class BookSearch(val question: String, val bookId: String, val bookTitle: String) : ElectoralUiState()
 }
 
 class ElectoralViewModelFactory(private val repository: ElectoralRepository) : ViewModelProvider.Factory {
