@@ -763,7 +763,7 @@ fun InteractiveScenarioCard(
                                 chosenOptionIndex == null -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
                                 isSelected && isOptionCorrect -> Color(0xFFE8F5E9)
                                 isSelected && !isOptionCorrect -> Color(0xFFFFEBEE)
-                                isOptionCorrect && chosenOptionIndex != null -> Color(0xFFE8F5E9).copy(alpha = 0.5f)
+                                isOptionCorrect -> Color(0xFFE8F5E9)
                                 else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.2f)
                             },
                             border = BorderStroke(
@@ -807,7 +807,12 @@ fun InteractiveScenarioCard(
                                     Text(
                                         text = option.text,
                                         fontSize = 12.5.sp,
-                                        color = MaterialTheme.colorScheme.onSurface
+                                        // Fondos verde/rojo claro fijos: texto oscuro también en tema oscuro
+                                        color = when {
+                                            chosenOptionIndex != null && isOptionCorrect -> OnLightOk
+                                            isSelected && !isOptionCorrect -> OnLightBad
+                                            else -> MaterialTheme.colorScheme.onSurface
+                                        }
                                     )
                                     if (isSelected) {
                                         Spacer(modifier = Modifier.height(4.dp))

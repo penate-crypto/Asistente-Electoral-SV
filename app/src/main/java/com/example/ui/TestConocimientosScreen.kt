@@ -881,7 +881,7 @@ fun Exam125ResultsView(
                         text = q.questionText,
                         fontSize = 13.5.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (isCorrect) Color(0xFF1B5E20) else Color(0xFFB71C1C)
+                        color = OnLightPanel
                     )
 
                     val userLetter = if (userSelected != null) optionLetters.getOrElse(userSelected) { "-" } else "Sin responder"
