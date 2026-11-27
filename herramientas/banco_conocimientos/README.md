@@ -4,18 +4,18 @@ La app lee **todas** las situaciones de `app/src/main/assets/json respuestas/*.j
 (clase `JsonKnowledgeLoader.kt`). Si esa carpeta tiene situaciones, el motor usa solo
 ese banco. Si está vacía, usa la lista de respaldo escrita en `ElectoralKnowledgeBase.kt`.
 
-## Contenido actual (versión 2.0)
+## Contenido actual (versión 2.1)
 
-154 situaciones. Cada cita legal se comprobó contra el texto de los PDF de la biblioteca de la app.
+157 situaciones. Cada cita legal se comprobó contra el texto de los PDF de la biblioteca de la app.
 
 | Categoría | Situaciones | Prefijos de ID |
 |---|---|---|
 | Instalación | 12 | `INST-` |
-| Votación | 31 | `VOT-` |
+| Votación | 32 | `VOT-` |
 | Identificación (DUI) | 8 | `DUI-` |
 | Seguridad | 16 | `ARM-`, `SEG-` |
-| Vigilancia (vigilantes, supervisores, jefes de centro) | 15 | `VIG-` |
-| Escrutinio | 25 | `ESC-` |
+| Vigilancia (vigilantes, supervisores, jefes de centro) | 16 | `VIG-` |
+| Escrutinio | 26 | `ESC-` |
 | Roles (paso a paso por cargo, JEM, JED, TSE, FGR, PNC, JVE) | 12 | `ROL-` |
 | Organismos electorales (integración, excusas, multas, permisos) | 9 | `OET-` |
 | Recursos y nulidades | 7 | `REC-` |
@@ -28,6 +28,15 @@ Las fuentes usadas son el Código Electoral, la Constitución y la reforma const
 el Código Penal (Art. 295), el Instructivo JRV del TSE (2024), la Ley Especial de Voto en el
 Extranjero, el Reglamento de Observación Electoral, la Ley de Reestructuración Municipal, las
 Disposiciones de Candidaturas No Partidarias y el Ciclo Electoral del TSE.
+
+## Agregadas en la versión 2.1
+
+* `VOT-032` Votante muestra su voto marcado a otras personas (secreto del voto).
+* `ESC-026` Papeleta con la esquina desprendible todavía pegada en el escrutinio.
+* `VIG-016` Vigilante quiere retirarse o dejar sus funciones en medio del escrutinio.
+* "Papeletas de otra JRV" ya estaba cubierta por `ESC-025`, `INST-005` y `ESC-012`.
+* Nuevos grupos de sinónimos `mostrar_voto` y `esquina_desprendible` en `assets/sinonimos/sinonimos_globales.json`.
+* Batería de prueba: `prueba_motor/preguntas/06_nuevas_situaciones.txt` (19/19).
 
 ## Correcciones al banco anterior
 

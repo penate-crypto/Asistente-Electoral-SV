@@ -1,0 +1,19 @@
+VOT-032|un votante muestra su voto
+VOT-032|el votante enseña su papeleta marcada a todos
+VOT-032|una señora mostró por quién votó
+VOT-032|el votante le enseñó el voto al vigilante
+VOT-032|que hago si alguien muestra su voto antes de meterlo a la urna
+VOT-032|el votante no doblo la papeleta y se ve por quien voto
+ESC-026|en el escrutinio se encuentra un voto que aun tiene la esquina desprendible
+ESC-026|papeleta con la esquina pegada en el conteo
+ESC-026|no le quitaron la esquina a la papeleta
+ESC-026|salio un voto con la esquina perforada
+ESC-026|es nulo un voto con la esquina desprendible
+VIG-016|vigilante quiere dejar sus funciones en medio del escrutinio
+VIG-016|el vigilante se quiere ir a mitad del conteo
+VIG-016|el vigilante se retira durante el escrutinio
+VIG-016|el vigilante abandona la mesa en el escrutinio
+VIG-016|que pasa si el vigilante se va antes de terminar el conteo
+ESC-025,INST-005,ESC-012|se encuentra papeletas de otra JRV
+ESC-025,ESC-012|en el escrutinio aparecen papeletas de otra jrv
+INST-005,ESC-025|en el paquete vienen papeletas de otra mesa

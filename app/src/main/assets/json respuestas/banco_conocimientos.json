@@ -1,16 +1,16 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "nombre": "Banco de Conocimientos - Asistente Electoral SV",
   "formato": "BANCO_CONOCIMIENTOS_ELECTORAL_SV",
-  "fechaExportacion": "2026-11-18 03:12:57",
-  "totalRegistros": 154,
+  "fechaExportacion": "2026-11-27 06:09:43",
+  "totalRegistros": 157,
   "categorias": {
     "Instalación": 12,
-    "Votación": 31,
+    "Votación": 32,
     "Identificación": 8,
     "Seguridad": 16,
-    "Vigilancia": 15,
-    "Escrutinio": 25,
+    "Vigilancia": 16,
+    "Escrutinio": 26,
     "Roles": 12,
     "Organismos Electorales": 9,
     "Recursos y Nulidades": 7,
@@ -239,8 +239,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-002",
@@ -375,8 +375,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-003",
@@ -554,8 +554,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-004",
@@ -692,8 +692,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-005",
@@ -844,8 +844,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-006",
@@ -946,8 +946,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-007",
@@ -1050,8 +1050,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-008",
@@ -1163,8 +1163,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-009",
@@ -1287,8 +1287,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-010",
@@ -1438,8 +1438,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-011",
@@ -1539,8 +1539,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "INST-012",
@@ -1660,8 +1660,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-001",
@@ -1835,8 +1835,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-002",
@@ -1995,8 +1995,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-003",
@@ -2096,8 +2096,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-004",
@@ -2219,8 +2219,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-005",
@@ -2337,8 +2337,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-006",
@@ -2454,8 +2454,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-007",
@@ -2615,8 +2615,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-008",
@@ -2747,8 +2747,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-009",
@@ -2846,8 +2846,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-010",
@@ -2989,8 +2989,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-011",
@@ -3135,8 +3135,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-012",
@@ -3235,8 +3235,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-013",
@@ -3337,8 +3337,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-014",
@@ -3466,8 +3466,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-015",
@@ -3584,8 +3584,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-016",
@@ -3691,8 +3691,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-017",
@@ -3793,8 +3793,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-018",
@@ -3894,8 +3894,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-019",
@@ -4010,8 +4010,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-020",
@@ -4143,8 +4143,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-021",
@@ -4260,8 +4260,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-022",
@@ -4357,8 +4357,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-023",
@@ -4468,8 +4468,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-024",
@@ -4604,8 +4604,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-025",
@@ -4728,8 +4728,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-026",
@@ -4842,8 +4842,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-027",
@@ -5012,8 +5012,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-028",
@@ -5161,8 +5161,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-029",
@@ -5292,8 +5292,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-030",
@@ -5452,8 +5452,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VOT-031",
@@ -5572,8 +5572,214 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
+    },
+    {
+      "id": "VOT-032",
+      "titulo": "Votante Muestra su Voto Marcado a Otras Personas (Secreto del Voto)",
+      "categoria": "Votación",
+      "subcategoria": "Secreto del Voto",
+      "descripcion_situacion": "Un votante enseña o exhibe su papeleta ya marcada a los miembros de la JRV, a un vigilante o a otras personas antes de depositarla.",
+      "actores": [
+        "Votante",
+        "Presidente de JRV",
+        "Tercer vocal",
+        "Vigilante de partido"
+      ],
+      "objetos": [
+        "Papeleta",
+        "Depósito de votos"
+      ],
+      "acciones": [
+        "Mostrar el voto",
+        "Proteger el secreto del voto",
+        "Depositar la papeleta"
+      ],
+      "contextos": [
+        "proceso_votacion",
+        "seguridad_electoral"
+      ],
+      "intenciones": [
+        "procedimiento",
+        "consulta_permiso_prohibicion"
+      ],
+      "palabras_clave": [
+        "muestra su voto",
+        "mostro su voto",
+        "ensena su voto",
+        "ensena la papeleta",
+        "enseño su voto",
+        "mostro la papeleta marcada",
+        "por quien voto",
+        "dice por quien voto",
+        "voto a la vista",
+        "exhibe su voto",
+        "papeleta abierta",
+        "no doblo la papeleta",
+        "voto publico",
+        "muestra el voto al vigilante",
+        "secreto del voto",
+        "revela su voto",
+        "votante muestra",
+        "ensena su papeleta",
+        "ensena su papeleta marcada",
+        "mostro por quien voto",
+        "muestra la papeleta"
+      ],
+      "sinonimos": {
+        "mostrar": [
+          "enseñar",
+          "ensenar",
+          "exhibir",
+          "revelar"
+        ],
+        "voto": [
+          "papeleta marcada"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Votante que da a conocer su voto marcado.",
+        "que_hacer": [
+          "El voto es secreto (Art. 78 de la Constitución y Art. 3 del Código Electoral) y la JRV debe velar porque se emita en forma secreta en el lugar designado (Art. 196 CE).",
+          "Pedir con cortesía al votante que doble su papeleta para que no se vea la marca y que la deposite en el depósito correspondiente.",
+          "La tercera vocalía vela porque se mantengan las condiciones apropiadas para votar en secreto en el anaquel.",
+          "Recordar a miembros de la JRV y vigilantes que no deben mirar, comentar ni anotar el sentido del voto de nadie.",
+          "Si parece que alguien le exige mostrar el voto (a cambio de dinero o por presión), hacerlo constar en el acta e informar a la JEM y a la FGR: comprar votos, coaccionar a un elector o violar el secreto del voto es fraude electoral (Art. 295 del Código Penal)."
+        ],
+        "que_no_hacer": [
+          "NO quitarle la papeleta ni anular su voto por haberla mostrado: esa no figura entre las causas de nulidad del Art. 207 del Código Electoral.",
+          "NO permitir que se tome fotografía o video de la papeleta marcada.",
+          "NO comentar en voz alta por quién votó la persona."
+        ],
+        "quien_interviene": [
+          "Junta Receptora de Votos",
+          "Junta Electoral Municipal (JEM)",
+          "Fiscalía General de la República (FGR)"
+        ],
+        "advertencia": "El Código Electoral no regula expresamente qué hacer cuando el propio votante enseña su voto; por eso la papeleta no se anula. Siga además las indicaciones de la JEM y del instructivo vigente del TSE.",
+        "fundamento_legal": [
+          {
+            "ley": "Constitución de la República de El Salvador",
+            "articulos": [
+              {
+                "numero": "78",
+                "fuente": "El voto será libre, directo, igualitario y secreto."
+              }
+            ]
+          },
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "3",
+                "fuente": "El voto es libre, directo, igualitario y secreto."
+              },
+              {
+                "numero": "196",
+                "fuente": "La Junta velará que el ciudadano emita el voto de forma secreta en el lugar designado para tal efecto."
+              },
+              {
+                "numero": "197",
+                "fuente": "Al ciudadano, estando solo, se le concederá el tiempo necesario para marcar su papeleta y depositarla."
+              },
+              {
+                "numero": "207",
+                "fuente": "Causas de nulidad del voto: no incluyen que el votante muestre su papeleta."
+              }
+            ]
+          },
+          {
+            "ley": "Código Penal de El Salvador",
+            "articulos": [
+              {
+                "numero": "295",
+                "fuente": "Fraude electoral: pagar o prometer beneficios para inducir el voto, coaccionar a un elector o violar el secreto de su voto."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Constitución de la República de El Salvador",
+            "tipo": "Constitución",
+            "pagina": "16",
+            "seccion": "Art. 78",
+            "descripcion": "El voto será libre, directo, igualitario y secreto.",
+            "documento_relacionado": "Constitución de la República de El Salvador, Art. 78",
+            "ubicacion_pdf": "libros/constitucion.pdf",
+            "pdf_doc_id": "constitucion_republica_1983"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "2",
+            "seccion": "Art. 3",
+            "descripcion": "El voto es libre, directo, igualitario y secreto.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 3",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "66",
+            "seccion": "Art. 196",
+            "descripcion": "La Junta velará que el ciudadano emita el voto de forma secreta en el lugar designado para tal efecto.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 196",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "67",
+            "seccion": "Art. 197",
+            "descripcion": "Al ciudadano, estando solo, se le concederá el tiempo necesario para marcar su papeleta y depositarla.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 197",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "71",
+            "seccion": "Art. 207",
+            "descripcion": "Causas de nulidad del voto: no incluyen que el votante muestre su papeleta.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 207",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Penal de El Salvador",
+            "tipo": "Ley",
+            "pagina": "90",
+            "seccion": "Art. 295",
+            "descripcion": "Fraude electoral: pagar o prometer beneficios para inducir el voto, coaccionar a un elector o violar el secreto de su voto.",
+            "documento_relacionado": "Código Penal de El Salvador, Art. 295",
+            "ubicacion_pdf": "libros/Código Penal.pdf",
+            "pdf_doc_id": "codigo_penal_delitos_electorales"
+          },
+          {
+            "nombre": "Instructivo para Integrantes de Juntas Receptoras de Votos (TSE)",
+            "tipo": "Instructivo TSE",
+            "pagina": "22",
+            "seccion": "Cap. 4: Funciones específicas durante la votación",
+            "descripcion": "Procedimiento operativo oficial del TSE para integrantes de JRV.",
+            "documento_relacionado": "Instructivo JRV - Elecciones 2024",
+            "ubicacion_pdf": "libros/instructivo-JRV.pdf",
+            "pdf_doc_id": "instructivo_jrv_tse"
+          }
+        ]
+      },
+      "situaciones_relacionadas": [
+        "VOT-007",
+        "DEL-004"
+      ],
+      "nivel_prioridad": "alta",
+      "estado": "vigente",
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-001",
@@ -5700,8 +5906,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-002",
@@ -5824,8 +6030,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-003",
@@ -5939,8 +6145,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-004",
@@ -6077,8 +6283,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-005",
@@ -6174,8 +6380,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-006",
@@ -6268,8 +6474,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-007",
@@ -6384,8 +6590,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DUI-008",
@@ -6516,8 +6722,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ARM-001",
@@ -6663,8 +6869,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ARM-002",
@@ -6803,8 +7009,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ARM-010",
@@ -6930,8 +7136,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-001",
@@ -7049,8 +7255,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-002",
@@ -7166,8 +7372,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-003",
@@ -7268,8 +7474,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-004",
@@ -7376,8 +7582,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-005",
@@ -7504,8 +7710,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-006",
@@ -7648,8 +7854,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-007",
@@ -7777,8 +7983,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-008",
@@ -7920,8 +8126,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-009",
@@ -8066,8 +8272,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-010",
@@ -8209,8 +8415,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-011",
@@ -8380,8 +8586,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-012",
@@ -8500,8 +8706,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "SEG-013",
@@ -8604,8 +8810,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-001",
@@ -8799,8 +9005,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-002",
@@ -8946,8 +9152,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-003",
@@ -9062,8 +9268,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-004",
@@ -9202,8 +9408,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-005",
@@ -9299,8 +9505,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-006",
@@ -9406,8 +9612,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-007",
@@ -9504,8 +9710,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-008",
@@ -9637,8 +9843,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-009",
@@ -9748,8 +9954,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-010",
@@ -9852,8 +10058,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-011",
@@ -9954,8 +10160,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-012",
@@ -10052,8 +10258,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-013",
@@ -10170,8 +10376,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-014",
@@ -10283,8 +10489,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "VIG-015",
@@ -10401,8 +10607,160 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
+    },
+    {
+      "id": "VIG-016",
+      "titulo": "Vigilante Quiere Retirarse o Dejar sus Funciones en Medio del Escrutinio",
+      "categoria": "Vigilancia",
+      "subcategoria": "Funciones del Vigilante",
+      "descripcion_situacion": "Durante el escrutinio, un vigilante de partido anuncia que se va, que deja sus funciones o que no esperará al final del conteo.",
+      "actores": [
+        "Vigilante de partido",
+        "Suplente del vigilante",
+        "Presidente de JRV",
+        "Secretario de JRV",
+        "Jefe de centro"
+      ],
+      "objetos": [
+        "Acta de cierre y escrutinio",
+        "Credencial"
+      ],
+      "acciones": [
+        "Retirarse",
+        "Sustituir vigilante",
+        "Continuar escrutinio",
+        "Firmar acta"
+      ],
+      "contextos": [
+        "escrutinio_conteo",
+        "acreditacion_vigilancia"
+      ],
+      "intenciones": [
+        "procedimiento",
+        "consulta_permiso_prohibicion"
+      ],
+      "palabras_clave": [
+        "vigilante se quiere ir",
+        "vigilante se retira",
+        "vigilante abandona",
+        "vigilante deja sus funciones",
+        "vigilante se fue",
+        "vigilante se va",
+        "vigilante renuncia",
+        "se retira el vigilante",
+        "sin vigilante en el escrutinio",
+        "vigilante abandona el escrutinio",
+        "dejar sus funciones",
+        "abandona sus funciones",
+        "se va a mitad del conteo",
+        "vigilante se marcha"
+      ],
+      "sinonimos": {
+        "retirarse": [
+          "irse",
+          "abandonar",
+          "marcharse",
+          "salirse",
+          "dejar sus funciones"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Retiro de un vigilante durante el escrutinio.",
+        "que_hacer": [
+          "El escrutinio NO se detiene: la JRV continúa el conteo. La falta de concurrencia de un vigilante o la falta de su firma en el acta no es motivo de nulidad (Art. 128 CE).",
+          "Su suplente puede actuar en cualquier momento; por eso propietario y suplente deben permanecer en el centro de votación (Art. 124 CE). Si el suplente acreditado está presente, se incorpora de inmediato.",
+          "Si el vigilante se retira sin firmar el acta, hacer constar en ella la razón por la cual no fue firmada (Art. 128 CE).",
+          "Si firma pero no está de acuerdo con el contenido, debe manifestar su inconformidad en la misma acta (Art. 128 CE).",
+          "Anotar en el acta la hora y la incidencia (Art. 200 lit. D CE). El partido puede comunicarlo a su jefe de centro o supervisor, que asesoran a sus vigilantes (Art. 125 CE)."
+        ],
+        "que_no_hacer": [
+          "NO suspender ni repetir el escrutinio por la salida del vigilante.",
+          "NO obligarlo a quedarse: vigilar el escrutinio es una facultad del partido (Art. 128 CE), no una obligación.",
+          "NO aceptar como reemplazo a una persona sin credencial: solo puede actuar el suplente acreditado (Art. 124 CE).",
+          "NO cambiar el conteo porque falte la firma o la presencia del vigilante."
+        ],
+        "quien_interviene": [
+          "Junta Receptora de Votos",
+          "Vigilante suplente",
+          "Jefe de centro del partido"
+        ],
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "124",
+                "fuente": "Solo se admite un vigilante propietario por partido; en su defecto puede actuar en cualquier momento su suplente, y ambos deben permanecer en el centro de votación."
+              },
+              {
+                "numero": "125",
+                "fuente": "Los jefes de centro y supervisores de partido asesoran legalmente a sus vigilantes."
+              },
+              {
+                "numero": "128",
+                "fuente": "Facultades de los vigilantes; su falta de concurrencia o de firma en el acta no es motivo de nulidad, pero se hace constar en el acta la razón."
+              },
+              {
+                "numero": "200",
+                "fuente": "En el acta de cierre y escrutinio se hacen constar las incidencias; los vigilantes en funciones la firman si lo quieren."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "42",
+            "seccion": "Art. 124",
+            "descripcion": "Solo se admite un vigilante propietario por partido; en su defecto puede actuar en cualquier momento su suplente, y ambos deben permanecer en el centro de votación.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 124",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "43",
+            "seccion": "Art. 125",
+            "descripcion": "Los jefes de centro y supervisores de partido asesoran legalmente a sus vigilantes.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 125",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "43",
+            "seccion": "Art. 128",
+            "descripcion": "Facultades de los vigilantes; su falta de concurrencia o de firma en el acta no es motivo de nulidad, pero se hace constar en el acta la razón.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 128",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "68",
+            "seccion": "Art. 200",
+            "descripcion": "En el acta de cierre y escrutinio se hacen constar las incidencias; los vigilantes en funciones la firman si lo quieren.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 200",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          }
+        ]
+      },
+      "situaciones_relacionadas": [
+        "VIG-008",
+        "VIG-003",
+        "VIG-014"
+      ],
+      "nivel_prioridad": "normal",
+      "estado": "vigente",
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-001",
@@ -10602,8 +10960,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-002",
@@ -10707,8 +11065,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-003",
@@ -10860,8 +11218,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-004",
@@ -10985,8 +11343,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-005",
@@ -11089,8 +11447,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-006",
@@ -11194,8 +11552,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-007",
@@ -11330,8 +11688,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-008",
@@ -11436,8 +11794,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-009",
@@ -11534,8 +11892,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-010",
@@ -11699,8 +12057,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-011",
@@ -11801,8 +12159,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-012",
@@ -11893,8 +12251,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-013",
@@ -12020,8 +12378,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-014",
@@ -12138,8 +12496,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-015",
@@ -12269,8 +12627,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-016",
@@ -12390,8 +12748,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-017",
@@ -12523,8 +12881,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-018",
@@ -12648,8 +13006,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-019",
@@ -12780,8 +13138,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-020",
@@ -12874,8 +13232,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-021",
@@ -12995,8 +13353,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-022",
@@ -13116,8 +13474,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-023",
@@ -13237,8 +13595,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-024",
@@ -13365,8 +13723,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ESC-025",
@@ -13475,8 +13833,195 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
+    },
+    {
+      "id": "ESC-026",
+      "titulo": "Papeleta con la Esquina Desprendible Todavía Pegada en el Escrutinio",
+      "categoria": "Escrutinio",
+      "subcategoria": "Clasificación de Votos",
+      "descripcion_situacion": "Al abrir el depósito de votos aparece una papeleta que aún conserva la esquina desprendible con los últimos tres dígitos de su número correlativo.",
+      "actores": [
+        "Presidente de JRV",
+        "Secretario de JRV",
+        "Vigilante de partido"
+      ],
+      "objetos": [
+        "Papeleta",
+        "Esquina desprendible",
+        "Acta de cierre y escrutinio"
+      ],
+      "acciones": [
+        "Clasificar votos",
+        "Verificar autenticidad de la papeleta",
+        "Registrar incidencia"
+      ],
+      "contextos": [
+        "escrutinio_conteo",
+        "proceso_votacion"
+      ],
+      "intenciones": [
+        "procedimiento",
+        "consulta_legal_normativa"
+      ],
+      "palabras_clave": [
+        "esquina desprendible",
+        "esquina pegada",
+        "no le quitaron la esquina",
+        "papeleta con esquina",
+        "papeleta con la esquina",
+        "esquina perforada",
+        "esquina sin desprender",
+        "esquina de la papeleta",
+        "talon de la papeleta",
+        "ultimos tres digitos",
+        "voto con la esquina",
+        "no desprendieron la esquina",
+        "esquinita"
+      ],
+      "sinonimos": {
+        "esquina desprendible": [
+          "talon",
+          "esquina perforada",
+          "pestaña",
+          "esquinita",
+          "esquina"
+        ]
+      },
+      "respuesta": {
+        "situacion_detectada": "Papeleta depositada sin que se retirara la esquina desprendible.",
+        "que_hacer": [
+          "La esquina desprendible lleva los últimos tres dígitos del número correlativo de la papeleta; la secretaría debía retirarla y guardarla en el depósito especial al entregar la papeleta (Arts. 186 y 196 CE). Que siga pegada es una omisión de la JRV, no del votante.",
+          "En el escrutinio, tener en cuenta lo establecido en el Art. 186 (Art. 200 lit. B CE): verificar a la vista de los vigilantes que la papeleta sea auténtica (tipo de elección, sello del TSE y escudo, número de la JRV) y que su número correlativo corresponda a las papeletas recibidas por esa JRV.",
+          "Clasificar el voto según la marca, como cualquier otro: es válido si la intención del votante está claramente determinada (Art. 205) y solo es nulo si cae en alguna causa del Art. 207 (por ejemplo, numeración que no corresponde a la JRV o papeleta no entregada por esa JRV).",
+          "Si se reclama su validez o invalidez y no se puede determinar con claridad la intención del votante, se trata como voto impugnado (Art. 206).",
+          "Hacer constar la incidencia en el acta de cierre y escrutinio (Art. 200 lit. D)."
+        ],
+        "que_no_hacer": [
+          "NO anular el voto solo porque conserva la esquina desprendible: no es una causa de nulidad del Art. 207.",
+          "NO alterar la papeleta: dejar constancia de cómo se encontró.",
+          "NO intentar identificar al votante con el número de la esquina: el voto es secreto."
+        ],
+        "quien_interviene": [
+          "Junta Receptora de Votos",
+          "Vigilantes de partido",
+          "Junta Electoral Municipal (JEM)"
+        ],
+        "advertencia": "El Código Electoral no dice expresamente qué hacer con la esquina en el escrutinio. Este criterio sigue los Arts. 200, 205 y 207; consulte a la JEM si el instructivo vigente del TSE indica otra cosa.",
+        "fundamento_legal": [
+          {
+            "ley": "Código Electoral de El Salvador",
+            "articulos": [
+              {
+                "numero": "186",
+                "fuente": "La esquina perforada con los últimos tres dígitos del número correlativo se retira al entregar la papeleta; la secretaría la desprende y la coloca en un depósito especial."
+              },
+              {
+                "numero": "196",
+                "fuente": "La secretaría muestra la papeleta firmada y sellada y luego retira la esquina desprendible antes de entregarla."
+              },
+              {
+                "numero": "200",
+                "fuente": "En el escrutinio se debe tomar en cuenta lo establecido en el Art. 186 y hacer constar las incidencias en el acta."
+              },
+              {
+                "numero": "205",
+                "fuente": "Votos válidos: los que reúnen los requisitos de ley y en los que la voluntad del votante está claramente determinada."
+              },
+              {
+                "numero": "206",
+                "fuente": "Voto impugnado: aquel sobre el que se reclama su validez o invalidez y no se puede determinar con claridad la intención."
+              },
+              {
+                "numero": "207",
+                "fuente": "Causas de nulidad del voto (no incluyen la esquina desprendible sin retirar)."
+              }
+            ]
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "61",
+            "seccion": "Art. 186",
+            "descripcion": "La esquina perforada con los últimos tres dígitos del número correlativo se retira al entregar la papeleta; la secretaría la desprende y la coloca en un depósito especial.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 186",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "66",
+            "seccion": "Art. 196",
+            "descripcion": "La secretaría muestra la papeleta firmada y sellada y luego retira la esquina desprendible antes de entregarla.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 196",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "68",
+            "seccion": "Art. 200",
+            "descripcion": "En el escrutinio se debe tomar en cuenta lo establecido en el Art. 186 y hacer constar las incidencias en el acta.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 200",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "70",
+            "seccion": "Art. 205",
+            "descripcion": "Votos válidos: los que reúnen los requisitos de ley y en los que la voluntad del votante está claramente determinada.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 205",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "71",
+            "seccion": "Art. 206",
+            "descripcion": "Voto impugnado: aquel sobre el que se reclama su validez o invalidez y no se puede determinar con claridad la intención.",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 206",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Código Electoral de El Salvador",
+            "tipo": "Ley",
+            "pagina": "71",
+            "seccion": "Art. 207",
+            "descripcion": "Causas de nulidad del voto (no incluyen la esquina desprendible sin retirar).",
+            "documento_relacionado": "Código Electoral de El Salvador, Art. 207",
+            "ubicacion_pdf": "libros/Codigo-Electoral.pdf",
+            "pdf_doc_id": "codigo_electoral_decreto_413"
+          },
+          {
+            "nombre": "Instructivo para Integrantes de Juntas Receptoras de Votos (TSE)",
+            "tipo": "Instructivo TSE",
+            "pagina": "21",
+            "seccion": "Cap. 4: Funciones específicas durante la votación",
+            "descripcion": "Procedimiento operativo oficial del TSE para integrantes de JRV.",
+            "documento_relacionado": "Instructivo JRV - Elecciones 2024",
+            "ubicacion_pdf": "libros/instructivo-JRV.pdf",
+            "pdf_doc_id": "instructivo_jrv_tse"
+          }
+        ]
+      },
+      "situaciones_relacionadas": [
+        "ESC-008",
+        "ESC-025",
+        "ESC-012"
+      ],
+      "nivel_prioridad": "normal",
+      "estado": "vigente",
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-001",
@@ -13626,8 +14171,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-002",
@@ -13802,8 +14347,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-003",
@@ -13918,8 +14463,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-004",
@@ -14035,8 +14580,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-005",
@@ -14165,8 +14710,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-006",
@@ -14308,8 +14853,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-007",
@@ -14440,8 +14985,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-008",
@@ -14543,8 +15088,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-009",
@@ -14706,8 +15251,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-010",
@@ -14849,8 +15394,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-011",
@@ -14978,8 +15523,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ROL-012",
@@ -15127,8 +15672,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-001",
@@ -15277,8 +15822,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-002",
@@ -15399,8 +15944,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-003",
@@ -15529,8 +16074,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-004",
@@ -15658,8 +16203,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-005",
@@ -15763,8 +16308,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-006",
@@ -15855,8 +16400,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-007",
@@ -16010,8 +16555,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-008",
@@ -16127,8 +16672,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "OET-009",
@@ -16256,8 +16801,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REC-001",
@@ -16357,8 +16902,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REC-002",
@@ -16440,8 +16985,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REC-003",
@@ -16551,8 +17096,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REC-004",
@@ -16681,8 +17226,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REC-005",
@@ -16817,8 +17362,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REC-006",
@@ -16918,8 +17463,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REC-007",
@@ -17037,8 +17582,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DEL-001",
@@ -17166,8 +17711,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DEL-002",
@@ -17291,8 +17836,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DEL-003",
@@ -17428,8 +17973,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "DEL-004",
@@ -17564,8 +18109,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "PRO-001",
@@ -17685,8 +18230,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "PRO-002",
@@ -17784,8 +18329,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "PRO-003",
@@ -17898,8 +18443,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "PRO-004",
@@ -18001,8 +18546,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REG-001",
@@ -18143,8 +18688,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REG-002",
@@ -18260,8 +18805,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REG-003",
@@ -18362,8 +18907,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "REG-004",
@@ -18477,8 +19022,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ELE-001",
@@ -18627,8 +19172,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ELE-002",
@@ -18777,8 +19322,8 @@
       ],
       "nivel_prioridad": "alta",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ELE-003",
@@ -18922,8 +19467,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ELE-004",
@@ -19080,8 +19625,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ELE-005",
@@ -19198,8 +19743,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ELE-006",
@@ -19297,8 +19842,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     },
     {
       "id": "ELE-007",
@@ -19406,8 +19951,8 @@
       ],
       "nivel_prioridad": "normal",
       "estado": "vigente",
-      "creadoEn": 1794971577285,
-      "actualizadoEn": 1794971577285
+      "creadoEn": 1795759782210,
+      "actualizadoEn": 1795759782210
     }
   ]
 }

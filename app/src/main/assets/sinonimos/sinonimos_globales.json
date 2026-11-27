@@ -292,6 +292,47 @@
     "migrante",
     "residente en el exterior"
    ]
+  },
+  {
+   "id": "mostrar_voto",
+   "descripcion": "Votante que muestra o revela su voto",
+   "terminos": [
+    "muestra su voto",
+    "mostro su voto",
+    "mostrar su voto",
+    "ensena su voto",
+    "enseno su voto",
+    "enseno el voto",
+    "ensena el voto",
+    "ensena su papeleta",
+    "enseno su papeleta",
+    "ensena la papeleta",
+    "enseno la papeleta",
+    "muestra la papeleta",
+    "mostro la papeleta",
+    "muestra su papeleta",
+    "mostro su papeleta",
+    "mostro por quien voto",
+    "dijo por quien voto",
+    "exhibe su voto",
+    "revela su voto",
+    "revelo su voto",
+    "voto a la vista",
+    "papeleta marcada a todos"
+   ]
+  },
+  {
+   "id": "esquina_desprendible",
+   "descripcion": "Esquina desprendible de la papeleta",
+   "terminos": [
+    "esquina desprendible",
+    "esquina pegada",
+    "esquina perforada",
+    "esquina sin desprender",
+    "no desprendieron la esquina",
+    "no le quitaron la esquina",
+    "talon de la papeleta"
+   ]
   }
  ]
 }

@@ -147,7 +147,7 @@ cats = {}
 for s in situaciones:
     cats[s["categoria"]] = cats.get(s["categoria"], 0) + 1
 banco = {
-    "version": "2.0",
+    "version": "2.1",
     "nombre": "Banco de Conocimientos - Asistente Electoral SV",
     "formato": "BANCO_CONOCIMIENTOS_ELECTORAL_SV",
     "fechaExportacion": time.strftime("%Y-%m-%d %H:%M:%S"),
